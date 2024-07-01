@@ -22,5 +22,8 @@
     "email": "nigreos625@gmail.com",
     "url": "https://github.com/gentIlIs266"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
