@@ -1,0 +1,26 @@
+{
+  "name": "wetube-clone-challenge-ver",
+  "version": "1.0.0",
+  "description": "The agony of someone trying to clone Youtube with insufficient skills",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "NodeJS",
+    "MongoDB",
+    "Pug",
+    "Express",
+    "mongoose",
+    "webpack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "github.com/gentilis266/wetube-clone-challenge-ver"
+  },
+  "author": {
+    "name": "gentilis",
+    "email": "nigreos625@gmail.com",
+    "url": "https://github.com/gentIlIs266"
+  },
+  "license": "MIT"
+}
