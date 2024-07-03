@@ -4,3 +4,18 @@
 ## How does this site look like
 
 ## Note
+/ -- homepage
+/shorts
+/feed/subscriptions
+/channel/:userid
+/feed/history
+/feed/playlists
+/feed/playlists
+studio.youtube.com/channel/:userid -- my videos
+
+
+/join
+/login
+/edit-user  
+/delete-user    
+/watch?:videoid
