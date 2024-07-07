@@ -1,13 +1,10 @@
 import express from "express";
 import morgan from "morgan";
 
-import channelIdRouter from "./routers/channelIdRouter";
-import channelRouter from "./routers/channelRouter";
 import feedRouter from "./routers/feedRouter";
+import channelRouter from "./routers/handleRouter";
 import primalRouter from "./routers/primalRouter";
-import shortsRouter from "./routers/shortsRouter";
 import studioRouter from "./routers/studioRouter";
-import userIdRouter from "./routers/userIdRouter";
 import userRouter from "./routers/userIdRouter";
 import videoRouter from "./routers/videoRouter";
 
