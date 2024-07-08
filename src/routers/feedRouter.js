@@ -1,5 +1,10 @@
 import express from "express";
 
+import {
+    subcriptions, me, viewingHistory, playlists,
+    trendingVideo, movie, studyProgram
+} from "../controllers/feedController";
+
 const feedRouter = express.Router();
 
 feedRouter.get("/subscriptions", subcriptions);

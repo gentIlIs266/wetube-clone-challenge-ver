@@ -1,5 +1,10 @@
 import express from "express";
 
+import {
+    myVideo, youtubeStudio, videoEdit, outline,
+    reach, participation, audience, videoEditor
+ } from "../controllers/studioController";
+
 const studioRouter = express.Router();
 
 studioRouter.get("/:channelid/videos/upload?filter=", myVideo);

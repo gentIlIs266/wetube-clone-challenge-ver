@@ -1,12 +1,17 @@
 import express from "express";
 
-const channelRouter = express.Router();
+import {
+    channel, channelHome, channelVideos,
+    channelShorts, channelPlaylist, channelCommunity
+} from "../controllers/handleController";
 
-channelRouter.get("/:handle", channel);
-channelRouter.get("/:handle/featured", channelHome);
-channelRouter.get("/:handle/videos", channelVideos);
-channelRouter.get("/:handle/shorts", channelShorts);
-channelRouter.get("/:handle/playlists", channelPlaylist);
-channelRouter.get("/:handle/community", channelCommunity);
+const handleRouter = express.Router();
+
+handleRouter.get("/:handle", channel);
+handleRouter.get("/:handle/featured", channelHome);
+handleRouter.get("/:handle/videos", channelVideos);
+handleRouter.get("/:handle/shorts", channelShorts);
+handleRouter.get("/:handle/playlists", channelPlaylist);
+handleRouter.get("/:handle/community", channelCommunity);
 
 export default handleRouter;

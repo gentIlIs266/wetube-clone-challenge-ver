@@ -2,25 +2,21 @@ import express from "express";
 import morgan from "morgan";
 
 import feedRouter from "./routers/feedRouter";
-import channelRouter from "./routers/handleRouter";
+import handleRouter from "./routers/handleRouter";
 import primalRouter from "./routers/primalRouter";
 import studioRouter from "./routers/studioRouter";
-import userRouter from "./routers/userIdRouter";
+import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
 const PORT = 5000;
-const app = express();
+const app = express(); 
 
 app.use(morgan("dev"));
 
 app.use("/", primalRouter);
 app.use("/feed", feedRouter);
-app.use("/shorts", shortsRouter);
-app.use("/channel", channelRouter);
+app.use("/channel", handleRouter);
 app.use("/studio", studioRouter);
-app.use("/:userid", userIdRouter);
-app.use("/:channelid", channelIdRouter);
-
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
