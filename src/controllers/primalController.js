@@ -1,5 +1,5 @@
 export const home = (req, res) => {
-    res.send("home");
+    return res.render("home", { tabTitle: "WeTube" })
 }
 export const userJoin = (req, res) => {}
 export const userLogin = (req, res) => {}
@@ -13,7 +13,9 @@ export const youtubeKids = (req, res) => {}
 export const watchLater = (req, res) => {}
 export const likeVideo = (req, res) => {}
 
-export const watchVideo = (req, res) => {}
+export const watchVideo = (req, res) => {
+    const { videoid } = req.params;
+}
 export const watchShorts = (req, res) => {}
 
 export const account = (req, res) => {}

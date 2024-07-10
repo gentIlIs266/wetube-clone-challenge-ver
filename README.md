@@ -6,6 +6,8 @@
 ## Note
 --------------primal---------------
 /
+/join
+/login
 /gaming     게임
 /podcasts   팟캐스트
 /premium    유튜브 프리미엄
@@ -43,10 +45,15 @@
 /@김데데/shorts     shorts
 /@김데데/playlists  재생목록
 /@김데데/community  커뮤니티
+--------------user---------------
+/users/edit
+/users/delete
 --------------studio---------------
 /studio/:channelid/videos/upload?filter=    내 동영상
 /studio/channel/:channelid  유튜브 스튜디오
 /studio/video/:videoid/edit     동영상 수정/세부정보
+/studio/video/:videoid/delete     동영상 삭제
+/studio/upload     동영상 업로드
 /studio/video/:videoid/analytics/tab-overview/period-default    개요 
 /studio/video/:videoid/analytics/tab-reach_viewers/period-default   도달범위 
 /studio/video/:videoid/analytics/tab-interest_viewers/period-default   참여도 
@@ -57,12 +64,6 @@
 youtube.com/results?search_query=frank+ocean+live 
 
 ------------------------------------------------------
-
-/join
-/login
-
-/users/edit
-/users/delete
 
 /videos/watch
 /videos/edit
