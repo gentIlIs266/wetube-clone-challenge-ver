@@ -1,5 +1,15 @@
-export const home = (req, res) => {
-    return res.render("home", { tabTitle: "WeTube" })
+import VIDEO from "../models/videoModel";
+
+export const home = async (req, res) => {
+    try {
+        const DBVIDEO = await VIDEO.find({})
+            .sort({ createdAt: "desc" })
+        return res.render("home", { tabTitle: "WeTube", DBVIDEO});
+    } catch (error) {
+        return res.render("error", { error });
+    } finally {
+        return res.redirect("/");
+    }
 }
 export const userJoin = (req, res) => {}
 export const userLogin = (req, res) => {}

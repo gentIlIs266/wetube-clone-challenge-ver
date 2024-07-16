@@ -8,7 +8,6 @@ import studioRouter from "./routers/studioRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
-const PORT = 5000;
 const app = express(); 
 
 app.set("view engine", "pug");
@@ -22,7 +21,5 @@ app.use("/studio", studioRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
-app.listen(PORT, () => {
-    console.log(`[O] SERVER IS LISTENING TO PORT ${PORT}`);
-    console.log(`[ LINK ] --->  http://localhost:${PORT}`);
-})
+
+export default app;

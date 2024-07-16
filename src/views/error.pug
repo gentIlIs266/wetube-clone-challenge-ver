@@ -1,0 +1,10 @@
+include partials/html-head.pug
+
+- window.open("/")    
+
+a(href="/")
+    button home
+main
+    h1(style="color: red")=error.name
+    h3=error.message 
+    p=error.stack

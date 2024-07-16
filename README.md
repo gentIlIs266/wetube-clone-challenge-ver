@@ -70,3 +70,6 @@ youtube.com/results?search_query=frank+ocean+live
 /videos/delete
 /videos/comments
 /videos/comments/delete
+
+
+> video model description "#" 로 시작하는 단어 해쉬태그로 인식학게 하기
