@@ -1,0 +1,18 @@
+include ../partials/html-head.pug
+
+header 
+    h1 Join
+main
+    form(method="POST") 
+        div 
+            input(name="name" required type="text" placeholder="이름")
+            input(name="username" required type="text" placeholder="유저네임")
+        div
+            input(name="location" required type="text" placeholder="국가/지역")                              
+            input(name="birthDate" required type="text" placeholder="생년월일")                              
+        div 
+            input(name="email" required type="email" placeholder="name@example.com")                              
+        div
+            input(name="password" required type="password" placeholder="암호")                              
+            input(name="passwordConfirm" required type="password" placeholder="암호 확인")     
+        input(type="submit" value="계속")     

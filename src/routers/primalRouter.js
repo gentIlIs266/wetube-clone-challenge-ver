@@ -1,7 +1,8 @@
 import express from "express";
 
 import {
-    home, userJoin, userLogin, game, podcast,
+    home, getUserJoin, postUserJoin, getUserLogin, postUserLogin,
+    userLogin, game, podcast,
     youtubePremium, youtubeMusic, youtubeKids,
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,
@@ -12,8 +13,8 @@ import {
 const primalRouter = express.Router();
 
 primalRouter.get("/", home);
-primalRouter.get("/join", userJoin);
-primalRouter.get("/login", userLogin);
+primalRouter.route("/join").get(getUserJoin).post(postUserJoin);
+primalRouter.route("/login").get(getUserLogin).post(postUserLogin);
 
 primalRouter.get("/gaming", game);
 primalRouter.get("/podcasts", podcast);
@@ -24,8 +25,8 @@ primalRouter.get("/kids", youtubeKids);
 primalRouter.get("/playlist?list=WL", watchLater);
 primalRouter.get("/playlist?list=LL", likeVideo);
 
-primalRouter.get("/watch/:videoid", watchVideo); //videos/watch
-primalRouter.get("/shorts/:shortsid", watchShorts);
+primalRouter.get("/watch/?v=:videoId", watchVideo); //videos/watch
+primalRouter.get("/shorts/:shortsId", watchShorts);
 
 primalRouter.get("/account", account);
 primalRouter.get("/account_notifications", accountNotification);
