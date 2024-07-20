@@ -25,14 +25,15 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "mongoose": "^8.5.1",
+    "morgan": "^1.10.0",
     "pug": "^3.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/node": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
-    "morgan": "^1.10.0",
     "nodemon": "^3.1.4"
   }
 }
