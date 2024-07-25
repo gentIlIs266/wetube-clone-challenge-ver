@@ -1,6 +1,8 @@
 import VIDEO from "../models/videoModel";
 import USER from "../models/userModel";
 
+import bcrypt from "bcrypt";
+
 export const home = async (req, res) => {
     try {
         const DBVIDEO = await VIDEO.find({})
@@ -17,33 +19,26 @@ export const getUserJoin = (req, res) => {
 };
 export const postUserJoin = async (req, res) => {
     const {
-        name, username, location,
+        name, username, location, birthDate,
         email, password, passwordConfirm
     } = req.body;
     const userIsAlreadyExisting = await USER.exists({ $or: [{ username }, { email }] })
     if (password !== passwordConfirm) {
-        const formMessageWrapper = document.createElement("div");
-        const shapingThisWrapper = (element) => {
-            element.classList.add("form-message-wrapper");
-            const formMessage = document.createElement("span");
-            formMessage.textContent = "암호를 재입력하십시오."
-            element.appendChild(formMessage);
-        }
-        const passwordWarpperDiv = document.querySelector(".password-wrapper");
-        passwordWarpperDiv.classList.add("is-error");
-        passwordWarpperDiv.appendChild(shapingThisWrapper(formMessageWrapper));
-        return res.status(400)
+        //error text
+        return res.status(400).redirect("/join");
     }
     if (userIsAlreadyExisting) {
-        return res.status(400)
+        //error text
+        return res.status(400).redirect("/join");
     }
     try {
         await USER.create({
             name,
             username,
             location,
+            birthDate,
             email,
-            passwordConfirm
+            passwordConfirm,
         });
         //if user create an account, redirect to home in logged in
         return res.redirect("/");
@@ -58,8 +53,49 @@ export const getUserLogin = (req, res) => {
 };
 export const postUserLogin = async (req, res) => {
     const { emailOrUsername, password } = req.body;
-    //ascertain the shape of email and filter the other type(ex. num)
-    const userIsExist = await USER.findOne({})
+    const logInProcess = (input) => {
+        req.session.loggedIn = true;
+        req.session.user = input;
+    };
+    const isPasswordCorrect = async (input, userObj) => {
+        try {
+            const passwordConfirmed = await bcrypt.compare(input, userObj.password);
+            return passwordConfirmed;
+        } catch (err) {
+            return res.render("err", { err }); 
+        }
+    };
+    ((input) => {
+        const email_regex = new RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i); 
+        return email_regex.test(input);
+    })(emailOrUsername);
+    if (isEmailFormatCorrect) {
+        try {
+            const findUserByEmail = await USER.findOne({ email: emailOrUsername, OAuth: false });
+            if (!findUserByEmail) {
+                //message: there's no user using email that you typed
+            }
+            if (isPasswordCorrect(password, findUserByEmail) === false) {
+                //message: wrong password
+            }
+            logInProcess(findUserByEmail);
+        } catch (err) {
+            return res.render("error", { err });
+        };
+    } else {
+        try {
+            const findUserByUsername = await USER.findOne({ username: emailOrUsername, OAuth: false });
+            if (!findUserByUsername) {
+                //message: there's no user using username that you typed
+            }
+            if (isPasswordCorrect(password, findUserByEmail) === false) {
+                //message: wrong password
+            }
+            logInProcess(findUserByUsername);
+        } catch (err) {
+            return res.render("error", { err });
+        }
+    }
 };
 
 export const game = (req, res) => {};

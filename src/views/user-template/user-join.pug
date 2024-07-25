@@ -7,9 +7,21 @@ main
     form(method="POST") 
         div 
             input(name="name" required type="text" placeholder="이름")
-            input(name="username" required type="text" placeholder="유저네임")
+            input(name="username" required type="text" placeholder="유저이름")
         div
-            input(name="location" required type="text" placeholder="국가/지역")                              
+            h3 국가/지역
+            select(name="location" aria-required="true")
+                option(value="sun") 태양
+                option(value="mercury") 수성
+                option(value="venus") 금성
+                option(value="earth") 지구
+                option(value="mars") 화성
+                option(value="jupiter") 목성 
+                option(value="saturn") 토성 
+                option(value="uranus") 천왕성 
+                option(value="neptune") 해왕성
+                option(value="pluto") 명왕성
+                option(value="other-planetary-system") 그 외 행성
             input(name="birthDate" required type="text" placeholder="생년월일")                              
         div 
             input(name="email" required type="email" placeholder="name@example.com")                              
