@@ -21,9 +21,9 @@ app.use(
         secret: "chooseRandomStringlater",
         resave: false,
         saveUninitialized: false, 
-        //store: MongoStore.create({
-        //    mongoUrl: "mongodb://127.0.0.1:27017/wetube-challenge",
-        //})
+        store: MongoStore.create({
+            mongoUrl: "mongodb://127.0.0.1:27017/wetube-challenge",
+        })
 }))
 
 app.use("/", primalRouter);

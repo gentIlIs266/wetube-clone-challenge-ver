@@ -1,8 +1,8 @@
 import express from "express";
 
 import {
-    home, getUserJoin, postUserJoin, getUserLogin, postUserLogin,
-    userLogin, game, podcast,
+    home, getUserJoin, postUserJoin, getUserLogin,
+    postUserLogin, game, podcast,
     youtubePremium, youtubeMusic, youtubeKids,
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,

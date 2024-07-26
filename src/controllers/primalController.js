@@ -3,10 +3,12 @@ import USER from "../models/userModel";
 
 import bcrypt from "bcrypt";
 
+import { logInProcess } from "../global-function";
+
 export const home = async (req, res) => {
     try {
         const DBVIDEO = await VIDEO.find({})
-            .sort({ createdAt: "desc" })
+            .sort({ createdAt: "desc" });
         return res.render("home", { tabTitle: "WeTube", DBVIDEO});
     } catch (error) {
         return res.render("error", { error });
@@ -18,21 +20,18 @@ export const getUserJoin = (req, res) => {
     })
 };
 export const postUserJoin = async (req, res) => {
-    const {
-        name, username, location, birthDate,
-        email, password, passwordConfirm
-    } = req.body;
-    const userIsAlreadyExisting = await USER.exists({ $or: [{ username }, { email }] })
+    const { name, username, location, birthDate, email, password, passwordConfirm } = req.body;
     if (password !== passwordConfirm) {
         //error text
         return res.status(400).redirect("/join");
     }
+    const userIsAlreadyExisting = await USER.exists({ $or: [{ username }, { email }] });
     if (userIsAlreadyExisting) {
         //error text
         return res.status(400).redirect("/join");
     }
     try {
-        await USER.create({
+        const justCreatedUser = await USER.create({
             name,
             username,
             location,
@@ -40,7 +39,7 @@ export const postUserJoin = async (req, res) => {
             email,
             passwordConfirm,
         });
-        //if user create an account, redirect to home in logged in
+        logInProcess(justCreatedUser);
         return res.redirect("/");
     } catch (error) {
         return res.render("error", { error });
@@ -53,10 +52,6 @@ export const getUserLogin = (req, res) => {
 };
 export const postUserLogin = async (req, res) => {
     const { emailOrUsername, password } = req.body;
-    const logInProcess = (input) => {
-        req.session.loggedIn = true;
-        req.session.user = input;
-    };
     const isPasswordCorrect = async (input, userObj) => {
         try {
             const passwordConfirmed = await bcrypt.compare(input, userObj.password);
