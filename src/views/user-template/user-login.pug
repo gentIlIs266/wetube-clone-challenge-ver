@@ -1,10 +1,23 @@
 include ../partials/html-head.pug
 include ../partials/masthead.pug
 
+-const pwInputCreate = () => {
+    const pwInput = document.createElement("input");
+    pwInput.setAttribute("name", "password");
+    pwInput.setAttribute("required");
+    pwInput.setAttribute("type", "password");
+    pwInput.setAttribute("placeholder", "암호");
+    const signInForm = document.querySelector("#sign_in_form");
+    signInForm.appendChild(pwInput);
+};
+
 header 
     h1 Log in
 main
-    form(method="POST")
+    form(method="POST" style="margin: auto;")#sign_in_form
         input(name="emailOrUsername" required type="text" placeholder="이메일 또는 유저네임")
-        input(name="password" required type="password" placeholder="암호")
-        input(type="submit" value=">")
+
+        if noUserExistError
+            div.form-message-wrapper
+                span(dir="auto").form-message 그 유저네임/이메일 을 쓰는 유저가 존재하지 않습니다.
+            

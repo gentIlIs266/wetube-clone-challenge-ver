@@ -1,3 +1,5 @@
+import express from "express";
+
 import VIDEO from "../models/videoModel";
 import USER from "../models/userModel";
 
@@ -16,20 +18,29 @@ export const home = async (req, res) => {
 };
 export const getUserJoin = (req, res) => {
     return res.render("user-template/user-join", {
-        tabTitle: "Join"
+        tabTitle: "Join",
     })
 };
 export const postUserJoin = async (req, res) => {
-    const { name, username, location, birthDate, email, password, passwordConfirm } = req.body;
+    const {
+        body: {
+            name, username, location, birthDate,
+            email, password, passwordConfirm
+        }
+    } = req;
     if (password !== passwordConfirm) {
-        //error text
-        return res.status(400).redirect("/join");
-    }
+        return res.status(400).render("user-template/user-join", {
+            tabTitle: "Join",
+            pwConfirmError: true
+        });
+    };
     const userIsAlreadyExisting = await USER.exists({ $or: [{ username }, { email }] });
     if (userIsAlreadyExisting) {
-        //error text
-        return res.status(400).redirect("/join");
-    }
+        return res.status(400).render("user-template/user-join", {
+            tabTitle: "Join",
+            alreadyExistError: true,
+        });
+    };
     try {
         const justCreatedUser = await USER.create({
             name,
@@ -43,54 +54,34 @@ export const postUserJoin = async (req, res) => {
         return res.redirect("/");
     } catch (error) {
         return res.render("error", { error });
-    }
-}
+    };
+};
 export const getUserLogin = (req, res) => {
     return res.render("user-template/user-login", {
         tabTitle: "Log in"
     })
 };
 export const postUserLogin = async (req, res) => {
-    const { emailOrUsername, password } = req.body;
-    const isPasswordCorrect = async (input, userObj) => {
-        try {
-            const passwordConfirmed = await bcrypt.compare(input, userObj.password);
-            return passwordConfirmed;
-        } catch (err) {
-            return res.render("err", { err }); 
-        }
-    };
-    ((input) => {
-        const email_regex = new RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i); 
-        return email_regex.test(input);
-    })(emailOrUsername);
-    if (isEmailFormatCorrect) {
-        try {
-            const findUserByEmail = await USER.findOne({ email: emailOrUsername, OAuth: false });
-            if (!findUserByEmail) {
-                //message: there's no user using email that you typed
-            }
-            if (isPasswordCorrect(password, findUserByEmail) === false) {
-                //message: wrong password
-            }
-            logInProcess(findUserByEmail);
-        } catch (err) {
-            return res.render("error", { err });
+    const {
+        body: { emailOrUsername, password },
+    } = req;
+    try {
+        const findByEmailOrUsername = await USER.findOne({
+            $or: [
+                { username: emailOrUsername, OAuth: false },
+                { email: emailOrUsername, OAuth: false }
+            ]
+        });
+        if (!findByEmailOrUsername) {
+            return res.status(400).render("user-template/user-login", {
+                tabTitle: "Log in",
+                noUserExistError: true,
+            });
         };
-    } else {
-        try {
-            const findUserByUsername = await USER.findOne({ username: emailOrUsername, OAuth: false });
-            if (!findUserByUsername) {
-                //message: there's no user using username that you typed
-            }
-            if (isPasswordCorrect(password, findUserByEmail) === false) {
-                //message: wrong password
-            }
-            logInProcess(findUserByUsername);
-        } catch (err) {
-            return res.render("error", { err });
-        }
-    }
+        pwInputCreate();
+    } catch (error) {
+        return res.render("error", { error });
+    };
 };
 
 export const game = (req, res) => {};

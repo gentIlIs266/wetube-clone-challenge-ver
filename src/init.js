@@ -1,7 +1,7 @@
+import app from "./server"
+
 import "./db"
 import "./models/videoModel"
-
-import app from "./server"
 
 const PORT = 5000;
 
