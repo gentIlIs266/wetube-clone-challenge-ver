@@ -1,12 +1,78 @@
-include html-head.pug
-
-div(style="display: flex;") 
-    button guide
-    a(href="/")
-        button logo(home) 
-    input(name="search_query" type="text")
-    button upload
-    a(href="/join") 
-        button join
-    a(href="/login") 
-        button login
+div(style="position: fixed; top: 0; width: 100%;")#masthead-container
+    div(rold="banner")#masthead
+        div(style="width: 100%; height: 56px background: #0f0f0f;")#background
+        div(style="height: 56px; padding: 0 16px; display: flex; flex-direction: row; align-items: center; justify-content: space-between;")#container
+            div#start
+                button guide
+                a(href="/")
+                    button logo(home)
+            div#center
+                input(name="search_query" type="text")
+            div#end
+                div(style="display: flex;")#buttons
+                    if !locals.loggedIn
+                        div#menu-button
+                            div#button
+                                a(href="#") 
+                                    div(role="button")#button
+                                        button(aria-label="설정")#button.wt-icon-button
+                                            span.wt-icon-shape 
+                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                    svg(
+                                                        xmlns="http://www.w3.org/2000/svg" height="24"
+                                                        style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                        viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                    )
+                                                        path(d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z")
+                        div#login-button
+                            a(href="/login" aria-label="로그인") 
+                                div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                    i(style="width: 24px; height: 24px;")
+                                        span.wt-icon-shape
+                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                svg(
+                                                        xmlns="http://www.w3.org/2000/svg" height="24"
+                                                        style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                        viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                    )
+                                                        path(d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1c4.96 0 9 4.04 9 9 0 1.42-.34 2.76-.93 3.96-1.53-1.72-3.98-2.89-7.38-3.03A3.996 3.996 0 0016 9c0-2.21-1.79-4-4-4S8 6.79 8 9c0 1.97 1.43 3.6 3.31 3.93-3.4.14-5.85 1.31-7.38 3.03C3.34 14.76 3 13.42 3 12c0-4.96 4.04-9 9-9zM9 9c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 12c-3.16 0-5.94-1.64-7.55-4.12C6.01 14.93 8.61 13.9 12 13.9c3.39 0 5.99 1.03 7.55 2.98C17.94 19.36 15.16 21 12 21z")
+                                div.wy-spec-button-shape-next__button-text-content
+                                    span(role="text").wt-core-attributed-string 로그인 
+                    if locals.loggedIn
+                        div#button.upload-button
+                            a(href="#") 
+                                div(role="button")#button
+                                    button(aria-label="만들기")#button.wt-icon-button
+                                        span.wt-icon-shape
+                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                svg(
+                                                    xmlns="http://www.w3.org/2000/svg" height="24"
+                                                    style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                    viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                )
+                                                    path(d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm3-7H3v12h14v-6.39l4 1.83V8.56l-4 1.83V6m1-1v3.83L22 7v8l-4-1.83V19H2V5h16z")
+                        div#button.notification-button
+                            a(href="#") 
+                                div(role="button")#button
+                                    button(aria-label="알림")#button.wt-icon-button
+                                        span.wt-icon-shape
+                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                svg(
+                                                    xmlns="http://www.w3.org/2000/svg" height="24"
+                                                    style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                    viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                )
+                                                    path(d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15C6 7.4 7.56 5.1 10 4.34v-.38c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.87zm-1 .42-2-1.88v-5.47c0-2.47-1.19-4.36-3.13-5.1-1.26-.53-2.64-.5-3.84.03C8.15 6.11 7 7.99 7 10.42v5.47l-2 1.88V18h14v-.23z")
+                        div#button.avatar-button
+                            a(href="#") 
+                                div(role="button")#button
+                                    button(aria-label="만들기")#button.wt-icon-button
+                                        span.wt-icon-shape
+                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                svg(
+                                                    xmlns="http://www.w3.org/2000/svg" height="24"
+                                                    style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                    viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                )
+                        button 
+                            a(href="/logout") log out

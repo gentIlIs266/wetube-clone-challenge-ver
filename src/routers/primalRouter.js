@@ -2,7 +2,7 @@ import express from "express";
 
 import {
     home, getUserJoin, postUserJoin, getUserLogin,
-    postUserLogin, game, podcast,
+    postUserLogin, userLogout, game, podcast,
     youtubePremium, youtubeMusic, youtubeKids,
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,
@@ -15,6 +15,7 @@ const primalRouter = express.Router();
 primalRouter.get("/", home);
 primalRouter.route("/join").get(getUserJoin).post(postUserJoin);
 primalRouter.route("/login").get(getUserLogin).post(postUserLogin);
+primalRouter.get("/logout", userLogout);
 
 primalRouter.get("/gaming", game);
 primalRouter.get("/podcasts", podcast);

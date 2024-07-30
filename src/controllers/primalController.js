@@ -5,8 +5,6 @@ import USER from "../models/userModel";
 
 import bcrypt from "bcrypt";
 
-import { logInProcess } from "../global-function";
-
 export const home = async (req, res) => {
     try {
         const DBVIDEO = await VIDEO.find({})
@@ -22,6 +20,10 @@ export const getUserJoin = (req, res) => {
     })
 };
 export const postUserJoin = async (req, res) => {
+    const logInProcess = (userObj) => {
+        req.session.loggedIn = true;
+        req.session.user = userObj;
+    };
     const {
         body: {
             name, username, location, birthDate,
@@ -62,6 +64,10 @@ export const getUserLogin = (req, res) => {
     })
 };
 export const postUserLogin = async (req, res) => {
+    const logInProcess = (userObj) => {
+        req.session.loggedIn = true;
+        req.session.user = userObj;
+    };
     const {
         body: { emailOrUsername, password },
     } = req;
@@ -72,16 +78,35 @@ export const postUserLogin = async (req, res) => {
                 { email: emailOrUsername, OAuth: false }
             ]
         });
+        const passwordConfirm = bcrypt.compare(password, findByEmailOrUsername.password);
         if (!findByEmailOrUsername) {
             return res.status(400).render("user-template/user-login", {
+                step: "findUserFail",
                 tabTitle: "Log in",
                 noUserExistError: true,
             });
-        };
-        pwInputCreate();
+        } else if (!password) {
+            return res.status(400).render("user-template/user-login", {
+                step: "showPasswordInput",
+                tabTitle: "Log in",
+            })
+        } else if (passwordConfirm == false) {
+            return res.status(400).render("user-template/user-login", {
+                step: "passwordWrong",
+                tabTitle: "Log in",
+            });
+        } else if (passwordConfirm == true) {
+            logInProcess(findByEmailOrUsername);
+            return res.redirect("/");
+        }
     } catch (error) {
         return res.render("error", { error });
     };
+};
+
+export const userLogout = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
 };
 
 export const game = (req, res) => {};

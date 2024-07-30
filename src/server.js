@@ -27,6 +27,12 @@ app.use(
         })
 }))
 
+app.use((req, res, next) => {
+    res.locals.loggedIn = Boolean(req.session.loggedIn);
+    res.locals.loggedInUser = req.session.user || {};
+    return next();
+});
+
 app.use("/", primalRouter);
 app.use("/feed", feedRouter);
 app.use("/channel", handleRouter);
