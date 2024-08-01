@@ -1,6 +1,10 @@
 include partials/html-head.pug
 
 main
-    h1=error.name
-    h3=error.message 
-    p=error.stack
+    if errorMessage
+        div 
+            span=errorMessage
+    else
+        h1=error.name
+        h3=error.message 
+        p=error.stack

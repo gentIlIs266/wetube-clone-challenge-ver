@@ -4,6 +4,7 @@ import VIDEO from "../models/videoModel";
 import USER from "../models/userModel";
 
 import bcrypt from "bcrypt";
+import { invalidCsrfTokenError } from "../middleware";
 
 export const home = async (req, res) => {
     try {
@@ -50,7 +51,7 @@ export const postUserJoin = async (req, res) => {
             location,
             birthDate,
             email,
-            passwordConfirm,
+            password,
         });
         logInProcess(justCreatedUser);
         return res.redirect("/");
@@ -61,7 +62,7 @@ export const postUserJoin = async (req, res) => {
 export const getUserLogin = (req, res) => {
     return res.render("user-template/user-login", {
         tabTitle: "Log in"
-    })
+    });
 };
 export const postUserLogin = async (req, res) => {
     const logInProcess = (userObj) => {
@@ -69,44 +70,75 @@ export const postUserLogin = async (req, res) => {
         req.session.user = userObj;
     };
     const {
-        body: { emailOrUsername, password },
+        body: { step, emailOrUsername, password },
     } = req;
     try {
-        const findByEmailOrUsername = await USER.findOne({
+        const foundUser = await USER.findOne({
             $or: [
                 { username: emailOrUsername, OAuth: false },
                 { email: emailOrUsername, OAuth: false }
             ]
         });
-        const passwordConfirm = bcrypt.compare(password, findByEmailOrUsername.password);
-        if (!findByEmailOrUsername) {
-            return res.status(400).render("user-template/user-login", {
-                step: "findUserFail",
-                tabTitle: "Log in",
-                noUserExistError: true,
-            });
-        } else if (!password) {
-            return res.status(400).render("user-template/user-login", {
-                step: "showPasswordInput",
-                tabTitle: "Log in",
-            })
-        } else if (passwordConfirm == false) {
-            return res.status(400).render("user-template/user-login", {
-                step: "passwordWrong",
-                tabTitle: "Log in",
-            });
-        } else if (passwordConfirm == true) {
-            logInProcess(findByEmailOrUsername);
-            return res.redirect("/");
-        }
+        if (step === "showFirstInput") {
+            if (foundUser) {
+                res.render("user-template/user-login", {
+                    step: "showPasswordInput",
+                    tabTitle: "Log in",
+                    emailOrUsername,
+                });
+            };
+            if (!foundUser) {
+                res.status(400).render("user-template/user-login", {
+                    step: "showFirstInput",
+                    tabTitle: "Log in",
+                    noUserExistError: true,
+                });
+            };
+        };
+        if (step === "showPasswordInput") {
+            if (foundUser) {
+                const passwordConfirm = await bcrypt.compare(password, foundUser.password);
+                if (passwordConfirm) {
+                    logInProcess(foundUser);
+                    res.redirect("/");
+                };
+                if (!passwordConfirm) {
+                    res.status(400).render("user-template/user-login", {
+                        step: "showPasswordInput",
+                        tabTitle: "Log in",
+                        emailOrUsername,
+                        wrongPasswordError: true,
+                    });
+                };
+            } else {
+                res.render("user-template/user-login", {
+                    step: "showPasswordInput",
+                    tabTitle: "Log in",
+                });
+            }
+        };
     } catch (error) {
-        return res.render("error", { error });
+        if (error === invalidCsrfTokenError) {
+            res.status(403).render("error", {
+                errorMessage: "Invalid CSRF token",
+            });
+        };
+        res.render("error", { error });
     };
 };
 
 export const userLogout = (req, res) => {
-    req.session.destroy();
-    return res.redirect("/");
+    if (req.session) {
+        req.session.destroy((error) => {
+            if (error) {
+                return res.status(500).redirect("/");
+            };
+            res.clearCookie("connect.sid");
+            return res.redirect("/");
+        });
+    } else {
+        return res.status(400).send("NO SESSION EXIST");
+    };
 };
 
 export const game = (req, res) => {};

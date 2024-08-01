@@ -26,11 +26,13 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "mongoose": "^8.5.1",
     "morgan": "^1.10.0",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

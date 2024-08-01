@@ -14,7 +14,9 @@ const primalRouter = express.Router();
 
 primalRouter.get("/", home);
 primalRouter.route("/join").get(getUserJoin).post(postUserJoin);
-primalRouter.route("/login").get(getUserLogin).post(postUserLogin);
+primalRouter.route("/login")
+    .get(getUserLogin)
+    .post(postUserLogin);
 primalRouter.get("/logout", userLogout);
 
 primalRouter.get("/gaming", game);

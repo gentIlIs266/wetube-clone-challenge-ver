@@ -1,56 +1,70 @@
 include ../partials/html-head.pug
 include ../partials/masthead.pug
 
-
-head 
-    script.
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelector("#sign_in_form")
-                .addEventListener("submit", async (event) => {
-                    event.preventDefault();
-                    const emailOrUsername = document.querySelector("#emailOrUsername__input").value;
-                    const password = document.querySelector("#password__input").value;
-                    try {
-                        const data = await ( 
-                            await fetch("/login", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/x-www-form-urlencoded",                        
-                                },
-                                body: new URLSearchParams({ emailOrUsername: emailOrUsername, password: password }),
-                            })
-                        ).json();
-                        if (data.step === "passwordWrong") {
-                            document.querySelector(".signin-error").style.display = "block";
-                        } else if (data.step === "showPasswordInput") {
-                            document.querySelector("#password__input").style.display = "inline-block"
-                        }
-                    } catch (error) {
-                        return res.render("error", { error });
-                    };
-                });
-        });
-        
 body 
     header 
         h1 Log in
     main
-        form(method="POST" style="margin: auto;")#sign_in_form
-            input(name="emailOrUsername" required type="text" placeholder="이메일 또는 유저네임")#emailOrUsername__input
-            input(name="password" required type="password" placeholder="암호" style="display: none;")#password__input
-            div(sytle="display: none;").signin-error
+        if step === "showFirstInput" || !step
+            form(action="/login" method="POST" style="margin: auto;")#sign_in_form
+                input(name="step" type="hidden" value="showFirstInput")
+                input(
+                    name="emailOrUsername"
+                    required
+                    type="text"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    aria-required="true"
+                    spellcheck="false"
+                    autocomplete="off"
+                    aria-invalid="false"
+                    placeholder="이메일 또는 유저네임"
+                )#account_name_text_field
+                button(type="submit" aria-label="계속" aria-disabled="false")#sign-in >
+            if error
+                -console.error(error);
+        if step === "showPasswordInput"
+            form(action="/login" method="POST" style="margin: auto;")#sign_in_form
+                input(name="step" type="hidden" value="showPasswordInput")
+                input(
+                    name="emailOrUsername"
+                    required
+                    type="text"
+                    value=emailOrUsername 
+                    autocorrect="off"
+                    autocapitalize="off"
+                    aria-required="true"
+                    spellcheck="false"
+                    autocomplete="off"
+                    aria-invalid="false"
+                    placeholder="이메일 또는 유저네임"
+                )#account_name_text_field.form-textbox-input
+                input(
+                    name="password"
+                    required
+                    type="password"
+                    aria-required="true"
+                    autocomplete="off"
+                    aria-invalid="false"
+                    placeholder="암호"
+                )#password_field_label.form-textbox-input
+                button(type="submit" aria-label="계속" aria-disabled="false")#sign-in >
+            if error 
+                -console.error(error);
+        if wrongPasswordError
+            div.signin-error
                 div.pop-container
                     div(style="border: 1px solid #000;").error.pop-bottom
                         p#errMsg.fat 암호가 올바르지 않습니다.
                         a(href="#")
                             | 암호를
                             span 잊으셨습니까?
-            if noUserExistError
-                div.form-message-wrapper
-                    span(dir="auto").form-message 입력하신 유저네임/이메일 을 쓰는 유저가 존재하지 않습니다.
-            if noPasswordTypedError
-                div.form-message-wrapper
-                    span(dir="auto").form-message 비밀번호를 입력하십시오.
+        if noUserExistError
+            div.form-message-wrapper
+                span(dir="auto").form-message 입력하신 유저네임/이메일 을 쓰는 유저가 존재하지 않습니다.
+        if unexpectedError
+            div.form-message-wrapper
+                span(dir="auto").form-message 예기치 못한 오류 발생. 다시 시도해 주세요.
         div 
             span ID 가 없으십니까? 
             span 

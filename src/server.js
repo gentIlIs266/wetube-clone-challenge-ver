@@ -10,28 +10,34 @@ import studioRouter from "./routers/studioRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
+import { localsSetting } from "./middleware";
+
 const app = express(); 
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
+
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
     session({
-        secret: "chooseRandomStringlater",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false, 
+        cookie: {
+            secure: false,
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: 1209600000,
+         },
         store: MongoStore.create({
-            mongoUrl: "mongodb://127.0.0.1:27017/wetube-challenge",
+            mongoUrl: process.env.DB_URL,
         })
-}))
+    })
+);
 
-app.use((req, res, next) => {
-    res.locals.loggedIn = Boolean(req.session.loggedIn);
-    res.locals.loggedInUser = req.session.user || {};
-    return next();
-});
+app.use(localsSetting);
 
 app.use("/", primalRouter);
 app.use("/feed", feedRouter);
