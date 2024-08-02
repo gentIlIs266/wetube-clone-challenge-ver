@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import bodyParser from "body-parser";
+import path from "path";
 
 import feedRouter from "./routers/feedRouter";
 import handleRouter from "./routers/handleRouter";
@@ -18,7 +20,8 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(
     session({
@@ -38,6 +41,8 @@ app.use(
 );
 
 app.use(localsSetting);
+
+app.use("/avatars", express.static(path.join("public/avatars")));
 
 app.use("/", primalRouter);
 app.use("/feed", feedRouter);

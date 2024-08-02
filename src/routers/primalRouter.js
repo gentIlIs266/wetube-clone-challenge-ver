@@ -2,7 +2,8 @@ import express from "express";
 
 import {
     home, getUserJoin, postUserJoin, getUserLogin,
-    postUserLogin, userLogout, game, podcast,
+    postUserLogin, userLogout, startGhLogin, finishGhLogin,
+    game, podcast,
     youtubePremium, youtubeMusic, youtubeKids,
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,
@@ -18,6 +19,9 @@ primalRouter.route("/login")
     .get(getUserLogin)
     .post(postUserLogin);
 primalRouter.get("/logout", userLogout);
+
+primalRouter.get("/gh/start", startGhLogin);
+primalRouter.get("/gh/finish", finishGhLogin);
 
 primalRouter.get("/gaming", game);
 primalRouter.get("/podcasts", podcast);

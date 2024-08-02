@@ -4,13 +4,21 @@ import VIDEO from "../models/videoModel";
 import USER from "../models/userModel";
 
 import bcrypt from "bcrypt";
-import { invalidCsrfTokenError } from "../middleware";
 
 export const home = async (req, res) => {
+    const {
+        session: {
+            user
+        },
+    } = req;
     try {
         const DBVIDEO = await VIDEO.find({})
             .sort({ createdAt: "desc" });
-        return res.render("home", { tabTitle: "WeTube", DBVIDEO});
+        return res.render("home", {
+            tabTitle: "WeTube",
+            DBVIDEO,
+            user,
+        });
     } catch (error) {
         return res.render("error", { error });
     }
@@ -141,6 +149,81 @@ export const userLogout = (req, res) => {
     };
 };
 
+export const startGhLogin = (req, res) => {
+    const primalUrl = "https://github.com/login/oauth/authorize";
+    const startGhLoginConfig = {
+        client_id: process.env.GHLOGIN_CLIENT_ID,
+        allow_signup: false,
+        scope: "read:user user:email",
+    };
+    const params = new URLSearchParams(startGhLoginConfig).toString();
+    const GETGhUrl = `${primalUrl}?${params}`;
+    return res.redirect(GETGhUrl);
+};
+export const finishGhLogin = async (req, res) => {
+    const logInProcess = (userObj) => {
+        req.session.loggedIn = true;
+        req.session.user = userObj;
+    };
+    const primalUrl = "https://github.com/login/oauth/access_token";
+    const finishGhLoginConfig = {
+        client_id: process.env.GHLOGIN_CLIENT_ID,
+        client_secret: process.env.GHLOGIN_CLIENT_SECRET,
+        code: req.query.code,
+    };
+    const params = new URLSearchParams(finishGhLoginConfig).toString();
+    const POSTGhUrl = `${primalUrl}?${params}`;
+    const tokenRequest = await (
+        await fetch(POSTGhUrl, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+            }
+        })
+    ).json();
+    if ("access_token" in tokenRequest) {
+        const { access_token } = tokenRequest;
+        const ghAPIUrl = "https://api.github.com";
+        const userData = await (
+            await fetch(`${ghAPIUrl}/user`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+        ).json();
+        const userEmailData = await (
+            await fetch(`${ghAPIUrl}/user/emails`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+        ).json();
+        const emailObj = userEmailData.find(
+            (email) => email.primary === true && email.verified === true
+        );
+        if (!emailObj) res.redirect("/login");
+        let foundUserFromDB = await USER.findOne({ email: emailObj.email });
+        if (!foundUserFromDB) {
+            const justCreatedUser = await USER.create({
+                name: userData.name,
+                username: userData.login,
+                location: userData.location ? userData.location : "",
+                birthDate: "",
+                email: emailObj.email,
+                password: "",
+                OAuth: true,
+                avatarURL: userData.avatar_url,
+            });
+            logInProcess(justCreatedUser);
+            return res.redirect("/");
+        };
+        logInProcess(foundUserFromDB);
+        return res.redirect("/");
+    } else {
+        return res.redirect("/login");
+    }
+};
+
 export const game = (req, res) => {};
 export const podcast = (req, res) => {};
 export const youtubePremium = (req, res) => {};
@@ -164,3 +247,4 @@ export const accountPrivacy = (req, res) => {}
 export const accountSharing = (req, res) => {}
 export const accountBilling = (req, res) => {}
 export const accountAdvanced = (req, res) => {}
+
