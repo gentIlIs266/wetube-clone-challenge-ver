@@ -1,8 +1,16 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const generateRandomString = (length) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+const generateRandomString = (length, forId, forHandle) => {
+    const forIdCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    const forHandlecharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+    let characters = "";
+    if (forId) {
+        characters = forIdCharacters;
+    };
+    if (forHandle) {
+        characters = forHandlecharacters;
+    };
     let result = "";
     const charactersLength = characters.length;
     for (let i =0; i < length; i++) {
@@ -24,7 +32,7 @@ const userSchema = new mongoose.Schema({
     user_channel: {
         channel_name: { type: String },
         channel_handle: { type: String },
-        channel_id: { type: String, default: `${generateRandomString(25)}` }
+        channel_id: { type: String, default: `${generateRandomString(25, true, false)}` }
     }
 });
 
@@ -34,7 +42,7 @@ userSchema.pre("save", async function () {
     };
     if (this.isNew) {
         this.user_channel.channel_name = this.username
-        this.user_channel.channel_handle = `@${this.username}-${generateRandomString(5)}`
+        this.user_channel.channel_handle = `@${this.username}-${generateRandomString(5, false, true)}`
     };
 });
 

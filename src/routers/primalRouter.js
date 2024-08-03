@@ -10,12 +10,20 @@ import {
     accountPrivacy, accountSharing, accountBilling,
     accountAdvanced
 } from "../controllers/primalController";
+import { shouldNotLogInForThisUrl } from "../middleware";
 
 const primalRouter = express.Router();
 
 primalRouter.get("/", home);
-primalRouter.route("/join").get(getUserJoin).post(postUserJoin);
-primalRouter.route("/login")
+primalRouter
+    .route("/join")
+    .all(shouldNotLogInForThisUrl)
+    .get(getUserJoin)
+    .post(postUserJoin);
+
+primalRouter
+    .route("/login")
+    .all(shouldNotLogInForThisUrl)
     .get(getUserLogin)
     .post(postUserLogin);
 primalRouter.get("/logout", userLogout);

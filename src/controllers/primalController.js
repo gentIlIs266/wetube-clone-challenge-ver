@@ -240,11 +240,16 @@ export const watchVideo = (req, res) => {
 }
 export const watchShorts = (req, res) => {}
 
-export const account = (req, res) => {}
+export const account = (req, res) => {
+    return res.render("account-template/account.pug", {
+        tabTitle: "WeTube",
+    })
+}
 export const accountNotification = (req, res) => {}
 export const accountPlayback = (req, res) => {}
 export const accountPrivacy = (req, res) => {}
 export const accountSharing = (req, res) => {}
 export const accountBilling = (req, res) => {}
 export const accountAdvanced = (req, res) => {}
+
 

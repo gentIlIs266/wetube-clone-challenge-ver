@@ -4,3 +4,20 @@ export const localsSetting = (req, res, next) => {
     return next();
 };
 
+export const shouldLogInForThisUrl = (req, res, next) => {
+    if (req.session.loggedIn) {
+        return next();
+    };
+    if (!req.session.loggedIn) {
+        return res.redirect("/login");
+    };
+};
+
+export const shouldNotLogInForThisUrl = (req, res, next) => {
+    if (req.session.loggedIn) {
+        return res.redirect("/");
+    };
+    if (!req.session.loggedIn) {
+        return next();
+    };    
+};
