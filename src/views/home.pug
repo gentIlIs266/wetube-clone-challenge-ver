@@ -36,3 +36,20 @@ script.
             };
         });
     });
+    document.addEventListener("DOMContentLoaded", () => {
+        const notificationBtn = document.querySelector("#notification-topbar-button");
+        const notificationDropdown = document.querySelector("#wt-notification-dropdown");
+        notificationBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            notificationDropdown.style.display = notificationDropdown.style.display === "block" ? "none" : "block";
+        });
+        document.addEventListener("click", (event) => {
+            if (
+                !notificationBtn.contains(event.target)
+                &&
+                !notificationDropdown.contains(event.target)
+            ) {
+                notificationDropdown.style.display === "none";
+            };
+        });
+    });

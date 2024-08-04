@@ -34,7 +34,7 @@ div(style="position: fixed; top: 0; width: 100%;")#masthead-container
                                                 g
                                                     path(
                                                         d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z"
-                                                        fill="FF0000"
+                                                        fill="#DE3163"
                                                     )
                                                     path(d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white")
                                                 g
@@ -96,7 +96,7 @@ div(style="position: fixed; top: 0; width: 100%;")#masthead-container
                                                 )
                                                     path(d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm3-7H3v12h14v-6.39l4 1.83V8.56l-4 1.83V6m1-1v3.83L22 7v8l-4-1.83V19H2V5h16z")
                         div#notification-topbar-button
-                            a(href="#") 
+                            a() 
                                 div(role="button")#button
                                     button(aria-label="알림")#button.wt-icon-button
                                         span.wt-icon-shape
@@ -113,6 +113,122 @@ div(style="position: fixed; top: 0; width: 100%;")#masthead-container
                                     img(draggable="false" alt="아바타 이미지" height="32" width="32" src=user.avatar)#img
 if locals.loggedIn
     div#popup-container
+        div(
+            horizontal-align="auto"
+            vertical-align="top"
+            aria-disabled="false"
+            prevent-autonav="true"
+            style="display: none; outline: none; position: fixed; left: 1158.26px; top: 48px; border: 1px solid #000;"
+            aria-hidden="true"
+        )#wt-content-create-dropdown
+            div#contentWrapper
+                div#container
+                    div#sections
+                        div#menu-section
+                            div#items
+                                div#compact-link
+                                    a(role="link" tabindex="-1" href=`/studio/channel/${user.user_channel.channel_id}`)#endpoint
+                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
+                                            div(style="width: 24px; height: 24px")#content-icon
+                                                span#wt-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            height="24"
+                                                            width="24"
+                                                            viewBox="0 0 24 24"
+                                                            focusable="false"
+                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                            aria-hidden="true"
+                                                        )
+                                                            path(d="m10 8 6 4-6 4V8zm11-5v18H3V3h18zm-1 1H4v16h16V4z")
+                                            div#primary-text-container
+                                                span#label 동영상 업로드
+                                div#compact-link
+                                    a(role="link" tabindex="-1" href="#")#endpoint
+                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
+                                            div(style="width: 24px; height: 24px")#content-icon
+                                                span#wt-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            height="24"
+                                                            width="24"
+                                                            viewBox="0 0 24 24"
+                                                            focusable="false"
+                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                            aria-hidden="true"
+                                                        )
+                                                            g 
+                                                                path(d="M14 12c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM8.48 8.45l-.71-.7C6.68 8.83 6 10.34 6 12s.68 3.17 1.77 4.25l.71-.71C7.57 14.64 7 13.39 7 12s.57-2.64 1.48-3.55zm7.75-.7-.71.71c.91.9 1.48 2.15 1.48 3.54s-.57 2.64-1.48 3.55l.71.71C17.32 15.17 18 13.66 18 12s-.68-3.17-1.77-4.25zM5.65 5.63l-.7-.71C3.13 6.73 2 9.24 2 12s1.13 5.27 2.95 7.08l.71-.71C4.02 16.74 3 14.49 3 12s1.02-4.74 2.65-6.37zm13.4-.71-.71.71C19.98 7.26 21 9.51 21 12s-1.02 4.74-2.65 6.37l.71.71C20.87 17.27 22 14.76 22 12s-1.13-5.27-2.95-7.08z")
+                                            div#primary-text-container
+                                                span#label 라이브 스트리밍 시작
+                                div#compact-link
+                                    a(role="link" tabindex="-1" href="#")#endpoint
+                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
+                                            div(style="width: 24px; height: 24px")#content-icon
+                                                span#wt-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            height="24"
+                                                            width="24"
+                                                            viewBox="0 0 24 24"
+                                                            focusable="false"
+                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                            aria-hidden="true"
+                                                        )
+                                                            path(d="M15.01,7.34l1.64,1.64L8.64,17H6.99v-1.64L15.01,7.34 M15.01,5.92l-9.02,9.02V18h3.06l9.02-9.02L15.01,5.92L15.01,5.92z M17.91,4.43l1.67,1.67l-0.67,0.67L17.24,5.1L17.91,4.43 M17.91,3.02L15.83,5.1l3.09,3.09L21,6.11L17.91,3.02L17.91,3.02z M21,10h-1 v10H4V4h10V3H3v18h18V10z")                                                        
+                                            div#primary-text-container
+                                                span#label 게시물 작성
+        div(
+            horizontal-align="auto"
+            vertical-align="top"
+            aria-disabled="false"
+            prevent-autonav="true"
+            style="display: none; outline: none; position: fixed; left: 915.2px; top: 8px; border: 1px solid #000;"
+            aria-hidden="true"
+        )#wt-notification-dropdown
+            div#contentWrapper
+                div(style="outline: none; box-sizing: border-box; max-width: 480px; max-height: 448px")#multi-page-menu-render
+                    div#container
+                        div(
+                            slot="dropdown-content"
+                            tabindex="-1"
+                            style="outline: none; box-sizing: border-box; max-width: 480px; max-height: 448px"
+                        )#multi-menu
+                            div#header
+                                div#simple-menu-header
+                                    h2
+                                        span 알림
+                                    div#buttons
+                                        div#button-render
+                                            a(href="/account_notifications" aria-label="설정" rel="nofollow") 
+                                                div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                    div(style="width: 24px; height: 24px")
+                                                        span.wt-icon-shape.wt-spec-icon-shape
+                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                svg(
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    enable-background="new 0 0 24 24"
+                                                                    height="24"
+                                                                    viewBox="0 0 24 24"
+                                                                    width="24"
+                                                                    focusable="false"
+                                                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                    aria-hidden="true"
+                                                                )
+                                                                    path(d="M12 9.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5m0-1c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zM13.22 3l.55 2.2.13.51.5.18c.61.23 1.19.56 1.72.98l.4.32.5-.14 2.17-.62 1.22 2.11-1.63 1.59-.37.36.08.51c.05.32.08.64.08.98s-.03.66-.08.98l-.08.51.37.36 1.63 1.59-1.22 2.11-2.17-.62-.5-.14-.4.32c-.53.43-1.11.76-1.72.98l-.5.18-.13.51-.55 2.24h-2.44l-.55-2.2-.13-.51-.5-.18c-.6-.23-1.18-.56-1.72-.99l-.4-.32-.5.14-2.17.62-1.21-2.12 1.63-1.59.37-.36-.08-.51c-.05-.32-.08-.65-.08-.98s.03-.66.08-.98l.08-.51-.37-.36L3.6 8.56l1.22-2.11 2.17.62.5.14.4-.32c.53-.44 1.11-.77 1.72-.99l.5-.18.13-.51.54-2.21h2.44M14 2h-4l-.74 2.96c-.73.27-1.4.66-2 1.14l-2.92-.83-2 3.46 2.19 2.13c-.06.37-.09.75-.09 1.14s.03.77.09 1.14l-2.19 2.13 2 3.46 2.92-.83c.6.48 1.27.87 2 1.14L10 22h4l.74-2.96c.73-.27 1.4-.66 2-1.14l2.92.83 2-3.46-2.19-2.13c.06-.37.09-.75.09-1.14s-.03-.77-.09-1.14l2.19-2.13-2-3.46-2.92.83c-.6-.48-1.27-.87-2-1.14L14 2z")
+                            div#container
+                                div#sections
+                                    div#wt-multi-page-menu-section-render
+                                        div#items
+                                            div#notification-render
+                                                a(tabindex="0" role="link" href="#") 
+                                                    div#new
+                                                    div#avatar
+                                                    div.text
+                                                    div.thumnail-container
         div(
             horizontal-align="auto"
             vertical-align="top"
@@ -413,71 +529,3 @@ if locals.loggedIn
                                                             path(d="M13 14h-2v-2h2v2zm0-9h-2v6h2V5zm6-2H5v16.59l3.29-3.29.3-.3H19V3m1-1v15H9l-5 5V2h16z")
                                             div#primary-text-container
                                                 span#label 의견 보내기
-        div(
-            horizontal-align="auto"
-            vertical-align="top"
-            aria-disabled="false"
-            prevent-autonav="true"
-            style="display: none; outline: none; position: fixed; left: 1158.26px; top: 48px; border: 1px solid #000;"
-            aria-hidden="true"
-        )#wt-content-create-dropdown
-            div#contentWrapper
-                div#container
-                    div#sections
-                        div#menu-section
-                            div#items
-                                div#compact-link
-                                    a(role="link" tabindex="-1" href="#")#endpoint
-                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
-                                            div(style="width: 24px; height: 24px")#content-icon
-                                                span#wt-icon-shape
-                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                        svg(
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            height="24"
-                                                            width="24"
-                                                            viewBox="0 0 24 24"
-                                                            focusable="false"
-                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                            aria-hidden="true"
-                                                        )
-                                                            path(d="m10 8 6 4-6 4V8zm11-5v18H3V3h18zm-1 1H4v16h16V4z")
-                                            div#primary-text-container
-                                                span#label 동영상 업로드
-                                div#compact-link
-                                    a(role="link" tabindex="-1" href="#")#endpoint
-                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
-                                            div(style="width: 24px; height: 24px")#content-icon
-                                                span#wt-icon-shape
-                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                        svg(
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            height="24"
-                                                            width="24"
-                                                            viewBox="0 0 24 24"
-                                                            focusable="false"
-                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                            aria-hidden="true"
-                                                        )
-                                                            g 
-                                                                path(d="M14 12c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM8.48 8.45l-.71-.7C6.68 8.83 6 10.34 6 12s.68 3.17 1.77 4.25l.71-.71C7.57 14.64 7 13.39 7 12s.57-2.64 1.48-3.55zm7.75-.7-.71.71c.91.9 1.48 2.15 1.48 3.54s-.57 2.64-1.48 3.55l.71.71C17.32 15.17 18 13.66 18 12s-.68-3.17-1.77-4.25zM5.65 5.63l-.7-.71C3.13 6.73 2 9.24 2 12s1.13 5.27 2.95 7.08l.71-.71C4.02 16.74 3 14.49 3 12s1.02-4.74 2.65-6.37zm13.4-.71-.71.71C19.98 7.26 21 9.51 21 12s-1.02 4.74-2.65 6.37l.71.71C20.87 17.27 22 14.76 22 12s-1.13-5.27-2.95-7.08z")
-                                            div#primary-text-container
-                                                span#label 라이브 스트리밍 시작
-                                div#compact-link
-                                    a(role="link" tabindex="-1" href="#")#endpoint
-                                        div(role="none" tabindex="0" aria-disabled="false" style="display: flex") 
-                                            div(style="width: 24px; height: 24px")#content-icon
-                                                span#wt-icon-shape
-                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                        svg(
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            height="24"
-                                                            width="24"
-                                                            viewBox="0 0 24 24"
-                                                            focusable="false"
-                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                            aria-hidden="true"
-                                                        )
-                                                            path(d="M15.01,7.34l1.64,1.64L8.64,17H6.99v-1.64L15.01,7.34 M15.01,5.92l-9.02,9.02V18h3.06l9.02-9.02L15.01,5.92L15.01,5.92z M17.91,4.43l1.67,1.67l-0.67,0.67L17.24,5.1L17.91,4.43 M17.91,3.02L15.83,5.1l3.09,3.09L21,6.11L17.91,3.02L17.91,3.02z M21,10h-1 v10H4V4h10V3H3v18h18V10z")                                                        
-                                            div#primary-text-container
-                                                span#label 게시물 작성

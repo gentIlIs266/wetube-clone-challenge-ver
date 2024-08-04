@@ -1,0 +1,82 @@
+#tp-wt-paper-dialog {
+    display: block;
+    margin: auto;
+    background: #282828, #fff;
+    color: #fff, #212121;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.wtcp-uploads-dialog {
+    display: flex;
+    flex-direction: column;
+}
+#tp-wt-paper-dialog.wtcp-uploads-dialog {
+    box-shadow:
+        0 24px 38px 3px rgba(0, 0, 0, .14),
+        0 9px 46px 8px rgba(0, 0, 0, .12),
+        0 11px 15px -7px rgba(0, 0, 0, .4)
+    ;
+    border-radius: 24px;
+    height: calc(100% - ($--wtcp-vertical-bumpers-size) * 2);
+    min-height: 492px;
+    width: 960px;
+    min-width: 960px;
+    overflow-x: hidden;
+}
+.header.wtcp-uploads-dialog {
+    display: flex;
+    flex-direction: column;
+}
+.wtcp-uploads-dialog .title-row.wtcp-uploads-dialog {
+    padding: 16px 24px;
+    height: 28px;
+}
+.title-row.wtcp-uploads-dialog {
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 16px;
+    border-bottom: 1px solid $--wtcp-line-divider;
+    height: calc(($--header-title-row-height) - 1px);
+}
+#scrollable-content.wtcp-uploads-dialog {
+    flex: 1;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-y: overlay;
+    overflow-x: hidden;
+}
+.wtcp-uploads-dialog .button-area.wtcp-uploads-dialog {
+    padding: 0;
+    height: unset;
+}
+.metadata-fade-in-section.wtcp-uploads-dialog {
+    padding: 8px 8px 8px 16px;
+    height: calc(($--button-row-height) - 16px);
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    border-top: 1px solid $--wtcp-line-divider;
+}
+.wtcp-uploads-dialog .inner-button-area.wtcp-uploads-dialog {
+    margin: 16px 24px;
+}
+.inner-button-area.wtcp-uploads-dialog {
+    display: flex;
+    flex: 1;
+}
+.tp-wt-iron-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    vertical-align: middle;
+    width: $--iron-icon-width;
+    height: $--iron-icon-height;
+}
+.tp-wt-iron-icon {
+    width: $--icon-standard-length;
+    height: $--icon-standard-length;
+}

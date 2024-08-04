@@ -1,8 +1,9 @@
 import express from "express";
 
 import {
-    myVideo, getWetubeStudio, postWetubeStudio, videoEdit, outline,
-    reach, participation, audience, videoEditor
+    myVideo, getCreateVideo, postCreateVideo, getWetubeStudio, postWetubeStudio, videoEdit, outline,
+    reach, participation, audience, videoEditor,
+    
 } from "../controllers/studioController";
 
 import { shouldLogInForThisUrl } from "../middleware"; 
@@ -12,7 +13,9 @@ const studioRouter = express.Router();
 
 studioRouter
     .all(shouldLogInForThisUrl)
-    .get("/:channelid[0-9A-Za-z]/videos/upload?filter=", myVideo);
+    .route("/:channelid[0-9A-Za-z]/videos/upload")
+    .get(getCreateVideo)
+    .post(postCreateVideo)
 studioRouter
     .route("/channel/:channelid[0-9A-Za-z]")
     .all(shouldLogInForThisUrl)
