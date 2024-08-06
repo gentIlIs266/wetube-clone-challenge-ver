@@ -1,15 +1,14 @@
-#tp-wt-paper-dialog {
-    display: block;
-    margin: auto;
-    background: #282828, #fff;
-    color: #fff, #212121;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
+#wtcp-uploads-dialog-file-picker.wtcp-uploads-dialog {
+    flex: 1;
+    height: auto;
+    margin-bottom: 24px;
 }
-.wtcp-uploads-dialog {
+div#wtcp-uploads-dialog-file-picker {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: $--wtcp-text-primary;
 }
 #tp-wt-paper-dialog.wtcp-uploads-dialog {
     box-shadow:
@@ -24,13 +23,29 @@
     min-width: 960px;
     overflow-x: hidden;
 }
+.dialog-content.wtcp-uploads-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+}
 .header.wtcp-uploads-dialog {
     display: flex;
     flex-direction: column;
 }
-.wtcp-uploads-dialog .title-row.wtcp-uploads-dialog {
-    padding: 16px 24px;
-    height: 28px;
+.wtcp-uploads-dialog {
+    .title-row.wtcp-uploads-dialog {
+        padding: 16px 24px;
+        height: 28px;
+    }
+    .button-area.wtcp-uploads-dialog {
+        padding: 0;
+        height: unset;
+    }
+    .inner-button-area.wtcp-uploads-dialog {
+        margin: 16px 24px;
+    }
 }
 .title-row.wtcp-uploads-dialog {
     display: flex;
@@ -48,10 +63,6 @@
     overflow-y: overlay;
     overflow-x: hidden;
 }
-.wtcp-uploads-dialog .button-area.wtcp-uploads-dialog {
-    padding: 0;
-    height: unset;
-}
 .metadata-fade-in-section.wtcp-uploads-dialog {
     padding: 8px 8px 8px 16px;
     height: calc(($--button-row-height) - 16px);
@@ -59,9 +70,6 @@
     flex-shrink: 0;
     align-items: center;
     border-top: 1px solid $--wtcp-line-divider;
-}
-.wtcp-uploads-dialog .inner-button-area.wtcp-uploads-dialog {
-    margin: 16px 24px;
 }
 .inner-button-area.wtcp-uploads-dialog {
     display: flex;
@@ -73,10 +81,188 @@
     justify-content: center;
     position: relative;
     vertical-align: middle;
+    fill: currentColor;
+    stroke: none;
     width: $--iron-icon-width;
     height: $--iron-icon-height;
 }
 .tp-wt-iron-icon {
     width: $--icon-standard-length;
     height: $--icon-standard-length;
+}
+#content.wtcp-uploads-file-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 370px;
+    padding: 16px 50px 0;
+}
+.wtcp-icon-button {
+    width: $--icon-standard-length;
+    height: $--icon-standard-length;
+    padding: $--icon-standard-padding;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.close-button-area.wtcp-uploads-dialog {
+    display: flex;
+    margin-left: auto;
+}
+#wtcp-uploads-file-picker-animation {
+    display: block;
+}
+#wtcp-uploads-file-picker-animation.wtcp-uploads-file-picker {
+    margin-top: auto;
+}
+#circle.wtcp-uploads-file-picker-animation {
+    width: 136px;
+    height: 136px;
+    background: $--wtcp-general-background-a;
+    position: relative;
+    border-radius: 68px;
+    overflow: hidden;
+}
+#arrow-group.wtcp-uploads-file-picker-animation {
+    position: absolute;
+    top: 42px;
+    left: 48px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+}
+#arrow.wtcp-uploads-file-picker-animation {
+    position: relative;
+    width: 38px;
+    height: 36px;
+    flex: none;
+    align-self: center;
+}
+#arrow-tip.wtcp-uploads-file-picker-animation {
+    width: 0;
+    height: 0;
+    border-left: 19px solid transparent;
+    border-right: 19px solid transparent;
+    border-bottom: 21px solid $--wtcp-icon-inactive;
+    position: absolute;
+    top: 0;
+    z-index: 30;
+}
+#arrow-line.wtcp-uploads-file-picker-animation {
+    width: 16px;
+    height: 16px;
+    background: $--wtcp-icon-inactive;
+    position: absolute;
+    top: 20px;
+    left: 11px;
+    z-index: 30;
+}
+#arrow-underline.wtcp-uploads-file-picker-animation {
+    flex: none;
+    align-self: center;
+    width: 40px;
+    border-bottom: 6px solid $--wtcp-icon-inactive;
+    margin-top: 10px;
+}
+#tp-wt-paper-dialog {
+    display: block;
+    margin: auto;
+    background: $--paper-dialog-background-color;
+    color: $--paper-dialog-color;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+#speed-line.wtcp-uploads-file-picker-animation {
+    width: 136px;
+    height: 262px;
+    position: absolute;
+    bottom: 26px;
+    opacity: 0;
+}
+#burst.wtcp-uploads-file-picker-animation {
+    position: absolute;
+    width: 136px;
+    height: 136px;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    background: $--wtcp-general-background-b-a0;
+}
+#stroke.wtcp-uploads-file-picker-animation {
+    background: $--wtcp-general-background-b;
+    position: absolute;
+    width: 136px;
+    height: 136px;
+    top: 0;
+    left: 0;
+    border-radius: 68px;
+    transform: scale(0, 0);
+}
+.label.wtcp-uploads-file-picker {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    margin-top: 23px;
+}
+.sublabel.wtcp-uploads-file-picker {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: $--wtcp-text-secondary;
+    margin-top: 2px;
+}
+#select-files-button.wtcp-uploads-file-picker {
+    margin-top: 26px;
+    margin-bottom: auto;
+}
+.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--filled {
+    color: $--wt-spec-text-primary-inverse;
+    background-color: $--wtcp-text-primary;
+}
+.wtcp-button-shape-impl--size-m {
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border-radius: 18px;
+}
+.wtcp-button-shape-impl {
+    position: relative;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 0;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    border: none;
+    cursor: pointer;
+    outline-width: 0;
+    box-sizing: border-box;
+    background: none;
+    text-decoration: none;
+    flex: 1;
+    flex-basis: 0.000000001;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.disclaimer.wtcp-uploads-file-picker {
+    font-weight: 400;
+    letter-spacing: .011em;
+    font-size: 12px;
+    line-height: 16px;
+    color: $--wtcp-text-secondary;
+    text-align: center;
+    line-height: 24px;
 }

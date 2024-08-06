@@ -1,27 +1,113 @@
 include ../partials/html-head.pug
 
-div(
-    style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
-)#tp-wt-paper-dialog.dialog-content.wtcp-uploads-dialog
-    div.header.wtcp-uploads-dialog
-        div.title-row.wtcp-uploads-dialog
-            div.metadata-fade-in-section.wtcp-uploads-dialog
-                span#title.wtcp-uploads-dialog
-    div#wtcp-uploads-dialog-file-picker.wtcp-uploads-dialog
-        div(style="position: relative;")#content.wtcp-uploads-file-picker
-            div#wtcp-uploads-file-picker-animation.wtcp-uploads-file-picker
-                p.wtcp-uploads-file-picker 동영상 파일을 드래그 앤 드롭하여 업로드
-                p.wtcp-uploads-file-picker 동영상을 게시하기 전에는 비공개로 설정됩니다.
-                div.error-area.wtcp-uploads-file-picker
-                div(
-                    type="filled" 
-                    tabindex="-1"
-                    aria-disabled="false"
-                    role="button"
-                )#select-files-button.wtcp-uploads-file-picker
-                form(method="POST")
-                    if step === "showFileInput" || !step
+if step === "showFileInput" || !step
+    div(
+        style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+    )#tp-wt-paper-dialog.dialog-content.wtcp-uploads-dialog
+        div.dialog-content.wtcp-uploads-dialog
+            div.header.wtcp-uploads-dialog
+                div.title-row.wtcp-uploads-dialog
+                    div.metadata-fade-in-section.wtcp-uploads-dialog
+                        div#title.wtcp-uploads-dialog
+                            |동영상 업로드
+                    div.close-button-area.wtcp-uploads-dialog
+                        div#send-feedback-button.wtcp-uploads-dialog
+                            div(
+                                tabindex="0" aria-disabled="false" aria-label="의견 보내기" role="button"
+                            ).wtcp-uploads-dialog
+                                div.remove-defaults.wtcp-icon-button
+                                    svg(
+                                        viewBox="0 0 24 24"
+                                        focusable="false"
+                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                    ).tp-wt-iron-icon
+                                        g.tp-wt-iron-icon
+                                            path(
+                                                d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                            ).tp-wt-iron-icon
+                        div(
+                            tabindex="0"
+                            aria-disabled="false"
+                            aria-label="닫기"
+                            role="button"
+                            onclick=`location.href = "/studio/channel/${channelId}"`
+                        )#close-button.wtcp-uploads-dialog
+                            div.remove-defaults.wtcp-icon-button
+                                svg(
+                                    viewBox="0 0 24 24"
+                                    focusable="false"
+                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                ).tp-wt-iron-icon
+                                    g.tp-wt-iron-icon
+                                            path(
+                                                d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
+                                            ).tp-wt-iron-icon
+            div#wtcp-uploads-dialog-file-picker.wtcp-uploads-dialog
+                div.picked-file-form-container
+                    form(method="POST" style="display: none;") 
                         input(name="step" type="hidden" value="showFileInput")
+                        input(name="video" type="file" required)
+                div(style="position: relative;")#content.wtcp-uploads-file-picker
+                    div#wtcp-uploads-file-picker-animation.wtcp-uploads-file-picker
+                        div#circle.wtcp-uploads-file-picker-animation
+                            div#arrow-group.wtcp-uploads-file-picker-animation
+                                div#arrow.wtcp-uploads-file-picker-animation
+                                    div#arrow-tip.wtcp-uploads-file-picker-animation
+                                    div#arrow-line.wtcp-uploads-file-picker-animation
+                                div#arrow-underline.wtcp-uploads-file-picker-animation
+                            div#speed-line.wtcp-uploads-file-picker-animation
+                                img(
+                                    src="https://www.gstatic.com/youtube/img/creator/uploads/speed_line_darkmode.svg"
+                                ).wtcp-uploads-file-picker-animation
+                            div#burst.wtcp-uploads-file-picker-animation
+                                div#stroke.wtcp-uploads-file-picker-animation
+                    p.label.wtcp-uploads-file-picker 동영상 파일을 드래그 앤 드롭하여 업로드
+                    p.sublabel.wtcp-uploads-file-picker 동영상을 게시하기 전에는 비공개로 설정됩니다.
+                    div.error-area.wtcp-uploads-file-picker
+                    div(
+                        type="filled" 
+                        tabindex="-1"
+                        aria-disabled="false"
+                        role="button"
+                    )#select-files-button.wtcp-uploads-file-picker
+                        div#wtcp-button-shape.wtcp-button
+                            button(
+                                aria-label="파일 선택"
+                            ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
+                                div.wtcp-button-shape-impl__button-text-content
+                                    |파일 선택
+                    p#disclaimer-html.disclaimer.wtcp-uploads-file-picker
+                        |WeTube에 동영상을 제출하면 WeTube 
+                        a(href="#").link-placeholder 서비스 약관 
+                        | 및 
+                        a(href="#").link-placeholder 커뮤니티 가이드 
+                        |에 동의하게 됩니다.
+                    p.disclaimer.wtcp-uploads-file-picker
+                        span.wtcp-uploads-file-picker 불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다.
+                        span.wtcp-uploads-file-picker 타인의 저작권 또는 개인 정보 보호 권리를 침해해서는 안 됩니다.   
+                        a(href="#").wtcp-uploads-file-picker 자세히 알아보기       
+//-if step === "videoInfoSetting"
+    div(
+        style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+    )#tp-wt-paper-dialog.dialog-content.wtcp-uploads-dialog
+        div.header.wtcp-uploads-dialog
+            div.title-row.wtcp-uploads-dialog
+                div.metadata-fade-in-section.wtcp-uploads-dialog
+                    span#title.wtcp-uploads-dialog
+        div#wtcp-uploads-dialog-file-picker.wtcp-uploads-dialog
+            div(style="position: relative;")#content.wtcp-uploads-file-picker
+                div#wtcp-uploads-file-picker-animation.wtcp-uploads-file-picker
+                    p.wtcp-uploads-file-picker 동영상 파일을 드래그 앤 드롭하여 업로드
+                    p.wtcp-uploads-file-picker 동영상을 게시하기 전에는 비공개로 설정됩니다.
+                    div.error-area.wtcp-uploads-file-picker
+                    div(
+                        type="filled" 
+                        tabindex="-1"
+                        aria-disabled="false"
+                        role="button"
+                    )#select-files-button.wtcp-uploads-file-picker
+                    form(method="POST")
+                        input(name="step" type="hidden" value="videoInfoSetting")
                         input(
                             type="file"
                             name="Filedata"
@@ -29,7 +115,6 @@ div(
                             tabindex="-1"
                             style="overflow: hidden;"
                         )
-                    if step === "videoInfoSetting"
                         input(name="step" type="hidden" value="videoInfoSetting")
                         input(
                             name="title"
@@ -44,64 +129,64 @@ div(
                             placeholder="시청자에게 동영상에 대해 설명해 주세요(채널을 멘션하려면 @ 입력)"
                             maxLength="5000"
                         )
-
-                p#disclaimer-html.wtcp-uploads-file-picker
-                    |WeTube에 동영상을 제출하면 WeTube
-                    a(href="#").link-placeholder 서비스 약관
-                    | 및
-                    a(href="#").link-placeholder 커뮤니티 가이드
-                    |에 동의하게 됩니다.
-                p.wtcp-uploads-file-picker
-                    span.wtcp-uploads-file-picker 불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다.
-                    span.wtcp-uploads-file-picker 타인의 저작권 또는 개인 정보 보호 권리를 침해해서는 안 됩니다.
-                    a(href="#").wtcp-uploads-file-picker 자세히 알아보기
-    div(
-        role="progressbar"
-        value="0"
-        aria-disabled="false"
-    )#scrollable-content.metadata-fade-in-section.wtcp-uploads-dialog
-    div.button-area.metadata-fade-in-section.wtcp-uploads-dialog
-        div.inner-button-area.wtcp-uploads-dialog
-            div.left-button-area.wtcp-uploads-dialog
-                div#video-upload-progress.wtcp-uploads-dialog
-                    div(role="tooltip")#uploading-badge.wtcp-video-upload-progress
-                        svg(
-                            viewBox="0 0 24 24"
-                            focusable="false"
-                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                        ).tp-wt-iron-icon
-                            g.tp-wt-iron-icon
-                                path(
-                                    d="M17,18v1H6V18ZM6.49,9l.71.71L11,5.91V16h1V5.91l3.8,3.81L16.51,9l-5-5Z"
-                                ).tp-wt-iron-icon
-                    div(role="tooltip")#processing-badge.wtcp-video-upload-progress
-                        svg(
-                            viewBox="0 0 24 24"
-                            focusable="false"
-                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                        ).tp-wt-iron-icon
-                            g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
-                                path(
-                                    d="M3 3V21H21V3H3ZM20 20H4V4H20V20ZM16 7H13V17H16C17.66 17 19 15.66 19 14V10C19 8.34 17.66 7 16 7ZM15 15V9H16C16.55 9 17 9.45 17 10V14C17 14.55 16.55 15 16 15H15ZM11 7V17H9V13H7V17H5V7H7V11H9V7H11Z"
-                                ).tp-wt-iron-icon
-                    div(role="tooltip")#checks-badge.wtcp-video-upload-progress
-                        svg(
-                            viewBox="0 0 24 24"
-                            focusable="false"
-                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                        ).tp-wt-iron-icon
-                            g.tp-wt-iron-icon
-                                path(
-                                    d="M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3 M12,2 c5.5,0,10,4.5,10,10s-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2L12,2z"
-                                ).tp-wt-iron-icon
-            div.right-button-area.wtcp-uploads-dialog
-                div(
-                    type="filled"
-                    tabindex="-1"
-                    aria-disabled="false"
-                    role="button"
-                )#done-button.wtcp-uploads-dialog
-                    div#wtcp-button-shape
-                        button(aria-label="저장").wtcp-button-shape-impl
-                            div.wtcp-button-shape-impl__button-text-content
-                                |다음
+                    p#disclaimer-html.wtcp-uploads-file-picker
+                        |WeTube에 동영상을 제출하면 WeTube
+                        a(href="#").link-placeholder 서비스 약관
+                        | 및
+                        a(href="#").link-placeholder 커뮤니티 가이드
+                        |에 동의하게 됩니다.
+                    p.wtcp-uploads-file-picker
+                        span.wtcp-uploads-file-picker 불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다.
+                        span.wtcp-uploads-file-picker 타인의 저작권 또는 개인 정보 보호 권리를 침해해서는 안 됩니다.
+                        a(href="#").wtcp-uploads-file-picker 자세히 알아보기
+        div(
+            role="progressbar"
+            value="0"
+            aria-disabled="false"
+        )#scrollable-content.metadata-fade-in-section.wtcp-uploads-dialog
+        div.button-area.metadata-fade-in-section.wtcp-uploads-dialog
+            div.inner-button-area.wtcp-uploads-dialog
+                div.left-button-area.wtcp-uploads-dialog
+                    div#video-upload-progress.wtcp-uploads-dialog
+                        div(role="tooltip")#uploading-badge.wtcp-video-upload-progress
+                            svg(
+                                viewBox="0 0 24 24"
+                                focusable="false"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g.tp-wt-iron-icon
+                                    path(
+                                        d="M17,18v1H6V18ZM6.49,9l.71.71L11,5.91V16h1V5.91l3.8,3.81L16.51,9l-5-5Z"
+                                    ).tp-wt-iron-icon
+                        div(role="tooltip")#processing-badge.wtcp-video-upload-progress
+                            svg(
+                                viewBox="0 0 24 24"
+                                focusable="false"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                    path(
+                                        d="M3 3V21H21V3H3ZM20 20H4V4H20V20ZM16 7H13V17H16C17.66 17 19 15.66 19 14V10C19 8.34 17.66 7 16 7ZM15 15V9H16C16.55 9 17 9.45 17 10V14C17 14.55 16.55 15 16 15H15ZM11 7V17H9V13H7V17H5V7H7V11H9V7H11Z"
+                                    ).tp-wt-iron-icon
+                        div(role="tooltip")#checks-badge.wtcp-video-upload-progress
+                            svg(
+                                viewBox="0 0 24 24"
+                                focusable="false"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g.tp-wt-iron-icon
+                                    path(
+                                        d="M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3 M12,2 c5.5,0,10,4.5,10,10s-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2L12,2z"
+                                    ).tp-wt-iron-icon
+                div.right-button-area.wtcp-uploads-dialog
+                    div(
+                        type="filled"
+                        tabindex="-1"
+                        aria-disabled="false"
+                        role="button"
+                    )#done-button.wtcp-uploads-dialog
+                        div#wtcp-button-shape
+                            button(aria-label="저장").wtcp-button-shape-impl
+                                div.wtcp-button-shape-impl__button-text-content
+                                    |다음
+-//

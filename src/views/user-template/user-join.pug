@@ -10,8 +10,30 @@ body
         div.account-info-section 
             form(method="POST") 
                 div.flow-section
-                    input(name="name" required type="text" placeholder="이름").form-textbox
-                    input(name="username" required type="text" placeholder="유저네임").form-textbox
+                    input(
+                        name="name"
+                        required
+                        type="text"
+                        placeholder="이름"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-required="true"
+                        aria-invalid="false"
+                    ).form-textbox
+                    input(
+                        name="username"
+                        required
+                        type="text"
+                        placeholder="유저네임"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-required="true"
+                        aria-invalid="false"
+                    ).form-textbox
                     if alreadyExistError
                         div.form-message-wrapper
                             span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
@@ -29,15 +51,54 @@ body
                         option(value="neptune") 해왕성
                         option(value="pluto") 명왕성
                         option(value="other-planetary-system") 그 외 행성
-                    input(name="birthDate" required type="text" placeholder="생년월일").form-textbox                              
+                    input(
+                        name="birthDate"
+                        required
+                        type="text"
+                        placeholder="생년월일"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        aria-required="true"
+                    ).form-textbox                              
                 div.flow-section
-                    input(name="email" required type="email" placeholder="name@example.com").form-textbox 
+                    input(
+                        name="email"
+                        required
+                        type="email"
+                        placeholder="name@example.com"
+                        autocorrect="off"
+                        autocapitalize= "off"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-required="true"
+                        aria-invalid="false"
+                    ).form-textbox 
                     if alreadyExistError
                         div.form-message-wrapper
                             span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
                 div.password-wrapper
-                    input(name="password" required type="text" placeholder="암호").form-textbox                              
-                    input(name="passwordConfirm" required type="password" placeholder="암호 확인").form-textbox
+                    input(
+                        name="password"
+                        required
+                        type="text"
+                        placeholder="암호"
+                        autocomplete="off"
+                        aria-required="true"
+                        aria-invalid="true"
+                    ).form-textbox                              
+                    input(
+                        name="passwordConfirm"
+                        required
+                        type="password"
+                        placeholder="암호 확인"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-required="true"
+                        aria-invalid="false"
+                    ).form-textbox
                     if pwConfirmError
                         div.form-message-wrapper
                             span(dir="auto").form-message 암호를 재입력하십시오

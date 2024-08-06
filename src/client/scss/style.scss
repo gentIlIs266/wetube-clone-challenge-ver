@@ -3,3 +3,7 @@
 
 @import "./components/create-video.scss";
 @import "./components/studio-masthead.scss";
+
+a {
+    color: $--wtcp-themed-blue !important;
+}

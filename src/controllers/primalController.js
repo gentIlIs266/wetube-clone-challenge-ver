@@ -123,15 +123,16 @@ export const postUserLogin = async (req, res) => {
                     step: "showPasswordInput",
                     tabTitle: "Log in",
                 });
-            }
+            };
         };
     } catch (error) {
-        if (error === invalidCsrfTokenError) {
-            res.status(403).render("error", {
-                errorMessage: "Invalid CSRF token",
-            });
-        };
-        res.render("error", { error });
+        return res.render("error", { error });
+        /*
+        return res.render("user-template/user-login", {
+            tabTitle: "Log In",
+            unexpectedError: true,
+        });
+        */
     };
 };
 

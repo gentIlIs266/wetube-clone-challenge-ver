@@ -18,7 +18,7 @@ div#studio-header
                     g.topbar-wt-iron-icon
                         path(d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z").topbar-wt-iron-icon
         button#studio-home
-            a(target="_self" href=`/studio/channel/{}`)#home-button
+            a(target="_self" href=`/studio/channel/${channelId}`)#home-button
                 img(height="24" src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_white.svg").home-button
         div#omnisearch.wtcp-header
             div(tabindex="-1")#search-layer.omnisearch
@@ -66,7 +66,7 @@ div#studio-header
                 aria-disabled="false"
                 tabindex="-1"
                 role="button"
-                onclick=`location.href="/studio/${user.user_channel.channel_id}/videos/upload"`
+                onclick=`location.href="/studio/${channelId}/videos/upload"`
             )#create-icon.wtcp-header
                 div#wtcp-button-shape.wtcp-button
                     button(aria-label="만들기").ytcp-button-shape-impl

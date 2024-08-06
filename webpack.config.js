@@ -10,7 +10,7 @@ module.exports = {
     })],
     output: {
         clean: true,
-        filename: "js/[name].js",
+        filename: "js/index.js",
         path: path.resolve(__dirname, "assets"),
     },
     module: {
