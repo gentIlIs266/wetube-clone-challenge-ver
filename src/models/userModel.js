@@ -33,7 +33,8 @@ const userSchema = new mongoose.Schema({
         channel_name: { type: String },
         channel_handle: { type: String },
         channel_id: { type: String, default: `${generateRandomString(25, true, false)}` }
-    }
+    },
+    user_video: [{ type: mongoose.Schema.Types.ObjectId, ref: "VIDEO" }]
 });
 
 userSchema.pre("save", async function () {

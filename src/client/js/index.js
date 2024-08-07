@@ -1,5 +1,4 @@
 import "../scss/style.scss";
 
-import "./create-video.js";
+import "./createVideo.js";
 
-alert("its working")

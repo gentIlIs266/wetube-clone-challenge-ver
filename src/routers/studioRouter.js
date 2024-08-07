@@ -8,7 +8,7 @@ import {
     
 } from "../controllers/studioController";
 
-import { shouldLogInForThisUrl } from "../middleware"; 
+import { multerVideoErrorHandling, shouldLogInForThisUrl, videoFileUpload } from "../middleware"; 
 
 const studioRouter = express.Router();
 
@@ -18,7 +18,7 @@ studioRouter
     .all(shouldLogInForThisUrl)
     .route("/:channelId[0-9A-Za-z]/videos/upload")
     .get(getCreateVideo)
-    .post(postCreateVideo)
+    .post(videoFileUpload.single("video"), postCreateVideo, multerVideoErrorHandling);
 studioRouter.get("/video/:videoId/edit", videoEdit);
 studioRouter.get("/video/:videoId/analytics/tab-overview/period-default", outline);
 studioRouter.get("/video/:videoId/analytics/tab-reach_viewers/period-default", reach);

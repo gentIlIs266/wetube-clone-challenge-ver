@@ -46,6 +46,10 @@ div#wtcp-uploads-dialog-file-picker {
     .inner-button-area.wtcp-uploads-dialog {
         margin: 16px 24px;
     }
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
 }
 .title-row.wtcp-uploads-dialog {
     display: flex;
@@ -265,4 +269,62 @@ div#wtcp-uploads-dialog-file-picker {
     color: $--wtcp-text-secondary;
     text-align: center;
     line-height: 24px;
+}
+.error-area.wtcp-uploads-file-picker {
+    margin-top: 18px;
+    .warning-icon.wtcp-uploads-file-picker {
+        color: $--wtcp-error-red;
+        margin-right: 12px;
+    }
+}
+.details-header-wrapper.wtcp-uploads-dialog {
+    display: flex;
+    position: relative;
+    margin: 8px 48px 17px 48px;
+    width: calc(($--metadata-editor-left-col-min-width) + 8px);
+}
+div#details.wtcp-uploads-dialog {
+    display: flex;
+    padding: 0 48px 24px;
+    min-width: $--metadata-editor-left-col-min-width;
+    min-height: 108px;
+    #wtcp-video-metadata-editor-sidepannel.wtcp-video-metadata-editor {
+        align-self: flex-start;
+        position: sticky;
+        top: 24px;
+        width: 352px;
+        padding-left: 24px;
+    }
+}
+.left-col.wtcp-video-metadata-editor {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: var($--metadata-editor-left-col-min-width, 640px);
+}
+div#basics
+#wtcp-video-metadata-editor-sidepannel {
+    display: flex;
+    flex-direction: column;
+}
+.wtcp-video-metadata-editor-basics.wtcp-video-metadata-editor,
+#wtcp-video-metadata-editor-sidepannel.wtcp-video-metadata-editor {
+    min-height: min-content;
+}
+.button-area.wtcp-uploads-dialog {
+    padding: 8px 8px 8px 16px;
+    height: calc(($--button-row-height) - 16px);
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    border-top: 1px solid $--wtcp-line-divider;
+    .left-button-area.wtcp-uploads-dialog,
+    #wtcp-video-upload-progress.wtcp-uploads-dialog {
+        flex-grow: 1;
+    }
+}
+.left-button-area.wtcp-uploads-dialog,
+.right-button-area.wtcp-uploads-dialog {
+    display: flex;
+    align-items: center;
 }

@@ -44,6 +44,7 @@ app.use(localsSetting);
 
 app.use("/avatars", express.static(path.join("public/avatars")));
 app.use("/assets", express.static("assets"));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/", primalRouter);
 app.use("/feed", feedRouter);
