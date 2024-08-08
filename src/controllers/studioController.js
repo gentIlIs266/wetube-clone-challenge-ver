@@ -44,11 +44,14 @@ export const postCreateVideo = async (req, res) => {
                 fileDontExistError: true,
             });
         };
-        return res.render("studio-template/create-video.pug", {
-            step: "showVideoMetaDataInput",
-            tabTitle: "Saving Video...",
-            user
-        });
+        if (file) {
+            return res.render("studio-template/create-video.pug", {
+                step: "showVideoMetaDataInput",
+                tabTitle: "Saving Video...",
+                user,
+                file
+            });
+        };
     };
     if (step === "showVideoMetaDataInput") {
         try {

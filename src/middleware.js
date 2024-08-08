@@ -1,5 +1,5 @@
 import multer from "multer";
-import path from "path";
+import iconv from "iconv-lite";
 
 export const localsSetting = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -28,51 +28,32 @@ export const shouldNotLogInForThisUrl = (req, res, next) => {
 export const videoFileUpload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, "uploads/videdos");
+            cb(null, "uploads/videos");
         },
         filename: (req, file, cb) => {
-            cb(null, Date.now() + path.extname(file.originalname));
+            const decodedFileName = iconv.decode(Buffer.from(file.originalname, "binary"), "utf-8");
+            cb(null, `${decodedFileName}`);
         },
     }),
     limits: {
-        fileSize: 256000000,
+        fileSize: 256 * 1024 * 1024,
     },
     fileFilter: (req, file, cb) => {
-        if (!file.mimetype.startsWith("video/")) {
+        const allowedVideoMimeTypes = [
+            'video/mp4',
+            'video/x-msvideo',
+            'video/x-matroska',
+            'video/webm',
+            'video/quicktime'
+          ];
+        if (!allowedVideoMimeTypes.includes(file.mimetype)) {
             return cb(new Error("WRONG FILE TYPE, ONLY VIDEO FILE ALLOWED"), false);
         };
         cb(null, true);
     },
 });
 
-export const avatarFileUpload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, "uploads/avatars");
-        },
-        filename: (req, file, cb) => {
-            cb(null, Date.now() + path.extname(file.originalname));
-        },
-    }),
-    limits: {
-        fileSize: 16000000,
-    },
-    fileFilter: (req, file, cb) => {
-        const allowedMimeTypes = [
-            'image/jpeg',  
-            'image/png',  
-            'image/gif',  
-            'image/webp',  
-            'image/bmp',  
-            'image/tiff',  
-            'image/svg+xml'
-        ];
-        if (!allowedMimeTypes.includes(file.mimetype)) {
-            return cb(new Error("WRONG FILE TYPE, ONLY IMAGE FILE ALLOWED"), false);
-        };
-        cb(null, true);
-    },
-});
+//export const avatarFileUpload = ;
 
 export const multerVideoErrorHandling = (err, rea, res, next) => {
     if (err.code === "LIMIT_FILE_SIZE") {
@@ -81,6 +62,7 @@ export const multerVideoErrorHandling = (err, rea, res, next) => {
             fileSizeOverError: true,
         });
     } else if (err) {
+        console.error(err)
         return res.status(400).send(err.message);
     };
     next();

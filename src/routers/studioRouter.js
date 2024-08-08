@@ -18,7 +18,7 @@ studioRouter
     .all(shouldLogInForThisUrl)
     .route("/:channelId[0-9A-Za-z]/videos/upload")
     .get(getCreateVideo)
-    .post(videoFileUpload.single("video"), postCreateVideo, multerVideoErrorHandling);
+    .post(videoFileUpload.single("videoFileData"), postCreateVideo, multerVideoErrorHandling);
 studioRouter.get("/video/:videoId/edit", videoEdit);
 studioRouter.get("/video/:videoId/analytics/tab-overview/period-default", outline);
 studioRouter.get("/video/:videoId/analytics/tab-reach_viewers/period-default", reach);
