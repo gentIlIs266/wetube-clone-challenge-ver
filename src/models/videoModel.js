@@ -1,4 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
+
+const dateTimeArr = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
+    .toISOString()
+    .split("T", 2);
+const dateString = dateTimeArr[0];
+const timeString = dateTimeArr[1].split(".")[0];
 
 const videoSchema = new mongoose.Schema({
     fileUrl: { type: String, required: true },
@@ -6,10 +12,11 @@ const videoSchema = new mongoose.Schema({
     description: { type: String, trim: true, maxLength: 5000 },
     meta: {
         views: { type: Number, default: 0 },
-        createdAt: { type: Date, default: new Date() },
+        createdAt: { type: String, default: `${dateString}_${timeString}` },
         likes: { type: Number, default: 0 },
         dislikes: { type: Number, default: 0 }, 
-    }
+    },
+    video_owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "USER" }
 })
 
 const videoModel = mongoose.model("VIDEO", videoSchema);     

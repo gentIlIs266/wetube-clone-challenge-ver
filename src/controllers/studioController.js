@@ -23,49 +23,89 @@ export const postWetubeStudio = (req, res) => {
 };
 export const getCreateVideo = (req, res) => {
     const {
-        session: { user }
+        session: {
+            user: sessionUser
+        }
     } = req;
     return res.render("studio-template/create-video.pug", {
         tabTitle: "Creating Video...",
-        user,
+        sessionUser,
     })
 };
 export const postCreateVideo = async (req, res) => {
     const {
-        session: { user },
-        body: { step, title, description },
+        session: {
+            user: sessionUser
+        },
+        body: { step, metadataTitle, metadataDescription },
         file,
     } = req;
+    let justCreatedVideoId = null;
     if (step === "showVideoFileInput") {
         if (!file) {
             return res.status(400).render("studio-template/create-video.pug", {
                 step: "showFileInput",
                 tabTitle: "Creating Video...",
+                sessionUser,
                 fileDontExistError: true,
             });
         };
         if (file) {
+            try {
+                const justCreatedVideo = await VIDEO.create({
+                    fileUrl: file.path,
+                    title: file.filename,
+                    description: "",
+                    video_owner: sessionUser._id,
+                });
+                justCreatedVideoId = justCreatedVideo._id;
+                console.log("first:", justCreatedVideoId);
+            } catch (error) {
+                console.error(error);
+                return res.status(500).render("studio-template/create-video.pug", {
+                    step: "showFileInput",
+                    tabTitle: "Creating Video...",
+                    sessionUser,
+                    unexpectedError: true,
+                });
+            };
             return res.render("studio-template/create-video.pug", {
                 step: "showVideoMetaDataInput",
                 tabTitle: "Saving Video...",
-                user,
+                sessionUser,
                 file
             });
         };
     };
     if (step === "showVideoMetaDataInput") {
-        try {
-            const justCreatedVideo = await VIDEO.create({
-                fileUrl: file.fileUrl,
-                title,
-                description
+        if (!justCreatedVideoId) {
+            return res.status(500).render("studio-template/create-video.pug", {
+                step: "showVideoFileInput",
+                tabTitle: "Saving Video...",
+                sessionUser,
+                unexpectedError: true,
             });
-            const userWhoCreatedThisVideo = await USER.findById(_id);
-            userWhoCreatedThisVideo.user_video.push(justCreatedVideo._id);
-            userWhoCreatedThisVideo.save();
-            return res.redirect(`/studio/channel/${_id}`);
+        };
+        try {
+            await VIDEO.findByIdAndUpdate(
+                justCreatedVideoId,
+                {
+                    title: metadataTitle,
+                    description: metadataDescription,
+                }
+            );
+            const userCreatedThisVideo = await USER.findById(sessionUser._id);
+            userCreatedThisVideo.user_video.push(justCreatedVideoId);
+            userCreatedThisVideo.save();
+            return res.redirect(`/studio/channel/${userCreatedThisVideo.user_channel.channel_id}`);
         } catch (error) {
-            return res.render("error", { error });
+            console.error(error);
+            return res.status(500).render("studio-template/create-video.pug", {
+                step: "showVideoFileInput",
+                tabTitle: "Saving Video...",
+                sessionUser,
+                unexpectedError: true,
+            });
         };
     };
 };

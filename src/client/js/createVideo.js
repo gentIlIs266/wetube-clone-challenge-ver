@@ -1,3 +1,4 @@
+//file drag and drop
 document.addEventListener("DOMContentLoaded", () => {
     const selectFilesButton = document.querySelector("#select-files-button");
     const uploadsFilePicker = document.querySelector("#wtcp-uploads-dialog-file-picker");
@@ -41,5 +42,94 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
 });
+//title, description input chat counter
 document.addEventListener("DOMContentLoaded", () => {
-})
+    const titleTextbox = document.querySelector(
+        "#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox"
+    );
+    const titleCharCounter = document.querySelector(
+        "#title-textarea.wtcp-video-title .char-counter.wtcp-social-suggestions-textbox"
+    );
+    const descriptionTextbox = document.querySelector(
+        "#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox"
+    );
+    const descriptionCharCounter = document.querySelector(
+        "#description-textarea.wtcp-video-description .char-counter.wtcp-social-suggestions-textbox"
+    );
+    const updateTitleLength = () => {
+        const titleLength = titleTextbox.textContent.length;
+        titleCharCounter.textContent = `${titleLength}/100`;
+    };
+    const updateDescriptionLength = () => {
+        const descriptionLength = descriptionTextbox.textContent.length;
+        descriptionCharCounter.textContent = `${descriptionLength}/5000`
+    };
+    titleTextbox.addEventListener("input", updateTitleLength);
+    descriptionTextbox.addEventListener("input", updateDescriptionLength);
+    updateTitleLength();
+    updateDescriptionLength();
+});
+//metadata textbox focus/blur styling
+document.addEventListener("DOMContentLoaded", () => {
+    function setupFocusBlurHandlers(container, textbox) {
+        let containerFocused = false;
+        function handleFocus() {
+            containerFocused = true;
+            container.classList.add("focused");
+        };
+        function handleBlur() {
+            containerFocused = false;
+            container.classList.remove("focused");
+        };
+        container.addEventListener("focus", () => {
+            if (containerFocused) {
+                container.classList.add("focused");
+            }
+        });
+        container.addEventListener("blur", handleBlur);
+        container.addEventListener("click", () => {
+            textbox.focus();
+            handleFocus();
+        });
+        textbox.addEventListener("focus", handleFocus);
+        textbox.addEventListener("blur", handleBlur);
+    };
+    const titleContainer = document.querySelector(
+        "#title-textarea.wtcp-video-title #container.wtcp-form-input-container-html-tag"
+    );
+    const titleTextbox = document.querySelector(
+        "#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox"
+    );
+    const descriptionContainer = document.querySelector(
+        "#description-textarea.wtcp-video-description #container.wtcp-form-input-container-html-tag"
+    );
+    const descriptionTextbox = document.querySelector(
+        "#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox"
+    );
+    setupFocusBlurHandlers(titleContainer, titleTextbox);
+    setupFocusBlurHandlers(descriptionContainer, descriptionTextbox); 
+});
+//metadata texbox value to metadata form / button form submit
+document.addEventListener("DOMContentLoaded", () => {
+    const formTitleData = document.querySelector(
+        "#file-metadata-form #file-metadata-tilte"
+    );
+    const formDescriptionData = document.querySelector(
+        "#file-metadata-form #file-metadata-description"
+    );
+    const titleTextbox = document.querySelector(
+        "#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox"
+    );
+    const descriptionTextbox = document.querySelector(
+        "#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox"
+    );
+    const submitButton = document.querySelector(
+        ".wtcp-button-shape-html-tag.wtcp-button button[aria-label='저장']"
+    )
+    submitButton.addEventListener("click", () => {
+        const fileMetaDataForm = document.querySelector("#file-metadata-form");
+        fileMetaDataForm.submit();
+    });
+    formTitleData.value = titleTextbox.textContent;
+    formDescriptionData.value = descriptionTextbox.textContent;
+});

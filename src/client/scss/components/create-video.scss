@@ -12,6 +12,9 @@
     #reuse-details-button.wtcp-uploads-dialog {
         margin-right: 8px;
     }
+    .inner-button-area.wtcp-uploads-dialog {
+        margin: 16px 24px;
+    }
 }
 .tp-wt-paper-dialog-html-tag {
     .tp-wt-paper-dialog.wtcp-uploads-dialog {
@@ -365,6 +368,10 @@
 .wtcp-button-shape-impl--mono.wtcp-button-shape-impl--filled {
     color: $--wt-spec-text-primary-inverse;
     background-color: $--wt-spec-text-primary;
+    &:hover {
+        background-color: $--wt-spec-mono-filled-hover;
+        border-color: transparent;
+    }
 }
 .wtcp-button-shape-impl--mono.wtcp-button-shape-impl--tonal {
     color: $--wt-spec-text-primary;
@@ -544,11 +551,13 @@ h1.wtcp-uploads-dialog {
         border-radius: $--wtcp-m-border-radius;
         box-shadow: 0 0 0 1px inset $--wtcp-container-border-color;
         padding:
-            0,
-            $--wtcp-form-field-horizontal-padding,
-            11px,
-            $--wtcp-form-field-horizontal-padding
-        ;
+            if($--wtcp-form-input-container-padding != null,
+                $--wtcp-form-input-container-padding,
+                0 $--wtcp-form-field-horizontal-padding 11px
+            );
+        &:hover {
+            box-shadow: 0 0 0 1px inset #fff;
+        }
     }
     #label.wtcp-form-input-container {
         font-family: "Roboto", sans-serif;
@@ -592,6 +601,9 @@ h1.wtcp-uploads-dialog {
     margin-bottom: 3px;
     position: relative;
 }
+#child-input.wtcp-form-input-container {
+    height: calc($--wtcp-form-input-container-child-input-height);
+}
 .wtcp-form-input-container-html-tag #label-icon-container.wtcp-form-input-container,
 .wtcp-form-input-container-html-tag #label-help-tooltip.wtcp-form-input-container {
     top: -2px;
@@ -628,6 +640,11 @@ h1.wtcp-uploads-dialog {
     border: none;
     outline: none;
     background-color: transparent;
+    &[aria-label]:empty::before {
+        color: $--wtcp-icon-disabled;
+        content: attr(aria-label);
+        cursor: text;
+    }
 }
 .container-bottom.wtcp-social-suggestions-textbox {
     display: flex;
@@ -650,4 +667,63 @@ h1.wtcp-uploads-dialog {
     .char-counter.wtcp-social-suggestions-textbox {
         visibility: visible;
     }
+}
+.wtcp-form-input-container-html-tag.focused #outer.wtcp-form-input-container {
+    box-shadow: 0 0 0 2px inset #fff;
+}
+.wtcp-video-description-html-tag {
+    color: $--wtcp-text-primary;
+    display: flex;
+    flex-direction: column;
+}
+.description.wtcp-video-description {
+    .wtcp-social-suggestions-textbox-html-tag.wtcp-video-description {
+        height: 168px;
+        max-height: 960px;
+    }
+}
+.inner-button-area.wtcp-uploads-dialog {
+    display: flex;
+    flex: 1;
+}
+.left-button-area.wtcp-uploads-dialog,
+.right-button-area.wtcp-uploads-dialog {
+    display: flex;
+    align-items: center;
+}
+.button-area.wtcp-uploads-dialog .left-button-area.wtcp-uploads-dialog,
+.wtcp-video-uploads-progress-html-tag.wtcp-uploads-dialog {
+    flex-grow: 1;
+}
+.wtcp-video-uploads-progress-html-tag {
+    display: flex;
+    height: 24px;
+}
+.wtcp-video-uploads-progress-html-tag.wtcp-uploads-dialog {
+    display: flex;
+    margin-right: 16px;
+}
+.wtcp-video-uploads-progress-html-tag[modern] #uploading-badge.wtcp-video-upload-progress,
+.wtcp-video-uploads-progress-html-tag[modern] #processing-badge.wtcp-video-upload-progress,
+.wtcp-video-uploads-progress-html-tag[modern] #checks-badge.wtcp-video-upload-progress {
+    fill: $--wtcp-text-primary;
+    opacity: 1;
+}
+.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress {
+    &:not(:first-of-type) {
+        margin-left: 8px;
+    }
+}
+.progress-label.wtcp-video-upload-progress {
+    color: $--wtcp-text-secondary;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+    margin-right: 6px;
+    margin-left: 16px;
 }
