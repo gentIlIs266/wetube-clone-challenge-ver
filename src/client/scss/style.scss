@@ -7,8 +7,14 @@
 @import "./components/create-video.scss";
 @import "./components/studio-masthead.scss";
 @import "./components/animation.scss";
+@import "./components/masthead.scss";
 
 a {
     color: $--wtcp-themed-blue;
     text-decoration: none;
+}
+@media (min-width: 876px) {
+    #logo.wtd-masthead {
+        width: 129px;
+    }
 }

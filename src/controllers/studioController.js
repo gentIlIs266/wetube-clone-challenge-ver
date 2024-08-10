@@ -40,7 +40,7 @@ export const postCreateVideo = async (req, res) => {
         body: { step, metadataTitle, metadataDescription },
         file,
     } = req;
-    let justCreatedVideoId = null;
+    let justCreatedVideoId = req.session.justCreatedVideoId || null;
     if (step === "showVideoFileInput") {
         if (!file) {
             return res.status(400).render("studio-template/create-video.pug", {
@@ -59,6 +59,7 @@ export const postCreateVideo = async (req, res) => {
                     video_owner: sessionUser._id,
                 });
                 justCreatedVideoId = justCreatedVideo._id;
+                req.session.justCreatedVideoId = justCreatedVideoId;
                 console.log("first:", justCreatedVideoId);
             } catch (error) {
                 console.error(error);
@@ -96,7 +97,7 @@ export const postCreateVideo = async (req, res) => {
             );
             const userCreatedThisVideo = await USER.findById(sessionUser._id);
             userCreatedThisVideo.user_video.push(justCreatedVideoId);
-            userCreatedThisVideo.save();
+            await userCreatedThisVideo.save();
             return res.redirect(`/studio/channel/${userCreatedThisVideo.user_channel.channel_id}`);
         } catch (error) {
             console.error(error);

@@ -111,25 +111,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //metadata texbox value to metadata form / button form submit
 document.addEventListener("DOMContentLoaded", () => {
-    const formTitleData = document.querySelector(
-        "#file-metadata-form #file-metadata-tilte"
-    );
-    const formDescriptionData = document.querySelector(
-        "#file-metadata-form #file-metadata-description"
-    );
-    const titleTextbox = document.querySelector(
-        "#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox"
-    );
-    const descriptionTextbox = document.querySelector(
-        "#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox"
-    );
-    const submitButton = document.querySelector(
-        ".wtcp-button-shape-html-tag.wtcp-button button[aria-label='저장']"
-    )
+    const formTitleData = document.querySelector("#file-metadata-form #file-metadata-title");
+    const formDescriptionData = document.querySelector("#file-metadata-form #file-metadata-description");
+    const titleTextbox = document.querySelector("#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox");
+    const descriptionTextbox = document.querySelector("#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox");
+    const submitButton = document.querySelector(".wtcp-button-shape-html-tag.wtcp-button button[aria-label='저장']");
     submitButton.addEventListener("click", () => {
         const fileMetaDataForm = document.querySelector("#file-metadata-form");
         fileMetaDataForm.submit();
     });
-    formTitleData.value = titleTextbox.textContent;
-    formDescriptionData.value = descriptionTextbox.textContent;
+    titleTextbox.addEventListener("input", () => {
+        formTitleData.value = titleTextbox.textContent;
+    });
+    descriptionTextbox.addEventListener("input", () => {
+        formDescriptionData.value = descriptionTextbox.textContent;
+    });
 });
