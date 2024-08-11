@@ -173,8 +173,16 @@ div#masthead-container.wtd-app
                                                     aria-hidden="true"
                                                 )
                                                     path(d="M12 3c-1.66 0-3 1.37-3 3.07v5.86c0 1.7 1.34 3.07 3 3.07s3-1.37 3-3.07V6.07C15 4.37 13.66 3 12 3zm6.5 9h-1c0 3.03-2.47 5.5-5.5 5.5S6.5 15.03 6.5 12h-1c0 3.24 2.39 5.93 5.5 6.41V21h2v-2.59c3.11-.48 5.5-3.17 5.5-6.41z")
+                                div(
+                                    style="border-radius: inherit;"
+                                ).wt-touch-feedback-shape-html-tag
+                                    div(
+                                        aria-hidden="true"
+                                    ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--overlay-touch-response
+                                        div.wt-spec-touch-feedback-shape__stroke
+                                        div.wt-spec-touch-feedback-shape__fill
             div#end.wtd-masthead
-                div(style="display: flex;")#buttons
+                div#buttons.wtd-masthead
                     if !locals.loggedIn
                         div#menu-button
                             div#button
@@ -204,36 +212,68 @@ div#masthead-container.wtd-app
                                 div.wy-spec-button-shape-next__button-text-content
                                     span(role="text").wt-core-attributed-string 로그인 
                     if locals.loggedIn
-                        div#topbar-content-button
-                            a() 
-                                div(role="button")#button
-                                    button(aria-label="만들기")#button.wt-icon-button
-                                        span.wt-icon-shape
-                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                svg(
-                                                    xmlns="http://www.w3.org/2000/svg" height="24"
-                                                    style="pointer-events: none; display: inherit; width: 100% height: 100%"
-                                                    viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
-                                                )
-                                                    path(d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm3-7H3v12h14v-6.39l4 1.83V8.56l-4 1.83V6m1-1v3.83L22 7v8l-4-1.83V19H2V5h16z")
-                        div#notification-topbar-button
-                            a() 
-                                div(role="button")#button
-                                    button(aria-label="알림")#button.wt-icon-button
-                                        span.wt-icon-shape
-                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                svg(
-                                                    xmlns="http://www.w3.org/2000/svg" height="24"
-                                                    style="pointer-events: none; display: inherit; width: 100% height: 100%"
-                                                    viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
-                                                )
-                                                    path(d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15C6 7.4 7.56 5.1 10 4.34v-.38c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.87zm-1 .42-2-1.88v-5.47c0-2.47-1.19-4.36-3.13-5.1-1.26-.53-2.64-.5-3.84.03C8.15 6.11 7 7.99 7 10.42v5.47l-2 1.88V18h14v-.23z")
-                        div#topbar-menu-button
-                            button(aria-haspopup="true" aria-label="계정 메뉴")#avatar-btn
-                                div(height="32" width="32" style="background-color: transparent;")
-                                    img(draggable="false" alt="아바타 이미지" height="32" width="32" src=user.avatar)#img
+                        div(
+                            is-icon-button has-no-text
+                        ).wtd-topbar-menu-button-renderer-html-tag.wtd-masthead.style-default
+                            div#button.wtd-topbar-menu-button-renderer
+                                a(
+                                    tabindex="-1"
+                                ).wt-simple-endpoint.wtd-topbar-menu-button-renderer
+                                    div(
+                                        role="button"
+                                    ).wt-icon-button-html-tag.wtd-topbar-menu-button-renderer.style-default
+                                        button(aria-label="만들기")#button.wt-icon-button
+                                            div.wt-icon-html-tag.wtd-topbar-menu-button-renderer
+                                                span.wt-icon-shape.wt-spec-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg" height="24"
+                                                            style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                            viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                        )
+                                                            path(d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm3-7H3v12h14v-6.39l4 1.83V8.56l-4 1.83V6m1-1v3.83L22 7v8l-4-1.83V19H2V5h16z")
+                                        div#interaction.wt-interation-html-tag.circular.wt-icon-button
+                                            div.stroke.wt-interaction
+                                            div.fill.wt-interaction
+                        div.wtd-notification-topbar-button-renderer-html-tag.wtd-masthead
+                            div(
+                                role="button"
+                            )#icon.wt-icon-button-html-tag.wtd-notification-topbar-button-renderer
+                                button(aria-label="알림")#button.wt-icon-button
+                                    div.wt-icon-badge-shape-html-tag
+                                        div.wt-spec-icon-badge-shape.wt-spec-icon-badge-shape--type-notification.wt-spec-icon-badge-shape--style-overlay
+                                            div.wt-spec-icon-badge-shepe__icon
+                                                div.wt-icon-html-tag
+                                                    span.wt-icon-shape.wt-spec-icon-shape
+                                                        div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                            svg(
+                                                                xmlns="http://www.w3.org/2000/svg" height="24"
+                                                                style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                                viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                            )
+                                                                path(d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15C6 7.4 7.56 5.1 10 4.34v-.38c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.87zm-1 .42-2-1.88v-5.47c0-2.47-1.19-4.36-3.13-5.1-1.26-.53-2.64-.5-3.84.03C8.15 6.11 7 7.99 7 10.42v5.47l-2 1.88V18h14v-.23z")
+                                div#interaction.wt-interaction-html-tag
+                                    div.stroke.wt-interaction
+                                    div.fill.wt-interaction
+                        div.wtd-topbar-menu-button-renderer-html-tag.wtd-masthead
+                            button(
+                                aria-haspopup="true" aria-label="계정 메뉴"
+                                )#avatar-btn.wtd-topbar-menu-button-renderer
+                                div(
+                                    height="32"
+                                    width="32"
+                                    style="background-color: transparent;"
+                                    loaded
+                                ).wt-img-shadow-html-tag.wtd-topbar-menu-button-renderer.no-transition
+                                    img(
+                                        draggable="false"
+                                        alt="아바타 이미지"
+                                        height="32"
+                                        width="32"
+                                        src=user.avatar
+                                    )#img.wt-img-shadow
 if locals.loggedIn
-    div#popup-container
+    div.wtd-popup-container-html-tag
         div(
             horizontal-align="auto"
             vertical-align="top"
@@ -241,7 +281,7 @@ if locals.loggedIn
             prevent-autonav="true"
             style="display: none; outline: none; position: fixed; left: 1158.26px; top: 48px; border: 1px solid #000;"
             aria-hidden="true"
-        )#wt-content-create-dropdown
+        ).wt-content-create-dropdown.wtd-popup-container
             div#contentWrapper
                 div#container
                     div#sections
