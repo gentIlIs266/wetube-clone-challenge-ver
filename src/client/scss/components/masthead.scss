@@ -350,17 +350,46 @@ button.wt-icon-button {
     flex-basis: 0.000000001px;
 }
 .wt-spec-button-shape-next--size-m {
-    .yt-spec-button-shape-next__icon {
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border-radius: 18px ;
+}
+.wt-spec-button-shape-next--size-m {
+    .wt-spec-button-shape-next__icon {
         width: 24px;
         height: 24px;
     }
 }
-.yt-spec-button-shape-next__icon {
+.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--outline {
+    padding: 0 15px;
+    border-width: 1px;
+    border-style: solid;
+}
+.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading {
+    .wt-spec-button-shape-next__icon {
+        margin-right: 6px;
+        margin-left: -6px;
+    }
+}
+.wt-spec-button-shape-next__icon {
     line-height: 0;
     fill: currentColor;
 }
 .wt-spec-button-shape-next--mono.wt-spec-button-shape-next--text {
     color: #f1f1f1;
+}
+.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--outline {
+    color: #3EA6FF;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.wt-spec-button-shape-next__button-text-content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.wt-core-attributed-string--white-space-no-wrap {
+    white-space: nowrap;
 }
 #search-container.wtd-searchbox-spt {
     pointer-events: none;
@@ -388,6 +417,12 @@ button.wt-icon-button {
         outline: none;
     }
 }
+#voice-search-button.wtd-masthead .wtd-masthead[is-icon-button],
+#buttons.wtd-masthead .wtd-masthead[is-icon-button] {
+    color: $--wt-spec-icon-active-other;
+    outline: none;
+}
+
 .wt-spec-button-shape-next--overlay.wt-spec-button-shape-next--text {
     color: #fff;
 }
@@ -561,6 +596,16 @@ button.wtd-topbar-menu-button-renderer,
 }
 .wt-img-shadow-html-tag.no-transition {
     opacity: 1;
+}
+.wt-spec-touch-feedback-shape__stroke {
+    will-change: opacity;
+    opacity: 0;
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 img.wt-img-shadow {
     display: block;

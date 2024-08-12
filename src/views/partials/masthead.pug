@@ -39,7 +39,7 @@ div#masthead-container.wtd-app
                                                     g
                                                         path(
                                                             d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z"
-                                                            fill="#DE3163"
+                                                            fill="#FF0000"
                                                         )
                                                         path(d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white")
                                                     g
@@ -184,33 +184,54 @@ div#masthead-container.wtd-app
             div#end.wtd-masthead
                 div#buttons.wtd-masthead
                     if !locals.loggedIn
-                        div#menu-button
-                            div#button
-                                a(href="#") 
-                                    div(role="button")#button
+                        div(is-icon-button has-no-text).wtd-topbar-menu-button-renderer-html-tag.wtd-masthead.style-default
+                            div#button.wtd-topbar-menu-button-renderer
+                                a(tabindex="-1").wt-simple-endpoint.wtd-topbar-menu-button-renderer 
+                                    div(role="button")#button.wt-icon-button-html-tag.wtd-topbar-menu-button-renderer.style-default
                                         button(aria-label="설정")#button.wt-icon-button
-                                            span.wt-icon-shape 
+                                            div.wt-icon-html-tag.wtd-topbar-menu-button-renderer
+                                                span.wt-icon-shape.wt-spec-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg" height="24"
+                                                            style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                            viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                        )
+                                                            path(d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z")
+                                        div#interaction.wt-interaction-html-tag.circular.wt-icon-button
+                                            div.stroke.wt-interaction
+                                            div.fill.wt-interaction
+                        div.wtd-button-rederer-html-tag.wtd-masthead
+                            div.wt-button-shape-html-tag
+                                a(
+                                    href="/login"
+                                    aria-label="로그인"
+                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading 
+                                    div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                            span.wt-icon-shape.wt-spec-icon-shape
                                                 div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
                                                     svg(
-                                                        xmlns="http://www.w3.org/2000/svg" height="24"
-                                                        style="pointer-events: none; display: inherit; width: 100% height: 100%"
-                                                        viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
-                                                    )
-                                                        path(d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z")
-                        div#login-button
-                            a(href="/login" aria-label="로그인") 
-                                div(aria-hidden="true").wt-spec-button-shape-next__icon
-                                    i(style="width: 24px; height: 24px;")
-                                        span.wt-icon-shape
-                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                svg(
-                                                        xmlns="http://www.w3.org/2000/svg" height="24"
-                                                        style="pointer-events: none; display: inherit; width: 100% height: 100%"
-                                                        viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
-                                                    )
-                                                        path(d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1c4.96 0 9 4.04 9 9 0 1.42-.34 2.76-.93 3.96-1.53-1.72-3.98-2.89-7.38-3.03A3.996 3.996 0 0016 9c0-2.21-1.79-4-4-4S8 6.79 8 9c0 1.97 1.43 3.6 3.31 3.93-3.4.14-5.85 1.31-7.38 3.03C3.34 14.76 3 13.42 3 12c0-4.96 4.04-9 9-9zM9 9c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 12c-3.16 0-5.94-1.64-7.55-4.12C6.01 14.93 8.61 13.9 12 13.9c3.39 0 5.99 1.03 7.55 2.98C17.94 19.36 15.16 21 12 21z")
-                                div.wy-spec-button-shape-next__button-text-content
-                                    span(role="text").wt-core-attributed-string 로그인 
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            width="24"
+                                                            focusable="false"
+                                                            style="pointer-events: none; display: inherit; width: 100% height: 100%"
+                                                            aria-hidden="true"
+                                                        )
+                                                            path(d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1c4.96 0 9 4.04 9 9 0 1.42-.34 2.76-.93 3.96-1.53-1.72-3.98-2.89-7.38-3.03A3.996 3.996 0 0016 9c0-2.21-1.79-4-4-4S8 6.79 8 9c0 1.97 1.43 3.6 3.31 3.93-3.4.14-5.85 1.31-7.38 3.03C3.34 14.76 3 13.42 3 12c0-4.96 4.04-9 9-9zM9 9c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 12c-3.16 0-5.94-1.64-7.55-4.12C6.01 14.93 8.61 13.9 12 13.9c3.39 0 5.99 1.03 7.55 2.98C17.94 19.36 15.16 21 12 21z")
+                                    div.wt-spec-button-shape-next__button-text-content
+                                        span(
+                                            role="text"
+                                        ).wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                            |로그인
+                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                        div(
+                                            aria-hidden="true"
+                                        ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                            div.wt-spec-touch-feedback-shape__stroke
+                                            div.wt-spec-touch-feedback-shape__fill
                     if locals.loggedIn
                         div(
                             is-icon-button has-no-text
