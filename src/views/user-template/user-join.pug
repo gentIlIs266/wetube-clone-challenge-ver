@@ -1,105 +1,105 @@
 include ../partials/html-head.pug
-include ../partials/masthead.pug
 
-body 
-    main
-        div.intro
-            h1 Wetube Account 생성
-            div.intro-text
-                | 계정을 생성하면 동영상을 업로드 및 기타 기능들을 이용할 수 있습니다.
-        div.account-info-section 
-            form(method="POST") 
-                div.flow-section
-                    input(
-                        name="name"
-                        required
-                        type="text"
-                        placeholder="이름"
-                        autocorrect="off"
-                        autocapitalize="off"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-required="true"
-                        aria-invalid="false"
-                    ).form-textbox
-                    input(
-                        name="username"
-                        required
-                        type="text"
-                        placeholder="유저네임"
-                        autocorrect="off"
-                        autocapitalize="off"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-required="true"
-                        aria-invalid="false"
-                    ).form-textbox
-                    if alreadyExistError
-                        div.form-message-wrapper
-                            span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
-                div.flow-section
-                    h3 국가/지역
-                    select(name="location" aria-required="true")
-                        option(value="SUN") 태양
-                        option(value="MERCURY") 수성
-                        option(value="VENUS") 금성
-                        option(value="EARTH") 지구
-                        option(value="MARS") 화성
-                        option(value="JUPITER") 목성 
-                        option(value="SATURN") 토성 
-                        option(value="URANUS") 천왕성 
-                        option(value="NEPTUNE") 해왕성
-                        option(value="PLUTO") 명왕성
-                        option(value="OTHER-PLANETARY-SYSTEM") 그 외 행성
-                    input(
-                        name="birthDate"
-                        required
-                        type="text"
-                        placeholder="생년월일"
-                        autocorrect="off"
-                        autocapitalize="off"
-                        spellcheck="false"
-                        aria-required="true"
-                    ).form-textbox                              
-                div.flow-section
-                    input(
-                        name="email"
-                        required
-                        type="email"
-                        placeholder="name@example.com"
-                        autocorrect="off"
-                        autocapitalize= "off"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-required="true"
-                        aria-invalid="false"
-                    ).form-textbox 
-                    if alreadyExistError
-                        div.form-message-wrapper
-                            span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
-                div.password-wrapper
-                    input(
-                        name="password"
-                        required
-                        type="text"
-                        placeholder="암호"
-                        autocomplete="off"
-                        aria-required="true"
-                        aria-invalid="true"
-                    ).form-textbox                              
-                    input(
-                        name="passwordConfirm"
-                        required
-                        type="password"
-                        placeholder="암호 확인"
-                        autocorrect="off"
-                        autocapitalize="off"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-required="true"
-                        aria-invalid="false"
-                    ).form-textbox
-                    if pwConfirmError
-                        div.form-message-wrapper
-                            span(dir="auto").form-message 암호를 재입력하십시오
-                input(type="submit" value="계속")     
+body
+    include ../partials/masthead.pug
+    div#signin-container.rs-page-content
+    div.intro
+        h1 Wetube Account 생성
+        div.intro-text
+            | 계정을 생성하면 동영상을 업로드 및 기타 기능들을 이용할 수 있습니다.
+    div.account-info-section 
+        form(method="POST") 
+            div.flow-section
+                input(
+                    name="name"
+                    required
+                    type="text"
+                    placeholder="이름"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-required="true"
+                    aria-invalid="false"
+                ).form-textbox
+                input(
+                    name="username"
+                    required
+                    type="text"
+                    placeholder="유저네임"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-required="true"
+                    aria-invalid="false"
+                ).form-textbox
+                if alreadyExistError
+                    div.form-message-wrapper
+                        span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
+            div.flow-section
+                h3 국가/지역
+                select(name="location" aria-required="true")
+                    option(value="SUN") 태양
+                    option(value="MERCURY") 수성
+                    option(value="VENUS") 금성
+                    option(value="EARTH") 지구
+                    option(value="MARS") 화성
+                    option(value="JUPITER") 목성 
+                    option(value="SATURN") 토성 
+                    option(value="URANUS") 천왕성 
+                    option(value="NEPTUNE") 해왕성
+                    option(value="PLUTO") 명왕성
+                    option(value="OTHER-PLANETARY-SYSTEM") 그 외 행성
+                input(
+                    name="birthDate"
+                    required
+                    type="text"
+                    placeholder="생년월일"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    aria-required="true"
+                ).form-textbox                              
+            div.flow-section
+                input(
+                    name="email"
+                    required
+                    type="email"
+                    placeholder="name@example.com"
+                    autocorrect="off"
+                    autocapitalize= "off"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-required="true"
+                    aria-invalid="false"
+                ).form-textbox 
+                if alreadyExistError
+                    div.form-message-wrapper
+                        span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
+            div.password-wrapper
+                input(
+                    name="password"
+                    required
+                    type="text"
+                    placeholder="암호"
+                    autocomplete="off"
+                    aria-required="true"
+                    aria-invalid="true"
+                ).form-textbox                              
+                input(
+                    name="passwordConfirm"
+                    required
+                    type="password"
+                    placeholder="암호 확인"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-required="true"
+                    aria-invalid="false"
+                ).form-textbox
+                if pwConfirmError
+                    div.form-message-wrapper
+                        span(dir="auto").form-message 암호를 재입력하십시오
+            input(type="submit" value="계속")     

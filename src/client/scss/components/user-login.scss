@@ -1,0 +1,21 @@
+body:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', MalgunGothic, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5882352941;
+}
+:lang(ko) {
+    word-break: keep-all;
+    font-style: normal;
+}
+body {
+    min-width: 1024px;
+    background-color: #fff;
+    color: #1d1d1f;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.022em;
+    line-height: 1.47059;
+    padding-top: 56px;
+}
+

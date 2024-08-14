@@ -1,10 +1,8 @@
 include ../partials/html-head.pug
-include ../partials/masthead.pug
 
-body 
-    header 
-        h1 Log in
-    main
+body(lang="ko")
+    include ../partials/masthead.pug
+    div#sign-container.rs-page-content
         if step === "showFirstInput" || !step
             form(action="/login" method="POST" style="margin: auto;")#sign_in_form
                 input(name="step" type="hidden" value="showFirstInput")
