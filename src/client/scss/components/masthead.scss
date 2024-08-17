@@ -112,6 +112,16 @@ button.wt-icon-button {
     right: 0;
     bottom: 0;
     left: 0;
+    &[focused] {
+        .fill.wt-interaction {
+            opacity: .1;
+        }
+    }
+}
+.wt-interaction-html-tag.down {
+    .fill.wt-interaction {
+        opacity: .1;
+    }
 }
 .wt-interaction-html-tag.circular .fill.wt-interaction,
 .wt-interaction-html-tag.circular .stroke.wt-interaction {
@@ -383,6 +393,10 @@ button.wt-icon-button {
 .wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--outline {
     color: #3EA6FF;
     border-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+        background: #263850;
+        border-color: transparent;
+    }
 }
 .wt-spec-button-shape-next__button-text-content {
     text-overflow: ellipsis;
@@ -468,6 +482,11 @@ button.wt-icon-button {
     right: 0;
     bottom: 0;
     left: 0;
+}
+.wt-spec-touch-feedback-shape--down {
+    .wt-spec-touch-feedback-shape__fill {
+        opacity: .1;
+    }
 }
 .wt-spec-touch-feedback-shape--overlay-touch-response {
     .wt-spec-touch-feedback-shape__stroke {
@@ -623,4 +642,14 @@ button.wtd-topbar-menu-button-renderer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.wt-spec-touch-feedback-shape--touch-response {
+    .wt-spec-touch-feedback-shape__fill {
+        background-color: #fff;
+    }
+}
+.wt-spec-touch-feedback-shape--down {
+    .wt-spec-touch-feedback-shape__fill {
+        opacity: .1;
+    }
 }
