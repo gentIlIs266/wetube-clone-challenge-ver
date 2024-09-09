@@ -1,21 +1,327 @@
-body:lang(ko) {
+#signin-container {
+    margin-top: 56px;
+}
+.rs-sign-in.rs-sign-in-idms-no-sidebar {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.rs-sign-in-has-idms .rs-sign-in-header {
+    padding-bottom: 0;
+}
+.typography-headline-reduced:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Display', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+}
+.typography-headline-reduced {
+    font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 35px;
+    font-weight: 600;
     letter-spacing: 0;
-    font-family: 'SF Pro KR', 'SF Pro Text', MalgunGothic, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.5882352941;
+    line-height: 1.1;
 }
-:lang(ko) {
-    word-break: keep-all;
-    font-style: normal;
+.rs-sign-in-header {
+    padding-bottom: 36px;
+    padding-top: 34px;
 }
-body {
-    min-width: 1024px;
-    background-color: #fff;
+.rs-sign-in-has-idms .rs-sign-in-main {
+    margin: 0 auto;
+}
+.row {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+.rs-sign-in-has-idms .rs-sign-in-content {
+    box-sizing: border-box;
+    margin: 0;
+    min-height: 450px;
+    min-width: 600px;
+    padding: 0;
+    position: relative;
+    width: auto;
+    z-index: 1;
+}
+.rs-sign-in-idms-no-sidebar .rs-sign-in-content {
+    float: none;
+    margin: 0 auto;
+}
+.column {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+}
+.rs-sign-in-idms-no-sidebar .rt-apple-auth {
+    height: 480px;
+    margin-top: 72px;
+}
+.rt-apple-auth {
+    height: 480px;
+    margin: 83px auto 0;
+    width: 640px;
+}
+.si-container[data-theme=dark] {
+    color: #494949;
+}
+.si-container {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+.widget-container.restrict-max-wh.restrict-min-content {
+    min-height: 100vh;
+    height: min-content;
+}
+.widget-container.restrict-max-wh {
+    min-height: 420px;
+}
+.widget-container[data-mode=inline] {
+    justify-content: start;
+}
+.widget-container {
+    height: 100%;
+    min-width: 310px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.fade-in {
+    animation: fade-in .5s ease-in-out;
+}
+.widget-container .si-step {
+    width: 100%;
+}
+.widget-container[data-mode=inline] .signin {
+    padding-top: 4px;
+}
+.widget-container .si-container-title {
+    margin: 14px 0;
+}
+.widget-container .si-container-description,
+.widget-container .si-container-title {
+    max-width: 380px;
+    margin: 5px auto 13px;
+    word-break: break-word;
+}
+.tk-label:lang(ko) {
+    line-height: 1.29167;
+    font-family: 'SF Pro KR', 'SF Pro Display', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.tk-label {
+    font-size: 24px;
+    line-height: 1.16667;
+    font-weight: 600;
+    letter-spacing: .009em;
+    font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.widget-container .signin .swp-enable.si-field-container:not(:first-child) {
+    margin-top: 40px;
+}
+.widget-container .signin .swp-enable.si-field-container {
+    max-width: 480px;
+}
+.widget-container .si-field-container {
+    max-width: 328px;
+    position: relative;
+    outline: none;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+}
+.signin-form.fed-auth.hide-password {
+    max-height: 44px;
+    transition: max-height .2s linear;
+}
+.signin-form.fed-auth.swp {
+    min-height: 158px;
+}
+.signin-form.fed-auth.swp {
+    min-height: 156px;
+    max-height: none;
+}
+.signin-form.fed-auth {
+    max-height: 44px;
+}
+.signin-form {
+    min-height: 5.2em;
+}
+.signin-form {
+    max-height: 114px;
+}
+.signin-form.fed-auth .account-name {
+    position: relative;
+}
+.signin-form.eyebrow .form-cell-wrapper {
+    position: relative;
+}
+.signin-form.eyebrow .form-textbox {
+    height: 3.3em;
+}
+.swp .form-cell-wrapper {
+    margin: auto;
+}
+.signin-form .form-textbox {
+    margin: 0;
+    box-shadow: none;
+    height: 2.6em;
+    border: 0;
+    border-radius: 6px;
+    border-color: transparent;
+}
+.form-textbox {
+    position: relative;
+}
+.signin-form.fed-auth.hide-password .account-name input.form-textbox,
+.signin-form.fed-auth.hide-password .account-name input.form-textbox-input {
+    padding-right: 43px;
+}
+.widget-container input[type=password],
+.widget-container input[type=tel],
+.widget-container input[type=text] {
+    color: #494949;
+}
+[dir] .form-textbox .form-textarea,
+[dir] .form-textbox .form-textbox-input {
+    background-color: hsla(0, 0%, 100%, .8);
+    border-color: #86868b;
+}
+[dir] .form-textbox-input {
+    border: 1px solid;
+    border-radius: 12px;
+    margin-bottom: .82353rem;
+    padding: 1.05882rem .94118rem 0;
+}
+[dir=ltr] .form-textbox-input {
+    text-align: left;
+}
+.form-textbox .form-textarea,
+.form-textbox .form-textbox-input {
     color: #1d1d1f;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0.022em;
-    line-height: 1.47059;
-    padding-top: 56px;
+    border-color: #86868b;
+    background-color: hsla(0, 0%, 100%, .8);
+    text-overflow: ellipsis;
 }
-
+.form-textbox-input:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.35296;
+    letter-spacing: 0;
+}
+.signin-form .form-textbox-input {
+    margin: 0;
+}
+.form-textbox-input {
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 3.29412rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    margin-bottom: .82353rem;
+    padding: 1.05882rem .94118rem 0;
+    text-align: left;
+    appearance: none;
+    border: 1px solid;
+}
+.signin-form #apple_id_field_label.form-textbox-label {
+    padding-right: 26px;
+    text-overflow: ellipsis;
+}
+.signin-form #apple_id_field_label {
+    z-index: 3;
+}
+.form-textbox-label:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.35296;
+    letter-spacing: 0;
+}
+.form-textbox .form-textbox-label {
+    color: #6e6e73;
+}
+[dir=ltr] .form-textbox-label {
+    left: 1rem;
+}
+[dir] .form-textbox-label {
+    transition-duration: .125s;
+    transition-timing-function: ease-in;
+}
+.form-textbox-label {
+    position: absolute;
+    pointer-events: none;
+    top: 1.05882rem;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: calc(100% - 32px);
+    left: 1rem;
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+[dir] .form-textbox .form-textbox-input:focus,
+[dir] .form-textbox .form-textbox-input:focus-within {
+    border-color: #0071e3;
+    border-width: 2px;
+    outline: none;
+}
+[dir=ltr] .form-textbox-input:focus,
+[dir=ltr] .form-textbox-input:focus-within {
+    padding-left: .88235rem;
+}
+.form-textbox-input:focus-within~.form-textbox-label:lang(ko),
+.form-textbox-input:focus~.form-textbox-label:lang(ko) {
+    line-height: 1.41667;
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.form-textbox-input:focus-within~.form-textbox-label,
+.form-textbox-input:focus~.form-textbox-label {
+    font-size: 12px;
+    line-height: 1.33337;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    top: .58824rem;
+}
+.signin-form.eyebrow.hide-password.has-focus~.si-button.fed-ui {
+    top: 23px;
+}
+.signin-form.eyebrow.hide-password~.si-button.fed-ui {
+    top: 15px;
+    transition-timing-function: ease-in;
+    transition-duration: .125s;
+}
+.signin-form.fed-auth~.si-button.fed-ui.fed-ui-animation-show {
+    animation: fade-in .5s ease-in-out;
+}
+.signin-form.fed-auth~.si-button.fed-ui {
+    top: 9px;
+    margin: 0;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #6e6e73;
+    border-radius: 50%;
+    right: 10px;
+    padding: 0 1px 0 2px;
+    z-index: 101;
+}
+.widget-container .si-button {
+    border: 1px solid transparent;
+    position: absolute;
+    top: 44px;
+    right: 5px;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+}
+.feat-split {
+    display: none;
+}
