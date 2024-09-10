@@ -5,7 +5,8 @@ module.exports = {
     entry: {
         index: "./src/client/js/index.js",
         createVideo: "./src/client/js/createVideo.js",
-        home: "./src/client/js/home.js"
+        home: "./src/client/js/home.js",
+        user: "./src/client/js/user.js"
     },
     mode: "development",
     watch: true,

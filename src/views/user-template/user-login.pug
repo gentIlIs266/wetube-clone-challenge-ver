@@ -74,20 +74,30 @@ body(lang="ko")
                                                 div.form-checkbox
                                                     input(
                                                         type="checkbox"
-                                                        name=""
                                                     )#remember-me.form-checkbox-input
                                                     label(for="remember-me")#remember-me-label.form-label
                                                         span(
                                                             aria-hidden="true"
                                                         ).form-checkbox-indicator
-                                                            |아이디 저장
+                                                        |아이디 저장
                                             button(
                                                 tabindex="0"
                                                 aria-label="계속"
                                                 aria-disabled="true"
                                                 disabled
                                             )#sign-in.si-button.btn.fed-ui.fed-ui-animation-show.disable.remember-me  
-                                                i.shared-icon.icon_sign_in
+                                                span.shared-icon.icon_sign_in
+                                                    svg(
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        width="24"
+                                                        height="24"
+                                                        stroke="currentcolor"
+                                                        stroke-width="4"
+                                                        stroke-linecap="butt"
+                                                        stroke-linejoin="miter"
+                                                    )
+                                                        path(d="M5 12h8 M15 10 L18 12 L15 14 Z")
                                                 span.text.feat-split 계속
                                         div.si-container-footer.has-remember-me
                                             div.links.tk-subbody
@@ -125,7 +135,7 @@ body(lang="ko")
                                             div.form-message-wrapper
                                                 span(dir="auto").form-message 예기치 못한 오류 발생. 다시 시도해 주세요.
                                         div#oauth
-                                            button(onclick="window.location.href='gh/start'")
+                                            button(onclick="window.location.href='gh/start'")#gitgub_oauth_button
                                                 svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" style="width: 18px; height: 18px")
                                                     path(
                                                         fill-rule="evenodd"
@@ -140,6 +150,7 @@ body(lang="ko")
                 a(href="#" target="_blank").as-chat-button
                     |지금 채팅하기
                     span.a11y (새 창에서 열림) 
-                | 또는 
+                |  또는 
                 span 000-000-0000
                 | 번호로 문의하세요.
+    script(type="text/javascript" src="/assets/js/user.js")

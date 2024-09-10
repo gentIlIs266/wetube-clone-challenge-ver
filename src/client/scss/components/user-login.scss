@@ -1,3 +1,7 @@
+body:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5882352941;
+}
 #signin-container {
     margin-top: 56px;
 }
@@ -307,9 +311,10 @@
     height: 25px;
     width: 25px;
     border: 1px solid #6e6e73;
+    color: #919191;
     border-radius: 50%;
     right: 10px;
-    padding: 0 1px 0 2px;
+    padding: 1px 2px 2px 0;
     z-index: 101;
 }
 .widget-container .si-button {
@@ -322,6 +327,187 @@
     cursor: pointer;
     padding: 5px;
 }
+.si-container .disable {
+    opacity: .6;
+    pointer-events: none;
+}
+.signin-form.fed-auth~.si-button.fed-ui
+.icon_sign_in {
+    padding: 1px;
+}
+.widget-container .si-button .icon_sign_in {
+    font-size: 26px;
+    color: #494949;
+    vertical-align: top;
+}
+.shared-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.signin-form.eyebrow.hide-password.has-focus~.si-button.fed-ui
+.signin-form.eyebrow.hide-password.account-name-entered~.si-button.fed-ui {
+    top: 23px;
+}
 .feat-split {
     display: none;
+}
+.widget-container .si-remember-password {
+    display: inline-block;
+    position: relative;
+    margin: 18px 0 16px;
+}
+.form-checkbox {
+    position: relative;
+}
+.form-checkbox-input {
+    height: .94118rem;
+    opacity: 0;
+    position: absolute;
+    top: .17647rem;
+    width: .94118rem;
+}
+.widget-container .si-remember-password label[for=remember-me] {
+    display: inline;
+    color: inherit;
+    line-height: inherit;
+    padding-top: 1px;
+}
+.form-checkbox .form-label {
+    padding-left: 1.52941rem;
+    margin-bottom: .64706rem;
+}
+.form-label {
+    display: inline-block;
+    position: relative;
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #1d1d1f;
+}
+.form-label:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.35296;
+    letter-spacing: 0;
+}
+.form-checkbox .form-checkbox-indicator {
+    background-color: hsla(0,0%,100%,.8);
+    border-color: #86868b;
+}
+.form-checkbox-indicator {
+    border-radius: .17647rem;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    box-sizing: content-box;
+    display: inline-block;
+    height: .82353rem;
+    position: absolute;
+    top: .11765rem;
+    left: 0;
+    width: .82353rem;
+}
+.form-checkbox-input:checked~.form-label .form-checkbox-indicator::after {
+    left: .5px;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: .009em;
+    line-height: 1.55556;
+    position: absolute;
+    top: -.41176rem;
+}
+.form-checkbox-input:checked~.form-label .form-checkbox-indicator::after {
+    color: inherit;
+    display: inline-block;
+    font-size: inherit;
+    font-style: normal;
+    font-weight: inherit;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    alt: "";
+    text-decoration: none;
+}
+.form-checkbox-input:checked~.form-label .form-checkbox-indicator::after {
+    content: "\2713";
+    color: #fff;
+    background-color: #0071E3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: .82353rem;
+    width: .82353rem;
+    border-radius: .0701rem;
+}
+.widget-container .signin .swp-enable+.si-container-footer.has-remember-me .links {
+    margin-top: 12px;
+}
+.tk-subbody:lang(ko) {
+    line-height: 1.57143;
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.tk-subbody {
+    font-size: 14px;
+    line-height: 1.42859;
+    font-weight: 400;
+    letter-spacing: -.016em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.si-container .si-forgot-password {
+    padding-bottom: 9px;
+}
+.widget-container .si-link {
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0;
+    display: inline;
+}
+.no-wrap {
+    white-space: nowrap;
+}
+.a11y, .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+.sk-icon-external::after {
+    content: "\2197";
+}
+.sk-icon-after::after {
+    padding-left: .3em;
+    top: 0;
+}
+#gitgub_oauth_button {
+    all: unset;
+    background: rgba(0,0,0,0);
+    border: 1px solid #1d1d1f;
+    color: #1d1d1f;
+    border-radius: 10px;
+    padding: .5rem;
+}
+.widget-container .links .fat {
+    font-weight: 400;
+}
+.rs-chat {
+    border-top: 1px solid #d2d2d7;
+    padding: 0;
+    text-align: start;
+}
+.rs-chat-content {
+    padding: 21px 0;
+}
+.rs-chat-content .as-chat-button {
+    text-decoration: underline;
 }
