@@ -1,0 +1,495 @@
+#content, html, html body {
+    height: 100%;
+}
+.local-nav-html-tag {
+    padding-top: 56px;
+}
+.ac-localnav-menustate {
+    display: none;
+}
+#ac-localnav-sticky-placeholder {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    visibility: hidden;
+    z-index: -1;
+}
+.ac-localnav.css-sticky,
+.ac-localnav[data-sticky] {
+    position: sticky;
+}
+.ac-localnav {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 52px;
+    min-width: 1024px;
+    z-index: 9997;
+}
+.ac-loaclnav-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    z-index: 1;
+}
+.ac-localnav.ac-localnav-scrim .ac-localnav-background {
+    background-color: hsla(0, 0%, 100%, .9);
+}
+.ac-localnav.ac-localnav-scrim .ac-localnav-background::after {
+    background-color: rgba(51, 51, 51, .2);
+}
+.ac-localnav-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: background-color .5s cubic-bezier(.28, .11, .32, 1);
+}
+.ac-localnav-menustate:checked~.ac-localnav .ac-localnav-background:after,
+.ac-localnav-menustate:target~.ac-localnav .ac-localnav-background:after,
+.ac-localnav.ac-localnav-scrim .ac-localnav-background:after,
+.ac-localnav.ac-localnav-sticking .ac-localnav-background:after {
+    margin-left: 0;
+    left: 0;
+    width: 100%;
+}
+.ac-localnav-background::after {
+    margin-left: -490px;
+    left: 50%;
+    content: "";
+    display: block;
+    position: absolute;  
+    top: 100%;
+    width: 980px;
+    height: 1px;
+    z-index: 1;
+}
+.ac-localnav-content {
+    box-sizing: content-box;
+    background-color: #fff;
+    margin: 0 auto;
+    max-width: 980px;
+    padding: 0 22px;
+    position: relative;
+    z-index: 2;
+}
+.ac-localnav-content:after, .ac-localnav-content:before {
+    content: " ";
+    display: table;
+}
+.ac-localnav-content:after {
+    clear: both;
+}
+.ac-localnav-title:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Display', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.ac-localnav-title {
+    font-size: 24px;
+    line-height: 2.125;
+    font-weight: 500;
+    letter-spacing: .015em;
+    font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    cursor: default;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 52px;
+    white-space: nowrap;
+}
+.ac-localnav-menu:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.ac-localnav-menu {
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    float: right;
+    line-height: 40px;
+    margin-top: 0;
+    padding-top: 12px;
+}
+.ac-localnav-menucta-anchor {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    z-index: 10;
+}
+.ac-localnav-menucta-anchor-label {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(0 0 99.9% 99.9%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    border: 0;
+}
+.ac-localnav-menu-tray {
+    float: left;
+}
+ul.ac-localnav-menu-items {
+    border: none;
+}
+.ac-localnav-menu-item {
+    margin-left: 24px;
+    float: left;
+    list-style: none;
+}
+.ac-localnav-menu-link {
+    color: #333;
+    display: inline-block;
+    line-height: 22px;
+    white-space: nowrap;
+}
+.ac-localnav-menu-link:hover {
+    color: #0070c9;
+    text-decoration: none;
+}
+.ac-localnav-actions {
+    float: left;
+}
+.ac-localnav-action {
+    margin-left: 24px;
+    float: left;
+}
+.ac-localnav-action-menucta {
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+.ac-localnav-menucta {
+    margin-left: -11px;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    width: 40px;
+    height: 48px;
+    -webkit-tap-highlight-color: transparent;
+}
+.ac-localnav-menucta-chevron {
+    display: block;
+    z-index: 1;
+    transition:
+        transform 1s cubic-bezier(.86, 0, .07, 1),
+        origin 1s cubic-bezier(.86, 0, .07, 1);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateY(16%);
+}
+.ac-loaclnav-curtain {
+    background: rgba(0, 0, 0, .4);
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    z-index: 9996;
+    transition: opacity .2s ease;
+}
+.app-container {
+    min-width: 768px;
+    position: relative;
+    min-height: 100%;
+}
+#app-content {
+    min-height: 100%;
+    margin-top: -108px;
+    padding-top: 108px;
+    padding-bottom: 95px;
+}
+.idms-step-header {
+    display: none;
+}
+.flow-body {
+    background: transparent;
+}
+.no-horizontal-scrollbar {
+    overflow-x: hidden;
+}
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table;
+}
+.flow-body .intro {
+    padding-top: 30px;
+}
+.text-centered {
+    text-align: center;
+}
+.intro {
+    text-align: center;
+    color: #000;
+}
+.web .flow-section.account-info-section {
+    padding-top: 15px;
+}
+.flow-section {
+    max-width: 1200px;
+    margin: auto;
+    width: 80%;
+    border-bottom: 1px solid #e7e7e8;
+    padding: 30px 0 20px;
+}
+.centered {
+    margin: auto;
+}
+.container-xs {
+    max-width: 460px;
+}
+.form-table {
+    display: table;
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+.form-cell {
+    display: table-cell;
+    vertical-align: top;
+    direction: ltr;
+}
+.form-cell .form-sidebyside-textboxes.row {
+    margin-right: inherit;
+    margin-left: inherit;
+}
+.row {
+    position: relative;
+    z-index: 1;
+}
+.row:after, .row:before {
+    content: " ";
+    display: table;
+}
+.form-cell .form-sidebyside-textboxes.row .column {
+    padding-left: inherit;
+}
+.large-6 {
+    width: 50%;
+}
+.column {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    float: left;
+    min-height: 2px;
+}
+.column, .form-element, .row {
+    z-index: inherit;
+}
+.pop-wrapper {
+    width: 150%;
+    overflow: visible;
+}
+.field-pop-wrapper {
+    width: 100%;
+}
+.pop-wrapper, .send-code-wrap {
+    position: relative;
+}
+.field-wrapper.padding.right {
+    padding-right: 2px;
+}
+.form-element {
+    position: relative;
+}
+.form-textbox:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: 0;
+}
+.form-textbox {
+    font-size: 17px;
+    line-height: 1.23543;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+    width: 100%;
+    height: 3.3em;
+    margin-bottom: 14px;
+    padding-top: 18px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: #333;
+    text-align: left;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: hsla(0, 0%, 100%, .8);
+    background-clip: padding-box;
+}
+.form-textbox:focus {
+    appearance: none;
+    border-color: #0070c9;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(131,192,253,.5);
+}
+.form-textbox.form-textbox-entered~.form-label,
+.form-textbox:focus~.form-label,
+.form-textbox~.form-label {
+    z-index: 0;
+}
+.form-textbox~.form-label {
+    pointer-events: none;
+    position: absolute;
+    top: 18px;
+    left: 17px;
+    color: #888;
+    padding: 0;
+    z-index: 1;
+    transition-timing-function: ease-in;
+    transition-duration: .125s;
+}
+.form-block-label:lang(ko),
+.form-label:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.form-block-label, .form-label {
+    font-size: 17px;
+    line-height: 1.23543;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: block;
+    position: relative;
+    vertical-align: top;
+    color: #333;
+}
+.form-textbox.form-textbox-entered~.form-label:lang(ko),
+.form-textbox:focus~.form-label:lang(ko),
+.form-textbox:valid[required]~.form-label:lang(ko),
+.form-textbox[placeholder]~.form-label:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.form-textbox.form-textbox-entered~.form-label,
+.form-textbox:focus~.form-label,
+.form-textbox:valid[required]~.form-label,
+.form-textbox[placeholder]~.form-label {
+    font-size: 12px;
+    line-height: 1.75;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    top: 8px;
+    color: #666;
+}
+.form-table+* {
+    margin-top: 1em;
+}
+.large-12 {
+    width: 100%;
+}
+.tk-body-reduced:not(.button):not(a) {
+    color: #666;
+}
+.tk-body-reduced:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.tk-body-reduced {
+    font-size: 12px;
+    line-height: 1.42861;
+    font-weight: 400;
+    letter-spacing: -.016em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.section-subtitle {
+    color: #666;
+    font-weight: 600;
+    padding-bottom: 2px;
+}
+.a11y, .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+.hide-eyebrow-label .form-dropdown {
+    padding-top: 0;
+}
+.form-dropdown:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.form-dropdown {
+    padding-right: 28px;
+    font-size: 17px;
+    line-height: 1.23543;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 3.3em;
+    color: #333;
+    padding: 1.11765rem 2.35294rem 0 .94118rem;
+    text-align: left;
+    background: hsla(0,0%,100%,.8);
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background-clip: padding-box;
+    margin-bottom: 14px;
+    appearance: none;
+    min-height: 32px;
+}
+.form-dropdown:focus {
+    border-color: #0070c9;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(131,192,253,.5);
+}
+.form-dropdown~.form-icon {
+    display: block;
+    pointer-events: none;
+    color: #888;
+    right: 18px;
+    font-size: 21px;
+    font-weight: 300;
+    top: 1rem;
+    line-height: 0;
+}
+.form-icon {
+    display: none;
+    position: absolute;
+    top: 3px;
+    right: 16px;
+}
+.sk-icon:after {
+    color: inherit;
+    display: inline-block;
+    font-style: normal;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: 1;
+    text-decoration: underline;
+    position: relative;
+    z-index: 1;
+    alt: "";
+    text-decoration: none;
+}
+.sk-icon-chevrondown:after {
+    content: "\02C5";
+    height: 1px;
+}

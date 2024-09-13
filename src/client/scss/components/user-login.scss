@@ -3,7 +3,7 @@ body:lang(ko) {
     line-height: 1.5882352941;
 }
 #signin-container {
-    margin-top: 56px;
+    padding-top: 56px;
 }
 .rs-sign-in.rs-sign-in-idms-no-sidebar {
     padding-bottom: 0;
@@ -26,6 +26,7 @@ body:lang(ko) {
 .rs-sign-in-header {
     padding-bottom: 36px;
     padding-top: 34px;
+    letter-spacing: -0.115rem;
 }
 .rs-sign-in-has-idms .rs-sign-in-main {
     margin: 0 auto;
@@ -73,7 +74,7 @@ body:lang(ko) {
     padding: 0;
 }
 .widget-container.restrict-max-wh.restrict-min-content {
-    min-height: 100vh;
+    min-height: 100%;
     height: min-content;
 }
 .widget-container.restrict-max-wh {
