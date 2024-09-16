@@ -9,8 +9,6 @@
 @import "./components/studio-masthead.scss";
 @import "./components/animation.scss";
 @import "./components/masthead.scss";
-@import "./components/user-login.scss";
-@import "./components/user-join.scss";
 
 a {
     color: $--wtcp-themed-blue;
@@ -51,11 +49,6 @@ a {
     .ac-localnav.ac-localnav-scrim .ac-localnav-background {
         backdrop-filter: saturate(180%) blur(20px);
         background-color: hsla(0, 0%, 100%, .7);
-    }
-}
-@media only screen and (min-device-width: 1069px) {
-    .column {
-        padding: 0 15px;
     }
 }
 @media only screen and (min-device-width: 1069px) {

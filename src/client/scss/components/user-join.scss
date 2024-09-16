@@ -1,5 +1,59 @@
+*, :after, :before {
+    box-sizing: border-box;
+}
+body:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+:lang(ko) {
+    word-break: keep-all;
+    font-style: normal;
+}
 #content, html, html body {
     height: 100%;
+}
+body {
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-decoration: none;
+    min-width: 1069px;
+    font-size: 17px;
+    line-height: 1.47059;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+body, html {
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
+}
+body, button, input, select, textarea {
+    font-synthesis: none;
+    direction: ltr;
+    text-align: left;
+}
+#webAppContent, body, html {
+    height: 100%;
+    position: relative;
+}
+abbr, blockquote, body, button, dd, dl,
+dt, fieldset, figure, form, h1, h2, h3,
+h4, h5, h6, hgroup, input, legend, li, ol, p, pre, ul {
+    margin: 0;
+    padding: 0;
+}
+.button-caption-link:lang(ko),
+.button-link:lang(ko),
+.link:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.button:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .local-nav-html-tag {
     padding-top: 56px;
@@ -277,8 +331,8 @@ ul.ac-localnav-menu-items {
 .form-cell .form-sidebyside-textboxes.row .column {
     padding-left: inherit;
 }
-.large-6 {
-    width: 50%;
+.form-sidebyside-textboxes .column:last-child {
+    padding-right: 0;
 }
 .column {
     box-sizing: border-box;
@@ -288,6 +342,14 @@ ul.ac-localnav-menu-items {
     padding: 0;
     float: left;
     min-height: 2px;
+}
+.large-6 {
+    width: 50%;
+}
+@media only screen and (min-device-width: 1069px) {
+    .column {
+        padding: 0 15px;
+    }
 }
 .column, .form-element, .row {
     z-index: inherit;
@@ -492,4 +554,176 @@ ul.ac-localnav-menu-items {
 .sk-icon-chevrondown:after {
     content: "\02C5";
     height: 1px;
+}
+.field-info-wrapper {
+    right: -35px;
+    top: 10px;
+    position: absolute;
+    width: 33px;
+    height: 33px;
+}
+.field-info-wrapper>.button {
+    width: inherit;
+    height: inherit;
+}
+.button.button-help {
+    cursor: help;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-caption-link,
+.button-link,
+.link {
+    color: #0070c9;
+    min-width: 0;
+    padding: 0;
+    white-space: normal;
+    background: none;
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border-radius: 0;
+}
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+}
+i.icon.icon_help.help-anchor.bd-info {
+    background: #0070c9;
+    width: 1.59em;
+    height: 1.59em;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 10px;
+    padding: .4em 0 0 .54em;
+}
+.icon_help:before {
+    content: "\003F";
+}
+.position-relative {
+    position: relative;
+}
+.form-choice {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+.form-choice~.form-label {
+    display: block;
+    padding-left: 26px;
+    margin-top: 13px;
+    margin-bottom: 0;
+    color: #333;
+    cursor: pointer;
+}
+.form-choice-checkbox~.form-label .form-choice-indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+.form-choice-checkbox+.form-label .form-choice-indicator {
+    border-radius: 3px;
+}
+.form-choice-indicator {
+    box-sizing: content-box;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+.field-caption {
+    margin-bottom: 14px;
+    display: block;
+}
+.tk-caption {
+    font-size: 12px;
+    line-height: 1.33341;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.updates .label-small {
+    display: block;
+    color: #333;
+}
+.field-caption {
+    color: #666;
+}
+.privacy-wrapper {
+    max-width: 465px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    color: #666;
+}
+.tk-caption:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;   
+}
+.privacy-wrapper .privacy-icon {
+    margin: 10px auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url("https://appleid.cdn-apple.com/static/bin/cb1900903086/dist/assets/privacy-icon.png");
+    width: 35px;
+    height: 28px;
+}
+.web .create-form .toolbar-footer .flow-controls .nav-action {
+    font-size: 18px;
+}
+.web .create-form .toolbar-footer .flow-controls {
+    margin: auto;
+    text-align: center;
+    float: none !important;
+    padding: 0 0 40px;
+}
+.toolbar-footer .buttton-group:not(.full-width) {
+    display: flex !important;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+.buttton-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.toolbar-footer .button-primary:last-child,
+.toolbar-footer .button-secondary:last-child,
+.toolbar-footer .first {
+    margin-left: 0;
+}
+.button {
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #0070c9;
+    background: linear-gradient(#42a1ec,#0070c9);
+    border: 1px solid #07c;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 30px;
+    padding: 4px 15px;
+    text-align: center;
+    white-space: nowrap;
 }

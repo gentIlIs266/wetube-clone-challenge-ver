@@ -1,5 +1,6 @@
 include ../partials/html-head.pug
-
+head 
+    link(rel="stylesheet", href="/assets/css/userLogin.css" type="text/css")
 body(lang="ko")
     include ../partials/masthead.pug
     div#signin-container.rs-page-content
@@ -39,6 +40,7 @@ body(lang="ko")
                                                                             spellcheck="false"
                                                                             autocomplete="off"
                                                                             aria-invalid="false"
+                                                                            autofocus
                                                                         )#account_name_text_field.force-ltr.form-textbox-input
                                                                         span(
                                                                             aria-hidden="true"

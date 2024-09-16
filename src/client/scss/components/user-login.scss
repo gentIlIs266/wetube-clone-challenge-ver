@@ -280,14 +280,27 @@ body:lang(ko) {
 [dir=ltr] .form-textbox-input:focus-within {
     padding-left: .88235rem;
 }
+
+.form-textbox-input.form-textarea-with-placeholder~.form-textbox-label:lang(ko),
+.form-textbox-input.form-textbox-entered~.form-textbox-label:lang(ko),
 .form-textbox-input:focus-within~.form-textbox-label:lang(ko),
-.form-textbox-input:focus~.form-textbox-label:lang(ko) {
+.form-textbox-input:focus~.form-textbox-label:lang(ko),
+.form-textbox-input:valid[required]~.form-textbox-label:lang(ko),
+.form-textbox-input[placeholder]:not(placeholder-shown)~.form-textbox-label:lang(ko),
+.form-textbox-input[placeholder]:not([placeholder=" "])~.form-textbox-label:lang(ko)
+{
     line-height: 1.41667;
     letter-spacing: 0;
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.form-textbox-input.form-textarea-with-placeholder~.form-textbox-label,
+.form-textbox-input.form-textbox-entered~.form-textbox-label,
 .form-textbox-input:focus-within~.form-textbox-label,
-.form-textbox-input:focus~.form-textbox-label {
+.form-textbox-input:focus~.form-textbox-label,
+.form-textbox-input:valid[required]~.form-textbox-label,
+.form-textbox-input[placeholder]:not(:placeholder-shown)~.form-textbox-label,
+.form-textbox-input[placeholder]:not([placeholder=" "])~.form-textbox-label
+{
     font-size: 12px;
     line-height: 1.33337;
     font-weight: 400;
@@ -348,7 +361,7 @@ body:lang(ko) {
     width: 100%;
     height: 100%;
 }
-.signin-form.eyebrow.hide-password.has-focus~.si-button.fed-ui
+.signin-form.eyebrow.hide-password.has-focus~.si-button.fed-ui,
 .signin-form.eyebrow.hide-password.account-name-entered~.si-button.fed-ui {
     top: 23px;
 }

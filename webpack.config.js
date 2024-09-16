@@ -6,12 +6,15 @@ module.exports = {
         index: "./src/client/js/index.js",
         createVideo: "./src/client/js/createVideo.js",
         masthead: "./src/client/js/masthead.js",
-        user: "./src/client/js/user.js"
+        user: "./src/client/js/user.js",
+        userJoin: "./src/client/scss/components/user-join.scss",
+        userLogin: "./src/client/scss/components/user-login.scss",
+        createVideo: "./src/client/scss/components/create-video.scss",
     },
     mode: "development",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
-        filename: "css/style.css",
+        filename: "css/[name].css",
     })],
     output: {
         clean: true,
