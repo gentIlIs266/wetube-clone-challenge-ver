@@ -309,22 +309,46 @@ body(lang="ko")#pagecontent
                                                                                     div.overflow-text
                                                                                         |계속
         div.global-footer.create-footer
-
+            footer
+                footer(role="contentinfo" aria-labelledby="ac-gf-label")#ac-globalfooter.js
+                    div.ac-gf-content
+                        h2#ac-gf-label.ac-gf-label
+                            |Apple Footer
+                        style
+                            |#ac-globalfooter .ac-gf-footer-legal-link:last-child  {margin: 3px 0 0 0;} #ac-globalfooter .ac-gf-footer {border-top: none;}
+                        section.ac-gf-footer
+                            div.ac-gf-footer-shop
+                                |다양한 쇼핑 방법: 
+                                a(href="#")
+                                    |Apple Store를 방문
+                                |하거나, 
+                                a(href="#")
+                                    |리셀러
+                                |를 찾아보거나, 080-330-8877번으로 전화하세요.
+                            div.ac-gf-footer-locale
+                                a(href="#" title="국가 또는 지역 선택").ac-gf-footer-locale-link.choose
+                                    |대한민국
+                            div.ac-gf-footer-legal
+                                div.ac-gf-footer-legal-copyright
+                                    |Copyright © 2024 Apple Inc. 모든 권리 보유.
+                                div.ac-gf-footer-legal-links
+                                    a(href="#").ac-gf-footer-legal-link
+                                        |개인정보 처리방침 
+                                    a(href="#").ac-gf-footer-legal-link
+                                        |웹 사이트 이용 약관 
+                                    a(href="#").ac-gf-footer-legal-link
+                                        |판매 및 환불
+                                    a(href="#").ac-gf-footer-legal-link
+                                        |법적 고지 
+                                    a(href="#").ac-gf-footer-legal-link
+                                        |사이트 맵 
 //-
-        
-            if alreadyExistError
-                div.form-message-wrapper
-                    span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
-                                       
-        div.flow-section
-             
-            if alreadyExistError
-                div.form-message-wrapper
-                    span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
-        div.password-wrapper
-                                          
-            
-            if pwConfirmError
-                div.form-message-wrapper
-                    span(dir="auto").form-message 암호를 재입력하십시오
-            input(type="submit" value="계속")     
+    if alreadyExistError
+        div.form-message-wrapper
+            span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
+    if alreadyExistError
+        div.form-message-wrapper
+            span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
+    if pwConfirmError
+        div.form-message-wrapper
+            span(dir="auto").form-message 암호를 재입력하십시오
