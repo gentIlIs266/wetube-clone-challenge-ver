@@ -4,11 +4,7 @@
 
 @import "./preset/reset.scss";
 @import "./preset/variables.scss";
-
-@import "./components/create-video.scss";
-@import "./components/studio-masthead.scss";
-@import "./components/animation.scss";
-@import "./components/masthead.scss";
+@import "./preset/animation.scss";
 
 a {
     color: $--wtcp-themed-blue;

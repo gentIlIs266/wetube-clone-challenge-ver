@@ -1,3 +1,4 @@
+import "../scss/components/user-login.scss";
 /*user loain account input focus resposne*/
 document.addEventListener("DOMContentLoaded", () => {
     const signInForm = document.querySelector("#sign_in_form.signin-form");
@@ -39,4 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             disableButton.setAttribute("disabled", "")
         }
     });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const nameErrorWrapper = document.querySelector("#idms-error-wrapper-1726210118058-0");
 });

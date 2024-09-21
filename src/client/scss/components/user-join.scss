@@ -1,5 +1,10 @@
+@import "../style.scss";
 *, :after, :before {
     box-sizing: border-box;
+}
+:focus {
+    outline: 3px solid rgba(131,192,253,.5);
+    outline-offset: 1px;
 }
 body:lang(ko) {
     letter-spacing: 0;
@@ -50,7 +55,7 @@ h4, h5, h6, hgroup, input, legend, li, ol, p, pre, ul {
 .link:lang(ko) {
     letter-spacing: 0;
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+} 
 .button:lang(ko) {
     letter-spacing: 0;
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -289,6 +294,14 @@ ul.ac-localnav-menu-items {
     text-align: center;
     color: #000;
 }
+.intro.text-centered h1 {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+}
+.intro .intro-text {
+    font-size: .83em;
+}
 .web .flow-section.account-info-section {
     padding-top: 15px;
 }
@@ -397,11 +410,20 @@ ul.ac-localnav-menu-items {
     background: hsla(0, 0%, 100%, .8);
     background-clip: padding-box;
 }
+.field-has-info {
+    margin-bottom: 4px;
+}
 .form-textbox:focus {
     appearance: none;
     border-color: #0070c9;
     outline: 0;
     box-shadow: 0 0 0 3px rgba(131,192,253,.5);
+}
+.is-error .form-textbox {
+    border-color: #de071c;
+    background: #fef0f0;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 .form-textbox.form-textbox-entered~.form-label,
 .form-textbox:focus~.form-label,
@@ -419,6 +441,9 @@ ul.ac-localnav-menu-items {
     transition-timing-function: ease-in;
     transition-duration: .125s;
 }
+.is-error .form-textbox~.form-label {
+    color: #de071c;
+}
 .form-block-label:lang(ko),
 .form-label:lang(ko) {
     letter-spacing: 0;
@@ -432,7 +457,6 @@ ul.ac-localnav-menu-items {
     font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: block;
     position: relative;
-    vertical-align: top;
     color: #333;
 }
 .form-textbox.form-textbox-entered~.form-label:lang(ko),
@@ -453,6 +477,12 @@ ul.ac-localnav-menu-items {
     font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     top: 8px;
     color: #666;
+}
+.is-error .form-textbox.form-textbox-entered~.form-label,
+.is-error .form-textbox:focus~.form-label
+.is-error .form-textbox:valid[required]~.form-label,
+.is-error .form-textbox[placeholder]~.form-label {
+    color: #de071c;
 }
 .form-table+* {
     margin-top: 1em;
@@ -528,9 +558,9 @@ ul.ac-localnav-menu-items {
     pointer-events: none;
     color: #888;
     right: 18px;
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 300;
-    top: 1rem;
+    top: 1.3rem;
     line-height: 0;
 }
 .form-icon {
@@ -563,15 +593,33 @@ ul.ac-localnav-menu-items {
     width: 33px;
     height: 33px;
 }
-.field-info-wrapper>.button {
-    width: inherit;
-    height: inherit;
-}
 .button.button-help {
     cursor: help;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.field-info-wrapper>.button {
+    width: inherit;
+    height: inherit;
+}
+.button {
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #0070c9;
+    background: linear-gradient(#42a1ec,#0070c9);
+    border: 1px solid #07c;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 30px;
+    padding: 4px 15px;
+    text-align: center;
+    white-space: nowrap;
 }
 .button-caption-link,
 .button-link,
@@ -608,7 +656,7 @@ i.icon.icon_help.help-anchor.bd-info {
     color: #fff;
     border-radius: 50%;
     font-size: 10px;
-    padding: .4em 0 0 .54em;
+    padding-top: .35em;
 }
 .icon_help:before {
     content: "\003F";
@@ -649,12 +697,34 @@ i.icon.icon_help.help-anchor.bd-info {
     border: 1px solid #ccc;
     background: #fff;
 }
+.form-choice-checkbox:checked+.form-label .form-choice-indicator:after {
+    font-size: 19px;
+    line-height: 1.47384;
+    font-weight: 400;
+    letter-spacing: .015em;
+    font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #fff;
+    top: -.76471rem;
+    left: -.58824rem;
+    padding: 0;
+    width: 1.47059rem;
+    vertical-align: top;
+}
+.form-choice-checkbox:checked+.form-label .form-choice-indicator {
+    background: #0070c9;
+    text-align: center;
+}
+.form-choice:checked~.form-label .form-choice-indicator {
+    border: 6px solid #0070c9;
+    width: .23529rem;
+    height: .23529rem;
+}
 .field-caption {
     margin-bottom: 14px;
     display: block;
 }
 .tk-caption {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.33341;
     font-weight: 400;
     letter-spacing: -.01em;
@@ -687,7 +757,7 @@ i.icon.icon_help.help-anchor.bd-info {
     height: 28px;
 }
 .web .create-form .toolbar-footer .flow-controls .nav-action {
-    font-size: 18px;
+    font-size: 15px;
 }
 .web .create-form .toolbar-footer .flow-controls {
     margin: auto;
@@ -709,24 +779,6 @@ i.icon.icon_help.help-anchor.bd-info {
 .toolbar-footer .button-secondary:last-child,
 .toolbar-footer .first {
     margin-left: 0;
-}
-.button {
-    font-size: 17px;
-    line-height: 1.47059;
-    font-weight: 400;
-    letter-spacing: -.022em;
-    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #0070c9;
-    background: linear-gradient(#42a1ec,#0070c9);
-    border: 1px solid #07c;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    min-width: 30px;
-    padding: 4px 15px;
-    text-align: center;
-    white-space: nowrap;
 }
 #ac-globalfooter .ac-gf-content {
     margin: 0 auto;

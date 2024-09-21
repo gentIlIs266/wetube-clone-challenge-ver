@@ -1,3 +1,4 @@
+import "../scss/components/masthead.scss";
 /*masthead searchbox focused, has text styling*/
 document.addEventListener("DOMContentLoaded", () => {
     const mastheadSearchbox = document.querySelector("#search.wtd-searchbox-html-tag[role=search]");

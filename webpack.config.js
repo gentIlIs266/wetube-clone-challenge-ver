@@ -3,22 +3,20 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
+        createVideo: "./src/client/js/create-video.js",
         index: "./src/client/js/index.js",
-        createVideo: "./src/client/js/createVideo.js",
         masthead: "./src/client/js/masthead.js",
-        user: "./src/client/js/user.js",
-        userJoin: "./src/client/scss/components/user-join.scss",
-        userLogin: "./src/client/scss/components/user-login.scss",
-        createVideo: "./src/client/scss/components/create-video.scss",
+        userJoin: "./src/client/js/user-join.js",
+        userLogin: "./src/client/js/user-login.js",
     },
     mode: "development",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
-        filename: "css/[name].css",
+        filename: "css/[name].bundle.css",
     })],
     output: {
         clean: true,
-        filename: "js/[name].js",
+        filename: "js/[name].bundle.js",
         path: path.resolve(__dirname, "assets"),
     },
     module: {
