@@ -1,5 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { resolve } = require("url");
 
 module.exports = {
     entry: {
@@ -39,5 +40,29 @@ module.exports = {
                 ]
             }
         ]
+    },
+    resolve: {
+        fallback: {
+            "zlib": false,
+            "querystring": false,
+            "path": false,
+            "crypto": false,
+            "stream": false,
+            "http": false,
+            "url": false,
+            "buffer": false,
+            "util": false,
+            /*
+            "zlib": require.resolve("browserify-zlib"),
+            "querystring": require.resolve("querystring-es3"),
+            "path": require.resolve("path-browserify")
+            "crypto": require.resolve("crypto-browserify"),
+            "stream": require.resolve("stream-browserify"),
+            "http": require.resolve("stream-http"),
+            "url": require.resolve("url/"),
+            "buffer": require.resolve("buffer/"),
+            "util": require.resolve("util/"),
+            */
+        }
     }
 }

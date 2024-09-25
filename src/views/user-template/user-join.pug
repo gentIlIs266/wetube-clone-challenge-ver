@@ -1,10 +1,11 @@
 include ../partials/html-head.pug
 head
     link(rel="stylesheet", href="/assets/css/userJoin.bundle.css" type="text/css")
-body(lang="ko")#pagecontent
+body(lang="ko")#pagecontent.ltr
     div#content
         div.main-header.create-header
-            include ../partials/masthead.pug
+            div.wetubenav-html-tag
+                include ../partials/masthead.pug
             div.local-nav-html-tag
                 input(type="checkbox")#ac-localnav-menustate.ac-localnav-menustate
                 div#ac-localnav-sticky-placeholder.css-sticky
@@ -16,7 +17,7 @@ body(lang="ko")#pagecontent
                         div.ac-localnav-background
                         div.ac-localnav-content
                             div.ac-localnav-title
-                                span WeTube&nbsp;ID
+                                span WeTube&nbsp;계정
                             div.ac-localnav-menu
                                 a(
                                     href="#"
@@ -35,9 +36,9 @@ body(lang="ko")#pagecontent
                                                 span(aria-hidden="true") 로그인
                                                 span.a11y 로그인
                                         li.ac-localnav-menu-item
-                                            a(title="WeTube ID 생성" href="/join").ac-localnav-menu-link
-                                                span(aria-hidden="true") WeTube&nbsp;ID 생성
-                                                span.a11y WeTube&nbsp;ID 생성
+                                            a(title="WeTube 계정 생성" href="/join").ac-localnav-menu-link
+                                                span(aria-hidden="true") WeTube&nbsp;계정 생성
+                                                span.a11y WeTube&nbsp;계정 생성
                                         li.ac-localnav-menu-item
                                             a(title="FAQ" href="/faq").ac-localnav-menu-link
                                                 span(aria-hidden="true") FAQ
@@ -147,7 +148,7 @@ body(lang="ko")#pagecontent
                                                                                                                 option(dir="auto" value="SUN") 태양
                                                                                                                 option(dir="auto" value="MERCURY") 수성
                                                                                                                 option(dir="auto" value="VENUS") 금성
-                                                                                                                option(dir="auto" value="EARTH") 지구
+                                                                                                                option(dir="auto" value="EARTH" selected) 지구
                                                                                                                 option(dir="auto" value="MARS") 화성
                                                                                                                 option(dir="auto" value="JUPITER") 목성 
                                                                                                                 option(dir="auto" value="SATURN") 토성 
@@ -178,12 +179,13 @@ body(lang="ko")#pagecontent
                                                                                                                                     input(
                                                                                                                                         name="birthDate"
                                                                                                                                         autocorrect="off"
+                                                                                                                                        autocomplete="off"
                                                                                                                                         autocapitalize="off"
                                                                                                                                         spellcheck="false"
                                                                                                                                         required
                                                                                                                                         type="text"
                                                                                                                                         aria-required="true"
-                                                                                                                                    ).form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1726389991588-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
+                                                                                                                                    )#input-1727167270343-1.form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1727167270343-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
                                                                                                                                     span(aria-hidden="true" for="input-1726389991588-1").form-label
                                                                                                                                         |생년월일
                                                                                                             div(aria-hidden="false").idms-icon-html-tag
@@ -194,6 +196,7 @@ body(lang="ko")#pagecontent
                                                                                                                         aria-describedby="birthdayInfoMsg"
                                                                                                                     ).button.button-link.button-help.list-action 
                                                                                                                         i.icon.icon_help.help-anchor.bd-info
+                                                                                                                    div#birthdayInfoMsg.idms-popover-html-tag
                                                                         div.flow-section
                                                                             div.container-xs.centered
                                                                                 div.row
@@ -354,7 +357,7 @@ body(lang="ko")#pagecontent
                                         |법적 고지 
                                     a(href="#").ac-gf-footer-legal-link
                                         |사이트 맵 
-    script(src="/assets/js/userJoin.js" type="text/javascript")                                  
+    script(src="/assets/js/userJoin.bundle.js" type="text/javascript")                                  
 //-
     if alreadyExistError
         div.form-message-wrapper

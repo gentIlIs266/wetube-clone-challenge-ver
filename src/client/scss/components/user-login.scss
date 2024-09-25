@@ -484,6 +484,9 @@ body:lang(ko) {
     margin: 0;
     display: inline;
 }
+.widget-container .si-link:hover {
+    text-decoration: underline;
+}
 .no-wrap {
     white-space: nowrap;
 }
