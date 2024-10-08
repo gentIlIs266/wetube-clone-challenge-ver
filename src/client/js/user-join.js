@@ -1,4 +1,3 @@
-import e from "express";
 import "../scss/components/user-join.scss";
 /*join submit button action*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         joinForm.submit();
     });
 });
-/*birthday input help icon touch popover*/
+/*birthday input help icon hover popover*/
 document.addEventListener("DOMContentLoaded", () => {
     const birthdayInfoButton = document.querySelector("button[aria-describedby=birthdayInfoMsg]");
     const birthdayInfoMsg = document.querySelector("#birthdayInfoMsg");
@@ -66,234 +65,170 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 /*birthday input formatting*/
 document.addEventListener("DOMContentLoaded", () => {
-    const birthdayInput = document.querySelector("#input-1727167270343-1");
-    const defaultBirthdayFormat = "yyyy년 mm월 dd일";
-    const currentDate = new Date();
-    
-    birthdayInput.addEventListener("click", () => {
-        if (birthdayInput.value === defaultBirthdayFormat) {
-            birthdayInput.setSelectionRange(0, 0);
+    function handleNumberInput (enteredKey) {
+        while (
+            caretIndex < defaultDateFormat.length &&
+            defaultDateFormat[caretIndex] !== "y" &&
+            defaultDateFormat[caretIndex] !== "m" &&
+            defaultDateFormat[caretIndex] !== "d"
+        ) {
+            caretIndex++;
         };
-    });
+        
+        //if (caretIndex > defaultDateFormat.length) return;
+        if (
+            caretIndex < defaultDateFormat.length && defaultDateFormat[caretIndex] === " "
+        ) {
+            caretIndex++;
+        };
+        
+        //const defaultDateFormat = "yyyy년 mm월 dd일";
+
+        if (caretIndex < defaultDateFormat.length) {
+            const caretIndexAt = (positionNum) => caretIndex === positionNum;
+            const currnetYear = new Date().getFullYear().toString();
+            if (caretIndex >= 0 && caretIndex <= 3) {
+                if (caretIndexAt(0)) {
+                    if (enteredKey === "0") return;
+                    if (enteredKey > currnetYear[0]) return;
+                };
+                if (caretIndexAt(1)) {
+                    const inputFirstDigit = currentInput.charAt(0);
+                    if (inputFirstDigit === "1" && enteredKey < 9) return;
+                    if (parseInt(`${inputFirstDigit}${enteredKey}`) > parseInt(`${currnetYear[0]}${currnetYear[1]}`)) return;
+                };
+            };
+            if (caretIndex >= 6 && caretIndex <= 7) {
+                if (caretIndexAt(6) && enteredKey > "1") return;
+                if (caretIndexAt(7)) {
+                    const monthFirstDigit = currentInput.charAt(6);
+                    if (monthFirstDigit === "1" && enteredKey > "2") return;
+                    else if (monthFirstDigit === "0" && enteredKey === "0") return;
+                };
+            } else if (caretIndex >= 10 && caretIndex <= 11) {
+                if (caretIndexAt(10) && enteredKey > "3") return;
+                if (caretIndexAt(11)) {
+                    const monthFirstDigit = currentInput.charAt(10);
+                    if (monthFirstDigit === "3" && enteredKey > "1") return;
+                    else if (monthFirstDigit === "0" && enteredKey === "0") return;
+                };
+            };
+        };
+
+        currentInput = currentInput.substring(0, caretIndex) + enteredKey + currentInput.substring(caretIndex + 1);
+        birthdayInput.value = currentInput;
+        caretIndex++;
+        
+        while (
+            caretIndex < defaultDateFormat.length &&
+            defaultDateFormat[caretIndex] !== "y" &&
+            defaultDateFormat[caretIndex] !== "m" &&
+            defaultDateFormat[caretIndex] !== "d"
+        ) {
+            caretIndex++;
+        };
+
+        if (caretIndex >= defaultDateFormat.length) {
+            if (caretIndex >= currentInput.length) caretIndex = currentInput.length;
+            birthdayInput.setSelectionRange(currentInput.length, currentInput.length);
+            birthdayInput.setAttribute("value", `${currentInput}`);
+        } else {
+            updateCaretPosition();
+        };
+    };
+    function handleBackspaceInput () {
+        if (caretIndex <= 0) return;
+        if (defaultDateFormat[caretIndex - 1] === " ") caretIndex--;
+        while (
+            defaultDateFormat[caretIndex - 1] !== "y" &&
+            defaultDateFormat[caretIndex - 1] !== "m" &&
+            defaultDateFormat[caretIndex - 1] !== "d"
+        ) {
+            caretIndex--;
+        };
+
+        caretIndex--;
+        currentInput = currentInput.substring(0, caretIndex) + defaultDateFormat[caretIndex] + currentInput.substring(caretIndex + 1);
+        birthdayInput.value = currentInput;
+
+        updateCaretPosition();
+    };
+    function handleArrowKeys (enteredKey) {
+        if (enteredKey === "ArrowLeft" && caretIndex > 0) {
+            if (caretIndex === defaultDateFormat.length) {
+                caretIndex--;
+            } else {
+                if (
+                    defaultDateFormat[caretIndex - 1] !== "y" &&
+                    defaultDateFormat[caretIndex - 1] !== "m" &&
+                    defaultDateFormat[caretIndex - 1] !== "d"
+                ) {
+                    caretIndex--;
+                };
+                caretIndex--
+            };
+        } else if (enteredKey === "ArrowRight" && caretIndex < defaultDateFormat.length) {
+            if (
+                (caretIndex + 1) < defaultDateFormat.length &&
+                defaultDateFormat[caretIndex] !== "y" &&
+                defaultDateFormat[caretIndex] !== "m" &&
+                defaultDateFormat[caretIndex] !== "d"
+            ) {
+                caretIndex++;
+            };
+            caretIndex++;
+        };
+        updateCaretPosition();
+    };
+    const birthdayInput = document.querySelector("#input-1727167270343-1");
+    const defaultDateFormat = "yyyy년 mm월 dd일";
+    let currentInput = defaultDateFormat;
+    let caretIndex = 0;
     birthdayInput.addEventListener("focus", () => {
-        birthdayInput.value = defaultBirthdayFormat;
-        birthdayInput.setSelectionRange(0, 0);
+        if (birthdayInput.value === "") {
+            birthdayInput.value = defaultDateFormat;
+        };
+        setTimeout(() => {
+            updateCaretPosition();
+        }, 5)
     });
     birthdayInput.addEventListener("blur", () => {
-        if (birthdayInput.value === defaultBirthdayFormat) {
+        if (birthdayInput.value === defaultDateFormat) {
             birthdayInput.value = "";
-        }
+        };
     });
     birthdayInput.addEventListener("keydown", (event) => {
-        if (event.key.length === 1 && !/[0-9]/.test(event.key)) {
+        const enteredKey = event.key;
+        const areAllNumbersEntered = currentInput.includes("y") || currentInput.includes("m") || currentInput.includes("d");
+        if (
+            (enteredKey >= "0" && enteredKey <= "9") ||
+            enteredKey === "Backspace" ||
+            enteredKey === "Tab" ||
+            enteredKey === "ArrowLeft" ||
+            enteredKey === "ArrowRight"
+        ) {
             event.preventDefault();
-            return;
-        }
-    });
-});
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('birthdate');
-    const template = 'yyyy년 mm월 dd일';
-    const today = new Date();
-
-    // 현재 날짜 정보를 가져오기
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
-    const currentDay = today.getDate();
-
-    // 기본값을 세팅
-    input.value = template;
-    input.setSelectionRange(0, 0); // 처음에는 커서 고정
-
-    input.addEventListener('focus', () => {
-        if (input.value === template) {
-            input.setSelectionRange(0, 0); // 커서 고정
-        }
-    });
-
-    input.addEventListener('keydown', (e) => {
-        const start = input.selectionStart;
-        const end = input.selectionEnd;
-
-        // 숫자 이외의 키 입력 방지
-        if (e.key.length === 1 && !/[0-9]/.test(e.key)) {
-            e.preventDefault();
-            return;
-        }
-
-        // 숫자 입력 처리
-        if (/[0-9]/.test(e.key)) {
-            e.preventDefault();
-            const nextValue = replaceAt(input.value, start, e.key);
-
-            // 년도, 월, 일의 형식 유지
-            if (start === 0 || start === 1 || start === 2 || start === 3) {
-                input.value = nextValue;
-                input.setSelectionRange(start + 1, start + 1);
-            } else if (start === 6 || start === 7) {
-                input.value = nextValue;
-                input.setSelectionRange(start + 1, start + 1);
-            } else if (start === 11 || start === 12) {
-                input.value = nextValue;
-                input.setSelectionRange(start + 1, start + 1);
-            }
-
-            // 입력 완료 후 생년월일 유효성 체크
-            const year = parseInt(input.value.slice(0, 4));
-            const month = parseInt(input.value.slice(6, 8));
-            const day = parseInt(input.value.slice(11, 13));
-
-            if (isValidDate(year, month, day)) {
-                const inputDate = new Date(year, month - 1, day);
-                if (inputDate > today) {
-                    alert("존재하지 않는 생년월일입니다. 미래의 날짜는 입력할 수 없습니다.");
-                    input.value = template;
-                    input.setSelectionRange(0, 0);
-                }
+            if (enteredKey >= "0" && enteredKey <= "9") {
+                areAllNumbersEntered ? handleNumberInput(enteredKey) : event.preventDefault();
+            } else if (enteredKey === "Backspace") {
+                handleBackspaceInput();
+            } else if (enteredKey === "ArrowLeft" || enteredKey === "ArrowRight") {
+                handleArrowKeys(enteredKey);
+            } else if (enteredKey === "Tab") {
+                /*There is no code here*/
             } else {
-                alert("유효하지 않은 날짜입니다.");
-                input.value = template;
-                input.setSelectionRange(0, 0);
-            }
-        }
-
-        // 백스페이스로 숫자 삭제 처리
-        if (e.key === 'Backspace') {
-            e.preventDefault();
-            if (start > 0 && input.value[start - 1] !== '년' && input.value[start - 1] !== '월' && input.value[start - 1] !== '일') {
-                const newValue = replaceAt(input.value, start - 1, template[start - 1]);
-                input.value = newValue;
-                input.setSelectionRange(start - 1, start - 1);
-            }
-        }
+                event.preventDefault();
+            };
+            if (currentInput.replace(/[^0-9]/g, "").length === 8) event.preventDefault();
+        };
     });
-
-    function replaceAt(str, index, replacement) {
-        return str.substr(0, index) + replacement + str.substr(index + replacement.length);
-    }
-
-    // 유효한 날짜인지 확인하는 함수
-    function isValidDate(year, month, day) {
-        const date = new Date(year, month - 1, day);
-        return date.getFullYear() === year && (date.getMonth() + 1) === month && date.getDate() === day;
-    }
+    birthdayInput.addEventListener("input", (event) => {
+        const hangulLetter = event.target;
+        const removeKorRegExp = /(?!년|월|일)[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+        hangulLetter.value = hangulLetter.value.replace(removeKorRegExp, "");
+        setTimeout(() => {
+            updateCaretPosition();
+        }, 5);
+    });
+    const updateCaretPosition = () => birthdayInput.setSelectionRange(caretIndex, caretIndex);
 });
-*/
-/*
-document.addEventListener('DOMContentLoaded', function () {
-    const birthdateInput = document.getElementById('birthdate');
-    
-    const defaultFormat = 'yyyy년 mm월 dd일';
-    birthdateInput.value = defaultFormat;
-
-    function setCaretPosition(elem, pos) {
-        if (elem.setSelectionRange) {
-            elem.focus();
-            elem.setSelectionRange(pos, pos);
-        } else if (elem.createTextRange) {
-            var range = elem.createTextRange();
-            range.collapse(true);
-            range.moveEnd('character', pos);
-            range.moveStart('character', pos);
-            range.select();
-        }
-    }
-
-    function handleInput(e) {
-        const value = birthdateInput.value;
-        const num = e.key;
-
-        if (!/\d/.test(num)) {
-            e.preventDefault();
-            return;
-        }
-
-        let caretPos = birthdateInput.selectionStart;
-
-        if (caretPos >= 0 && caretPos <= 4) {
-            if (caretPos === 0 || caretPos === 1 || caretPos === 2 || caretPos === 3) {
-                birthdateInput.value = value.substring(0, caretPos) + num + value.substring(caretPos + 1);
-                setCaretPosition(birthdateInput, caretPos + 1);
-            }
-            if (caretPos === 4) {
-                setCaretPosition(birthdateInput, 6);
-            }
-        } else if (caretPos >= 6 && caretPos <= 7) {
-            if (caretPos === 6 || caretPos === 7) {
-                birthdateInput.value = value.substring(0, caretPos) + num + value.substring(caretPos + 1);
-                setCaretPosition(birthdateInput, caretPos + 1);
-            }
-            if (caretPos === 8) {
-                setCaretPosition(birthdateInput, 10);
-            }
-        } else if (caretPos >= 10 && caretPos <= 11) {
-            if (caretPos === 10 || caretPos === 11) {
-                birthdateInput.value = value.substring(0, caretPos) + num + value.substring(caretPos + 1);
-                setCaretPosition(birthdateInput, caretPos + 1);
-            }
-        }
-
-        e.preventDefault();
-    }
-
-    function handleBackspace(e) {
-        const value = birthdateInput.value;
-        const caretPos = birthdateInput.selectionStart;
-
-        if (e.key === 'Backspace') {
-            if (caretPos > 0 && caretPos <= 4) {
-                birthdateInput.value = value.substring(0, caretPos - 1) + 'y' + value.substring(caretPos);
-                setCaretPosition(birthdateInput, caretPos - 1);
-            } else if (caretPos >= 6 && caretPos <= 7) {
-                birthdateInput.value = value.substring(0, caretPos - 1) + 'm' + value.substring(caretPos);
-                setCaretPosition(birthdateInput, caretPos - 1);
-            } else if (caretPos >= 10 && caretPos <= 11) {
-                birthdateInput.value = value.substring(0, caretPos - 1) + 'd' + value.substring(caretPos);
-                setCaretPosition(birthdateInput, caretPos - 1);
-            }
-
-            e.preventDefault();
-        }
-    }
-
-    function isInputComplete() {
-        const value = birthdateInput.value;
-        const year = value.substring(0, 4).replace(/[^\d]/g, '');
-        const month = value.substring(6, 8).replace(/[^\d]/g, '');
-        const day = value.substring(10, 12).replace(/[^\d]/g, '');
-
-        // 년, 월, 일이 모두 숫자로 채워졌는지 확인
-        return year.length === 4 && month.length === 2 && day.length === 2;
-    }
-
-    // blur 이벤트에서 입력이 완료되지 않으면 다시 focus
-    function handleBlur(e) {
-        if (!isInputComplete()) {
-            e.preventDefault();
-            birthdateInput.focus();
-        } else {
-            const value = birthdateInput.value;
-            const year = value.substring(0, 4).replace(/[^\d]/g, '');
-            const month = value.substring(6, 8).replace(/[^\d]/g, '');
-            const day = value.substring(10, 12).replace(/[^\d]/g, '');
-
-            birthdateInput.value = `${year}년 ${month}월 ${day}일`;
-        }
-    }
-
-    function handleFocus() {
-        if (birthdateInput.value.trim() === '' || birthdateInput.value === defaultFormat) {
-            birthdateInput.value = defaultFormat;
-            setCaretPosition(birthdateInput, 0);
-        }
-    }
-
-    // 이벤트 핸들러 연결
-    birthdateInput.addEventListener('keydown', handleInput);
-    birthdateInput.addEventListener('keydown', handleBackspace);
-    birthdateInput.addEventListener('blur', handleBlur); // 포커스를 잃었을 때 처리
-    birthdateInput.addEventListener('focus', handleFocus); // 포커스 맞추기
-});
-
-*/

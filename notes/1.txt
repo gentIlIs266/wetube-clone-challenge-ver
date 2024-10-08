@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Date Input</title>
+    <style>
+        input {
+            font-size: 18px;
+            width: 200px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <label for="dob">생년월일: </label>
+    <input type="text" id="dob" maxlength="13" placeholder="yyyy년 mm월 dd일" autocomplete="off">
+
+    <script>
+        const dobInput = document.getElementById('dob');
+        const currentYear = new Date().getFullYear();
+
+        // 초기 상태의 placeholder 형식: yyyy년 mm월 dd일
+        const defaultFormat = 'yyyy년 mm월 dd일';
+
+        // 키 허용 목록 (숫자, 백스페이스, 방향키, 탭)
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+        let inputIndex = 0;  // 입력할 위치 추적
+        let year = '', month = '', day = '';  // 년, 월, 일 저장 변수
+
+        // input이 focus되면 기본 placeholder 설정
+        dobInput.addEventListener('focus', () => {
+            if (dobInput.value === '') {
+                dobInput.value = defaultFormat;
+                inputIndex = 0;
+            }
+        });
+
+        // input이 blur되면 입력이 없을 경우 필드를 비움
+        dobInput.addEventListener('blur', () => {
+            if (dobInput.value === defaultFormat) {
+                dobInput.value = '';
+            }
+        });
+
+        // 키 입력 시 숫자만 허용하고, 커서 이동/제어
+        dobInput.addEventListener('keydown', (e) => {
+            // 허용되지 않은 키 입력 차단
+            if (!allowedKeys.includes(e.key) && (isNaN(e.key) || e.key.length > 1)) {
+                e.preventDefault();
+                return;
+            }
+
+            // 숫자 입력 처리
+            if (!isNaN(e.key) && e.key.length === 1) {
+                e.preventDefault(); // 기본 입력 동작 방지
+
+                if (inputIndex < 4) {  // 년도 입력 처리
+                    year += e.key;
+                    dobInput.value = dobInput.value.substring(0, inputIndex) + e.key + dobInput.value.substring(inputIndex + 1);
+                    inputIndex++;
+                    
+                    if (inputIndex === 4) {
+                        // 년도 완료 후 유효성 검사
+                        if (parseInt(year, 10) > currentYear) {
+                            alert("현재 연도보다 클 수 없습니다.");
+                            year = year.slice(0, -1);  // 잘못된 입력 제거
+                            dobInput.value = defaultFormat;
+                            inputIndex = 0;
+                        } else {
+                            inputIndex = 6;  // "년"을 넘어서 월로 이동
+                        }
+                    }
+                } else if (inputIndex >= 6 && inputIndex < 8) {  // 월 입력 처리
+                    month += e.key;
+                    dobInput.value = dobInput.value.substring(0, inputIndex) + e.key + dobInput.value.substring(inputIndex + 1);
+                    inputIndex++;
+
+                    if (inputIndex === 8) {
+                        // 월 유효성 검사 (1월 ~ 12월 범위)
+                        const monthNum = parseInt(month, 10);
+                        if (monthNum < 1 || monthNum > 12) {
+                            alert("유효하지 않은 월입니다.");
+                            month = '';
+                            dobInput.value = dobInput.value.substring(0, 6) + 'mm월 dd일';
+                            inputIndex = 6;
+                        } else {
+                            inputIndex = 10;  // "월"을 넘어서 일로 이동
+                        }
+                    }
+                } else if (inputIndex >= 10 && inputIndex < 12) {  // 일 입력 처리
+                    day += e.key;
+                    dobInput.value = dobInput.value.substring(0, inputIndex) + e.key + dobInput.value.substring(inputIndex + 1);
+                    inputIndex++;
+
+                    if (inputIndex === 12) {
+                        // 일 유효성 검사 (1일 ~ 31일 범위)
+                        const dayNum = parseInt(day, 10);
+                        if (dayNum < 1 || dayNum > 31) {
+                            alert("유효하지 않은 일입니다.");
+                            day = '';
+                            dobInput.value = dobInput.value.substring(0, 10) + 'dd일';
+                            inputIndex = 10;
+                        } else {
+                            dobInput.blur();  // 입력이 완료되면 blur
+                        }
+                    }
+                }
+            }
+
+            // 백스페이스 입력 처리
+            if (e.key === 'Backspace') {
+                e.preventDefault();  // 기본 백스페이스 동작 방지
+
+                if (inputIndex > 0) {
+                    if (inputIndex <= 4) {
+                        year = year.slice(0, -1);  // 년도 지우기
+                        inputIndex--;
+                        dobInput.value = defaultFormat.substring(0, inputIndex) + defaultFormat.substring(inputIndex);
+                    } else if (inputIndex <= 6) {
+                        month = month.slice(0, -1);  // 월 지우기
+                        inputIndex = 6;
+                        dobInput.value = dobInput.value.substring(0, 6) + 'mm월 dd일';
+                    } else if (inputIndex <= 10) {
+                        day = day.slice(0, -1);  // 일 지우기
+                        inputIndex = 10;
+                        dobInput.value = dobInput.value.substring(0, 10) + 'dd일';
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+ 

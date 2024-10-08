@@ -1,6 +1,5 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { resolve } = require("url");
 
 module.exports = {
     entry: {
@@ -11,6 +10,7 @@ module.exports = {
         userLogin: "./src/client/js/user-login.js",
     },
     mode: "development",
+    target: "node",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
         filename: "css/[name].bundle.css",
@@ -34,35 +34,25 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: "/assets/css/",
+                        },
+                    },
                     "css-loader",
                     "sass-loader"
                 ]
-            }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "[name][ext]",
+                    outputPath: "fonts/",
+                    publicPath: "/fonts/",
+                },
+            },
         ]
     },
-    resolve: {
-        fallback: {
-            "zlib": false,
-            "querystring": false,
-            "path": false,
-            "crypto": false,
-            "stream": false,
-            "http": false,
-            "url": false,
-            "buffer": false,
-            "util": false,
-            /*
-            "zlib": require.resolve("browserify-zlib"),
-            "querystring": require.resolve("querystring-es3"),
-            "path": require.resolve("path-browserify")
-            "crypto": require.resolve("crypto-browserify"),
-            "stream": require.resolve("stream-browserify"),
-            "http": require.resolve("stream-http"),
-            "url": require.resolve("url/"),
-            "buffer": require.resolve("buffer/"),
-            "util": require.resolve("util/"),
-            */
-        }
-    }
 }

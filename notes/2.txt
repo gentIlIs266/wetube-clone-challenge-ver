@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Input</title>
+  <style>
+    input {
+      width: 200px;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 1px;
+      caret-color: transparent; /* 기본적으로 caret을 보이지 않게 설정 */
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="birthday-input" placeholder="yyyy년 mm월 dd일" maxlength="13">
+
+  <script>
+    const input = document.getElementById('birthday-input');
+    const formatTemplate = 'yyyy년 mm월 dd일'; // 기본 입력 형식
+    const maxYear = new Date().getFullYear(); // 현재 연도 가져오기
+    let currentInput = formatTemplate; // 입력 중인 내용 저장
+    let caretIndex = 0; // caret의 위치 관리
+
+    // focus할 때 기본 형식을 보여줌
+    input.addEventListener('focus', () => {
+      if (input.value === '') {
+        input.value = formatTemplate;
+      }
+      caretIndex = 0; // 처음에는 caret을 0에 위치
+      updateCaretPosition();
+    });
+
+    // focus를 잃었을 때 아무것도 입력되지 않았다면 입력을 비움
+    input.addEventListener('blur', () => {
+      if (input.value === formatTemplate) {
+        input.value = '';
+      }
+    });
+
+    // 키 입력을 처리하는 함수
+    input.addEventListener('keydown', (e) => {
+      if (!isAllowedKey(e)) {
+        e.preventDefault(); // 허용되지 않은 키는 무시
+        return;
+      }
+
+      if (isNumberKey(e)) {
+        handleNumberInput(e.key);
+      } else if (e.key === 'Backspace') {
+        handleBackspaceInput();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        handleArrowKeys(e.key);
+      } else if (e.key === 'Tab') {
+        // 기본적으로 Tab은 허용하되, caret 위치 이동 로직은 스킵
+      } else {
+        e.preventDefault();
+      }
+    });
+
+    // 숫자 입력을 처리하는 함수
+    function handleNumberInput(key) {
+      // 구분자를 넘어서 caret을 이동
+      while (formatTemplate[caretIndex] !== 'y' && formatTemplate[caretIndex] !== 'm' && formatTemplate[caretIndex] !== 'd') {
+        caretIndex++;
+      }
+
+      // 현재 위치가 템플릿의 숫자 자리면 입력 처리
+      if (caretIndex < formatTemplate.length) {
+        currentInput = currentInput.substring(0, caretIndex) + key + currentInput.substring(caretIndex + 1);
+        input.value = currentInput;
+        caretIndex++;
+
+        // 입력한 자리에 맞는 연도, 월, 일 검증
+        validateDate();
+
+        // 구분자를 만나면 다시 넘어서 이동
+        while (caretIndex < formatTemplate.length && (formatTemplate[caretIndex] !== 'y' && formatTemplate[caretIndex] !== 'm' && formatTemplate[caretIndex] !== 'd')) {
+          caretIndex++;
+        }
+
+        // 입력이 끝나면 자동 blur
+        if (caretIndex >= formatTemplate.length) {
+          input.blur();
+        } else {
+          updateCaretPosition();
+        }
+      }
+    }
+
+    // Backspace 입력을 처리하는 함수
+    function handleBackspaceInput() {
+      if (caretIndex <= 0) return;
+
+      // 구분자를 넘어서 caret 이동
+      while (caretIndex > 0 && (formatTemplate[caretIndex - 1] !== 'y' && formatTemplate[caretIndex - 1] !== 'm' && formatTemplate[caretIndex - 1] !== 'd')) {
+        caretIndex--;
+      }
+
+      caretIndex--;
+      currentInput = currentInput.substring(0, caretIndex) + formatTemplate[caretIndex] + currentInput.substring(caretIndex + 1);
+      input.value = currentInput;
+      updateCaretPosition();
+    }
+
+    // 방향키 처리하는 함수
+    function handleArrowKeys(key) {
+      if (key === 'ArrowLeft' && caretIndex > 0) {
+        caretIndex--;
+      } else if (key === 'ArrowRight' && caretIndex < formatTemplate.length) {
+        caretIndex++;
+      }
+      updateCaretPosition();
+    }
+
+    // caret 위치 업데이트 함수
+    function updateCaretPosition() {
+      input.setSelectionRange(caretIndex, caretIndex); // caret을 특정 위치로 설정
+    }
+
+    // 입력값 유효성을 확인하는 함수 (연도 기준)
+    function validateDate() {
+      const year = parseInt(currentInput.substring(0, 4));
+      if (year > maxYear) {
+        alert("유효하지 않은 연도입니다.");
+        handleBackspaceInput();
+      }
+    }
+
+    // 허용된 키인지 확인하는 함수
+    function isAllowedKey(e) {
+      const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+      return allowedKeys.includes(e.key) || isNumberKey(e);
+    }
+
+    // 숫자키 확인 함수
+    function isNumberKey(e) {
+      return /^[0-9]$/.test(e.key);
+    }
+  </script>
+</body>
+</html>
