@@ -24,6 +24,9 @@ a {
 [dir] button:disabled {
     cursor: default;
 }
+div[data-lastpass-icon-root] {
+    display: none;
+}
 @media (min-width: 876px) {
     #logo.wtd-masthead {
         width: 129px;

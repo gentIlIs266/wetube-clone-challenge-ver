@@ -25,8 +25,8 @@ export const home = async (req, res) => {
 };
 export const getUserJoin = (req, res) => {
     return res.render("user-template/user-join", {
-        tabTitle: "Join",
-    })
+        tabTitle: "WeTube 계정 생성",
+    });
 };
 export const postUserJoin = async (req, res) => {
     const logInProcess = (userObj) => {
@@ -36,21 +36,48 @@ export const postUserJoin = async (req, res) => {
     const {
         body: {
             name, username, location, birthDate,
-            email, password, passwordConfirm
+            email, password, passwordConfirm, adiToAspPolicy
         }
     } = req;
-    if (password !== passwordConfirm) {
-        return res.status(400).render("user-template/user-join", {
-            tabTitle: "Join",
-            pwConfirmError: true
-        });
-    };
-    const userIsAlreadyExisting = await USER.exists({ $or: [{ username }, { email }] });
-    if (userIsAlreadyExisting) {
-        return res.status(400).render("user-template/user-join", {
-            tabTitle: "Join",
-            alreadyExistError: true,
-        });
+    
+    try {
+        let renderParamObj = {
+            tabTitle: "WeTube 계정 생성",
+            error: {
+                nameError: false,
+                usernameError: false,
+                birthDateError: false,
+                emailError: false,
+                passwordError: false,
+                passwordConfirmError: false,
+                adiToAspPolicyError: false,
+                passwordConfirmNotSameError: false,
+                alreadyUsingThisUsernameError: false,
+                alreadyUsingThisEmailError: false,
+            },
+        };
+        const userWithSameUsername = await USER.exists({ username });
+        const userWithSameEmail = await USER.exists({ email });
+        if (
+            (!name || !username || !birthDate || !email || !password || !passwordConfirm || !adiToAspPolicy) ||
+            (password !== passwordConfirm) ||
+            (userWithSameUsername || userWithSameEmail)
+        ) {
+            if (!name) renderParamObj.error.nameError = true;
+            if (!username) renderParamObj.error.usernameError = true;
+            if (!birthDate) renderParamObj.error.birthDateError = true;
+            if (!email) renderParamObj.error.emailError = true;
+            if (!password) renderParamObj.error.passwordError = true;
+            if (!passwordConfirm) renderParamObj.error.passwordConfirmError = true;
+            if (!adiToAspPolicy) renderParamObj.error.adiToAspPolicyError = true;
+            if (password && passwordConfirm && (password !== passwordConfirm)) renderParamObj.error.passwordConfirmNotSameError = true;
+            if (userWithSameUsername) renderParamObj.error.alreadyUsingThisUsernameError = true;
+            if (userWithSameEmail) renderParamObj.error.alreadyUsingThisEmailError = true;
+    
+            return res.status(400).render("user-template/user-join", renderParamObj);
+        };  
+    } catch (error) {
+        return res.render("error", { error });
     };
     try {
         const justCreatedUser = await USER.create({
@@ -69,7 +96,7 @@ export const postUserJoin = async (req, res) => {
 };
 export const getUserLogin = (req, res) => {
     return res.render("user-template/user-login", {
-        tabTitle: "Log in"
+        tabTitle: "로그인"
     });
 };
 export const postUserLogin = async (req, res) => {
@@ -91,14 +118,14 @@ export const postUserLogin = async (req, res) => {
             if (foundUser) {
                 res.render("user-template/user-login", {
                     step: "showPasswordInput",
-                    tabTitle: "Log in",
+                    tabTitle: "로그인",
                     emailOrUsername,
                 });
             };
             if (!foundUser) {
                 res.status(400).render("user-template/user-login", {
                     step: "showFirstInput",
-                    tabTitle: "Log in",
+                    tabTitle: "로그인",
                     noUserExistError: true,
                 });
             };
@@ -113,7 +140,7 @@ export const postUserLogin = async (req, res) => {
                 if (!passwordConfirm) {
                     res.status(400).render("user-template/user-login", {
                         step: "showPasswordInput",
-                        tabTitle: "Log in",
+                        tabTitle: "로그인",
                         emailOrUsername,
                         wrongPasswordError: true,
                     });
@@ -121,18 +148,12 @@ export const postUserLogin = async (req, res) => {
             } else {
                 res.render("user-template/user-login", {
                     step: "showPasswordInput",
-                    tabTitle: "Log in",
+                    tabTitle: "로그인",
                 });
             };
         };
     } catch (error) {
         return res.render("error", { error });
-        /*
-        return res.render("user-template/user-login", {
-            tabTitle: "Log In",
-            unexpectedError: true,
-        });
-        */
     };
 };
 
