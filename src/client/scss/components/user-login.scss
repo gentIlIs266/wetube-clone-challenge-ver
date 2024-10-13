@@ -3,6 +3,9 @@ body:lang(ko) {
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.5882352941;
 }
+input[type=password], input[type=tel], input[type=text] {
+    appearance: none;
+}
 #signin-container {
     padding-top: 56px;
 }
@@ -65,6 +68,11 @@ body:lang(ko) {
     height: 480px;
     margin: 83px auto 0;
     width: 640px;
+}
+.tk-body:lang(ko) {
+    line-height: 1.58824;
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .si-container[data-theme=dark] {
     color: #494949;
@@ -271,17 +279,46 @@ body:lang(ko) {
     letter-spacing: -.022em;
     font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+[dir] .form-textbox .form-textarea.focused,
+[dir] .form-textbox .form-textarea:focus,
+[dir] .form-textbox .form-textarea:focus-within,
+[dir] .form-textbox .form-textbox-input.focused,
 [dir] .form-textbox .form-textbox-input:focus,
 [dir] .form-textbox .form-textbox-input:focus-within {
     border-color: #0071e3;
-    border-width: 2px;
+}
+.form-textbox .form-textarea.focused,
+.form-textbox .form-textarea:focus,
+.form-textbox .form-textarea:focus-within,
+.form-textbox .form-textbox-input.focused,
+.form-textbox .form-textbox-input:focus,
+.form-textbox .form-textbox-input:focus-within {
+    border-color: #0071e3;
     outline: none;
+}
+[dir] .form-textbox-input.focused,
+[dir] .form-textbox-input:focus,
+[dir] .form-textbox-input:focus-within {
+    border-width: 2px;
 }
 [dir=ltr] .form-textbox-input:focus,
 [dir=ltr] .form-textbox-input:focus-within {
     padding-left: .88235rem;
 }
-
+[dir].as-keyboarduser .form-textbox .form-textarea.focused,
+[dir].as-keyboarduser .form-textbox .form-textarea:focus,
+[dir].as-keyboarduser .form-textbox .form-textarea:focus-within,
+[dir].as-keyboarduser .form-textbox .form-textbox-input.focused,
+[dir].as-keyboarduser .form-textbox .form-textbox-input:focus,
+[dir].as-keyboarduser .form-textbox .form-textbox-input:focus-within,
+[dir].form-keyboarduser .form-textbox .form-textarea.focused,
+[dir].form-keyboarduser .form-textbox .form-textarea:focus,
+[dir].form-keyboarduser .form-textbox .form-textarea:focus-within,
+[dir].form-keyboarduser .form-textbox .form-textbox-input.focused,
+[dir].form-keyboarduser .form-textbox .form-textbox-input:focus,
+[dir].form-keyboarduser .form-textbox .form-textbox-input:focus-within {
+    box-shadow: 0 0 0 3px #fff,0 0 0 5px #0071e3;
+}
 .form-textbox-input.form-textarea-with-placeholder~.form-textbox-label:lang(ko),
 .form-textbox-input.form-textbox-entered~.form-textbox-label:lang(ko),
 .form-textbox-input:focus-within~.form-textbox-label:lang(ko),
@@ -362,9 +399,32 @@ body:lang(ko) {
     width: 100%;
     height: 100%;
 }
+.signin-form.eyebrow.show-password~.si-button.fed-ui {
+    top: 73px !important;
+    transition-timing-function: ease-in;
+    transition-duration: .125s;
+}
 .signin-form.eyebrow.hide-password.has-focus~.si-button.fed-ui,
 .signin-form.eyebrow.hide-password.account-name-entered~.si-button.fed-ui {
     top: 23px;
+}
+.signin-form .password.password-focus .form-textbox-input {
+    border-top-width: 2px;
+}
+.account-name.show-password .form-textbox-input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.signin-form .password .form-textbox-input {
+    border-top-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-textbox .form-textarea, .form-textbox .form-textbox-input {
+    color: #1d1d1f;
+    border-color: #86868b;
+    background-color: hsla(0,0%,100%,.8);
+    text-overflow: ellipsis;
 }
 .feat-split {
     display: none;

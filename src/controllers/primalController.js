@@ -26,6 +26,18 @@ export const home = async (req, res) => {
 export const getUserJoin = (req, res) => {
     return res.render("user-template/user-join", {
         tabTitle: "WeTube 계정 생성",
+        error: {
+            nameError: false,
+            usernameError: false,
+            birthDateError: false,
+            emailError: false,
+            passwordError: false,
+            passwordConfirmError: false,
+            adiToAspPolicyError: false,
+            passwordConfirmNotSameError: false,
+            alreadyUsingThisUsernameError: false,
+            alreadyUsingThisEmailError: false,
+        },
     });
 };
 export const postUserJoin = async (req, res) => {
