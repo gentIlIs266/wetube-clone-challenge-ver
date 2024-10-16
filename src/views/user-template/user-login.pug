@@ -29,87 +29,141 @@ body(lang="ko")
                                                     )#sign_in_form.signin-form.swp.eyebrow.fed-auth.hide-password
                                                         div
                                                             if step === "showFirstInput" || !step
-                                                                div.account-name
-                                                                    div
-                                                                        div.form-cell-wrapper.form-textbox
-                                                                            input(name="step" type="hidden" value="showFirstInput")
-                                                                            input(
-                                                                                type="text"
-                                                                                name="emailOrUsername"
-                                                                                required
-                                                                                autocorrect="off"
-                                                                                autocapitalize="off"
-                                                                                aria-required="true"
-                                                                                spellcheck="false"
-                                                                                autocomplete="off"
-                                                                                aria-invalid="false"
-                                                                                autofocus
-                                                                            )#account_name_text_field.force-ltr.form-textbox-input
-                                                                            span(
-                                                                                aria-hidden="true"
-                                                                            )#apple_id_field_label.form-textbox-label.form-label-flyout
-                                                                                |이메일 또는 유저네임
+                                                                if showErrorStyling
+                                                                    div.account-name
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox.is-error
+                                                                                input(name="step" type="hidden" value="showFirstInput")
+                                                                                input(
+                                                                                    type="text"
+                                                                                    name="emailOrUsername"
+                                                                                    required
+                                                                                    autocorrect="off"
+                                                                                    autocapitalize="off"
+                                                                                    aria-required="true"
+                                                                                    spellcheck="false"
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                )#account_name_text_field.force-ltr.form-textbox-input
+                                                                                span(
+                                                                                    aria-hidden="true"
+                                                                                )#apple_id_field_label.form-textbox-label.form-label-flyout
+                                                                                    |이메일 또는 유저네임
+                                                                else
+                                                                    div.account-name
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox
+                                                                                input(name="step" type="hidden" value="showFirstInput")
+                                                                                input(
+                                                                                    type="text"
+                                                                                    name="emailOrUsername"
+                                                                                    required
+                                                                                    autocorrect="off"
+                                                                                    autocapitalize="off"
+                                                                                    aria-required="true"
+                                                                                    spellcheck="false"
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                    autofocus
+                                                                                )#account_name_text_field.force-ltr.form-textbox-input
+                                                                                span(
+                                                                                    aria-hidden="true"
+                                                                                )#apple_id_field_label.form-textbox-label.form-label-flyout
+                                                                                    |이메일 또는 유저네임
                                                             if step === "showPasswordInput"
-                                                                div.account-name.show-password
-                                                                    div
-                                                                        div.form-cell-wrapper.form-textbox
-                                                                            input(name="step" type="hidden" value="showPasswordInput")
-                                                                            input(
-                                                                                type="text"
-                                                                                name="emailOrUsername"
-                                                                                required
-                                                                                autocorrect="off"
-                                                                                autocapitalize="off"
-                                                                                aria-required="true"
-                                                                                spellcheck="false"
-                                                                                autocomplete="off"
-                                                                                aria-invalid="false"
-                                                                                value=emailOrUsername
-                                                                            )#account_name_text_field.force-ltr.form-textbox-input
-                                                                            span(
-                                                                                aria-hidden="true"
-                                                                            )#apple_id_field_label.form-textbox-label.form-label-flyout
-                                                                                |이메일 또는 유저네임
-                                                                div.password.show-password.show-placeholder
-                                                                    div
-                                                                        div.form-cell-wrapper.form-textbox
-                                                                            input(
-                                                                                name="password"
-                                                                                type="password"
-                                                                                aria-required="true"
-                                                                                required
-                                                                                autocomplete="off"
-                                                                                aria-invalid="false"
-                                                                                autofocus
-                                                                            )#password_text_field.form-textbox-input
-                                                                            span(aria-hidden="true")#password_field_label.form-textbox-label.form-textbox-flyout
-                                                                                |암호
-                                                            //-
-                                                                form(action="/login" method="POST" style="margin: auto;")#sign_in_form
-                                                                    input(name="step" type="hidden" value="showPasswordInput")
-                                                                    input(
-                                                                        name="emailOrUsername"
-                                                                        required
-                                                                        type="text"
-                                                                        value=emailOrUsername 
-                                                                        autocorrect="off"
-                                                                        autocapitalize="off"
-                                                                        aria-required="true"
-                                                                        spellcheck="false"
-                                                                        autocomplete="off"
-                                                                        aria-invalid="false"
-                                                                        placeholder="이메일 또는 유저네임"
-                                                                    )#account_name_text_field.form-textbox-input
-                                                                    input(
-                                                                        name="password"
-                                                                        required
-                                                                        type="password"
-                                                                        aria-required="true"
-                                                                        autocomplete="off"
-                                                                        aria-invalid="false"
-                                                                        placeholder="암호"
-                                                                    )#password_field_label.form-textbox-input
-                                                                    button(type="submit" aria-label="계속" aria-disabled="false")#sign-in >
+                                                                if showErrorStyling
+                                                                    div.account-name.show-password
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox.is-error
+                                                                                input(name="step" type="hidden" value="showPasswordInput")
+                                                                                input(
+                                                                                    type="text"
+                                                                                    name="emailOrUsername"
+                                                                                    required
+                                                                                    autocorrect="off"
+                                                                                    autocapitalize="off"
+                                                                                    aria-required="true"
+                                                                                    spellcheck="false"
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                    value=emailOrUsername
+                                                                                )#account_name_text_field.force-ltr.form-textbox-input
+                                                                                span(
+                                                                                    aria-hidden="true"
+                                                                                )#apple_id_field_label.form-textbox-label.form-label-flyout
+                                                                                    |이메일 또는 유저네임
+                                                                    div.password.show-password.show-placeholder
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox.is-error
+                                                                                input(
+                                                                                    name="password"
+                                                                                    type="password"
+                                                                                    aria-required="true"
+                                                                                    required
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                )#password_text_field.form-textbox-input
+                                                                                span(aria-hidden="true")#password_field_label.form-textbox-label.form-textbox-flyout
+                                                                                    |암호
+                                                                else
+                                                                    div.account-name.show-password
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox
+                                                                                input(name="step" type="hidden" value="showPasswordInput")
+                                                                                input(
+                                                                                    type="text"
+                                                                                    name="emailOrUsername"
+                                                                                    required
+                                                                                    autocorrect="off"
+                                                                                    autocapitalize="off"
+                                                                                    aria-required="true"
+                                                                                    spellcheck="false"
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                    value=emailOrUsername
+                                                                                )#account_name_text_field.force-ltr.form-textbox-input
+                                                                                span(
+                                                                                    aria-hidden="true"
+                                                                                )#apple_id_field_label.form-textbox-label.form-label-flyout
+                                                                                    |이메일 또는 유저네임
+                                                                    div.password.show-password.show-placeholder
+                                                                        div
+                                                                            div.form-cell-wrapper.form-textbox
+                                                                                input(
+                                                                                    name="password"
+                                                                                    type="password"
+                                                                                    aria-required="true"
+                                                                                    required
+                                                                                    autocomplete="off"
+                                                                                    aria-invalid="false"
+                                                                                    autofocus
+                                                                                )#password_text_field.form-textbox-input
+                                                                                span(aria-hidden="true")#password_field_label.form-textbox-label.form-textbox-flyout
+                                                                                    |암호
+                                                    if showErrorPopover
+                                                        div.pop-container.error.signin-error.swp-pop-error
+                                                            div.error.pop-bottom.tk-subbody-headline
+                                                                p#errMsg.fat
+                                                                    if error.noUserExistError
+                                                                        |입력하신 유저네임 혹은 이메일을 쓰는 유저가
+                                                                        br
+                                                                        |존재하지 않습니다.
+                                                                    if error.wrongPasswordError
+                                                                        |암호가 올바르지 않습니다.
+                                                                if error.noUserExistError
+                                                                    a(href="#").si-link.ax-outline.thin.tk-subbody 
+                                                                        |WeTube&nbsp;ID가 
+                                                                        span.no-wrap.sk-icon.sk-icon-after.sk-icon-external
+                                                                            |없으십니까?
+                                                                        span.sr-only
+                                                                            |새 창에서 열립니다.
+                                                                if error.wrongPasswordError
+                                                                    a(href="#").si-link.ax-outline.thin.tk-subbody 
+                                                                        |암호를 
+                                                                        span.no-wrap.sk-icon.sk-icon-after.sk-icon-external
+                                                                            |잊으셨습니까?
+                                                                        span.sr-only
+                                                                            |새 창에서 열립니다.
                                                     div.si-remember-password
                                                         div.form-checkbox
                                                             input(
@@ -160,37 +214,88 @@ body(lang="ko")
                                                                 |지금 
                                                                 span.no-wrap.sk-icon.sk-icon-after.sk-icon-external
                                                                     |만드세요.
-                                                if wrongPasswordError
-                                                    div.signin-error
-                                                        div.pop-container
-                                                            div(style="border: 1px solid #000;").error.pop-bottom
-                                                                p#errMsg.fat 암호가 올바르지 않습니다.
-                                                                a(href="#")
-                                                                    | 암호를
-                                                                    span 잊으셨습니까?
-                                                if noUserExistError
-                                                    div.form-message-wrapper
-                                                        span(dir="auto").form-message 입력하신 유저네임/이메일 을 쓰는 유저가 존재하지 않습니다.
-                                                if unexpectedError
-                                                    div.form-message-wrapper
-                                                        span(dir="auto").form-message 예기치 못한 오류 발생. 다시 시도해 주세요.
-    div.as-chat.rs-chat
-        div.rs-chat-content.as-l-container
-            div
-                |도움이 더 필요하신가요? 
-                a(href="#" target="_blank").as-chat-button
-                    |지금 채팅하기
-                    span.a11y (새 창에서 열림) 
-                |  또는 
-                span 000-000-0000
-                | 번호로 문의하세요.
-    div#oauth
-        button(onclick="window.location.href='gh/start'")#gitgub_oauth_button
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" style="width: 18px; height: 18px")
-                path(
-                    fill-rule="evenodd"
-                    d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362l-.08-9.127c-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126l-.08 13.526c0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
-                    fill="#24292f"
-                )
-            |Continue with GitHub
+                                                        div.si-oauth
+                                                            span.fat
+                                                                |GitHub 계정이 있으십니까? 
+                                                            a(
+                                                                href="/gh/start"
+                                                            )#create-link.si-link.ax-outline.lite-theme-override 
+                                                                |깃허브로 로그인하세요.  
+                                                                svg(
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 98 96"
+                                                                    style="width: 16px; height: 16px; padding-top: 3px; box-sizing: border-box;"
+                                                                ).si-oauth-icon
+                                                                    path(
+                                                                        fill-rule="evenodd"
+                                                                        d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362l-.08-9.127c-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126l-.08 13.526c0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+                                                                        fill="#3EA6FF"
+                                                                    )
+                                                //-
+                                                    if error.unexpectedError
+                                                        div.form-message-wrapper
+                                                            span(dir="auto").form-message 예기치 못한 오류 발생. 다시 시도해 주세요.
+        div.as-chat.rs-chat
+            div.rs-chat-content.as-l-container
+                div
+                    |도움이 더 필요하신가요? 
+                    a(href="#" target="_blank").as-chat-button
+                        |지금 채팅하기
+                        span.a11y (새 창에서 열림) 
+                    |  또는 
+                    span 000-000-0000
+                    | 번호로 문의하세요.
+    footer(role="contentinfo" aria-labelledby="footer-label")#global-footersection.as-globalfooter
+        div.as-globalfooter-content
+            h2#footer-label.as-globalfooter-label 각주
+            h3.visuallyhidden 각주
+            div(data-nosnippet data-autom="page-legal-footnotes").as-globalfooter-sosumi
+                div#footnotes-portal
+                    p
+                        |사업자등록번호 : 021-81-55555 | 통신판매업신고번호 : 제 2011-서울강남-00810호
+                        br
+                        |대표이사 : HARRY POTTER | 주소 : 대충 지구 어딘가
+                        br
+                        |대표전화 : 314-330-8877 | 팩스 : 02-6928-9999
+                    p(style="padding-top: .8em;")
+                        |WeTube 온라인 스토어는 업계 표준 암호화를 사용하여 제출된 고객 비밀 정보를 보호합니다. 
+                        a(href="#") 
+                            |보안 정보
+                        |에 대해 더 알아보기.
+            div(data-nosnippet data-autom="global-footer-mini" typeof="Organization").as-globalfooter-mini
+                div(x-ms-format-detection="none").as-globalfooter-mini-shop
+                    p
+                        |다양한 쇼핑 방법: 
+                        span.nowrap
+                            a(href="#")
+                                |WeTube Store를 방문
+                        |하거나, 
+                        a(href="#")
+                            | 리셀러
+                        |를 찾아보거나, 
+                        span
+                            |080-330-8877
+                        |번으로 전화하세요.
+                div.as-globalfooter-mini-locale
+                    a(href="#") 
+                        |대한민국
+                div.as-globalfooter-mini-legal
+                    div.as-globalfooter-mini-legal-copyright
+                        |Copyright © 2024 WeTube Inc.  모든 권리 보유.
+                    ul.as-globalfooter-mini-legal-links
+                        li.as-globalfooter-mini-legal-links-item
+                            a(href="#").as-globalfooter-mini-legal-link
+                                |개인정보 처리방침
+                        li.as-globalfooter-mini-legal-links-item
+                            a(href="#").as-globalfooter-mini-legal-link
+                                |약관
+                        li.as-globalfooter-mini-legal-links-item
+                            a(href="#").as-globalfooter-mini-legal-link
+                                |판매 및 환불
+                        li.as-globalfooter-mini-legal-links-item
+                            a(href="#").as-globalfooter-mini-legal-link
+                                |법적 고지
+                        li.as-globalfooter-mini-legal-links-item
+                            a(href="#").as-globalfooter-mini-legal-link
+                                |사이트 맵
     script(type="text/javascript" src="/assets/js/userLogin.bundle.js")

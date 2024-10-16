@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dataFocusMethod === "key") passwordInput.setAttribute("data-focus-method", "key");    
             setTimeout(() => {
                 if (passwordInputAutoFocused) showPasswordPlaceholderDiv.classList.add("password-focus");
-            }, 5);
+            }, 10);
             if (passwordInput) {
                 if (accountNameInput.style.position === "") accountNameInput.style.position = "relative";
                 accountNameInput.zIndex = 0;
@@ -129,24 +129,33 @@ document.addEventListener("DOMContentLoaded", () => {
     accountNameInput.addEventListener("input", (event) => {
         disableButton.classList.remove("disable");
         disableButton.setAttribute("aria-disabled", "false");
-        disableButton.removeAttribute("disabled")
+        disableButton.removeAttribute("disabled");
         if (event.target.value === "") {
             disableButton.classList.add("disable");
             disableButton.setAttribute("aria-disabled", "true");
-            disableButton.setAttribute("disabled", "")
-        }
+            disableButton.setAttribute("disabled", "");
+        };
     });
-    passwordInput.addEventListener("input", (event) => {
-        disableButton.classList.remove("disable");
-        disableButton.setAttribute("aria-disabled", "false");
-        disableButton.removeAttribute("disabled")
-        if (event.target.value === "") {
-            disableButton.classList.add("disable");
-            disableButton.setAttribute("aria-disabled", "true");
-            disableButton.setAttribute("disabled", "")
-        }
-    });
+    if (passwordInput) {
+        passwordInput.addEventListener("input", (event) => {
+            disableButton.classList.remove("disable");
+            disableButton.setAttribute("aria-disabled", "false");
+            disableButton.removeAttribute("disabled");
+            if (event.target.value === "") {
+                disableButton.classList.add("disable");
+                disableButton.setAttribute("aria-disabled", "true");
+                disableButton.setAttribute("disabled", "");
+            };
+        });
+    };
 });
-/*user login show password step*/
+/*user login error response*/
 document.addEventListener("DOMContentLoaded", () => {
+    const firstStepAccountNameDiv = document.querySelector(".form-cell-wrapper.form-textbox");
+    const swpEnableDiv = document.querySelector(".swp-enable.container.si-field-container.password-second-step");
+    if (firstStepAccountNameDiv.classList.contains("is-error")) {
+        swpEnableDiv.classList.add("has-error")
+    } else {
+        if (swpEnableDiv.classList.contains("has-error")) swpEnableDiv.classList.remove("has-error");
+    };
 });

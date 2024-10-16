@@ -53,7 +53,7 @@ export const postUserJoin = async (req, res) => {
     } = req;
     
     try {
-        let renderParamObj = {
+        let joinRenderParamObj = {
             tabTitle: "WeTube 계정 생성",
             error: {
                 nameError: false,
@@ -70,23 +70,28 @@ export const postUserJoin = async (req, res) => {
         };
         const userWithSameUsername = await USER.exists({ username });
         const userWithSameEmail = await USER.exists({ email });
+        const birthDateStringTypeCheck = (dateString) => {
+            const dateRegExp = /^\d{4}년 d{2}월 d{2}일$/;
+            return dateRegExp.test(dateString) ? false : true;
+        };
         if (
             (!name || !username || !birthDate || !email || !password || !passwordConfirm || !adiToAspPolicy) ||
             (password !== passwordConfirm) ||
             (userWithSameUsername || userWithSameEmail)
         ) {
-            if (!name) renderParamObj.error.nameError = true;
-            if (!username) renderParamObj.error.usernameError = true;
-            if (!birthDate) renderParamObj.error.birthDateError = true;
-            if (!email) renderParamObj.error.emailError = true;
-            if (!password) renderParamObj.error.passwordError = true;
-            if (!passwordConfirm) renderParamObj.error.passwordConfirmError = true;
-            if (!adiToAspPolicy) renderParamObj.error.adiToAspPolicyError = true;
-            if (password && passwordConfirm && (password !== passwordConfirm)) renderParamObj.error.passwordConfirmNotSameError = true;
-            if (userWithSameUsername) renderParamObj.error.alreadyUsingThisUsernameError = true;
-            if (userWithSameEmail) renderParamObj.error.alreadyUsingThisEmailError = true;
+            if (!name) joinRenderParamObj.error.nameError = true;
+            if (!username) joinRenderParamObj.error.usernameError = true;
+            if (!birthDate) joinRenderParamObj.error.birthDateError = true;
+            if (birthDateStringTypeCheck(birthDate)) joinRenderParamObj.error.birthDateError = true;
+            if (!email) joinRenderParamObj.error.emailError = true;
+            if (!password) joinRenderParamObj.error.passwordError = true;
+            if (!passwordConfirm) joinRenderParamObj.error.passwordConfirmError = true;
+            if (!adiToAspPolicy) joinRenderParamObj.error.adiToAspPolicyError = true;
+            if (password && passwordConfirm && (password !== passwordConfirm)) joinRenderParamObj.error.passwordConfirmNotSameError = true;
+            if (userWithSameUsername) joinRenderParamObj.error.alreadyUsingThisUsernameError = true;
+            if (userWithSameEmail) joinRenderParamObj.error.alreadyUsingThisEmailError = true;
     
-            return res.status(400).render("user-template/user-join", renderParamObj);
+            return res.status(400).render("user-template/user-join", joinRenderParamObj);
         };  
     } catch (error) {
         return res.render("error", { error });
@@ -108,7 +113,13 @@ export const postUserJoin = async (req, res) => {
 };
 export const getUserLogin = (req, res) => {
     return res.render("user-template/user-login", {
-        tabTitle: "로그인"
+        tabTitle: "로그인",
+        step: "",
+        showErrorStyling: false,
+        error: {
+            noUserExistError: false,
+            wrongPasswordError: false,
+        },
     });
 };
 export const postUserLogin = async (req, res) => {
@@ -119,6 +130,16 @@ export const postUserLogin = async (req, res) => {
     const {
         body: { step, emailOrUsername, password },
     } = req;
+    let loginRenderParamObj = {
+        tabTitle: "로그인",
+        step: "",
+        showErrorStyling: false,
+        showErrorPopover: false,
+        error: {
+            noUserExistError: false,
+            wrongPasswordError: false,
+        },
+    };
     try {
         const foundUser = await USER.findOne({
             $or: [
@@ -128,18 +149,17 @@ export const postUserLogin = async (req, res) => {
         });
         if (step === "showFirstInput") {
             if (foundUser) {
-                res.render("user-template/user-login", {
-                    step: "showPasswordInput",
-                    tabTitle: "로그인",
-                    emailOrUsername,
-                });
+                loginRenderParamObj.step = "showPasswordInput";
+                loginRenderParamObj.emailOrUsername = emailOrUsername;
+                console.log(loginRenderParamObj)
+                res.render("user-template/user-login", loginRenderParamObj);
             };
             if (!foundUser) {
-                res.status(400).render("user-template/user-login", {
-                    step: "showFirstInput",
-                    tabTitle: "로그인",
-                    noUserExistError: true,
-                });
+                loginRenderParamObj.step = "showFirstInput";
+                loginRenderParamObj.error.noUserExistError = true;
+                loginRenderParamObj.showErrorStyling = true;
+                loginRenderParamObj.showErrorPopover = true;
+                res.status(400).render("user-template/user-login", loginRenderParamObj);
             };
         };
         if (step === "showPasswordInput") {
@@ -150,18 +170,16 @@ export const postUserLogin = async (req, res) => {
                     res.redirect("/");
                 };
                 if (!passwordConfirm) {
-                    res.status(400).render("user-template/user-login", {
-                        step: "showPasswordInput",
-                        tabTitle: "로그인",
-                        emailOrUsername,
-                        wrongPasswordError: true,
-                    });
+                    loginRenderParamObj.step = "showPasswordInput";
+                    loginRenderParamObj.emailOrUsername = emailOrUsername;
+                    loginRenderParamObj.error.wrongPasswordError = true;
+                    loginRenderParamObj.showErrorStyling = true;
+                    loginRenderParamObj.showErrorPopover = true;
+                    res.status(400).render("user-template/user-login", loginRenderParamObj);
                 };
             } else {
-                res.render("user-template/user-login", {
-                    step: "showPasswordInput",
-                    tabTitle: "로그인",
-                });
+                loginRenderParamObj.step = "showPasswordInput";
+                res.render("user-template/user-login", loginRenderParamObj);
             };
         };
     } catch (error) {

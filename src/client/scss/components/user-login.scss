@@ -1,4 +1,12 @@
 @import "../style.scss";
+[dir] abbr, [dir] blockquote, [dir] body, [dir] button,
+[dir] dd, [dir] dl, [dir] dt, [dir] fieldset, [dir] figure,
+[dir] form, [dir] h1, [dir] h2, [dir] h3, [dir] h4, [dir] h5,
+[dir] h6, [dir] hgroup, [dir] input, [dir] legend, [dir] li,
+[dir] ol, [dir] p, [dir] pre, [dir] ul {
+    margin: 0;
+    padding: 0;
+}
 body:lang(ko) {
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.5882352941;
@@ -426,6 +434,93 @@ input[type=password], input[type=tel], input[type=text] {
     background-color: hsla(0,0%,100%,.8);
     text-overflow: ellipsis;
 }
+[dir] .form-textbox.is-error .form-textarea:not(.focused),
+[dir] .form-textbox.is-error .form-textbox-input:not(:focus) {
+    background-color: #fff2f4;
+    border-color: #e30000;
+}
+.form-textbox.is-error .form-textbox-label {
+    color: #e30000;
+}
+.si-container .pop-container, .si-container .spinner-container {
+    position: relative;
+}
+.widget-container .si-field-container.has-error.password-second-step .pop-container.signin-error.swp-pop-error {
+    top: -60px;
+}
+.widget-container .si-field-container.has-error.password-second-step.password-on .pop-container.signin-error.swp-pop-error {
+    top: -35px;
+}
+.si-container .pop-container.error {
+    margin: auto;
+    max-width: 305px;
+}
+.widget-container .signin-error {
+    width: 100%;
+}
+.widget-container .pop-container {
+    color: #494949;
+}
+.si-container .pop-container {
+    animation: fade-in .2s ease-in-out;
+    z-index: 20000000000;
+}
+.si-container .pop-bottom {
+    background-color: #fae9a3;
+    position: absolute;
+    width: 100%;
+    margin-left: -50%;
+    border-radius: 5px;
+    left: 50%;
+    border: 1px solid rgba(185,149,1,.47);
+    box-shadow: 0 5px 10px 2px rgba(0,0,0,.1);
+    margin-top: 5px;
+    padding: 11px;
+}
+.si-container .error {
+    color: #503e30;
+}
+.tk-subbody-headline:lang(ko) {
+    letter-spacing: 0;
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.tk-subbody-headline {
+    font-size: 14px;
+    line-height: 1.42859;
+    font-weight: 600;
+    letter-spacing: -.016em;
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.si-container .pop-bottom:before {
+    width: 15px;
+    height: 15px;
+    background-color: #fae9a3;
+    content: "";
+    position: absolute;
+    left: 47.2%;
+    transform: rotate(135deg) skewX(5deg) skewY(5deg);
+    top: -8px;
+    border-left: 1px solid rgba(185,149,1,.47);
+    border-bottom: 1px solid rgba(185,149,1,.47);
+    box-shadow: -1px 1px 2px -1px rgba(185,149,1,.47);
+}
+.widget-container .si-field-container .pop-container .error .fat {
+    max-height: 110px;
+    overflow-y: auto;
+}
+.si-container .pop-container .fat {
+    margin: 0;
+}
+.si-container .pop-container .fat~a {
+    color: #503e30;
+    text-decoration: underline;
+}
+.widget-container .si-link {
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0;
+    display: inline;
+}
 .feat-split {
     display: none;
 }
@@ -538,6 +633,9 @@ input[type=password], input[type=tel], input[type=text] {
 .si-container .si-forgot-password {
     padding-bottom: 9px;
 }
+.si-container .si-oauth {
+    margin-top: 20px;
+}
 .widget-container .si-link {
     cursor: pointer;
     text-decoration: none;
@@ -588,4 +686,187 @@ input[type=password], input[type=tel], input[type=text] {
 }
 .rs-chat-content .as-chat-button {
     text-decoration: underline;
+}
+.as-globalfooter:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: 0;
+}
+.as-globalfooter {
+    background: #f5f5f7;
+    color: #0000008f;
+    font-family: 'SF Pro Text' , 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    line-height: 1.3333733333;
+    min-width: 1024px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+html:not([dir=rtl]).as-globalfooter-content {
+    padding-inline-start: 22px;
+    padding-inline-end: 22px;
+}
+.as-globalfooter-content {
+    margin: 0 auto;
+    max-width: 980px;
+    padding: 0 22px;
+}
+.as-globalfooter h1, .as-globalfooter h1>button,
+.as-globalfooter h2, .as-globalfooter h2>button,
+.as-globalfooter h3, .as-globalfooter h3>button,
+.as-globalfooter h4, .as-globalfooter h4>button,
+.as-globalfooter h5, .as-globalfooter h5>button,
+.as-globalfooter h6, .as-globalfooter h6>button {
+    color: #000000e0;
+}
+.as-globalfooter-label {
+    position: absolute;
+    clip: rect(1px,1px,1px,1px);
+    border: 0;
+    clip-path: inset(0 0 99.9% 99.9%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    padding: 0;
+}
+.visuallyhidden {
+    position: absolute;
+    clip: rect(1px,1px,1px,1px);
+    border: 0;
+    clip-path: inset(0 0 99.9% 99.9%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    padding: 0;
+
+}
+h1+*, h2+*, h3+*, h4+*, h5+*, h6+* {
+    margin-top: .8em;
+}
+ol+*, p+*, ul+* {
+    margin-top: .8em;
+}
+.as-globalfooter-sosumi {
+    border-bottom: 1px solid #00000029;
+    padding: 17px 0 11px;
+}
+.as-globalfooter a {
+    color: #000000b8;
+    text-decoration: none;
+}
+.as-globalfooter a:hover {
+    text-decoration: underline;
+}
+.as-globalfooter-sosumi a {
+    text-decoration: underline;
+}
+.as-globalfooter-sosumi li:lang(ko),
+.as-globalfooter-sosumi p:lang(ko) {
+    font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: 0;
+}
+.as-globalfooter-sosumi li,
+.as-globalfooter-sosumi p {
+    font-family: 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    line-height: 1.3333733333;
+}
+.as-globalfooter-sosumi+.as-globalfooter-mini {
+    border-top: none;
+}
+.as-globalfooter-mini {
+    border-top: 1px solid #00000029;
+    padding: 17px 0 11px;
+}
+.as-globalfooter-mini-shop {
+    max-height: 9999px;
+    padding-bottom: 3px;
+}
+.as-globalfooter-mini-shop a,
+.as-globalfooter-mini-shop a:hover {
+    color: #06c;
+    text-decoration: underline;
+}
+html:not([dir=rtl]) .as-globalfooter-mini-locale {
+    float: right;
+}
+.as-globalfooter-mini-locale-link:first-child:after {
+    inset-inline-start: 0;
+}
+.as-globalfooter-mini-locale-link:after {
+    bottom: 0;
+    content: "";
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    position: absolute;
+    top: 0;
+}
+.as-globalfooter-mini-locale-link:first-child {
+    margin-inline-start: 0;
+    padding-inline-start: 0;
+}
+.as-globalfooter-mini-locale-link {
+    display: inline-block;
+    position: relative;
+}
+.as-globalfooter-mini-legal {
+    position: relative;
+    top: -3px;
+    z-index: 1;
+}
+.as-globalfooter-mini-legal:after, .as-globalfooter-mini-legal:before {
+    content: " ";
+    display: table;
+    clear: both;
+}
+html:not([dir=rtl]) .as-globalfooter-mini-legal-copyright,
+html:not([dir=rtl]) .as-globalfooter-mini-legal-links {
+    float: left;
+}
+.as-globalfooter-mini-legal-copyright {
+    max-height: 9999px;
+}
+.as-globalfooter-mini-legal-copyright, .as-globalfooter-mini-legal-links {
+    list-style-type: none;
+    margin-inline-end: 30px;
+    margin-top: 5px;
+}
+.as-globalfooter-mini-legal-links {
+    margin-inline-start: 0;
+    position: relative;
+    top: -5px;
+    z-index: 1;
+}
+.as-globalfooter-mini-legal-links-item:before {
+    bottom: 0;
+    content: "";
+    inset-inline-end: 9px;
+    inset-inline-start: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+}
+.as-globalfooter-mini-legal-links-item:not(:last-child)::after {
+    background-color: #0000007a;
+    content: "";
+    height: 10px;
+    margin: 3px 0;
+    position: absolute;
+    width: 1px;
+}
+.as-globalfooter-mini-legal-links-item {
+    display: inline-block;
+    margin-inline-end: 6px;
+    margin-top: 5px;
+    position: relative;
+}
+.as-globalfooter-mini-legal-link {
+    display: inline-block;
+    margin-inline-start: -9px;
+    padding: 0 9px;
+    white-space: nowrap;
 }
