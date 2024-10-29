@@ -51,7 +51,6 @@ export const postUserJoin = async (req, res) => {
             email, password, passwordConfirm, adiToAspPolicy
         }
     } = req;
-    
     try {
         let joinRenderParamObj = {
             tabTitle: "WeTube 계정 생성",

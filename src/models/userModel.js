@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     avatar: { type: String, default: "/avatars/default-profile.webp" },
     location: { type: String },
-    birthDate: { type: Date },
+    birthDate: { type: String },
     email: { type: String },
     password: { type: String },
     OAuth: { type: Boolean, default: false },
