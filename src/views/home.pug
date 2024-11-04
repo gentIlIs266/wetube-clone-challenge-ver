@@ -1,2 +1,7 @@
 include partials/html-head.pug
-include partials/masthead.pug
+body(dir="ltr")
+    div(darker-dark-theme).wtd-app-html-tag
+        div#content.wtd-app
+            include partials/masthead.pug
+            include partials/app-drawer.pug
+            div#page-manager.wtd-page-manager-html-tag.wtd-app

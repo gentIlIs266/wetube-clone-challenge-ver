@@ -1,5 +1,10 @@
 @import "../preset/variables.scss";
+@import "../style.scss";
 
+#create-video-page-background[create-video-background] {
+    height: 100vh;
+    background-color: $--wtcp-brand-background-solid !important;
+}
 .wtcp-uploads-dialog-html-tag {
     display: flex;
     flex-direction: column;

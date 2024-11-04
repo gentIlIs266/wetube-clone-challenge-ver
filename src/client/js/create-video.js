@@ -1,3 +1,4 @@
+import "../scss/components/create-video.scss";    
 //file drag and drop
 document.addEventListener("DOMContentLoaded", () => {
     const selectFilesButton = document.querySelector("#select-files-button");
@@ -56,18 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const descriptionCharCounter = document.querySelector(
         "#description-textarea.wtcp-video-description .char-counter.wtcp-social-suggestions-textbox"
     );
-    const updateTitleLength = () => {
-        const titleLength = titleTextbox.textContent.length;
-        titleCharCounter.textContent = `${titleLength}/100`;
+    if (titleTextbox && descriptionTextbox) {
+        const updateTitleLength = () => {
+            const titleLength = titleTextbox.textContent.length;
+            titleCharCounter.textContent = `${titleLength}/100`;
+        };
+        const updateDescriptionLength = () => {
+            const descriptionLength = descriptionTextbox.textContent.length;
+            descriptionCharCounter.textContent = `${descriptionLength}/5000`
+        };
+        titleTextbox.addEventListener("input", updateTitleLength);
+        descriptionTextbox.addEventListener("input", updateDescriptionLength);
+        updateTitleLength();
+        updateDescriptionLength();
     };
-    const updateDescriptionLength = () => {
-        const descriptionLength = descriptionTextbox.textContent.length;
-        descriptionCharCounter.textContent = `${descriptionLength}/5000`
-    };
-    titleTextbox.addEventListener("input", updateTitleLength);
-    descriptionTextbox.addEventListener("input", updateDescriptionLength);
-    updateTitleLength();
-    updateDescriptionLength();
 });
 //metadata textbox focus/blur styling
 document.addEventListener("DOMContentLoaded", () => {
@@ -81,18 +84,22 @@ document.addEventListener("DOMContentLoaded", () => {
             containerFocused = false;
             container.classList.remove("focused");
         };
-        container.addEventListener("focus", () => {
-            if (containerFocused) {
-                container.classList.add("focused");
-            }
-        });
-        container.addEventListener("blur", handleBlur);
-        container.addEventListener("click", () => {
-            textbox.focus();
-            handleFocus();
-        });
-        textbox.addEventListener("focus", handleFocus);
-        textbox.addEventListener("blur", handleBlur);
+        if (container) {
+            container.addEventListener("focus", () => {
+                if (containerFocused) {
+                    container.classList.add("focused");
+                };
+            });
+            container.addEventListener("blur", handleBlur);
+            container.addEventListener("click", () => {
+                textbox.focus();
+                handleFocus();
+            });
+        };
+        if (textbox) {
+            textbox.addEventListener("focus", handleFocus);
+            textbox.addEventListener("blur", handleBlur);
+        };
     };
     const titleContainer = document.querySelector(
         "#title-textarea.wtcp-video-title #container.wtcp-form-input-container-html-tag"
@@ -116,14 +123,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const titleTextbox = document.querySelector("#title-textarea.wtcp-video-title #textbox.wtcp-social-suggestions-textbox");
     const descriptionTextbox = document.querySelector("#description-textarea.wtcp-video-description #textbox.wtcp-social-suggestions-textbox");
     const submitButton = document.querySelector(".wtcp-button-shape-html-tag.wtcp-button button[aria-label='저장']");
-    submitButton.addEventListener("click", () => {
-        const fileMetaDataForm = document.querySelector("#file-metadata-form");
-        fileMetaDataForm.submit();
-    });
-    titleTextbox.addEventListener("input", () => {
-        formTitleData.value = titleTextbox.textContent;
-    });
-    descriptionTextbox.addEventListener("input", () => {
-        formDescriptionData.value = descriptionTextbox.textContent;
-    });
+    if (submitButton) {
+        submitButton.addEventListener("click", () => {
+            const fileMetaDataForm = document.querySelector("#file-metadata-form");
+            fileMetaDataForm.submit();
+        });
+    };
+    if (titleTextbox) {
+        titleTextbox.addEventListener("input", () => {
+            formTitleData.value = titleTextbox.textContent;
+        });
+    };
+    if (descriptionTextbox) {
+        descriptionTextbox.addEventListener("input", () => {
+            formDescriptionData.value = descriptionTextbox.textContent;
+        });
+    };
 });

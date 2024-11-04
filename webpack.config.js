@@ -8,6 +8,7 @@ module.exports = {
         masthead: "./src/client/js/masthead.js",
         userJoin: "./src/client/js/user-join.js",
         userLogin: "./src/client/js/user-login.js",
+        appDrawer: "./src/client/js/appDrawer.js",
     },
     mode: "development",
     target: "node",
