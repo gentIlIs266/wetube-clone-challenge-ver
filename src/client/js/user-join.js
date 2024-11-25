@@ -75,15 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
             caretIndex++;
         };
         
-        //if (caretIndex > defaultDateFormat.length) return;
         if (
-            caretIndex < defaultDateFormat.length && defaultDateFormat[caretIndex] === " "
+            caretIndex < defaultDateFormat.length
+            &&
+            defaultDateFormat[caretIndex] === " "
         ) {
             caretIndex++;
         };
         
-        //const defaultDateFormat = "yyyy년 mm월 dd일";
-
         if (caretIndex < defaultDateFormat.length) {
             const caretIndexAt = (positionNum) => caretIndex === positionNum;
             const currnetYear = new Date().getFullYear().toString();

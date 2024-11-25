@@ -1,7 +1,137 @@
 include partials/html-head.pug
+include videoMixin.pug
 body(dir="ltr")
-    div(darker-dark-theme).wtd-app-html-tag
+    link(rel="stylesheet", href="assets/css/home.bundle.css" type="text/css")
+    script(src="assets/js/home.bundle.js" type="text/javascript" defer)
+    div(
+        darker-dark-theme frosted-glass-mode="none" guide-persistent-and-visible
+    ).wtd-app-html-tag
+        div#guide-service.wt-guide-manager-html-tag.wtd-app
+        div.wt-mdx-manager-html-tag.wtd-app
+        div.wt-playlist-manager-html-tag.wtd-app
+        div.wt-hotkey-manager-html-tag.wtd-app
         div#content.wtd-app
+            div#frosted-glass.wtd-app
             include partials/masthead.pug
             include partials/app-drawer.pug
             div#page-manager.wtd-page-manager-html-tag.wtd-app
+                div(
+                    rounded-container darker-dark-theme page-subtype="home"
+                    responsive-sizing="COMPACT" role="main" guide-persistent-and-visible
+                ).wtd-browse-html-tag.wtd-page-manager
+                    div(
+                        page-subtype="home"
+                        disable-grid-state-aware
+                        style="touch-action: pan-down;"
+                    ).wtd-two-column-browse-results-renderer-html-tag.wtd-browse.grid.grid-disabled
+                        div#primary.wtd-two-column-browse-results-renderer
+                            div(
+                                elements-per-row="3"
+                                is-default-grid
+                            ).wtd-rich-grid-renderer-html-tag.wtd-two-column-browse-results-renderer
+                                div#header.wtd-rich-grid-renderer
+                                    div(
+                                        at-start is-dark-theme fluid-width
+                                        component-style="FEED_FILTER_CHIP_BAR_STYLE_TYPE_DEFAULT"
+                                        at-end
+                                    ).wtd-feed-filter-chip-bar-renderer-html-tag.wtd-rich-grid-renderer
+                                        div#chips-wrapper.wtd-feed-filter-chip-bar-renderer
+                                            div#chips-content.wtd-feed-filter-chip-bar-renderer
+                                                div(
+                                                    style="touch-action: pan-y;"
+                                                )#scroll-container.wtd-feed-filter-chip-bar-renderer
+                                                    div(
+                                                        active-event
+                                                        role="tablist"
+                                                        selected-attribute="selected"
+                                                        style="transform: translateX(0px);"
+                                                    )#chips.iron-selector-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                        div(
+                                                            modern aria-selected="true" role="tab" tabindex="0"
+                                                            chip-style="STYLE_HOME_FILTER" selected
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer.iron-selected
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="전체"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |전체
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="음악"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |음악
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="게임"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |게임
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="팟캐스트"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |팟캐스트
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="믹스"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |믹스
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="라이브"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |라이브
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="수학"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |수학
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="랩"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |랩
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="최근에 업로드된 동영상"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |최근에 업로드된 동영상
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="감상한 동영상"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |감상한 동영상
+                                                        div(
+                                                            modern aria-selected="false" role="tab" tabindex="0" chip-style="STYLE_HOME_FILTER"
+                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                            div(
+                                                                ellipsis-truncate ellipsis-truncate-styling title="새로운 맞춤 동영상"
+                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                |새로운 맞춤 동영상
+                                div#big-yoodle.wtd-rich-grid-renderer
+                                div#masthead-ad.wtd-rich-grid-renderer
+                                div(hidden)#title-container.wtd-rich-grid-renderer
+                                div#spinner-container.wtd-rich-grid-renderer
+                                div#contents.wtd-rich-grid-renderer                              
+        div.wtd-permission-role-bottom-bar-renderer-html-tag.wtd-app
+        div.wtd-third-party-manager-html-tag.wtd-app
+        div#video-preview.wtd-app
+        div(
+            enable-refresh-signature-moments-web hidden aria-valuemin="0" aria-valuemax="100"
+        ).wt-page-navigation-progress-html-tag.wtd-app

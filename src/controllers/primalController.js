@@ -13,8 +13,9 @@ export const home = async (req, res) => {
     } = req;
     try {
         const DBVIDEO = await VIDEO.find({})
-            .sort({ createdAt: "desc" });
-        return res.render("home", {
+            .sort({ createdAt: "desc" })
+            .populate("video_owner");
+        return res.render("home.pug", {
             tabTitle: "WeTube",
             DBVIDEO,
             user,
@@ -288,6 +289,8 @@ export const watchVideo = (req, res) => {
     const {
         v: { videoId }
     } = req.query;
+    console.log(videoId)
+    return res.send(`this page is for video ${videoId}`)
 }
 export const watchShorts = (req, res) => {}
 

@@ -9,6 +9,7 @@ module.exports = {
         userJoin: "./src/client/js/user-join.js",
         userLogin: "./src/client/js/user-login.js",
         appDrawer: "./src/client/js/appDrawer.js",
+        home: "./src/client/js/home.js"
     },
     mode: "development",
     target: "node",

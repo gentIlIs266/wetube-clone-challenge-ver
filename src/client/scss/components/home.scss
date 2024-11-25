@@ -1,0 +1,17 @@
+@import "../preset/animation.scss";
+@import "../preset/reset.scss";
+@import "../preset/variables.scss";
+
+[hidden] {
+    display: none !important;
+}
+.wtd-app-html-tag {
+    background: $--wt-spec-base-background;    
+    display: block;
+    left: 0;
+    min-height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    scrollbar-color: $--wt-spec-text-secondary transparent;
+}

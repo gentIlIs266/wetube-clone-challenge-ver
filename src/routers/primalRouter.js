@@ -40,7 +40,7 @@ primalRouter.get("/kids", youtubeKids);
 primalRouter.get("/playlist?list=WL", watchLater);
 primalRouter.get("/playlist?list=LL", likeVideo);
 
-primalRouter.get("/watch/?v=:videoId", watchVideo); //videos/watch
+primalRouter.get("/watch?v=:videoId([0-9a-f]{24})", watchVideo); //videos/watch
 primalRouter.get("/shorts/:shortsId", watchShorts);
 
 primalRouter.get("/account", account);

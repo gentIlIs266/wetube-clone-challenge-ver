@@ -1,7 +1,7 @@
 import express from "express";
+import { watchVideo } from "../controllers/primalController";
 
 const videoRouter = express.Router();
 
-videoRouter.get("/watch?:videoId", );
 
 export default videoRouter;
