@@ -85,8 +85,8 @@ button.wt-icon-button {
     line-height: 0;
     cursor: pointer;
     &>.wt-icon-html-tag {
-        width: var($--wt-icon-button-icon-width, 100%);
-        height: var($--wt-icon-button-icon-height, 100%);
+        width: $--wt-icon-button-icon-width;
+        height: $--wt-icon-button-icon-height;
     }
 }
 #guide-icon.wtd-masthead {
@@ -478,7 +478,7 @@ html .tp-wt-paper-tooltip-html-tag .tp-wt-paper-tooltip[style-target=tooltip] {
     word-break: normal;
     font-family: 'Roboto', 'Ariel', sans-serif;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 18px;
     font-weight: 400;
 }
 .tp-wt-paper-tooltip[style-target=tooltip] {

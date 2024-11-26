@@ -1,2 +1,192 @@
 mixin videoItSelf(videoInfo)
-    
+    -'use strict'
+    -const tia=videoInfo.meta.videoLength.split(":"),u=["시간","분","초"],ariaLabelDuration=tia.map((value,index)=>`${value}${u[index+(u.length-tia.length)]}`).join(" ");
+    -const ts=videoInfo.views.toLocaleString("en-US");
+    -const n=new Date(),ud=videoInfo.meta.createdAt.split("_")[0],ut=videoInfo.meta.createdAt.split("_")[1],cm=n.getTime(),um=new Date(`${ud}T${ut}`).getTime(),ct=()=>{const dis=Math.floor((cm-um)/1e3);if(dis<0)return "FUTURE_VIDEO_ERROR";const yd=Math.floor(dis/31536000),mod=Math.floor(dis/2629800),wd=Math.floor(dis/604800),dd=Math.floor(dis/86400),hd=Math.floor(dis/3600),md=Math.floor(dis/60);return yd>0?`${yd}년 전`:mod>0?`${mod}달 전`:wd>0?`${wd}주 전`:dd>0?`${dd}일 전`:hd>0?`${hd}시간 전`:md>0?`${md}분 전`:`${dis}초 전`;},ago=ct();
+    div(
+        items-per-row="3" lockup="true" rendered-from-rich-grid
+    ).wtd-rich-item-renderer-html-tag.wtd-rich-grid-renderer
+        div#content.wtd-rich-item-renderer
+            div(lockup="true").wtd-rich-grid-media-html-tag.wtd-rich-grid-renderer
+                div#dismissible.wtd-rich-grid-media
+                    div#thumbnail.wtd-rich-grid-media
+                        div(
+                            rich-grid-thumbnail use-hovered-property
+                            width="9999" size="large" loaded
+                        ).wtd-thumbnail-html-tag.wtd-rich-grid-media
+                            a(
+                                aria-hidden="true" tabindex="-1" rel="null" href=`/watch?v=${videoInfo._id}`
+                            )#thumbnail.wt-simple-endpoint.inline-block.wtd-thumbnail
+                                div(
+                                    alt ftl-eligible notify-on-loaded notify-on-unloaded
+                                ).wt-image-html-tag.wtd-thumbnail
+                                    img(
+                                        alt style="background-color: transparent;"
+                                        src=videoInfo.thumbnailUrl[0]
+                                    ).wt-core-image.wt-core-image--fill-parent-height.wt-core-image--fill-parent-width.wt-core-image--content-mode-scale-aspect-fill.wt-core-image--loaded
+                                div#overlays.wtd-thumbnail
+                                    div(
+                                        hide-time-status overlay-style="DEFAULT"
+                                    ).wtd-thumbnail-overlay-time-status-renderer-html-tag.wtd-thumbnail
+                                        div(
+                                            is-thumbnail-badge system-icons enable-refresh-web enable-signature-moments-web
+                                        ).wtd-badge-supported-renderer-html-tag.wtd-thumbnail-overlay-time-status-renderer
+                                            dom-repeat(as="badge")#repeat.wtd-badge-supported-renderer
+                                        div.thumbnail-overlay-badge-shape.wtd-thumbnail-overlay-time-status-renderer
+                                            div(
+                                                role="img" aria-label=ariaLabelDuration
+                                            ).badge-shape-html-tag.badge-shape-wiz.badge-shape-wiz--thumbnail-default.badge-shape-wiz--thumbnail-badge
+                                                div.badge-shape-wiz__text
+                                                    |#{videoInfo.meta.videoLength}
+                                        div(hidden)#time-status.wtd-thumbnail-overlay-time-status-renderer
+                                            div(
+                                                size="16" disable-upgrade hidden
+                                            ).wt-icon-html-tag.wtd-thumbnail-overlay-time-status-renderer
+                                            span(
+                                                aria-label=ariaLabelDuration
+                                            )#text.wtd-thumbnail-overlay-time-status-renderer
+                                                |#{videoInfo.meta.videoLength}
+                                    div(
+                                        now-playing-badge
+                                    ).wtd-thumbnail-overlay-now-playing-renderer-html-tag.wtd-thumbnail
+                                        span#overlay-text.wtd-thumbnail-overlay-now-playing-renderer
+                                            |지금 재생 중
+                                        div.wtd-thumbnail-overlay-equalizer-html-tag.wtd-thumbnail-overlay-now-playing-renderer
+                                            svg(
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 95"
+                                            )#equalizer.wtd-thumbnail-overlay-equalizer
+                                                g.wtd-thumbnail-overlay-equalizer
+                                                    rect(x="0").bar.wtd-thumbnail-overlay-equalizer
+                                                    rect(x="20").bar.wtd-thumbnail-overlay-equalizer
+                                                    rect(x="40").bar.wtd-thumbnail-overlay-equalizer
+                                div#mouseover-overlay.wtd-thumbnail 
+                                div#hover-overlays.wtd-thumbnail 
+                        div(
+                            is-double-stack use-hovered-property width="9999"
+                            thumbnail-size="large" enable-web-modern-collections-v2 hidden
+                        ).wtd-playlist-thumbnail-html-tag.wtd-rich-grid-media
+                    div(hidden)#thumbnail-underlay.wtd-rich-grid-media
+                    div#details.wtd-rich-grid-media
+                        div#avatar-container.wt-simple-endpoint.wtd-rich-grid-media
+                            a(
+                                tabindex="-1" title=videoInfo.video_owner.username hidden
+                                href=`/${videoInfo.video_owner.user_channel.channel_handle}`
+                            )#avatar-link.wt-simple-endpoint.wtd-rich-grid-media 
+                                div(
+                                    width="48" style="background-color: transparent;" loaded
+                                )#avatar.wt-img-shadow-html-tag.wtd-rich-grid-media.no-transition
+                                    img(
+                                        draggable="false" alt width="48"
+                                        src=videoInfo.video_owner.avatar
+                                    )#img.wt-img-shadow
+                            div#decorated-avatar.wtd-rich-grid-media
+                                div(renderedfromidom="true").wt-decorated-avatar-view-model-html-tag.wt-decorated-avatar-view-model-wiz
+                                    div.wt-avatar-shape-html-tag
+                                        div(
+                                            aria-label="채널로 이동" role="button" tabindex="0"
+                                        ).wt-spec-avatar-shape.wt-spec-avatar-shape__button.wt-spec-avatar-shape__button--button-medium.wt-spec-avatar-shape__button--tappable
+                                            div.wt-spec-avatar-shape--cairo-refresh
+                                                div.wt-spec-avatar-shape--avatar-size-medium
+                                                    img(
+                                                        alt src=videoInfo.video_owner.avatar
+                                                    ).wt-core-image.wt-spec-avatar-shape__image.wt-core-image--fill-parent-height.wt-core-image--fill-parent-width.wt-core-image--content-mode-scale-to-fill.wt-core-image--loaded
+                                                    div.wt-spec-avatar-shape__image-overlays.wt-spec-avatar-shape__image
+                        div#meta.wtd-rich-grid-media
+                            h3.wtd-rich-grid-media
+                                div(
+                                    collection-truncate disable-upgrade hidden
+                                ).wtd-badge-supported-renderer-html-tag.top-badge.wtd-rich-grid-media
+                                a(
+                                    aria-label=`${videoInfo.title} 게시자: ${videoInfo.video_owner.username} 조회수: ${ts}회 ${ago} ${ariaLabelDuration}`
+                                    title=videoInfo.title href=`/watch?v=${videoInfo._id}`
+                                )#video-title-link.wt-simple-endpoint.focus-on-expand.wtd-rich-grid-media
+                                    div#video-title.wt-formatted-string-html-tag.wtd-rich-grid-media
+                                        |#{videoInfo.title}
+                            div(rich-meta amsterdam-post-mvp).wtd-video-meta-block-html-tag.grid.wtd-rich-grid-media
+                                div#metadata.wtd-video-meta-block
+                                    div#byline-container.wtd-video-meta-block
+                                        div#channel-name.wtd-channel-name-html-tag.wtd-video-meta-block
+                                            div#container.wtd-channel-name
+                                                div#text-container.wtd-channel-name
+                                                    div(
+                                                        link-inherit-color respect-lang-dir title=videoInfo.video_owner.username
+                                                        ellipsis-truncate ellipsis-truncate-styling dir="auto" has-link-only_
+                                                        style="text-align: left;"
+                                                    )#text.wt-formatted-string-html-tag.wtd-channel-name.complex-string
+                                                        a(spellcheck="false" href=`/${videoInfo.video_owner.channel_handle}`).wt-simple-endpoint.wt-formatted-string
+                                                            |#{videoInfo.video_owner.username}
+                                                div(
+                                                    fit-to-visible-bounds role="tooltip" tabindex="-1"
+                                                    style="inset: -26px auto auto 35.625px;"
+                                                ).tp-wt-paper-tooltip-html-tag.wtd-channel-name
+                                                    div(style-target="tooltip")#tooltip.hidden.tp-wt-paper-tooltip
+                                                        |#{videoInfo.video_owner.username}
+                                            div(
+                                                system-icons enable-refresh-web enable-signature-moments-web
+                                            ).wtd-badge-supported-renderer-html-tag.wtd-channel-name
+                                                //-
+                                                    if videoInfo.video_owner.user_channel.meta
+                                                div(
+                                                    aria-label="인증됨" role="img"
+                                                ).badge.badge-style-type-verified.wtd-badge-supported-renderer
+                                                    div(size="16").wt-icon-html-tag.wtd-badge-supported-renderer
+                                                        span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                svg(
+                                                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                                                                    width="24" focusable="false" aria-hidden="true"
+                                                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                )
+                                                                    path(d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM9.8 17.3l-4.2-4.1L7 11.8l2.8 2.7L17 7.4l1.4 1.4-8.6 8.5z")
+                                                    p.wtd-badge-supported-renderer
+                                                    div(
+                                                        position="top" role="tooltip" tabindex="-1"
+                                                        style="left: 73.1875px; top: -23.5px;"
+                                                    ).tp-wt-paper-tooltip-html-tag.wtd-badge-supported-renderer
+                                                        div(style-target="tooltips")#tooltip.tp-wt-paper-tooltip.hidden
+                                                            |인증됨
+                                                dom-repeat(as="badge")#repeat.wtd-badge-supported-renderer
+                                    div#metadata-line.wtd-video-meta-block
+                                        div(
+                                            hidden system-icons enable-refresh-web enable-signature-moments-web
+                                        ).wtd-badge-supported-renderer-html-tag.inline-metadata-badge.wtd-video-meta-block
+                                        div(hidden)#separator.wtd-video-meta-block
+                                            |•
+                                        span.inline-metadata-item.wtd-video-meta-block
+                                            |#{`조회수 ${ts}회`}
+                                        span.inline-metadata-item.wtd-video-meta-block
+                                            |#{ago}
+                                        dom-repeat(strip-whitespace).wtd-video-meta-block
+                                div#additional-metadata-line.wtd-video-meta-block
+                                    dom-repeat.wtd-video-meta-block
+                        div#menu.wtd-rich-grid-media
+                            div(safe-area menu-active).wtd-menu-renderer-html-tag.wtd-rich-grid-media
+                                div#top-level-buttons-computed.top-level-buttons.wtd-menu-renderer
+                                div#flexible-item-buttons.wtd-menu-renderer
+                                div(
+                                    style-target="button" role="button"
+                                )#button.wt-icon-button-html-tag.dropdown-trigger.wtd-menu-renderer
+                                    button(aria-label="작업 메뉴")#button.wt-icon-button
+                                        div.wt-icon-html-tag.wtd-menu-renderer
+                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                    svg(
+                                                        xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                        height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                        style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                    )
+                                                        path(d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z")
+                                    div#interaction.wt-interaction-html-tag.circular.wt-icon-shape
+                                        div.stroke.wt-interaction
+                                        div.fill.wt-interaction
+                                div(
+                                    version="modern" disable-upgrade hidden
+                                )#button-shape.wt-button-shape-html-tag.wtd-menu-renderer
+                    div#attached-survey.wtd-rich-grid-media
+                div#dismissed.wtd-rich-grid-media
+                div#interaction.wt-interaction-html-tag.extended.wtd-rich-grid-media
+                    div.stroke.wt-interaction
+                    div.fill.wt-interaction
+        div(hidden)#interaction.wt-interaction-html-tag.extended.rounded-large.wtd-rich-item-renderer
+            div.stroke.wt-interaction
+            div.fill.wt-interaction

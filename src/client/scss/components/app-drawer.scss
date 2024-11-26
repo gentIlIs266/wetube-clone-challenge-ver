@@ -405,6 +405,11 @@ a.wtd-guide-entry-renderer,
     background-color: $--wt-spec-base-background;
     border-radius: 10px;
 }
+.wtd-mini-guide-entry-renderer-html-tag:hover,
+.wtd-mini-guide-entry-renderer-html-tag:focus {
+    background-color: $--wt-spec-badge-chip-background;
+    outline: none;
+}
 a.wtd-mini-guide-entry-renderer {
     padding: 16px 0 14px;
     outline: 0;
