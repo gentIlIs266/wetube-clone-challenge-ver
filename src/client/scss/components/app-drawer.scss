@@ -114,6 +114,36 @@
 #sections.wtd-guide-renderer>.wtd-guide-subscriptions-section-renderer-html-tag {
     padding: 12px;
 }
+.wtd-guide-signin-promo-renderer-html-tag {
+    display: inline-block;
+    padding: 16px 32px;
+}
+.wt-formatted-string-html-tag.wtd-guide-signin-promo-renderer {
+    display: block;
+    color: $--wt-spec-text-primary;
+    font-family: "Roboto", "Ariel", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+#sign-in-button.wtd-guide-signin-promo-renderer:not([align-by-text]) {
+    margin-top: 12px;
+}
+.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--outline {
+    color: #3ea6ff;
+    border-color: rgba(255,255,255,0.2);
+    &:hover {
+        background: #263850;
+        border-color: transparent;
+    }
+}
+.wt-spec-button-shape-next--size-m {
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border-radius: 18px;
+}
 .wtd-guide-section-renderer-html-tag {
     min-height: 40px;
     display: block;

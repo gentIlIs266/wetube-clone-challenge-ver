@@ -34,174 +34,175 @@ body(dir="ltr")
                         div#primary.wtd-two-column-browse-results-renderer
                             div(
                                 elements-per-row="3" is-default-grid
-                                style="--wtd-rich-grid-item-max-width: 500px; --wtd-rich-grid-item-min-width: 310px; --wtd-rich-grid-items-per-row: 3; --wtd-rich-grid-posts-per-row: 3; --wtd-rich-grid-slim-items-per-row: 5; --wtd-rich-grid-slim-posts-per-row: 5; --wtd-rich-grid-mini-game-cards-per-row: 5; --wtd-rich-grid-content-offset-top: 112px;"
+                                style="--wtd-rich-grid-item-max-width: 500px; --wtd-rich-grid-item-min-width: 310px; --wtd-rich-grid-items-per-row: 3; --wtd-rich-grid-posts-per-row: 3; --wtd-rich-grid-slim-items-per-row: 5; --wtd-rich-grid-game-cards-per-row: 5; --wtd-rich-grid-mini-game-cards-per-row: 5; --wtd-rich-grid-content-offset-top: 112px;"
                             ).wtd-rich-grid-renderer-html-tag.wtd-two-column-browse-results-renderer
                                 div#header.wtd-rich-grid-renderer
-                                    div(
-                                        at-start is-dark-theme fluid-width component-style="FEED_FILTER_CHIP_BAR_STYLE_TYPE_DEFAULT" style
-                                    ).wtd-feed-filter-chip-bar-renderer-html-tag.wtd-rich-grid-renderer
-                                        div#chips-wrapper.wtd-feed-filter-chip-bar-renderer
-                                            div#chips-content.wtd-feed-filter-chip-bar-renderer
-                                                div#left-arrow.wtd-feed-filter-chip-bar-renderer
-                                                    div#left-arrow-button.wtd-feed-filter-chip-bar-renderer
-                                                        div(
-                                                            button-renderer button-next
-                                                        ).wtd-button-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div.wt-button-shape-html-tag
-                                                                button(
-                                                                    aria-disabled="false" aria-label="이전" title
-                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-only-default.wt-spec-button-shape-next--enable-backdrop-filter-experiment
-                                                                    div(aria-hidden="true").wt-spec-button-shape-next__icon
-                                                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
-                                                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
-                                                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                                                    svg(
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        height="24" viewBox="0 0 24 24"
-                                                                                        width="24" focusable="false" 
-                                                                                        aria-hidden="true"
-                                                                                        style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                                                    )
-                                                                                        path(d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z")
-                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
-                                                                        div(
-                                                                            aria-hidden="true"
-                                                                        ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
-                                                                            div.wt-spec-touch-feedback-shape__stroke
-                                                                            div.wt-spec-touch-feedback-shape__fill
+                                    if locals.loggedIn
+                                        div(
+                                            at-start is-dark-theme fluid-width component-style="FEED_FILTER_CHIP_BAR_STYLE_TYPE_DEFAULT" style
+                                        ).wtd-feed-filter-chip-bar-renderer-html-tag.wtd-rich-grid-renderer
+                                            div#chips-wrapper.wtd-feed-filter-chip-bar-renderer
+                                                div#chips-content.wtd-feed-filter-chip-bar-renderer
+                                                    div#left-arrow.wtd-feed-filter-chip-bar-renderer
+                                                        div#left-arrow-button.wtd-feed-filter-chip-bar-renderer
                                                             div(
-                                                                offset="8" role="tooltip" tabindex="-1" style="inset: 52px auto auto 0px;"
-                                                            ).tp-wt-paper-tooltip-html-tag
-                                                                div(style-target="tooltip")#tooltip.tp-wt-paper-tooltip.fade-out-animation
-                                                                    |이전
-                                                div#filter.wtd-feed-filter-chip-bar-renderer
-                                                div(
-                                                    style="touch-action: pan-y;"
-                                                )#scroll-container.wtd-feed-filter-chip-bar-renderer
+                                                                button-renderer button-next
+                                                            ).wtd-button-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div.wt-button-shape-html-tag
+                                                                    button(
+                                                                        aria-disabled="false" aria-label="이전" title
+                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-only-default.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                            div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                        svg(
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            height="24" viewBox="0 0 24 24"
+                                                                                            width="24" focusable="false" 
+                                                                                            aria-hidden="true"
+                                                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                        )
+                                                                                            path(d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z")
+                                                                        div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                            div(
+                                                                                aria-hidden="true"
+                                                                            ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                div.wt-spec-touch-feedback-shape__stroke
+                                                                                div.wt-spec-touch-feedback-shape__fill
+                                                                div(
+                                                                    offset="8" role="tooltip" tabindex="-1" style="inset: 52px auto auto 0px;"
+                                                                ).tp-wt-paper-tooltip-html-tag
+                                                                    div(style-target="tooltip")#tooltip.tp-wt-paper-tooltip.fade-out-animation
+                                                                        |이전
+                                                    div#filter.wtd-feed-filter-chip-bar-renderer
                                                     div(
-                                                        activate-event role="tablist" selected-attribute="selected"
-                                                        style="transform: translateX(0px);"
-                                                    )#chips.iron-selector-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                        style="touch-action: pan-y;"
+                                                    )#scroll-container.wtd-feed-filter-chip-bar-renderer
                                                         div(
-                                                            modern aria-selected="true" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER" selected
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer.iron-selected
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                            activate-event role="tablist" selected-attribute="selected"
+                                                            style="transform: translateX(0px);"
+                                                        )#chips.iron-selector-html-tag.wtd-feed-filter-chip-bar-renderer
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="전체"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |전체
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="true" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER" selected
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer.iron-selected
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="전체"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |전체
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="음악"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |음악
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="음악"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |음악
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="게임"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |게임
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="게임"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |게임
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="악기"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |악기
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="악기"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |악기
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="프로그래밍"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |프로그래밍
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="프로그래밍"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |프로그래밍
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="사이트 만드는거 존나 힘드네"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |사이트 만드는거 존나 힘드네
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="사이트 만드는거 존나 힘드네"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |사이트 만드는거 존나 힘드네
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="자바스크립트"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |자바스크립트
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="자바스크립트"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |자바스크립트
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="몽고DB"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |몽고DB
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="몽고DB"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |몽고DB
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="최근에 업로드된 동영상"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |최근에 업로드된 동영상
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="최근에 업로드된 동영상"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |최근에 업로드된 동영상
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="감상한 동영상"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |감상한 동영상
-                                                        div(
-                                                            modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
-                                                        ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="감상한 동영상"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |감상한 동영상
                                                             div(
-                                                                ellipsis-truncate ellipsis-truncate-styling title="새로운 맞춤 동영상"
-                                                            )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
-                                                                |새로운 맞춤 동영상
-                                                div#right-arrow.wtd-feed-filter-chip-bar-renderer
-                                                    div#right-arrow-button.wtd-feed-filter-chip-bar-renderer
-                                                        div(
-                                                            button-renderer button-next
-                                                        ).wtd-button-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
-                                                            div.wt-button-shape-html-tag
-                                                                button(
-                                                                    aria-disabled="false" aria-label="다음" title
-                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-only-default.wt-spec-button-shape-next--enable-backdrop-filter-experiment
-                                                                    div(aria-hidden="true").wt-spec-button-shape-next__icon
-                                                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
-                                                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
-                                                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                                                    svg(
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        height="24" viewBox="0 0 24 24"
-                                                                                        width="24" focusable="false" 
-                                                                                        aria-hidden="true"
-                                                                                        style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                                                    )
-                                                                                        path(d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z")
-                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
-                                                                        div(
-                                                                            aria-hidden="true"
-                                                                        ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
-                                                                            div.wt-spec-touch-feedback-shape__stroke
-                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                modern aria-selected="false" role="tab" tabidex="0" chip-style="STYLE_HOME_FILTER"
+                                                            ).wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div(hidden).wt-icon-html-tag.leading-icon-wt-chip-cloud-chip-renderer
+                                                                div(
+                                                                    ellipsis-truncate ellipsis-truncate-styling title="새로운 맞춤 동영상"
+                                                                )#text.wt-formatted-string-html-tag.wt-chip-cloud-chip-renderer
+                                                                    |새로운 맞춤 동영상
+                                                    div#right-arrow.wtd-feed-filter-chip-bar-renderer
+                                                        div#right-arrow-button.wtd-feed-filter-chip-bar-renderer
                                                             div(
-                                                                offset="8" role="tooltip" tabindex="-1" style="inset: 52px auto auto 50px;"
-                                                            ).tp-wt-paper-tooltip-html-tag
-                                                                div(style-target="tooltip")#tooltip.tp-wt-paper-tooltip
-                                                                    |다음
+                                                                button-renderer button-next
+                                                            ).wtd-button-renderer-html-tag.wtd-feed-filter-chip-bar-renderer
+                                                                div.wt-button-shape-html-tag
+                                                                    button(
+                                                                        aria-disabled="false" aria-label="다음" title
+                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-only-default.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                            div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                        svg(
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            height="24" viewBox="0 0 24 24"
+                                                                                            width="24" focusable="false" 
+                                                                                            aria-hidden="true"
+                                                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                        )
+                                                                                            path(d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z")
+                                                                        div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                            div(
+                                                                                aria-hidden="true"
+                                                                            ).wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                div.wt-spec-touch-feedback-shape__stroke
+                                                                                div.wt-spec-touch-feedback-shape__fill
+                                                                div(
+                                                                    offset="8" role="tooltip" tabindex="-1" style="inset: 52px auto auto 50px;"
+                                                                ).tp-wt-paper-tooltip-html-tag
+                                                                    div(style-target="tooltip")#tooltip.tp-wt-paper-tooltip
+                                                                        |다음
                                 div#big-yoodle.wtd-rich-grid-renderer
                                 div#masthead-ad.wtd-rich-grid-renderer
                                 div(hidden)#title-container.wtd-rich-grid-renderer
@@ -221,7 +222,44 @@ body(dir="ltr")
                                     each videoInfo in DBVIDEO
                                         +videoItSelf(videoInfo)
                                     else
-                                        span NO_VIDEO_EXIST
+                                        div.wtd-rich-section-renderer-html-tag
+                                            div#content.wtd-rich-section-renderer
+                                                div(
+                                                    rounded-container button-update is-dark-mode nudge-style="modernized-nudge"
+                                                    trim-style="no-trim" background-style="FEED_NUDGE_BACKGROUND_STYLE_UNKNOWN"
+                                                    contents-location="FEED_NUDGE_CONTENTS_LOCATION_UNKNOWN" no-icon
+                                                ).wtd-feed-nudge-renderer-html-tag.wtd-rich-section-renderer
+                                                    div#dismissible.wtd-feed-nudge-renderer
+                                                        div#dismiss-button.wtd-feed-nudge-renderer
+                                                        div#content-wrapper.wtd-feed-nudge-renderer
+                                                            div#header-container.wtd-feed-nudge-renderer
+                                                            div#text-container.wtd-feed-nudge-renderer
+                                                                div#title-container.wtd-feed-nudge-renderer
+                                                                    if locals.loggedIn 
+                                                                        div(
+                                                                            aria-label="업로드하여 시청하기"
+                                                                        )#title.wt-formatted-string-html-tag.wtd-feed-nudge-renderer
+                                                                            |업로드하여 시청하기
+                                                                    else
+                                                                        div(
+                                                                            aria-label="로그인하여 시작하기"
+                                                                        )#title.wt-formatted-string-html-tag.wtd-feed-nudge-renderer
+                                                                            |로그인하여 시작하기
+                                                                div#subtitle-container.wtd-feed-nudge-renderer
+                                                                    if locals.loggedIn 
+                                                                        div(
+                                                                            aria-label="내가 좋아할 만한 동영상 업로드하고 시청할 수 있도록 계정생성을 시작해 보세요"
+                                                                            split-lines
+                                                                        )#subtitle.wt-formatted-string-html-tag.wtd-feed-nudge-renderer
+                                                                            |내가 좋아할 만한 동영상 업로드하고 시청할 수 있도록 동영상 업로드를 시작해 보세요
+                                                                    else
+                                                                        div(
+                                                                            aria-label="내가 좋아할 만한 동영상 업로드하고 시청할 수 있도록 계정생성을 시작해 보세요"
+                                                                            split-lines
+                                                                        )#subtitle.wt-formatted-string-html-tag.wtd-feed-nudge-renderer
+                                                                            |내가 좋아할 만한 동영상 업로드하고 시청할 수 있도록 동영상 업로드를 시작해 보세요
+                                                            div(hidden)#contents.wtd-feed-nudge-renderer
+                                                            div(hidden)#button-container.wtd-feed-nudge-renderer
                         div#secondary.wtd-two-column-browse-results-renderer
                     div#survey.wtd-browse
                     div#metadata.wtd-browse
