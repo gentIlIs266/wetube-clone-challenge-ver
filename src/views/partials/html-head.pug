@@ -1,8 +1,108 @@
 doctype html
-html(lang="ko")
+-'use strict'
+-const styles = isThisPageJoinOrLogin ? "" : "font-size: 10px; font-family: Roboto, Arial, sans-serif;"; 
+html(
+    style=styles lang="ko-KR"
+    darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing
+)
     head
+        script.
+            window.wt={config_:{}};
         meta(name="viewport", content="width=device-width, height=device-height, initial-scale=1")
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge,chrome=1")
+        script.
+            var wtcfg = {d: function() {return window.wt && wt.config_ || wtcfg.data_ || (wtcfg.data_ = {})},get: function(k, o) {return k in wtcfg.d() ? wtcfg.d()[k] : o},et: function() {var a = arguments;if (a.length > 1)wtcfg.d()[a[0]] = a[1];else {var k;for (k in a[0])wtcfg.d()[k] = a[0][k]}}};
+        link(rel="shortcut icon", href="public/logos/wetube_favicon.ico", type="image/x-icon")
+        link(rel="icon" href="public/logos/wetube_favicon_32x32.png" sizes="32x32")
+        link(rel="icon" href="public/logos/wetube_favicon_48x48.png" sizes="48x48")
+        link(rel="icon" href="public/logos/wetube_favicon_96x96.png" sizes="96x96")
+        link(rel="icon" href="public/logos/wetube_favicon_144x144.png" sizes="144x144")
         title=tabTitle
-        link(rel="shortcut icon", href="#", type="image/x-icon" defer)
+        link(rel="canonical", href="/")
+        meta(property="og:image" content="")
+        meta(name="description" content="WeTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여, 친구 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.")
+        meta(name="keywords" content="동영상, 무료, 공유, 첫사이트, 어려움")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap")
+        script.
+            var wtcsi = {
+                gt: function(n) {
+                    n = (n || "") + "data_";
+                    return wtcsi[n] || (wtcsi[n] = {
+                        tick: {},
+                        info: {},
+                        gel: {
+                            preLoggedEventLoggingInfos: []
+                        }
+                    })
+                },
+                now: window.performance && window.performance.timing && window.performance.now && window.performance.timing.navigationStart ? function() {
+                    return window.performance.timing.navigationStart + window.performance.now()
+                }
+                : function() {
+                    return (new Date).getTime()
+                }
+                ,
+                tick: function(l, t, n) {
+                    var ticks = wtcsi.gt(n).tick;
+                    var v = t || wtcsi.now();
+                    if (ticks[l]) {
+                        ticks["_" + l] = ticks["_" + l] || [ticks[l]];
+                        ticks["_" + l].push(v)
+                    }
+                    ticks[l] = v
+                },
+                info: function(k, v, n) {
+                    wtcsi.gt(n).info[k] = v
+                },
+                infoGel: function(p, n) {
+                    wtcsi.gt(n).gel.preLoggedEventLoggingInfos.push(p)
+                },
+                setStart: function(t, n) {
+                    wtcsi.tick("_start", t, n)
+                }
+            };
+        script.
+            if (window.wtcsi) {window.wtcsi.tick('loadPageCompleteStart', null, '');}
+        script.
+            (function() {
+                window.wtplayer = {};
+                wtcfg.set({
+                    "GL": "KR",
+                    "HL": "ko",
+                    "HTML_DIR": "ltr",
+                    "HTML_LANG": "ko-KR",
+                    "LOGGED_IN": false,
+                });
+            })();
+            wtcfg.set("initialInnerWidth", window.innerWidth);
+            wtcfg.set("initialInnerHeight", window.innerHeight);
+        script.
+            if (window.wtcsi) {window.wtcsi.tick('loadPageCompleteFinish', null, '');}
+        script.
+            if (window.wtcsi) {window.wtcsi.tick('criticalScriptLoad', null, '');}
+        script(name="www-roboto").
+            if(document.fonts&&document.fonts.load){document.fonts.load("400 10pt Roboto","");document.fonts.load("500 10pt Roboto","");}
+        meta(name="theme-color" content="rgba(33, 33, 33, 0.98)")
+        style dom-bind,dom-if,dom-repeat{display:none;}
+    body
+        script.
+            if (window.wtcsi) {window.wtcsi.tick('bodyStart', null, '')}
+        script.
+            wtcfg.set('initialBodyClientWidth', document.body.clientWidth);
+        block wtd-app
+        script.
+            if (window.wtcsi) {window.wtcsi.tick('globalContentComplete', null, '')}
+        script.
+            var sc = wtcfg.d();
+            fetch('/wtconfig', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(sc),
+            }
+            ).then(resopnse => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));            
+            

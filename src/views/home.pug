@@ -1,6 +1,6 @@
-include partials/html-head.pug
+extends partials/html-head.pug
 include videoMixin.pug
-body(dir="ltr")
+block wtd-app
     link(rel="stylesheet", href="assets/css/home.bundle.css" type="text/css")
     script(src="assets/js/home.bundle.js" type="text/javascript" defer)
     div(

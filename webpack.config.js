@@ -55,6 +55,14 @@ module.exports = {
                     publicPath: "/fonts/",
                 },
             },
+            {
+                test: /\.(png|jpe?g|gif|ico)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "[name][ext]",
+                    outputPath: "img/"
+                },
+            }
         ]
     },
 }

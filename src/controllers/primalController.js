@@ -1,5 +1,3 @@
-import express from "express";
-
 import VIDEO from "../models/videoModel";
 import USER from "../models/userModel";
 
@@ -22,11 +20,12 @@ export const home = async (req, res) => {
         });
     } catch (error) {
         return res.render("error", { error });
-    }
+    };
 };
 export const getUserJoin = (req, res) => {
     return res.render("user-template/user-join", {
         tabTitle: "WeTube 계정 생성",
+        isThisPageJoinOrLogin: true,
         error: {
             nameError: false,
             usernameError: false,
@@ -55,6 +54,7 @@ export const postUserJoin = async (req, res) => {
     try {
         let joinRenderParamObj = {
             tabTitle: "WeTube 계정 생성",
+            isThisPageJoinOrLogin: true,
             error: {
                 nameError: false,
                 usernameError: false,
@@ -115,6 +115,7 @@ export const getUserLogin = (req, res) => {
     return res.render("user-template/user-login", {
         tabTitle: "로그인",
         step: "",
+        isThisPageJoinOrLogin: true,
         showErrorStyling: false,
         error: {
             noUserExistError: false,
@@ -133,6 +134,7 @@ export const postUserLogin = async (req, res) => {
     let loginRenderParamObj = {
         tabTitle: "로그인",
         step: "",
+        isThisPageJoinOrLogin: true,
         showErrorStyling: false,
         showErrorPopover: false,
         error: {
@@ -285,12 +287,15 @@ export const youtubeKids = (req, res) => {};
 export const watchLater = (req, res) => {};
 export const likeVideo = (req, res) => {};
 
-export const watchVideo = (req, res) => {
-    const {
-        v: { videoId }
-    } = req.query;
-    console.log(videoId)
-    return res.send(`this page is for video ${videoId}`)
+export const watchVideo = async (req, res) => {
+    const { v: videoId, t: videoTime } = req.query;
+    if (!videoId) return res.redirect("/");
+    const foundVideoFromDB = await VIDEO.findById(videoId).populate("video_owner");
+    /*if (foundVideoFromDB === null)*/
+    return res.render("watch-video.pug", {
+        tabTitle: foundVideoFromDB.title,
+        foundVideoFromDB,
+    });
 }
 export const watchShorts = (req, res) => {}
 
@@ -306,4 +311,11 @@ export const accountSharing = (req, res) => {}
 export const accountBilling = (req, res) => {}
 export const accountAdvanced = (req, res) => {}
 
-
+export const wtConfigReceiver = (req, res) => {
+    const receivedData = req.body;
+    console.log("receivedData", receivedData);
+    res.json({
+        msg: "succssful!",
+        receivedData
+    });
+};

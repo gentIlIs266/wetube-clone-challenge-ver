@@ -1,0 +1,15 @@
+include partials/html-head.pug
+body(dir="ltr")
+    link(rel="stylesheet", href="assets/css/home.bundle.css" type="text/css")
+    script(src="assets/js/home.bundle.js" type="text/javascript" defer)
+    div(
+        darker-dark-theme frosted-glass-mode="none" guide-persistent-and-visible
+    ).wtd-app-html-tag
+        div#guide-service.wt-guide-manager-html-tag.wtd-app
+        div.wt-mdx-manager-html-tag.wtd-app
+        div.wt-playlist-manager-html-tag.wtd-app
+        div.wt-hotkey-manager-html-tag.wtd-app
+        div#content.wtd-app
+            div#frosted-glass.wtd-app
+            include partials/masthead.pug
+            include partials/app-drawer.pug

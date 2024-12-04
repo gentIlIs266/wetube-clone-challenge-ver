@@ -3,12 +3,11 @@ import express from "express";
 import {
     home, getUserJoin, postUserJoin, getUserLogin,
     postUserLogin, userLogout, startGhLogin, finishGhLogin,
-    game, podcast,
-    youtubePremium, youtubeMusic, youtubeKids,
+    game, podcast, youtubePremium, youtubeMusic, youtubeKids,
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,
     accountPrivacy, accountSharing, accountBilling,
-    accountAdvanced
+    accountAdvanced, wtConfigReceiver
 } from "../controllers/primalController";
 import { shouldNotLogInForThisUrl } from "../middleware";
 
@@ -40,7 +39,7 @@ primalRouter.get("/kids", youtubeKids);
 primalRouter.get("/playlist?list=WL", watchLater);
 primalRouter.get("/playlist?list=LL", likeVideo);
 
-primalRouter.get("/watch?v=:videoId([0-9a-f]{24})", watchVideo); //videos/watch
+primalRouter.get("/watch", watchVideo); //videos/watch
 primalRouter.get("/shorts/:shortsId", watchShorts);
 
 primalRouter.get("/account", account);
@@ -50,5 +49,7 @@ primalRouter.get("/account_privacy", accountPrivacy);
 primalRouter.get("/account_sharing", accountSharing);
 primalRouter.get("/account_billing", accountBilling);
 primalRouter.get("/account_advanced", accountAdvanced);
+
+primalRouter.post("/wtconfig", wtConfigReceiver);
 
 export default primalRouter;

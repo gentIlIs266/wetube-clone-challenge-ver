@@ -1,6 +1,7 @@
 include ../partials/html-head.pug
 
 link(rel="stylesheet" href="/assets/css/createVideo.bundle.css" type="text/css")
+script(src="/assets/js/createVideo.bundle.js" defer)
 div(dark dark-theme create-video-background)#create-video-page-background
     if step === "showVideoFileInput" || !step
         div.wtcp-uploads-dialog-html-tag
@@ -337,4 +338,3 @@ div(dark dark-theme create-video-background)#create-video-page-background
                                             aria-label="저장"
                                         ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
                                             div.wtcp-button-shape-impl__button-text-content 저장
-script(src="/assets/js/createVideo.bundle.js")
