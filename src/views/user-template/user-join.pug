@@ -1,540 +1,542 @@
-include ../partials/html-head.pug
-head
+extends ../partials/html-head.pug
+block page-css
     link(rel="stylesheet", href="/assets/css/userJoin.bundle.css" type="text/css")
-body(lang="ko")#pagecontent.ltr
-    div#content
-        div.main-header.create-header
-            div.wetubenav-html-tag
-                include ../partials/masthead.pug
-            div.local-nav-html-tag
-                input(type="checkbox")#ac-localnav-menustate.ac-localnav-menustate
-                div#ac-localnav-sticky-placeholder.css-sticky
-                nav(
-                    role="navigation"
-                    data-sticky
-                )#ac-localnav.ac-localnav.js.touch.css-sticky.ac-localnav-scrim
-                    div.ac-loaclnav-wrapper
-                        div.ac-localnav-background
-                        div.ac-localnav-content
-                            div.ac-localnav-title
-                                span WeTube&nbsp;계정
-                            div.ac-localnav-menu
-                                a(
-                                    href="#"
-                                )#ac-localnav-menucta-anchor-open.ac-localnav-menucta-anchor.ac-localnav-menucta-anchor-open
-                                    span.ac-localnav-menucta-anchor-label
-                                        |Open Menu
-                                a(
-                                    href="#"
-                                )#ac-localnav-menustate-close.ac-localnav-menucta-anchor.ac-localnav-menucta-anchor-close
-                                    span.ac-localnav-menucta-anchor-label
-                                        |Close Menu
-                                div.ac-localnav-menu-tray
-                                    ul.ac-localnav-menu-items
-                                        li.ac-localnav-menu-item
-                                            a(title="로그인" href="/login").ac-localnav-menu-link
-                                                span(aria-hidden="true") 로그인
-                                                span.a11y 로그인
-                                        li.ac-localnav-menu-item
-                                            a(title="WeTube 계정 생성" href="/join").ac-localnav-menu-link
-                                                span(aria-hidden="true") WeTube&nbsp;계정 생성
-                                                span.a11y WeTube&nbsp;계정 생성
-                                        li.ac-localnav-menu-item
-                                            a(title="FAQ" href="/faq").ac-localnav-menu-link
-                                                span(aria-hidden="true") FAQ
-                                                span.a11y FAQ
-                                div.ac-localnav-actions
-                                    div(aria-hidden="true").ac-localnav-action.ac-localnav-action-menucta
-                                        label(for="ac-localnav-menustate").ac-localnav-menucta
-                                            span.ac-localnav-menucta-chevron
-                label(for="localnav-menustate")#ac-loaclnav-curtain.ac-loaclnav-curtain
-        div.app-container
-            div#app-content
-                div#flow
-                    div.create-app-html-tag
-                        div.aid-create-html-tag
-                            div.idms-flow-html-tag
-                                div.idms-flow-container
-                                    div#widget.flow.create.web
-                                        form(method="POST").create-form
-                                            div.idms-step-html-tag
-                                                div.idms-step-container
-                                                    div.idms-step-wrapper
-                                                        div#idms-step-1726196736286-0.idms-step
-                                                            div.idms-step-header.clearfix
-                                                            div.idms-step-content
-                                                                div.flow-wrapper
-                                                                    div(
-                                                                        role="main"
-                                                                    ).flow-body.no-horizontal-scrollbar.clearfix 
-                                                                        div.intro.text-centered
-                                                                            h1 WeTube&nbsp;계정 생성
-                                                                            div.intro-text
-                                                                                |계정을 생성하면 동영상을 업로드 및 기타 기능들을 이용할 수 있습니다.
-                                                                        div.flow-section.account-info-section
-                                                                            div.container-xs.centered
-                                                                                div.form-table
-                                                                                    div.form-cell
-                                                                                        div.form-sidebyside-textboxes.row
-                                                                                            div.full-name-html-tag
-                                                                                                div.column.large-6.medium-6.small-6
-                                                                                                    div.pop-wrapper.field-pop-wrapper
-                                                                                                        div.field-wrapper.padding.right
-                                                                                                            div(
-                                                                                                                classes="form-cell form-textbox form-textbox-text form-field last-name"
-                                                                                                            ).name-input-html-tag
-                                                                                                                div.name-input
-                                                                                                                    div.idms-textbox
-                                                                                                                        div.idms-error-wrapper
-                                                                                                                            if error.nameError
-                                                                                                                                div#idms-error-wrapper-1726210118058-0.is-error
-                                                                                                                                    div.form-element
-                                                                                                                                        input(
-                                                                                                                                            name="name"
-                                                                                                                                            type="text"
-                                                                                                                                            autocorrect="off"
-                                                                                                                                            autocapitalize="off"
-                                                                                                                                            autocomplete="off"
-                                                                                                                                            spellcheck="false"
-                                                                                                                                            required
-                                                                                                                                            aria-required="true"
-                                                                                                                                            aria-invalid="false"
-                                                                                                                                        )#input-1726651721308-1.generic-input-field.form-textbox.form-textbox-text
-                                                                                                                                        span(aria-hidden="true")#idms-input-labelledby-1726210118058-1.form-label
-                                                                                                                                            |이름
-                                                                                                                                    div#1728465627845-0.idms-error-html-tag
-                                                                                                                                        div.idms-error
-                                                                                                                                            div#idms-input-error-1728465627845-1.form-message-wrapper.std-error 
-                                                                                                                                                i.form-message-icon
-                                                                                                                                                span(dir="auto").form-message
-                                                                                                                                                    |이름을 입력하십시오.
-                                                                                                                            else
-                                                                                                                                div#idms-error-wrapper-1726210118058-0
-                                                                                                                                    div.form-element
-                                                                                                                                        input(
-                                                                                                                                            name="name"
-                                                                                                                                            type="text"
-                                                                                                                                            autocorrect="off"
-                                                                                                                                            autocapitalize="off"
-                                                                                                                                            autocomplete="off"
-                                                                                                                                            spellcheck="false"
-                                                                                                                                            required
-                                                                                                                                            aria-required="true"
-                                                                                                                                            aria-invalid="false"
-                                                                                                                                        )#input-1726651721308-1.generic-input-field.form-textbox.form-textbox-text
-                                                                                                                                        span(aria-hidden="true")#idms-input-labelledby-1726210118058-1.form-label
-                                                                                                                                            |이름
-                                                                                                div.column.large-6.medium-6.small-6
-                                                                                                    div.pop-wrapper.field-pop-wrapper
-                                                                                                        div.field-wrapper
-                                                                                                            div(
-                                                                                                                classes="form-cell form-textbox form-textbox-text form-field username"
-                                                                                                            ).username-input-html-tag
-                                                                                                                div.username-input
-                                                                                                                    div.idms-textbox
-                                                                                                                        div.idms-error-wrapper
-                                                                                                                            if error.usernameError
-                                                                                                                                div#idms-error-wrapper-1726214949968-0.is-error
-                                                                                                                                    div.form-element
-                                                                                                                                        input(
-                                                                                                                                            name="username"
-                                                                                                                                            type="text"
-                                                                                                                                            autocorrect="off"
-                                                                                                                                            autocapitalize="off"
-                                                                                                                                            autocomplete="off"
-                                                                                                                                            spellcheck="false"
-                                                                                                                                            required
-                                                                                                                                            aria-required="true"
-                                                                                                                                            aria-invalid="false"
-                                                                                                                                        )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
-                                                                                                                                        span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
-                                                                                                                                            |유저네임
-                                                                                                                                    div#1728543948224-0.idms-error-html-tag
-                                                                                                                                        div.idms-error
-                                                                                                                                            div#idms-input-error-1728543948224-1.form-message-wrapper.std-error 
-                                                                                                                                                i.form-message-icon
-                                                                                                                                                span(dir="auto").form-message
-                                                                                                                                                    |유저네임을 입력하십시오.
-                                                                                                                            else if error.alreadyUsingThisUsernameError
-                                                                                                                                div#idms-error-wrapper-1726214949968-0.is-error
-                                                                                                                                    div.form-element
-                                                                                                                                        input(
-                                                                                                                                            name="username"
-                                                                                                                                            type="text"
-                                                                                                                                            autocorrect="off"
-                                                                                                                                            autocapitalize="off"
-                                                                                                                                            autocomplete="off"
-                                                                                                                                            spellcheck="false"
-                                                                                                                                            required
-                                                                                                                                            aria-required="true"
-                                                                                                                                            aria-invalid="false"
-                                                                                                                                        )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
-                                                                                                                                        span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
-                                                                                                                                            |유저네임
-                                                                                                                                    div#1728543948224-0.idms-error-html-tag
-                                                                                                                                        div.idms-error
-                                                                                                                                            div#idms-input-error-1728543948224-1.form-message-wrapper.std-error 
-                                                                                                                                                i.form-message-icon
-                                                                                                                                                span(dir="auto").form-message
-                                                                                                                                                    |이미 이 유저네임을 쓰는 사용자가 존재합니다.
-                                                                                                                            else
-                                                                                                                                div#idms-error-wrapper-1726214949968-0
-                                                                                                                                    div.form-element
-                                                                                                                                        input(
-                                                                                                                                            name="username"
-                                                                                                                                            type="text"
-                                                                                                                                            autocorrect="off"
-                                                                                                                                            autocapitalize="off"
-                                                                                                                                            autocomplete="off"
-                                                                                                                                            spellcheck="false"
-                                                                                                                                            required
-                                                                                                                                            aria-required="true"
-                                                                                                                                            aria-invalid="false"
-                                                                                                                                        )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
-                                                                                                                                        span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
-                                                                                                                                            |유저네임
-                                                                                div.row
-                                                                                    div.column.large-12
-                                                                                        h3#countryLabel.tk-body-reduced.section-subtitle
-                                                                                            |국가/지역
-                                                                                        label(for="countryOptions").sr-only
-                                                                                            |국가/지역 선택
-                                                                                        div.idms-dropdown-html-tag
-                                                                                            div
-                                                                                                div.idms-error-wrapper-html-tag
-                                                                                                    div#idms-error-wrapper-1726215796898-0
-                                                                                                        div.form-element.hide-eyebrow-label
-                                                                                                            select(
-                                                                                                                aria-required="true"
-                                                                                                                name="location"
-                                                                                                            )#idms-input-1726215796898-1.generic-input-field.form-control.form-dropdown.form-dropdown.country-picker.idms-address-country 
-                                                                                                                option(dir="auto" value="SUN") 태양
-                                                                                                                option(dir="auto" value="MERCURY") 수성
-                                                                                                                option(dir="auto" value="VENUS") 금성
-                                                                                                                option(dir="auto" value="EARTH" selected) 지구
-                                                                                                                option(dir="auto" value="MARS") 화성
-                                                                                                                option(dir="auto" value="JUPITER") 목성 
-                                                                                                                option(dir="auto" value="SATURN") 토성 
-                                                                                                                option(dir="auto" value="URANUS") 천왕성 
-                                                                                                                option(dir="auto" value="NEPTUNE") 해왕성
-                                                                                                                option(dir="auto" value="PLUTO") 명왕성
-                                                                                                                option(dir="auto" value="OTHER-PLANETARY-SYSTEM") 그 외 행성
-                                                                                                            span(
-                                                                                                                aria-hidden="true"
-                                                                                                            ).form-icon.sk-icon.sk-icon-chevrondown
-                                                                                div.row
-                                                                                    div.column.large-12
-                                                                                        div.wc-birthday-html-tag
-                                                                                            div.birthday
-                                                                                                div.input-group
-                                                                                                    div.pop-wrapper.field-pop-wrapper
-                                                                                                        div.cell.cell-field
-                                                                                                            div(
-                                                                                                                classes="form-cell form-textbox form-textbox-text form-field generic-input-field birthday-field"
-                                                                                                            ).masked-date-html-tag
-                                                                                                                div.masked-date
-                                                                                                                    div.idms-error-wrapper-html-tag
-                                                                                                                        if error.birthDateError
-                                                                                                                            div#idms-error-wrapper-1726389991588-0.is-error
-                                                                                                                                div.form-element
-                                                                                                                                    input(
-                                                                                                                                        name="birthDate"
-                                                                                                                                        autocorrect="off"
-                                                                                                                                        autocomplete="off"
-                                                                                                                                        autocapitalize="off"
-                                                                                                                                        spellcheck="false"
-                                                                                                                                        required
-                                                                                                                                        type="text"
-                                                                                                                                        aria-required="true"
-                                                                                                                                    )#input-1727167270343-1.form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1727167270343-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
-                                                                                                                                    span(aria-hidden="true" for="input-1726389991588-1").form-label
-                                                                                                                                        |생년월일
-                                                                                                                                div#1728544175624-0.idms-error-html-tag
-                                                                                                                                    div.idms-error
-                                                                                                                                        div#idms-input-error-1728544175624-1.form-message-wrapper.std-error 
-                                                                                                                                            i.form-message-icon
-                                                                                                                                            span(dir="auto").form-message
-                                                                                                                                                |유효한 생년월일을 입력하십시오.
-                                                                                                                        else
-                                                                                                                            div#idms-error-wrapper-1726389991588-0
-                                                                                                                                div.form-element
-                                                                                                                                    input(
-                                                                                                                                        name="birthDate"
-                                                                                                                                        autocorrect="off"
-                                                                                                                                        autocomplete="off"
-                                                                                                                                        autocapitalize="off"
-                                                                                                                                        spellcheck="false"
-                                                                                                                                        required
-                                                                                                                                        type="text"
-                                                                                                                                        aria-required="true"
-                                                                                                                                    )#input-1727167270343-1.form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1727167270343-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
-                                                                                                                                    span(aria-hidden="true" for="input-1726389991588-1").form-label
-                                                                                                                                        |생년월일
-                                                                                                            div(aria-hidden="false").idms-icon-html-tag
-                                                                                                                div(aria-live="assertive").idms-icon.field-info-wrapper
-                                                                                                                    button(
-                                                                                                                        tabindex="0"
-                                                                                                                        aria-hidden="false"
-                                                                                                                        aria-describedby="birthdayInfoMsg"
-                                                                                                                    ).button.button-link.button-help.list-action 
-                                                                                                                        i.icon.icon_help.help-anchor.bd-info
-                                                                                                                    div#birthdayInfoMsg.idms-popover-html-tag
-                                                                        div.flow-section
-                                                                            div.container-xs.centered
-                                                                                div.row
-                                                                                    div.column.large-12
-                                                                                        div.account-name-html-tag
-                                                                                            div.pop-wrapper.field-pop-wrapper
-                                                                                                div.field-wrapper.position-relative
-                                                                                                    div(
-                                                                                                        classes="form-cell form-textbox form-textbox-text form-field email-field field-has-info"
-                                                                                                    ).email-input-html-tag
-                                                                                                        div.idms-textbox-html-tag
-                                                                                                            div.idms-error-wrapper
-                                                                                                                if error.emailError
-                                                                                                                    div#idms-error-wrapper-1726457196740-0.is-error
-                                                                                                                        div.form-element
-                                                                                                                            input(
-                                                                                                                                name="email"
-                                                                                                                                autocorrect="off"
-                                                                                                                                autocapitalize= "off"
-                                                                                                                                autocomplete="off"
-                                                                                                                                spellcheck="false"
-                                                                                                                                required
-                                                                                                                                aria-describedby="aidCaption"
-                                                                                                                                aria-labelledby="idms-input-labelledby-1726457196741-0"
-                                                                                                                                type="email"
-                                                                                                                                maxlength="254"
-                                                                                                                                aria-required="true"
-                                                                                                                                aria-invalid="false"
-                                                                                                                            )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
-                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
-                                                                                                                                |name@example.com
-                                                                                                                        div#1728544175647-0.idms-error-html-tag
-                                                                                                                            div.idms-error
-                                                                                                                                div#idms-input-error-1728544175647-1.form-message-wrapper.std-error 
-                                                                                                                                    i.form-message-icon
-                                                                                                                                    span(dir="auto").form-message
-                                                                                                                                        |기본 이메일 주소로 사용할 유효한 이메일 주소를 입력하십시오.
-                                                                                                                else if error.alreadyUsingThisEmailError
-                                                                                                                    div#idms-error-wrapper-1726457196740-0.is-error
-                                                                                                                        div.form-element
-                                                                                                                            input(
-                                                                                                                                name="email"
-                                                                                                                                autocorrect="off"
-                                                                                                                                autocapitalize= "off"
-                                                                                                                                autocomplete="off"
-                                                                                                                                spellcheck="false"
-                                                                                                                                required
-                                                                                                                                aria-describedby="aidCaption"
-                                                                                                                                aria-labelledby="idms-input-labelledby-1726457196741-0"
-                                                                                                                                type="email"
-                                                                                                                                maxlength="254"
-                                                                                                                                aria-required="true"
-                                                                                                                                aria-invalid="false"
-                                                                                                                            )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
-                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
-                                                                                                                                |name@example.com
-                                                                                                                        div#1728544175647-0.idms-error-html-tag
-                                                                                                                            div.idms-error
-                                                                                                                                div#idms-input-error-1728544175647-1.form-message-wrapper.std-error 
-                                                                                                                                    i.form-message-icon
-                                                                                                                                    span(dir="auto").form-message
-                                                                                                                                        |이미 이 이메일을 쓰는 사용자가 존재합니다.
-                                                                                                                else
-                                                                                                                    div#idms-error-wrapper-1726457196740-0
-                                                                                                                        div.form-element
-                                                                                                                            input(
-                                                                                                                                name="email"
-                                                                                                                                autocorrect="off"
-                                                                                                                                autocapitalize= "off"
-                                                                                                                                autocomplete="off"
-                                                                                                                                spellcheck="false"
-                                                                                                                                required
-                                                                                                                                aria-describedby="aidCaption"
-                                                                                                                                aria-labelledby="idms-input-labelledby-1726457196741-0"
-                                                                                                                                type="email"
-                                                                                                                                maxlength="254"
-                                                                                                                                aria-required="true"
-                                                                                                                                aria-invalid="false"
-                                                                                                                            )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
-                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
-                                                                                                                                |name@example.com
-                                                                                                    div.aidCaption.tk-body-reduced.field-caption.aid-caption
-                                                                                                        |유저네임과 함께 새 WeTube ID로 사용될 주소입니다.
-                                                                                div.row
-                                                                                    div.column.large-12
-                                                                                        div.new-password-html-tag
-                                                                                            div.pop-wrapper.field-pop-wrapper
-                                                                                                div.field-wrapper
-                                                                                                    div.password-input-html-tag
-                                                                                                        if error.passwordError
-                                                                                                            div.form-element.is-error.no-error-msg
-                                                                                                                input(
-                                                                                                                    name="password"
-                                                                                                                    type="password"
+block page-js
+    script(src="/assets/js/userJoin.bundle.js" type="text/javascript" defer)
+block wtd-app
+    div#pagecontent.ltr
+        div#content
+            div.main-header.create-header
+                div.wetubenav-html-tag
+                    include ../partials/masthead.pug
+                div.local-nav-html-tag
+                    input(type="checkbox")#ac-localnav-menustate.ac-localnav-menustate
+                    div#ac-localnav-sticky-placeholder.css-sticky
+                    nav(
+                        role="navigation"
+                        data-sticky
+                    )#ac-localnav.ac-localnav.js.touch.css-sticky.ac-localnav-scrim
+                        div.ac-loaclnav-wrapper
+                            div.ac-localnav-background
+                            div.ac-localnav-content
+                                div.ac-localnav-title
+                                    span WeTube&nbsp;계정
+                                div.ac-localnav-menu
+                                    a(
+                                        href="#"
+                                    )#ac-localnav-menucta-anchor-open.ac-localnav-menucta-anchor.ac-localnav-menucta-anchor-open
+                                        span.ac-localnav-menucta-anchor-label
+                                            |Open Menu
+                                    a(
+                                        href="#"
+                                    )#ac-localnav-menustate-close.ac-localnav-menucta-anchor.ac-localnav-menucta-anchor-close
+                                        span.ac-localnav-menucta-anchor-label
+                                            |Close Menu
+                                    div.ac-localnav-menu-tray
+                                        ul.ac-localnav-menu-items
+                                            li.ac-localnav-menu-item
+                                                a(title="로그인" href="/login").ac-localnav-menu-link
+                                                    span(aria-hidden="true") 로그인
+                                                    span.a11y 로그인
+                                            li.ac-localnav-menu-item
+                                                a(title="WeTube 계정 생성" href="/join").ac-localnav-menu-link
+                                                    span(aria-hidden="true") WeTube&nbsp;계정 생성
+                                                    span.a11y WeTube&nbsp;계정 생성
+                                            li.ac-localnav-menu-item
+                                                a(title="FAQ" href="/faq").ac-localnav-menu-link
+                                                    span(aria-hidden="true") FAQ
+                                                    span.a11y FAQ
+                                    div.ac-localnav-actions
+                                        div(aria-hidden="true").ac-localnav-action.ac-localnav-action-menucta
+                                            label(for="ac-localnav-menustate").ac-localnav-menucta
+                                                span.ac-localnav-menucta-chevron
+                    label(for="localnav-menustate")#ac-loaclnav-curtain.ac-loaclnav-curtain
+            div.app-container
+                div#app-content
+                    div#flow
+                        div.create-app-html-tag
+                            div.aid-create-html-tag
+                                div.idms-flow-html-tag
+                                    div.idms-flow-container
+                                        div#widget.flow.create.web
+                                            form(method="POST").create-form
+                                                div.idms-step-html-tag
+                                                    div.idms-step-container
+                                                        div.idms-step-wrapper
+                                                            div#idms-step-1726196736286-0.idms-step
+                                                                div.idms-step-header.clearfix
+                                                                div.idms-step-content
+                                                                    div.flow-wrapper
+                                                                        div(
+                                                                            role="main"
+                                                                        ).flow-body.no-horizontal-scrollbar.clearfix 
+                                                                            div.intro.text-centered
+                                                                                h1 WeTube&nbsp;계정 생성
+                                                                                div.intro-text
+                                                                                    |계정을 생성하면 동영상을 업로드 및 기타 기능들을 이용할 수 있습니다.
+                                                                            div.flow-section.account-info-section
+                                                                                div.container-xs.centered
+                                                                                    div.form-table
+                                                                                        div.form-cell
+                                                                                            div.form-sidebyside-textboxes.row
+                                                                                                div.full-name-html-tag
+                                                                                                    div.column.large-6.medium-6.small-6
+                                                                                                        div.pop-wrapper.field-pop-wrapper
+                                                                                                            div.field-wrapper.padding.right
+                                                                                                                div(
+                                                                                                                    classes="form-cell form-textbox form-textbox-text form-field last-name"
+                                                                                                                ).name-input-html-tag
+                                                                                                                    div.name-input
+                                                                                                                        div.idms-textbox
+                                                                                                                            div.idms-error-wrapper
+                                                                                                                                if error.nameError
+                                                                                                                                    div#idms-error-wrapper-1726210118058-0.is-error
+                                                                                                                                        div.form-element
+                                                                                                                                            input(
+                                                                                                                                                name="name"
+                                                                                                                                                type="text"
+                                                                                                                                                autocorrect="off"
+                                                                                                                                                autocapitalize="off"
+                                                                                                                                                autocomplete="off"
+                                                                                                                                                spellcheck="false"
+                                                                                                                                                required
+                                                                                                                                                aria-required="true"
+                                                                                                                                                aria-invalid="false"
+                                                                                                                                            )#input-1726651721308-1.generic-input-field.form-textbox.form-textbox-text
+                                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726210118058-1.form-label
+                                                                                                                                                |이름
+                                                                                                                                        div#1728465627845-0.idms-error-html-tag
+                                                                                                                                            div.idms-error
+                                                                                                                                                div#idms-input-error-1728465627845-1.form-message-wrapper.std-error 
+                                                                                                                                                    i.form-message-icon
+                                                                                                                                                    span(dir="auto").form-message
+                                                                                                                                                        |이름을 입력하십시오.
+                                                                                                                                else
+                                                                                                                                    div#idms-error-wrapper-1726210118058-0
+                                                                                                                                        div.form-element
+                                                                                                                                            input(
+                                                                                                                                                name="name"
+                                                                                                                                                type="text"
+                                                                                                                                                autocorrect="off"
+                                                                                                                                                autocapitalize="off"
+                                                                                                                                                autocomplete="off"
+                                                                                                                                                spellcheck="false"
+                                                                                                                                                required
+                                                                                                                                                aria-required="true"
+                                                                                                                                                aria-invalid="false"
+                                                                                                                                            )#input-1726651721308-1.generic-input-field.form-textbox.form-textbox-text
+                                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726210118058-1.form-label
+                                                                                                                                                |이름
+                                                                                                    div.column.large-6.medium-6.small-6
+                                                                                                        div.pop-wrapper.field-pop-wrapper
+                                                                                                            div.field-wrapper
+                                                                                                                div(
+                                                                                                                    classes="form-cell form-textbox form-textbox-text form-field username"
+                                                                                                                ).username-input-html-tag
+                                                                                                                    div.username-input
+                                                                                                                        div.idms-textbox
+                                                                                                                            div.idms-error-wrapper
+                                                                                                                                if error.usernameError
+                                                                                                                                    div#idms-error-wrapper-1726214949968-0.is-error
+                                                                                                                                        div.form-element
+                                                                                                                                            input(
+                                                                                                                                                name="username"
+                                                                                                                                                type="text"
+                                                                                                                                                autocorrect="off"
+                                                                                                                                                autocapitalize="off"
+                                                                                                                                                autocomplete="off"
+                                                                                                                                                spellcheck="false"
+                                                                                                                                                required
+                                                                                                                                                aria-required="true"
+                                                                                                                                                aria-invalid="false"
+                                                                                                                                            )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
+                                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
+                                                                                                                                                |유저네임
+                                                                                                                                        div#1728543948224-0.idms-error-html-tag
+                                                                                                                                            div.idms-error
+                                                                                                                                                div#idms-input-error-1728543948224-1.form-message-wrapper.std-error 
+                                                                                                                                                    i.form-message-icon
+                                                                                                                                                    span(dir="auto").form-message
+                                                                                                                                                        |유저네임을 입력하십시오.
+                                                                                                                                else if error.alreadyUsingThisUsernameError
+                                                                                                                                    div#idms-error-wrapper-1726214949968-0.is-error
+                                                                                                                                        div.form-element
+                                                                                                                                            input(
+                                                                                                                                                name="username"
+                                                                                                                                                type="text"
+                                                                                                                                                autocorrect="off"
+                                                                                                                                                autocapitalize="off"
+                                                                                                                                                autocomplete="off"
+                                                                                                                                                spellcheck="false"
+                                                                                                                                                required
+                                                                                                                                                aria-required="true"
+                                                                                                                                                aria-invalid="false"
+                                                                                                                                            )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
+                                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
+                                                                                                                                                |유저네임
+                                                                                                                                        div#1728543948224-0.idms-error-html-tag
+                                                                                                                                            div.idms-error
+                                                                                                                                                div#idms-input-error-1728543948224-1.form-message-wrapper.std-error 
+                                                                                                                                                    i.form-message-icon
+                                                                                                                                                    span(dir="auto").form-message
+                                                                                                                                                        |이미 이 유저네임을 쓰는 사용자가 존재합니다.
+                                                                                                                                else
+                                                                                                                                    div#idms-error-wrapper-1726214949968-0
+                                                                                                                                        div.form-element
+                                                                                                                                            input(
+                                                                                                                                                name="username"
+                                                                                                                                                type="text"
+                                                                                                                                                autocorrect="off"
+                                                                                                                                                autocapitalize="off"
+                                                                                                                                                autocomplete="off"
+                                                                                                                                                spellcheck="false"
+                                                                                                                                                required
+                                                                                                                                                aria-required="true"
+                                                                                                                                                aria-invalid="false"
+                                                                                                                                            )#input-1724237956433-1.generic-input-field.form-textbox.form-textbox-text
+                                                                                                                                            span(aria-hidden="true")#idms-input-labelledby-1726214949968-1.form-label
+                                                                                                                                                |유저네임
+                                                                                    div.row
+                                                                                        div.column.large-12
+                                                                                            h3#countryLabel.tk-body-reduced.section-subtitle
+                                                                                                |국가/지역
+                                                                                            label(for="countryOptions").sr-only
+                                                                                                |국가/지역 선택
+                                                                                            div.idms-dropdown-html-tag
+                                                                                                div
+                                                                                                    div.idms-error-wrapper-html-tag
+                                                                                                        div#idms-error-wrapper-1726215796898-0
+                                                                                                            div.form-element.hide-eyebrow-label
+                                                                                                                select(
                                                                                                                     aria-required="true"
-                                                                                                                    required
-                                                                                                                    autocomplete="off"
-                                                                                                                    aria-invalid="true"
-                                                                                                                    data-lpignore="true"
-                                                                                                                )#password.pwd.form-textbox.form-textbox-text.overridepwd.temp-override.has-errors
-                                                                                                                span(aria-hidden="true" for="password").form-label
-                                                                                                                    |암호
-                                                                                                        else
-                                                                                                            div.form-element.no-error-msg
-                                                                                                                input(
-                                                                                                                    name="password"
-                                                                                                                    type="password"
-                                                                                                                    aria-required="true"
-                                                                                                                    required
-                                                                                                                    autocomplete="off"
-                                                                                                                    aria-invalid="true"
-                                                                                                                    data-lpignore="true"
-                                                                                                                )#password.pwd.form-textbox.form-textbox-text.overridepwd.temp-override.has-errors
-                                                                                                                span(aria-hidden="true" for="password").form-label
-                                                                                                                    |암호
-                                                                                        div.password-confirm-html-tag
-                                                                                            div.pop-wrapper.field-pop-wrapper
-                                                                                                div.field-wrapper
-                                                                                                    div.confirm-password-input-html-tag
-                                                                                                        div.password-input
+                                                                                                                    name="location"
+                                                                                                                )#idms-input-1726215796898-1.generic-input-field.form-control.form-dropdown.form-dropdown.country-picker.idms-address-country 
+                                                                                                                    option(dir="auto" value="SUN") 태양
+                                                                                                                    option(dir="auto" value="MERCURY") 수성
+                                                                                                                    option(dir="auto" value="VENUS") 금성
+                                                                                                                    option(dir="auto" value="EARTH" selected) 지구
+                                                                                                                    option(dir="auto" value="MARS") 화성
+                                                                                                                    option(dir="auto" value="JUPITER") 목성 
+                                                                                                                    option(dir="auto" value="SATURN") 토성 
+                                                                                                                    option(dir="auto" value="URANUS") 천왕성 
+                                                                                                                    option(dir="auto" value="NEPTUNE") 해왕성
+                                                                                                                    option(dir="auto" value="PLUTO") 명왕성
+                                                                                                                    option(dir="auto" value="OTHER-PLANETARY-SYSTEM") 그 외 행성
+                                                                                                                span(
+                                                                                                                    aria-hidden="true"
+                                                                                                                ).form-icon.sk-icon.sk-icon-chevrondown
+                                                                                    div.row
+                                                                                        div.column.large-12
+                                                                                            div.wc-birthday-html-tag
+                                                                                                div.birthday
+                                                                                                    div.input-group
+                                                                                                        div.pop-wrapper.field-pop-wrapper
+                                                                                                            div.cell.cell-field
+                                                                                                                div(
+                                                                                                                    classes="form-cell form-textbox form-textbox-text form-field generic-input-field birthday-field"
+                                                                                                                ).masked-date-html-tag
+                                                                                                                    div.masked-date
+                                                                                                                        div.idms-error-wrapper-html-tag
+                                                                                                                            if error.birthDateError
+                                                                                                                                div#idms-error-wrapper-1726389991588-0.is-error
+                                                                                                                                    div.form-element
+                                                                                                                                        input(
+                                                                                                                                            name="birthDate"
+                                                                                                                                            autocorrect="off"
+                                                                                                                                            autocomplete="off"
+                                                                                                                                            autocapitalize="off"
+                                                                                                                                            spellcheck="false"
+                                                                                                                                            required
+                                                                                                                                            type="text"
+                                                                                                                                            aria-required="true"
+                                                                                                                                        )#input-1727167270343-1.form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1727167270343-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
+                                                                                                                                        span(aria-hidden="true" for="input-1726389991588-1").form-label
+                                                                                                                                            |생년월일
+                                                                                                                                    div#1728544175624-0.idms-error-html-tag
+                                                                                                                                        div.idms-error
+                                                                                                                                            div#idms-input-error-1728544175624-1.form-message-wrapper.std-error 
+                                                                                                                                                i.form-message-icon
+                                                                                                                                                span(dir="auto").form-message
+                                                                                                                                                    |유효한 생년월일을 입력하십시오.
+                                                                                                                            else
+                                                                                                                                div#idms-error-wrapper-1726389991588-0
+                                                                                                                                    div.form-element
+                                                                                                                                        input(
+                                                                                                                                            name="birthDate"
+                                                                                                                                            autocorrect="off"
+                                                                                                                                            autocomplete="off"
+                                                                                                                                            autocapitalize="off"
+                                                                                                                                            spellcheck="false"
+                                                                                                                                            required
+                                                                                                                                            type="text"
+                                                                                                                                            aria-required="true"
+                                                                                                                                        )#input-1727167270343-1.form-cell.form-textbox.form-textbox-text.form-field.generic-input-field.birthday-field.input-1727167270343-1.form-textbox.form-textbox-text.date.date-input.generic-input-field
+                                                                                                                                        span(aria-hidden="true" for="input-1726389991588-1").form-label
+                                                                                                                                            |생년월일
+                                                                                                                div(aria-hidden="false").idms-icon-html-tag
+                                                                                                                    div(aria-live="assertive").idms-icon.field-info-wrapper
+                                                                                                                        button(
+                                                                                                                            tabindex="0"
+                                                                                                                            aria-hidden="false"
+                                                                                                                            aria-describedby="birthdayInfoMsg"
+                                                                                                                        ).button.button-link.button-help.list-action 
+                                                                                                                            i.icon.icon_help.help-anchor.bd-info
+                                                                                                                        div#birthdayInfoMsg.idms-popover-html-tag
+                                                                            div.flow-section
+                                                                                div.container-xs.centered
+                                                                                    div.row
+                                                                                        div.column.large-12
+                                                                                            div.account-name-html-tag
+                                                                                                div.pop-wrapper.field-pop-wrapper
+                                                                                                    div.field-wrapper.position-relative
+                                                                                                        div(
+                                                                                                            classes="form-cell form-textbox form-textbox-text form-field email-field field-has-info"
+                                                                                                        ).email-input-html-tag
                                                                                                             div.idms-textbox-html-tag
-                                                                                                                div.idms-error-wrapper-html-tag
-                                                                                                                    if error.passwordConfirmError || error.passwordConfirmNotSameError
-                                                                                                                        div#idms-error-wrapper-1726456244687-0.is-error
+                                                                                                                div.idms-error-wrapper
+                                                                                                                    if error.emailError
+                                                                                                                        div#idms-error-wrapper-1726457196740-0.is-error
                                                                                                                             div.form-element
                                                                                                                                 input(
-                                                                                                                                    name="passwordConfirm"
-                                                                                                                                    required
-                                                                                                                                    type="password"
+                                                                                                                                    name="email"
                                                                                                                                     autocorrect="off"
-                                                                                                                                    autocapitalize="off"
+                                                                                                                                    autocapitalize= "off"
                                                                                                                                     autocomplete="off"
                                                                                                                                     spellcheck="false"
+                                                                                                                                    required
+                                                                                                                                    aria-describedby="aidCaption"
+                                                                                                                                    aria-labelledby="idms-input-labelledby-1726457196741-0"
+                                                                                                                                    type="email"
+                                                                                                                                    maxlength="254"
                                                                                                                                     aria-required="true"
                                                                                                                                     aria-invalid="false"
-                                                                                                                                    data-lpignore="true"
-                                                                                                                                )#input-1726456244687-1.generic-input-field.form-textbox.form-textbox-text.form-cell.form-textbox.form-textbox-text.form-field.confirm-field.override
-                                                                                                                                span(aria-hidden="true")#idms-input-labelledby-1726456244687-1.form-label
-                                                                                                                                    |암호 확인
-                                                                                                                            div#1728544954201-0.idms-error-html-tag
+                                                                                                                                )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
+                                                                                                                                span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
+                                                                                                                                    |name@example.com
+                                                                                                                            div#1728544175647-0.idms-error-html-tag
                                                                                                                                 div.idms-error
-                                                                                                                                    div#idms-input-error-1728544954202-0.form-message-wrapper.std-error 
+                                                                                                                                    div#idms-input-error-1728544175647-1.form-message-wrapper.std-error 
                                                                                                                                         i.form-message-icon
                                                                                                                                         span(dir="auto").form-message
-                                                                                                                                            |암호를 재입력하십시오.
-                                                                                                                    else
-                                                                                                                        div#idms-error-wrapper-1726456244687-0
+                                                                                                                                            |기본 이메일 주소로 사용할 유효한 이메일 주소를 입력하십시오.
+                                                                                                                    else if error.alreadyUsingThisEmailError
+                                                                                                                        div#idms-error-wrapper-1726457196740-0.is-error
                                                                                                                             div.form-element
                                                                                                                                 input(
-                                                                                                                                    name="passwordConfirm"
-                                                                                                                                    required
-                                                                                                                                    type="password"
+                                                                                                                                    name="email"
                                                                                                                                     autocorrect="off"
-                                                                                                                                    autocapitalize="off"
+                                                                                                                                    autocapitalize= "off"
                                                                                                                                     autocomplete="off"
                                                                                                                                     spellcheck="false"
+                                                                                                                                    required
+                                                                                                                                    aria-describedby="aidCaption"
+                                                                                                                                    aria-labelledby="idms-input-labelledby-1726457196741-0"
+                                                                                                                                    type="email"
+                                                                                                                                    maxlength="254"
                                                                                                                                     aria-required="true"
                                                                                                                                     aria-invalid="false"
-                                                                                                                                    data-lpignore="true"
-                                                                                                                                )#input-1726456244687-1.generic-input-field.form-textbox.form-textbox-text.form-cell.form-textbox.form-textbox-text.form-field.confirm-field.override
-                                                                                                                                span(aria-hidden="true")#idms-input-labelledby-1726456244687-1.form-label
-                                                                                                                                    |암호 확인
-                                                                        div.flow-section
-                                                                            div.adi-to-asp-policy-html-tag
-                                                                                div.container-xs.centered.adi-to-asp-policy-section
-                                                                                    div.form-element
-                                                                                        input(type="checkbox" name="adiToAspPolicy")#adiToAspPolicy.form-choice.form-choice-checkbox
-                                                                                        label(style="margin: 0;" for="adiToAspPolicy").form-label
-                                                                                            span.form-choice-indicator
-                                                                                            |WeTube와 데이터 개인정보 보호
-                                                                                            small(
-                                                                                                style="display: block; color: #666;"
-                                                                                            ).label-small.tk-caption.adi-to-asp-description
-                                                                                                |2024. 10. 26.부터 아일랜드 WeTube Distribution International Ltd 대신 싱가포르 WeTube Services Pte. Ltd에서 WeTube ID와 연결된 WeCloud 및 WeTube 미디어 서비스를 운영하게 되었음을 이해했습니다.
-                                                                                                br
-                                                                                                br
-                                                                                                |WeTube은 어디에서 데이터가 처리되는지에 관계없이 WeTube의 개인정보 처리방침에 따라 데이터 보호에 대한 높은 기준을 동일하게 유지합니다. 
-                                                                                                a(href="/support" target="_blank") 
-                                                                                                    |더 알아보기... 
-                                                                                        if error.adiToAspPolicyError
-                                                                                            div(style="padding: 10px 0 0 26px;").details.destructive
-                                                                                                |거주하는 국가의 개인정보 보호법을 준수하기 위해 이 동의가 필요합니다.
-                                                                        div.flow-section
-                                                                            div.container-xs.centered.updates-sections
-                                                                                div.email-updates-html-tag
-                                                                                    div.updates
+                                                                                                                                )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
+                                                                                                                                span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
+                                                                                                                                    |name@example.com
+                                                                                                                            div#1728544175647-0.idms-error-html-tag
+                                                                                                                                div.idms-error
+                                                                                                                                    div#idms-input-error-1728544175647-1.form-message-wrapper.std-error 
+                                                                                                                                        i.form-message-icon
+                                                                                                                                        span(dir="auto").form-message
+                                                                                                                                            |이미 이 이메일을 쓰는 사용자가 존재합니다.
+                                                                                                                    else
+                                                                                                                        div#idms-error-wrapper-1726457196740-0
+                                                                                                                            div.form-element
+                                                                                                                                input(
+                                                                                                                                    name="email"
+                                                                                                                                    autocorrect="off"
+                                                                                                                                    autocapitalize= "off"
+                                                                                                                                    autocomplete="off"
+                                                                                                                                    spellcheck="false"
+                                                                                                                                    required
+                                                                                                                                    aria-describedby="aidCaption"
+                                                                                                                                    aria-labelledby="idms-input-labelledby-1726457196741-0"
+                                                                                                                                    type="email"
+                                                                                                                                    maxlength="254"
+                                                                                                                                    aria-required="true"
+                                                                                                                                    aria-invalid="false"
+                                                                                                                                )#input-1726457196741-0.generic-input-field.form-textbox.form-textbox-text.email-field.form-cell.form-textbox.form-textbox-tex.form-field.email-field.field-has-info
+                                                                                                                                span(aria-hidden="true")#idms-input-labelledby-1726457196741-0.form-label
+                                                                                                                                    |name@example.com
+                                                                                                        div.aidCaption.tk-body-reduced.field-caption.aid-caption
+                                                                                                            |유저네임과 함께 새 WeTube ID로 사용될 주소입니다.
+                                                                                    div.row
+                                                                                        div.column.large-12
+                                                                                            div.new-password-html-tag
+                                                                                                div.pop-wrapper.field-pop-wrapper
+                                                                                                    div.field-wrapper
+                                                                                                        div.password-input-html-tag
+                                                                                                            if error.passwordError
+                                                                                                                div.form-element.is-error.no-error-msg
+                                                                                                                    input(
+                                                                                                                        name="password"
+                                                                                                                        type="password"
+                                                                                                                        aria-required="true"
+                                                                                                                        required
+                                                                                                                        autocomplete="off"
+                                                                                                                        aria-invalid="true"
+                                                                                                                        data-lpignore="true"
+                                                                                                                    )#password.pwd.form-textbox.form-textbox-text.overridepwd.temp-override.has-errors
+                                                                                                                    span(aria-hidden="true" for="password").form-label
+                                                                                                                        |암호
+                                                                                                            else
+                                                                                                                div.form-element.no-error-msg
+                                                                                                                    input(
+                                                                                                                        name="password"
+                                                                                                                        type="password"
+                                                                                                                        aria-required="true"
+                                                                                                                        required
+                                                                                                                        autocomplete="off"
+                                                                                                                        aria-invalid="true"
+                                                                                                                        data-lpignore="true"
+                                                                                                                    )#password.pwd.form-textbox.form-textbox-text.overridepwd.temp-override.has-errors
+                                                                                                                    span(aria-hidden="true" for="password").form-label
+                                                                                                                        |암호
+                                                                                            div.password-confirm-html-tag
+                                                                                                div.pop-wrapper.field-pop-wrapper
+                                                                                                    div.field-wrapper
+                                                                                                        div.confirm-password-input-html-tag
+                                                                                                            div.password-input
+                                                                                                                div.idms-textbox-html-tag
+                                                                                                                    div.idms-error-wrapper-html-tag
+                                                                                                                        if error.passwordConfirmError || error.passwordConfirmNotSameError
+                                                                                                                            div#idms-error-wrapper-1726456244687-0.is-error
+                                                                                                                                div.form-element
+                                                                                                                                    input(
+                                                                                                                                        name="passwordConfirm"
+                                                                                                                                        required
+                                                                                                                                        type="password"
+                                                                                                                                        autocorrect="off"
+                                                                                                                                        autocapitalize="off"
+                                                                                                                                        autocomplete="off"
+                                                                                                                                        spellcheck="false"
+                                                                                                                                        aria-required="true"
+                                                                                                                                        aria-invalid="false"
+                                                                                                                                        data-lpignore="true"
+                                                                                                                                    )#input-1726456244687-1.generic-input-field.form-textbox.form-textbox-text.form-cell.form-textbox.form-textbox-text.form-field.confirm-field.override
+                                                                                                                                    span(aria-hidden="true")#idms-input-labelledby-1726456244687-1.form-label
+                                                                                                                                        |암호 확인
+                                                                                                                                div#1728544954201-0.idms-error-html-tag
+                                                                                                                                    div.idms-error
+                                                                                                                                        div#idms-input-error-1728544954202-0.form-message-wrapper.std-error 
+                                                                                                                                            i.form-message-icon
+                                                                                                                                            span(dir="auto").form-message
+                                                                                                                                                |암호를 재입력하십시오.
+                                                                                                                        else
+                                                                                                                            div#idms-error-wrapper-1726456244687-0
+                                                                                                                                div.form-element
+                                                                                                                                    input(
+                                                                                                                                        name="passwordConfirm"
+                                                                                                                                        required
+                                                                                                                                        type="password"
+                                                                                                                                        autocorrect="off"
+                                                                                                                                        autocapitalize="off"
+                                                                                                                                        autocomplete="off"
+                                                                                                                                        spellcheck="false"
+                                                                                                                                        aria-required="true"
+                                                                                                                                        aria-invalid="false"
+                                                                                                                                        data-lpignore="true"
+                                                                                                                                    )#input-1726456244687-1.generic-input-field.form-textbox.form-textbox-text.form-cell.form-textbox.form-textbox-text.form-field.confirm-field.override
+                                                                                                                                    span(aria-hidden="true")#idms-input-labelledby-1726456244687-1.form-label
+                                                                                                                                        |암호 확인
+                                                                            div.flow-section
+                                                                                div.adi-to-asp-policy-html-tag
+                                                                                    div.container-xs.centered.adi-to-asp-policy-section
                                                                                         div.form-element
-                                                                                            input(type="checkbox" name="news")#news.form-choice.form-choice-checkbox
-                                                                                            label(for="news").form-label 
+                                                                                            input(type="checkbox" name="adiToAspPolicy")#adiToAspPolicy.form-choice.form-choice-checkbox
+                                                                                            label(style="margin: 0;" for="adiToAspPolicy").form-label
                                                                                                 span.form-choice-indicator
-                                                                                                |공지사항
-                                                                                                small.label-small.tk-caption
-                                                                                                    |WeTube 제품, 서비스 및 소프트웨어에 대한 공지사항, 마케팅, 추천 및 업데이트를 포함한 WeTube 이메일과 소식을 수신합니다.
-                                                                                        div.form-element
-                                                                                            input(type="checkbox" name="itunes")#itunes.form-choice.form-choice-checkbox
-                                                                                            label(for="itunes").form-label
-                                                                                                span.form-choice-indicator
-                                                                                                |앱, 음악, TV 등
-                                                                                                small.label-small.tk-caption
-                                                                                                    |앱, 음악, 영화, TV, 도서, 팟캐스트 등의 신규 출시, 독점 콘텐츠, 특별 프로모션 및 마케팅과 추천을 포함한 WeTube 이메일과 소식을 수신합니다.
-                                                                        div.label-small.text-centered.centered.tk-caption.field-caption.details.privacy-wrapper                           
-                                                                            div.privacy-icon
-                                                                            |WeTube&nbsp;ID 정보를 사용해 안전하게 계정에 로그인하고 데이터에 액세스합니다. WeTube에서는 보안, 지원 및 보고 목적으로 특정 데이터를 기록합니다. 동의하는 경우, WeTube 서비스의 사용 정보에 기반한 마케팅 이메일과 소식 전송에 WeTube ID 정보를 사용할 수 있습니다. 
-                                                                            a(href="/support" target="_blank") 
-                                                                                |데이터가 어떻게 관리되는지 알아보기
-                                                                                span.sr-only
-                                                                                    |새 창으로 열기
-                                                            div.idms-step-footer.clearfix
-                                                                div.idms-toolbar-html-tag
-                                                                    div#1726476993711-0.toolbar-wrapper.toolbar-footer.clearfix
-                                                                        div.button-group.flow-controls.clearfix.pull-right 
-                                                                            div.primary-button-group
-                                                                                button(
-                                                                                    tabindex="0" type="button"
-                                                                                ).button.button-primary.last.nav-action.pull-right.weight-medium
-                                                                                    div.overflow-text
-                                                                                        |계속
-        div.global-footer.create-footer
-            footer
-                footer(role="contentinfo" aria-labelledby="ac-gf-label")#ac-globalfooter.js
-                    div.ac-gf-content
-                        h2#ac-gf-label.ac-gf-label
-                            |WeTube Footer
-                        style
-                            |#ac-globalfooter .ac-gf-footer-legal-link:last-child  {margin: 3px 0 0 0;} #ac-globalfooter .ac-gf-footer {border-top: none;}
-                        section.ac-gf-footer
-                            div.ac-gf-footer-shop
-                                |다양한 쇼핑 방법: 
-                                a(href="#")
-                                    |WeTube Store를 방문
-                                |하거나, 
-                                a(href="#")
-                                    |리셀러
-                                |를 찾아보거나, 314-159-2653번으로 전화하세요.
-                            div.ac-gf-footer-locale
-                                a(href="#" title="국가 또는 지역 선택").ac-gf-footer-locale-link.choose
-                                    |대한민국
-                            div.ac-gf-footer-legal
-                                div.ac-gf-footer-legal-copyright
-                                    |Copyright © 2024 WeTube Inc. 모든 권리 보유.
-                                div.ac-gf-footer-legal-links
-                                    a(href="#").ac-gf-footer-legal-link
-                                        |개인정보 처리방침 
-                                    a(href="#").ac-gf-footer-legal-link
-                                        |웹 사이트 이용 약관 
-                                    a(href="#").ac-gf-footer-legal-link
-                                        |판매 및 환불
-                                    a(href="#").ac-gf-footer-legal-link
-                                        |법적 고지 
-                                    a(href="#").ac-gf-footer-legal-link
-                                        |사이트 맵 
-    script(src="/assets/js/userJoin.bundle.js" type="text/javascript")                                  
-//-
-    if alreadyExistError
-        div.form-message-wrapper
-            span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
-    if alreadyExistError
-        div.form-message-wrapper
-            span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
+                                                                                                |WeTube와 데이터 개인정보 보호
+                                                                                                small(
+                                                                                                    style="display: block; color: #666;"
+                                                                                                ).label-small.tk-caption.adi-to-asp-description
+                                                                                                    |2024. 10. 26.부터 아일랜드 WeTube Distribution International Ltd 대신 싱가포르 WeTube Services Pte. Ltd에서 WeTube ID와 연결된 WeCloud 및 WeTube 미디어 서비스를 운영하게 되었음을 이해했습니다.
+                                                                                                    br
+                                                                                                    br
+                                                                                                    |WeTube은 어디에서 데이터가 처리되는지에 관계없이 WeTube의 개인정보 처리방침에 따라 데이터 보호에 대한 높은 기준을 동일하게 유지합니다. 
+                                                                                                    a(href="/support" target="_blank") 
+                                                                                                        |더 알아보기... 
+                                                                                            if error.adiToAspPolicyError
+                                                                                                div(style="padding: 10px 0 0 26px;").details.destructive
+                                                                                                    |거주하는 국가의 개인정보 보호법을 준수하기 위해 이 동의가 필요합니다.
+                                                                            div.flow-section
+                                                                                div.container-xs.centered.updates-sections
+                                                                                    div.email-updates-html-tag
+                                                                                        div.updates
+                                                                                            div.form-element
+                                                                                                input(type="checkbox" name="news")#news.form-choice.form-choice-checkbox
+                                                                                                label(for="news").form-label 
+                                                                                                    span.form-choice-indicator
+                                                                                                    |공지사항
+                                                                                                    small.label-small.tk-caption
+                                                                                                        |WeTube 제품, 서비스 및 소프트웨어에 대한 공지사항, 마케팅, 추천 및 업데이트를 포함한 WeTube 이메일과 소식을 수신합니다.
+                                                                                            div.form-element
+                                                                                                input(type="checkbox" name="itunes")#itunes.form-choice.form-choice-checkbox
+                                                                                                label(for="itunes").form-label
+                                                                                                    span.form-choice-indicator
+                                                                                                    |앱, 음악, TV 등
+                                                                                                    small.label-small.tk-caption
+                                                                                                        |앱, 음악, 영화, TV, 도서, 팟캐스트 등의 신규 출시, 독점 콘텐츠, 특별 프로모션 및 마케팅과 추천을 포함한 WeTube 이메일과 소식을 수신합니다.
+                                                                            div.label-small.text-centered.centered.tk-caption.field-caption.details.privacy-wrapper                           
+                                                                                div.privacy-icon
+                                                                                |WeTube&nbsp;ID 정보를 사용해 안전하게 계정에 로그인하고 데이터에 액세스합니다. WeTube에서는 보안, 지원 및 보고 목적으로 특정 데이터를 기록합니다. 동의하는 경우, WeTube 서비스의 사용 정보에 기반한 마케팅 이메일과 소식 전송에 WeTube ID 정보를 사용할 수 있습니다. 
+                                                                                a(href="/support" target="_blank") 
+                                                                                    |데이터가 어떻게 관리되는지 알아보기
+                                                                                    span.sr-only
+                                                                                        |새 창으로 열기
+                                                                div.idms-step-footer.clearfix
+                                                                    div.idms-toolbar-html-tag
+                                                                        div#1726476993711-0.toolbar-wrapper.toolbar-footer.clearfix
+                                                                            div.button-group.flow-controls.clearfix.pull-right 
+                                                                                div.primary-button-group
+                                                                                    button(
+                                                                                        tabindex="0" type="button"
+                                                                                    ).button.button-primary.last.nav-action.pull-right.weight-medium
+                                                                                        div.overflow-text
+                                                                                            |계속
+            div.global-footer.create-footer
+                footer
+                    footer(role="contentinfo" aria-labelledby="ac-gf-label")#ac-globalfooter.js
+                        div.ac-gf-content
+                            h2#ac-gf-label.ac-gf-label
+                                |WeTube Footer
+                            style
+                                |#ac-globalfooter .ac-gf-footer-legal-link:last-child  {margin: 3px 0 0 0;} #ac-globalfooter .ac-gf-footer {border-top: none;}
+                            section.ac-gf-footer
+                                div.ac-gf-footer-shop
+                                    |다양한 쇼핑 방법: 
+                                    a(href="#")
+                                        |WeTube Store를 방문
+                                    |하거나, 
+                                    a(href="#")
+                                        |리셀러
+                                    |를 찾아보거나, 314-159-2653번으로 전화하세요.
+                                div.ac-gf-footer-locale
+                                    a(href="#" title="국가 또는 지역 선택").ac-gf-footer-locale-link.choose
+                                        |대한민국
+                                div.ac-gf-footer-legal
+                                    div.ac-gf-footer-legal-copyright
+                                        |Copyright © 2024 WeTube Inc. 모든 권리 보유.
+                                    div.ac-gf-footer-legal-links
+                                        a(href="#").ac-gf-footer-legal-link
+                                            |개인정보 처리방침 
+                                        a(href="#").ac-gf-footer-legal-link
+                                            |웹 사이트 이용 약관 
+                                        a(href="#").ac-gf-footer-legal-link
+                                            |판매 및 환불
+                                        a(href="#").ac-gf-footer-legal-link
+                                            |법적 고지 
+                                        a(href="#").ac-gf-footer-legal-link
+                                            |사이트 맵 
+    //-
+        if alreadyExistError
+            div.form-message-wrapper
+                span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
+        if alreadyExistError
+            div.form-message-wrapper
+                span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       

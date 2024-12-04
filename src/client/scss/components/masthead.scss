@@ -285,33 +285,13 @@ button.wt-icon-button {
     input.wtd-searchbox {
         color: $--wtd-searchbox-text-color;
     }
-}   
+}
 #search-icon.wtd-searchbox {
     display: none;
     position: absolute;
     left: 0;
     color: $--wt-spec-icon-inactive;
     padding: 0 10px;
-}
-#search-input.wtd-searchbox-spt {
-    input {
-        background-color: transparent;        
-        border: none;
-        box-shadow: none;
-        color: inherit;
-        font-family: "Roboto", sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 24px;
-        margin-left: 4px;
-        max-width: 100%;
-        outline: none;
-        text-align: inherit;
-        width: 100%;
-        -webkit-box-flex: 1;
-        flex: 1;
-        flex-basis: 0.000000001px;
-    }
 }
 .sbib_a {
     background: transparent;
@@ -438,14 +418,6 @@ button.wt-icon-button {
 }
 .wt-core-attributed-string--white-space-no-wrap {
     white-space: nowrap;
-}
-#search-container.wtd-searchbox-spt {
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 }
 #search-icon-legacy.wtd-searchbox {
     border: 1px solid $--wtd-searchbox-legacy-border-color;

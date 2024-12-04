@@ -1,12 +1,4 @@
 @import "../style.scss";
-[dir] abbr, [dir] blockquote, [dir] body, [dir] button,
-[dir] dd, [dir] dl, [dir] dt, [dir] fieldset, [dir] figure,
-[dir] form, [dir] h1, [dir] h2, [dir] h3, [dir] h4, [dir] h5,
-[dir] h6, [dir] hgroup, [dir] input, [dir] legend, [dir] li,
-[dir] ol, [dir] p, [dir] pre, [dir] ul {
-    margin: 0;
-    padding: 0;
-}
 body:lang(ko) {
     font-family: 'SF Pro KR', 'SF Pro Text', HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.5882352941;
@@ -634,7 +626,7 @@ input[type=password], input[type=tel], input[type=text] {
     padding-bottom: 9px;
 }
 .si-container .si-oauth {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 .widget-container .si-link {
     cursor: pointer;

@@ -1,108 +1,298 @@
 doctype html
 -'use strict'
--const styles = isThisPageJoinOrLogin ? "" : "font-size: 10px; font-family: Roboto, Arial, sans-serif;"; 
+-const styles=isThisPageJoinOrLogin?"":"font-size: 10px; font-family: Roboto, Arial, sans-serif;"; 
 html(
     style=styles lang="ko-KR"
     darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing
 )
     head
-        script.
-            window.wt={config_:{}};
-        meta(name="viewport", content="width=device-width, height=device-height, initial-scale=1")
-        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge,chrome=1")
-        script.
-            var wtcfg = {d: function() {return window.wt && wt.config_ || wtcfg.data_ || (wtcfg.data_ = {})},get: function(k, o) {return k in wtcfg.d() ? wtcfg.d()[k] : o},et: function() {var a = arguments;if (a.length > 1)wtcfg.d()[a[0]] = a[1];else {var k;for (k in a[0])wtcfg.d()[k] = a[0][k]}}};
-        link(rel="shortcut icon", href="public/logos/wetube_favicon.ico", type="image/x-icon")
+        script(src="assets/js/appDrawer.bundle.js" defer) 
+        script(src="assets/js/masthead.bundle.js" defer) 
+        meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1")
+        meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge,chrome=1")
+        //-
+            script.
+                window.wt = window.wt || {};
+                var wtcfg = {
+                    d: function() {
+                        return window.wt && wt.config_ || wtcfg.data_ || (wtcfg.data_ = {})
+                    },
+                    get: function(k, o) {
+                        return k in wtcfg.d() ? wtcfg.d()[k] : o
+                    },
+                    set: function() {
+                        var a = arguments;
+                        if (a.length > 1)
+                            wtcfg.d()[a[0]] = a[1];
+                        else {
+                            var k;
+                            for (k in a[0])
+                                wtcfg.d()[k] = a[0][k]
+                        }
+                    }
+                };
+            script.
+                (function() {
+                    window.yterr = window.yterr || true;
+                    window.unhandledErrorMessages = {};
+                    window.unhandledErrorCount = 0;
+                    window.onerror = function(msg, url, line, columnNumber, error) {
+                        var err;
+                        if (error)
+                            err = error;
+                        else {
+                            err = new Error;
+                            err.stack = "";
+                            err.message = msg;
+                            err.fileName = url;
+                            err.lineNumber = line;
+                            if (!isNaN(columnNumber))
+                                err["columnNumber"] = columnNumber
+                        }
+                        var message = String(err.message);
+                        if (!err.message || message in window.unhandledErrorMessages || window.unhandledErrorCount >= 5)
+                            return;
+                        window.unhandledErrorCount += 1;
+                        window.unhandledErrorMessages[message] = true;
+                        var img = new Image;
+                        window.emergencyTimeoutImg = img;
+                        img.onload = img.onerror = function() {
+                            delete window.emergencyTimeoutImg
+                        }
+                        ;
+                        var combinedLineAndColumn = err.lineNumber;
+                        if (!isNaN(err["columnNumber"]))
+                            combinedLineAndColumn = combinedLineAndColumn + (":" + err["columnNumber"]);
+                        var stack = err.stack || "";
+                        var values = {
+                            "msg": message,
+                            "type": err.name,
+                            "client.params": "unhandled window error",
+                            "file": err.fileName,
+                            "line": combinedLineAndColumn,
+                            "stack": stack.substr(0, 500)
+                        };
+                        var thirdPartyScript = !err.fileName || err.fileName === "<anonymous>" || stack.indexOf("extension://") >= 0;
+                        var replaced = stack.replace(/https:\/\/www.youtube.com\//g, "");
+                        if (replaced.match(/https?:\/\/[^/]+\//))
+                            thirdPartyScript = true;
+                        else if (stack.indexOf("trapProp") >= 0 && stack.indexOf("trapChain") >= 0)
+                            thirdPartyScript = true;
+                        else if (message.indexOf("redefine non-configurable") >= 0)
+                            thirdPartyScript = true;
+                        var baseUrl = window["ytcfg"].get("EMERGENCY_BASE_URL", "https://www.youtube.com/error_204?t=jserror&level=ERROR");
+                        var unsupported = message.indexOf("window.customElements is undefined") >= 0;
+                        if (thirdPartyScript || unsupported)
+                            baseUrl = baseUrl.replace("level=ERROR", "level=WARNING");
+                        var parts = [baseUrl];
+                        var key;
+                        for (key in values) {
+                            var value = values[key];
+                            if (value)
+                                parts.push(key + "=" + encodeURIComponent(value))
+                        }
+                        img.src = parts.join("&")
+                    }
+                    ;
+                    (function() {
+                        function _getExtendedNativePrototype(tag) {
+                            var p = this._nativePrototypes[tag];
+                            if (!p) {
+                                p = Object.create(this.getNativePrototype(tag));
+                                var p$ = Object.getOwnPropertyNames(window["Polymer"].Base);
+                                var i = 0;
+                                var n = void 0;
+                                for (; i < p$.length && (n = p$[i]); i++)
+                                    if (!window["Polymer"].BaseDescriptors[n])
+                                        try {
+                                            p[n] = window["Polymer"].Base[n]
+                                        } catch (e) {
+                                            throw new Error("Error while copying property: " + n + ". Tag is " + tag);
+                                        }
+                                try {
+                                    Object.defineProperties(p, window["Polymer"].BaseDescriptors)
+                                } catch (e) {
+                                    throw new Error("Polymer define property failed for " + Object.keys(p));
+                                }
+                                this._nativePrototypes[tag] = p
+                            }
+                            return p
+                        }
+                        function handlePolymerError(msg) {
+                            window.onerror(msg, window.location.href, 0, 0, new Error(Array.prototype.join.call(arguments, ",")))
+                        }
+                        var origPolymer = window["Polymer"];
+                        var newPolymer = function(config) {
+                            if (!origPolymer._ytIntercepted && window["Polymer"].Base) {
+                                origPolymer._ytIntercepted = true;
+                                window["Polymer"].Base._getExtendedNativePrototype = _getExtendedNativePrototype;
+                                window["Polymer"].Base._error = handlePolymerError;
+                                window["Polymer"].Base._warn = handlePolymerError
+                            }
+                            return origPolymer.apply(this, arguments)
+                        };
+                        var origDescriptor = Object.getOwnPropertyDescriptor(window, "Polymer");
+                        Object.defineProperty(window, "Polymer", {
+                            set: function(p) {
+                                if (origDescriptor && origDescriptor.set && origDescriptor.get) {
+                                    origDescriptor.set(p);
+                                    origPolymer = origDescriptor.get()
+                                } else
+                                    origPolymer = p;
+                                if (typeof origPolymer === "function")
+                                    Object.defineProperty(window, "Polymer", {
+                                        value: origPolymer,
+                                        configurable: true,
+                                        enumerable: true,
+                                        writable: true
+                                    })
+                            },
+                            get: function() {
+                                return typeof origPolymer === "function" ? newPolymer : origPolymer
+                            },
+                            configurable: true,
+                            enumerable: true
+                        })
+                    }
+                    )();
+            }
+            ).call(this);
+        link(rel="shortcut icon" href="public/logos/wetube_favicon.ico" type="image/x-icon")
         link(rel="icon" href="public/logos/wetube_favicon_32x32.png" sizes="32x32")
         link(rel="icon" href="public/logos/wetube_favicon_48x48.png" sizes="48x48")
         link(rel="icon" href="public/logos/wetube_favicon_96x96.png" sizes="96x96")
         link(rel="icon" href="public/logos/wetube_favicon_144x144.png" sizes="144x144")
         title=tabTitle
-        link(rel="canonical", href="/")
+        link(rel="canonical" href="/")
         meta(property="og:image" content="")
         meta(name="description" content="WeTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여, 친구 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.")
         meta(name="keywords" content="동영상, 무료, 공유, 첫사이트, 어려움")
-        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap")
-        script.
-            var wtcsi = {
-                gt: function(n) {
-                    n = (n || "") + "data_";
-                    return wtcsi[n] || (wtcsi[n] = {
-                        tick: {},
-                        info: {},
-                        gel: {
-                            preLoggedEventLoggingInfos: []
-                        }
-                    })
-                },
-                now: window.performance && window.performance.timing && window.performance.now && window.performance.timing.navigationStart ? function() {
-                    return window.performance.timing.navigationStart + window.performance.now()
-                }
-                : function() {
-                    return (new Date).getTime()
-                }
-                ,
-                tick: function(l, t, n) {
-                    var ticks = wtcsi.gt(n).tick;
-                    var v = t || wtcsi.now();
-                    if (ticks[l]) {
-                        ticks["_" + l] = ticks["_" + l] || [ticks[l]];
-                        ticks["_" + l].push(v)
+        //-
+            script.
+                var ytcsi = {
+                    gt: function(n) {
+                        n = (n || "") + "data_";
+                        return ytcsi[n] || (ytcsi[n] = {
+                            tick: {},
+                            info: {},
+                            gel: {
+                                preLoggedGelInfos: []
+                            }
+                        })
+                    },
+                    now: window.performance && window.performance.timing && window.performance.now && window.performance.timing.navigationStart ? function() {
+                        return window.performance.timing.navigationStart + window.performance.now()
                     }
-                    ticks[l] = v
-                },
-                info: function(k, v, n) {
-                    wtcsi.gt(n).info[k] = v
-                },
-                infoGel: function(p, n) {
-                    wtcsi.gt(n).gel.preLoggedEventLoggingInfos.push(p)
-                },
-                setStart: function(t, n) {
-                    wtcsi.tick("_start", t, n)
+                    : function() {
+                        return (new Date).getTime()
+                    }
+                    ,
+                    tick: function(l, t, n) {
+                        var ticks = ytcsi.gt(n).tick;
+                        var v = t || ytcsi.now();
+                        if (ticks[l]) {
+                            ticks["_" + l] = ticks["_" + l] || [ticks[l]];
+                            ticks["_" + l].push(v)
+                        }
+                        ticks[l] = v
+                    },
+                    info: function(k, v, n) {
+                        ytcsi.gt(n).info[k] = v
+                    },
+                    infoGel: function(p, n) {
+                        ytcsi.gt(n).gel.preLoggedGelInfos.push(p)
+                    },
+                    setStart: function(t, n) {
+                        ytcsi.tick("_start", t, n)
+                    }
+                };
+                (function(w, d) {
+                    function isGecko() {
+                        if (!w.navigator)
+                            return false;
+                        try {
+                            if (w.navigator.userAgentData && w.navigator.userAgentData.brands && w.navigator.userAgentData.brands.length) {
+                                var brands = w.navigator.userAgentData.brands;
+                                var i = 0;
+                                for (; i < brands.length; i++)
+                                    if (brands[i] && brands[i].brand === "Firefox")
+                                        return true;
+                                return false
+                            }
+                        } catch (e) {
+                            setTimeout(function() {
+                                throw e;
+                            })
+                        }
+                        if (!w.navigator.userAgent)
+                            return false;
+                        var ua = w.navigator.userAgent;
+                        return ua.indexOf("Gecko") > 0 && ua.toLowerCase().indexOf("webkit") < 0 && ua.indexOf("Edge") < 0 && ua.indexOf("Trident") < 0 && ua.indexOf("MSIE") < 0
+                    }
+                    ytcsi.setStart(w.performance ? w.performance.timing.responseStart : null);
+                    var isPrerender = (d.visibilityState || d.webkitVisibilityState) == "prerender";
+                    var vName = !d.visibilityState && d.webkitVisibilityState ? "webkitvisibilitychange" : "visibilitychange";
+                    if (isPrerender) {
+                        var startTick = function() {
+                            ytcsi.setStart();
+                            d.removeEventListener(vName, startTick)
+                        };
+                        d.addEventListener(vName, startTick, false)
+                    }
+                    if (d.addEventListener)
+                        d.addEventListener(vName, function() {
+                            ytcsi.tick("vc")
+                        }, false);
+                    if (isGecko()) {
+                        var isHidden = (d.visibilityState || d.webkitVisibilityState) == "hidden";
+                        if (isHidden)
+                            ytcsi.tick("vc")
+                    }
+                    var slt = function(el, t) {
+                        setTimeout(function() {
+                            var n = ytcsi.now();
+                            el.loadTime = n;
+                            if (el.slt)
+                                el.slt()
+                        }, t)
+                    };
+                    w.__ytRIL = function(el) {
+                        if (!el.getAttribute("data-thumb"))
+                            if (w.requestAnimationFrame)
+                                w.requestAnimationFrame(function() {
+                                    slt(el, 0)
+                                });
+                            else
+                                slt(el, 16)
+                    }
                 }
-            };
-        script.
-            if (window.wtcsi) {window.wtcsi.tick('loadPageCompleteStart', null, '');}
-        script.
-            (function() {
-                window.wtplayer = {};
-                wtcfg.set({
-                    "GL": "KR",
-                    "HL": "ko",
-                    "HTML_DIR": "ltr",
-                    "HTML_LANG": "ko-KR",
-                    "LOGGED_IN": false,
-                });
-            })();
-            wtcfg.set("initialInnerWidth", window.innerWidth);
-            wtcfg.set("initialInnerHeight", window.innerHeight);
-        script.
-            if (window.wtcsi) {window.wtcsi.tick('loadPageCompleteFinish', null, '');}
-        script.
-            if (window.wtcsi) {window.wtcsi.tick('criticalScriptLoad', null, '');}
+                )(window, document);
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap")
+        link(rel="stylesheet" href="//fonts.googleapis.com/css2?family=Roboto_old:wght@300;400;500;700&family=YouTube+Sans:wght@300..900&display=swap").css-httpsfontsgoogleapiscomcss2familyRoboto_oldwght300400500700familyYouTubeSanswght300900displayswap
         script(name="www-roboto").
             if(document.fonts&&document.fonts.load){document.fonts.load("400 10pt Roboto","");document.fonts.load("500 10pt Roboto","");}
+        link(rel="stylesheet" href="assets/css/appDrawer.bundle.css")
+        link(rel="stylesheet" href="assets/css/masthead.bundle.css")
+        block page-css
+        style.global_styles.
+            body{padding:0;margin:0;overflow-y:scroll}body.autoscroll{overflow-y:auto}body.no-scroll{overflow:hidden}body.no-y-scroll{overflow-y:hidden}.hidden{display:none}textarea{--paper-input-container-input_-_white-space:pre-wrap}.grecaptcha-badge{visibility:hidden}
+        style.searchbox.
+            #search-input.wtd-searchbox-spt input{-webkit-appearance:none;-webkit-font-smoothing:antialiased;background-color:transparent;border:none;box-shadow:none;color:inherit;font-family:Roboto,Noto,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin-left:4px;max-width:100%;outline:none;text-align:inherit;width:100%;-ms-flex:1 1 0.000000001px;-webkit-flex:1;-webkit-box-flex:1;-moz-box-flex:1;flex:1;-webkit-flex-basis:0.000000001px;-ms-flex-perferred-size:0.000000001px;flex-basis:0.000000001px}#search-container.wtd-searchbox-spt{pointer-events:none;position:absolute;top:0;right:0;bottom:0;left:0}#search-input.wtd-searchbox-spt #search::-webkit-input-placeholder{color:#888}#search-input.wtd-searchbox-spt #search::-moz-input-placeholder{color:#888}#search-input.wtd-searchbox-spt #search:-ms-input-placeholder{color:#888}
+        if !isThisPageJoinOrLogin
+            style.kevlar_global_style.
+                html{background-color:#fff!important;-webkit-text-size-adjust:none;}html[dark]{background-color:#0f0f0f!important;}#logo-red-icon-container.wtd-topbar-logo-renderer{width:86px;}
         meta(name="theme-color" content="rgba(33, 33, 33, 0.98)")
+        //-
+            script.
+                if (window.wtcsi) {window.wtcsi.tick('pdc', null, '');}
+            script.
+                var wtInitialData {}
+            script.
+                if (window.wtcsi) {window.wtcsi.tick('pdr', null, '');}
         style dom-bind,dom-if,dom-repeat{display:none;}
-    body
-        script.
-            if (window.wtcsi) {window.wtcsi.tick('bodyStart', null, '')}
-        script.
-            wtcfg.set('initialBodyClientWidth', document.body.clientWidth);
+        link(href="https://fonts.googleapis.com/css?family=Roboto_old:300italic,400italic,500italic,700italic" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet")
+    body(dir="ltr" rounded-container cz-shortcut-listen="true")
         block wtd-app
-        script.
-            if (window.wtcsi) {window.wtcsi.tick('globalContentComplete', null, '')}
-        script.
-            var sc = wtcfg.d();
-            fetch('/wtconfig', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(sc),
-            }
-            ).then(resopnse => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));            
-            
+        block page-js

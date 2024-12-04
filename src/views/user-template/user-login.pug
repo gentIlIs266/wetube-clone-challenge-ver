@@ -1,7 +1,9 @@
-include ../partials/html-head.pug
-head 
+extends ../partials/html-head.pug
+block page-css
     link(rel="stylesheet" href="/assets/css/userLogin.bundle.css" type="text/css")
-body(lang="ko")
+block page-js
+    script(type="text/javascript" src="/assets/js/userLogin.bundle.js")
+block wtd-app
     include ../partials/masthead.pug
     div#signin-container.rs-page-content
         div(role="main").rs-sign-in.as-l-container.rs-sign-in-account.rs-sign-in-has-idms.rs-sign-in-idms-no-sidebar 
@@ -252,11 +254,11 @@ body(lang="ko")
             div(data-nosnippet data-autom="page-legal-footnotes").as-globalfooter-sosumi
                 div#footnotes-portal
                     p
-                        |사업자등록번호 : 021-81-55555 | 통신판매업신고번호 : 제 2011-서울강남-00810호
+                        |사업자등록번호 : 314-15-926535 | 통신판매업신고번호 : 제 3000-태양계-00003호
                         br
                         |대표이사 : HARRY POTTER | 주소 : 대충 지구 어딘가
                         br
-                        |대표전화 : 314-330-8877 | 팩스 : 02-6928-9999
+                        |대표전화 : 978-89-96950 | 팩스 : 97-8899-6950
                     p(style="padding-top: .8em;")
                         |WeTube 온라인 스토어는 업계 표준 암호화를 사용하여 제출된 고객 비밀 정보를 보호합니다. 
                         a(href="#") 
@@ -298,4 +300,3 @@ body(lang="ko")
                         li.as-globalfooter-mini-legal-links-item
                             a(href="#").as-globalfooter-mini-legal-link
                                 |사이트 맵
-    script(type="text/javascript" src="/assets/js/userLogin.bundle.js")

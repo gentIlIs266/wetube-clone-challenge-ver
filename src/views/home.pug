@@ -1,8 +1,10 @@
 extends partials/html-head.pug
 include videoMixin.pug
-block wtd-app
+block page-css
     link(rel="stylesheet", href="assets/css/home.bundle.css" type="text/css")
+block page-js
     script(src="assets/js/home.bundle.js" type="text/javascript" defer)
+block wtd-app
     div(
         darker-dark-theme frosted-glass-mode="none" guide-persistent-and-visible
     ).wtd-app-html-tag

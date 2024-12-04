@@ -1,30 +1,49 @@
-include ../partials/html-head.pug
-
-link(rel="stylesheet" href="/assets/css/createVideo.bundle.css" type="text/css")
-script(src="/assets/js/createVideo.bundle.js" defer)
-div(dark dark-theme create-video-background)#create-video-page-background
-    if step === "showVideoFileInput" || !step
-        div.wtcp-uploads-dialog-html-tag
-            div(
-                role="dialog" 
-                tabindex="-1"
-                style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
-            )#dialog.tp-wt-paper-dialog-html-tag.wtcp-uploads-dialog
-                div.dialog-content.wtcp-uploads-dialog
-                    div.header.wtcp-uploads-dialog
-                        div.title-row.wtcp-uploads-dialog
-                            div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
-                                div#title.wtcp-uploads-dialog
-                                    |동영상 업로드
-                            div.close-button-area.wtcp-uploads-dialog
+extends ../partials/html-head.pug
+block page-css
+    link(rel="stylesheet" href="/assets/css/createVideo.bundle.css" type="text/css")
+block page-js
+    script(src="/assets/js/createVideo.bundle.js")
+block wtd-app
+    div(dark dark-theme create-video-background)#create-video-page-background
+        if step === "showVideoFileInput" || !step
+            div.wtcp-uploads-dialog-html-tag
+                div(
+                    role="dialog" 
+                    tabindex="-1"
+                    style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+                )#dialog.tp-wt-paper-dialog-html-tag.wtcp-uploads-dialog
+                    div.dialog-content.wtcp-uploads-dialog
+                        div.header.wtcp-uploads-dialog
+                            div.title-row.wtcp-uploads-dialog
                                 div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
-                                div.wtcp-send-feedback-button-html-tag.wtcp-uploads-dialog
+                                    div#title.wtcp-uploads-dialog
+                                        |동영상 업로드
+                                div.close-button-area.wtcp-uploads-dialog
+                                    div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
+                                    div.wtcp-send-feedback-button-html-tag.wtcp-uploads-dialog
+                                        div(
+                                            tabindex="0"
+                                            aria-disabled="false"
+                                            aria-label="의견 보내기"
+                                            role="button"
+                                        ).wtcp-icon-button-html-tag.wtcp-uploads-dialog
+                                            div.tp-wt-iron-icon-html-tag.remove-defaults.wtcp-icon-button
+                                                svg(
+                                                    viewBox="0 0 24 24"
+                                                    focusable="false"
+                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                ).tp-wt-iron-icon
+                                                    g.tp-wt-iron-icon
+                                                        path(
+                                                            d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                                        ).tp-wt-iron-icon
                                     div(
                                         tabindex="0"
                                         aria-disabled="false"
-                                        aria-label="의견 보내기"
+                                        aria-label="닫기"
+                                        onclick="location.href='/'"
                                         role="button"
-                                    ).wtcp-icon-button-html-tag.wtcp-uploads-dialog
+                                    )#close-button.wtcp-icon-button-html-tag.wtcp-uploads-dialog
                                         div.tp-wt-iron-icon-html-tag.remove-defaults.wtcp-icon-button
                                             svg(
                                                 viewBox="0 0 24 24"
@@ -33,223 +52,164 @@ div(dark dark-theme create-video-background)#create-video-page-background
                                             ).tp-wt-iron-icon
                                                 g.tp-wt-iron-icon
                                                     path(
-                                                        d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                                        d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
                                                     ).tp-wt-iron-icon
+                        div#wtcp-uploads-dialog-file-picker.wtcp-uploads-file-picker-html-tag.wtcp-uploads-dialog
+                            div(style="position: relative;")#content.wtcp-uploads-file-picker
+                                div#animation.wtcp-uplaods-file-picker-animation-html-tag.wtcp-uploads-file-picker
+                                    div#circle.wtcp-uplaods-file-picker-animation
+                                        div#arrow-group.wtcp-uplaods-file-picker-animation
+                                            div#arrow.wtcp-uplaods-file-picker-animation
+                                                div#arrow-tip.wtcp-uplaods-file-picker-animation
+                                                div#smoke.wtcp-uplaods-file-picker-animation
+                                                div#arrow-line.wtcp-uplaods-file-picker-animation
+                                            div#arrow-underline.wtcp-uplaods-file-picker-animation
+                                        div#speed-line.wtcp-uplaods-file-picker-animation
+                                            img(
+                                                src="https://www.gstatic.com/youtube/img/creator/uploads/speed_line_darkmode.svg"
+                                            ).wtcp-uplaods-file-picker-animation
+                                        div#burst.wtcp-uplaods-file-picker-animation
+                                            div#stroke.wtcp-uplaods-file-picker-animation
+                                p.label.wtcp-uploads-file-picker 동영상 파일을 드래그 앤 드롭하여 업로드
+                                p.sublabel.wtcp-uploads-file-picker 동영상을 게시하기 전에는 비공개로 설정됩니다.
+                                if error
+                                    div.error-area.wtcp-uploads-file-picker
+                                        div.tp-wt-iron-icon-html-tag.warning-icon.wtcp-uploads-file-picker
+                                            svg(
+                                                viewBox="0 0 24 24"
+                                                focusable="false"
+                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                            ).tp-wt-iron-icon
+                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                    path(
+                                                        d="M13 18H11V16H13V18ZM13 10H11V15H13V10ZM12 5.89L20.2 19H3.8L12 5.89ZM12 4L2 20H22L12 4Z"
+                                                    ).tp-wt-iron-icon
+                                        div#error-message.error-details.wtcp-uploads-file-picker
                                 div(
-                                    tabindex="0"
-                                    aria-disabled="false"
-                                    aria-label="닫기"
-                                    onclick=`location.href="/studio/channel/${sessionUser.user_channel.channel_id}"`
-                                    role="button"
-                                )#close-button.wtcp-icon-button-html-tag.wtcp-uploads-dialog
-                                    div.tp-wt-iron-icon-html-tag.remove-defaults.wtcp-icon-button
-                                        svg(
-                                            viewBox="0 0 24 24"
-                                            focusable="false"
-                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                        ).tp-wt-iron-icon
-                                            g.tp-wt-iron-icon
-                                                path(
-                                                    d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
-                                                ).tp-wt-iron-icon
-                    div#wtcp-uploads-dialog-file-picker.wtcp-uploads-file-picker-html-tag.wtcp-uploads-dialog
-                        div(style="position: relative;")#content.wtcp-uploads-file-picker
-                            div#animation.wtcp-uplaods-file-picker-animation-html-tag.wtcp-uploads-file-picker
-                                div#circle.wtcp-uplaods-file-picker-animation
-                                    div#arrow-group.wtcp-uplaods-file-picker-animation
-                                        div#arrow.wtcp-uplaods-file-picker-animation
-                                            div#arrow-tip.wtcp-uplaods-file-picker-animation
-                                            div#smoke.wtcp-uplaods-file-picker-animation
-                                            div#arrow-line.wtcp-uplaods-file-picker-animation
-                                        div#arrow-underline.wtcp-uplaods-file-picker-animation
-                                    div#speed-line.wtcp-uplaods-file-picker-animation
-                                        img(
-                                            src="https://www.gstatic.com/youtube/img/creator/uploads/speed_line_darkmode.svg"
-                                        ).wtcp-uplaods-file-picker-animation
-                                    div#burst.wtcp-uplaods-file-picker-animation
-                                        div#stroke.wtcp-uplaods-file-picker-animation
-                            p.label.wtcp-uploads-file-picker 동영상 파일을 드래그 앤 드롭하여 업로드
-                            p.sublabel.wtcp-uploads-file-picker 동영상을 게시하기 전에는 비공개로 설정됩니다.
-                            if error
-                                div.error-area.wtcp-uploads-file-picker
-                                    div.tp-wt-iron-icon-html-tag.warning-icon.wtcp-uploads-file-picker
-                                        svg(
-                                            viewBox="0 0 24 24"
-                                            focusable="false"
-                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                        ).tp-wt-iron-icon
-                                            g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
-                                                path(
-                                                    d="M13 18H11V16H13V18ZM13 10H11V15H13V10ZM12 5.89L20.2 19H3.8L12 5.89ZM12 4L2 20H22L12 4Z"
-                                                ).tp-wt-iron-icon
-                                    div#error-message.error-details.wtcp-uploads-file-picker
-                            div(
-                                tabindex="-1"
-                                aria-disabled="false"
-                                role="button"
-                                type="filled"
-                                modern
-                            )#select-files-button.wtcp-button-html-tag.wtcp-uploads-file-picker
-                                div.wtcp-button-shape-html-tag.wtcp-button
-                                    button(
-                                        aria-label="파일 선택"
-                                    ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
-                                        div.wtcp-button-shape-impl__button-text-content
-                                            |파일 선택
-                            form(
-                                action=`/studio/${sessionUser.user_channel.channel_id}/videos/upload` 
-                                method="POST"
-                                style="position: absolute; overflow: hidden; height: 0px; width: 0px; opacity: 0; left: 0px; top: 0px; display: none;"
-                                enctype="multipart/form-data"
-                            )#filedata-form
-                                input(name="step" type="hidden" value="showVideoFileInput")
-                                input(
-                                    name="videoFileData"
-                                    type="file"
-                                    aria-hidden="true"
                                     tabindex="-1"
-                                    accept="video/*"
-                                )#filedata-input
-                            if error 
-                                -console.error(error);
-                            p#disclaimer-html.disclaimer.wtcp-uploads-file-picker
-                                |WeTube 에 동영상을 제출하면 WeTube 
-                                a(href="#" target="_blank").link-placeholder 서비스 약관 
-                                |및 
-                                a(href="#" target="_blank").link-placeholder 커뮤니티 가이드
-                                |에 동의하게 됩니다.
-                            p.disclaimer.wtcp-uploads-file-picker
-                                span.wtcp-uploads-file-picker
-                                    |불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다. 
-                                span.wtcp-uploads-file-picker
-                                    |타인의 저작권 또는 개인 정보 보호 권리를 침해해서는 안 됩니다. 
-                                a(
-                                    href="https://www.youtube.com/yt/copyright"
-                                    target="_blank"
-                                ).wtcp-uploads-file-picker 자세히 알아보기
-    if step === "showVideoMetaDataInput"
-        div.wtcp-uploads-dialog-html-tag
-            div(
-                role="dialog" 
-                tabindex="-1"
-                style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
-            )#dialog.tp-wt-paper-dialog-html-tag.wtcp-uploads-dialog
-                div.dialog-content.wtcp-uploads-dialog
-                    div.header.wtcp-uploads-dialog
-                        div.title-row.wtcp-uploads-dialog
-                            div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
-                                div#title.wtcp-uploads-dialog
-                                    |#{file.filename}
-                            div.close-button-area.wtcp-uploads-dialog
-                                div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
-                                div.wtcp-send-feedback-button-html-tag.wtcp-uploads-dialog
-                                    div(
-                                        tabindex="0"
-                                        aria-disabled="false"
-                                        aria-label="의견 보내기"
-                                        role="button"
-                                    ).wtcp-icon-button-html-tag.wtcp-uploads-dialog
-                                        div.tp-wt-iron-icon-html-tag.remove-defaults.wtcp-icon-button
-                                            svg(
-                                                viewBox="0 0 24 24"
-                                                focusable="false"
-                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                            ).tp-wt-iron-icon
-                                                g.tp-wt-iron-icon
-                                                    path(
-                                                        d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
-                                                    ).tp-wt-iron-icon
-                    div(
-                        style="box-sizing: border-box;"
-                    )#scrollable-content.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
-                        div(role="none").wtcp-ve-html-tag.wtcp-uploads-dialog
-                            div.details-header-wrapper.wtcp-uploads-dialog
-                                h1.wtcp-uploads-dialog 세부정보
-                                div(    
-                                    tabindex="-1" aria-disabled="false" role="button" modern 
-                                )#reuse-details-button.wtcp-button-html-tag.wtcp-uploads-dialog
+                                    aria-disabled="false"
+                                    role="button"
+                                    type="filled"
+                                    modern
+                                )#select-files-button.wtcp-button-html-tag.wtcp-uploads-file-picker
                                     div.wtcp-button-shape-html-tag.wtcp-button
                                         button(
-                                            aria-label="세부정보 재사용"
-                                        ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
-                                            div.wtcp-button-shape-impl__button-text-content 세부정보 재사용
-                            div#details.wtcp-video-metadata-editor-html-tag.wtcp-uploads-dialog
-                                div.left-col.wtcp-video-metadata-editor
-                                    div#basics.wtcp-video-metadata-editor-basics-html-tag.wtcp-video-metadata-editor
-                                        form(
-                                            action=`/studio/${sessionUser.user_channel.channel_id}/videos/upload` 
-                                            method="POST"
-                                            style="position: absolute; overflow: hidden; height: 0px; width: 0px; opacity: 0; left: 0px; top: 0px; display: none;"
-                                        )#file-metadata-form
-                                            input(name="step" type="hidden" value="showVideoMetaDataInput")
-                                            input(
-                                                name="metadataTitle"
-                                                type="text"
-                                                aria-hidden="true"
-                                                tabindex="-1"
-                                            )#file-metadata-title
-                                            input(
-                                                name="metadataDescription"
-                                                type="text"
-                                                aria-hidden="true"
-                                                tabindex="-1"
-                                            )#file-metadata-description
-                                        if error 
-                                            -console.error(error);
-                                        div.input-container.title.wtcp-video-metadata-editor-basics
-                                            div#title-wrapper.wtcp-video-title-html-tag.wtcp-video-metadata-editor-basics
-                                                div(
-                                                    label="제목"
-                                                )#title-textarea.wtcp-social-suggestions-textbox-html-tag.wtcp-video-title
+                                            aria-label="파일 선택"
+                                        ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
+                                            div.wtcp-button-shape-impl__button-text-content
+                                                |파일 선택
+                                form(
+                                    action=`/studio/${sessionUser.user_channel.channel_id}/videos/upload` 
+                                    method="POST"
+                                    style="position: absolute; overflow: hidden; height: 0px; width: 0px; opacity: 0; left: 0px; top: 0px; display: none;"
+                                    enctype="multipart/form-data"
+                                )#filedata-form
+                                    input(name="step" type="hidden" value="showVideoFileInput")
+                                    input(
+                                        name="videoFileData"
+                                        type="file"
+                                        aria-hidden="true"
+                                        tabindex="-1"
+                                        accept="video/*"
+                                    )#filedata-input
+                                if error 
+                                    -console.error(error);
+                                p#disclaimer-html.disclaimer.wtcp-uploads-file-picker
+                                    |WeTube 에 동영상을 제출하면 WeTube 
+                                    a(href="#" target="_blank").link-placeholder 서비스 약관 
+                                    |및 
+                                    a(href="#" target="_blank").link-placeholder 커뮤니티 가이드
+                                    |에 동의하게 됩니다.
+                                p.disclaimer.wtcp-uploads-file-picker
+                                    span.wtcp-uploads-file-picker
+                                        |불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다. 
+                                    span.wtcp-uploads-file-picker
+                                        |타인의 저작권 또는 개인 정보 보호 권리를 침해해서는 안 됩니다. 
+                                    a(
+                                        href="https://www.youtube.com/yt/copyright"
+                                        target="_blank"
+                                    ).wtcp-uploads-file-picker 자세히 알아보기
+        if step === "showVideoMetaDataInput"
+            div.wtcp-uploads-dialog-html-tag
+                div(
+                    role="dialog" 
+                    tabindex="-1"
+                    style="outline: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+                )#dialog.tp-wt-paper-dialog-html-tag.wtcp-uploads-dialog
+                    div.dialog-content.wtcp-uploads-dialog
+                        div.header.wtcp-uploads-dialog
+                            div.title-row.wtcp-uploads-dialog
+                                div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
+                                    div#title.wtcp-uploads-dialog
+                                        |#{file.filename}
+                                div.close-button-area.wtcp-uploads-dialog
+                                    div.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
+                                    div.wtcp-send-feedback-button-html-tag.wtcp-uploads-dialog
+                                        div(
+                                            tabindex="0"
+                                            aria-disabled="false"
+                                            aria-label="의견 보내기"
+                                            role="button"
+                                        ).wtcp-icon-button-html-tag.wtcp-uploads-dialog
+                                            div.tp-wt-iron-icon-html-tag.remove-defaults.wtcp-icon-button
+                                                svg(
+                                                    viewBox="0 0 24 24"
+                                                    focusable="false"
+                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                ).tp-wt-iron-icon
+                                                    g.tp-wt-iron-icon
+                                                        path(
+                                                            d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                                        ).tp-wt-iron-icon
+                        div(
+                            style="box-sizing: border-box;"
+                        )#scrollable-content.wtcp-animatable-html-tag.metadata-fade-in-section.wtcp-uploads-dialog
+                            div(role="none").wtcp-ve-html-tag.wtcp-uploads-dialog
+                                div.details-header-wrapper.wtcp-uploads-dialog
+                                    h1.wtcp-uploads-dialog 세부정보
+                                    div(    
+                                        tabindex="-1" aria-disabled="false" role="button" modern 
+                                    )#reuse-details-button.wtcp-button-html-tag.wtcp-uploads-dialog
+                                        div.wtcp-button-shape-html-tag.wtcp-button
+                                            button(
+                                                aria-label="세부정보 재사용"
+                                            ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
+                                                div.wtcp-button-shape-impl__button-text-content 세부정보 재사용
+                                div#details.wtcp-video-metadata-editor-html-tag.wtcp-uploads-dialog
+                                    div.left-col.wtcp-video-metadata-editor
+                                        div#basics.wtcp-video-metadata-editor-basics-html-tag.wtcp-video-metadata-editor
+                                            form(
+                                                action=`/studio/${sessionUser.user_channel.channel_id}/videos/upload` 
+                                                method="POST"
+                                                style="position: absolute; overflow: hidden; height: 0px; width: 0px; opacity: 0; left: 0px; top: 0px; display: none;"
+                                            )#file-metadata-form
+                                                input(name="step" type="hidden" value="showVideoMetaDataInput")
+                                                input(
+                                                    name="metadataTitle"
+                                                    type="text"
+                                                    aria-hidden="true"
+                                                    tabindex="-1"
+                                                )#file-metadata-title
+                                                input(
+                                                    name="metadataDescription"
+                                                    type="text"
+                                                    aria-hidden="true"
+                                                    tabindex="-1"
+                                                )#file-metadata-description
+                                            if error 
+                                                -console.error(error);
+                                            div.input-container.title.wtcp-video-metadata-editor-basics
+                                                div#title-wrapper.wtcp-video-title-html-tag.wtcp-video-metadata-editor-basics
                                                     div(
-                                                        tabindex="-1"
-                                                    )#container.wtcp-form-input-container-html-tag.fill-height.wtcp-social-suggestions-textbox
-                                                        div#outer.wtcp-form-input-container
-                                                            div#label.wtcp-form-input-container
-                                                                span#label-text.wtcp-form-input-container
-                                                                    |제목(필수 항목)
-                                                                div#label-help-tooltip.wtcp-form-input-container
-                                                                    div(
-                                                                        tabindex="0" role="tooltip" mini
-                                                                    )#help-icon.tp-wt-iron-icon-html-tag.help-outline-icon.wtcp-form-input-container
-                                                                        svg(
-                                                                            viewBox="0 0 16 16"
-                                                                            focusable="false"
-                                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                                                        ).tp-wt-iron-icon
-                                                                            g.tp-wt-iron-icon
-                                                                                path(
-                                                                                    d="M8,2c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6S4.69,2,8,2 M8,1C4.14,1,1,4.14,1,8s3.14,7,7,7s7-3.14,7-7S11.86,1,8,1L8,1z M8,12.3c0.44,0,0.8-0.36,0.8-0.8S8.44,10.7,8,10.7s-0.8,0.36-0.8,0.8S7.56,12.3,8,12.3z M8,3.55c-1.45,0-2.62,1.18-2.62,2.62h1.31 c0-0.72,0.59-1.31,1.31-1.31s1.31,0.59,1.31,1.31c0,1.32-1.97,1.15-1.97,3.28h1.31c0-1.48,1.97-1.64,1.97-3.28 C10.62,4.72,9.45,3.55,8,3.55z"
-                                                                                ).tp-wt-iron-icon
-                                                            div#child-input.wtcp-form-input-container
-                                                                div#container-content.wtcp-social-suggestions-textbox
-                                                                    div(
-                                                                        dir="auto"
-                                                                    )#input.wtcp-social-suggestions-input-html-tag.fill-height.wtcp-social-suggestions-textbox
-                                                                        div(
-                                                                            contenteditable="true"
-                                                                            aria-required="true"
-                                                                            aria-label="동영상을 설명하는 제목 추가(채널을 멘션하려면 @ 입력)"
-                                                                            aria-invalid="false"
-                                                                            spellcheck="false"
-                                                                            style="display: inline-block;"
-                                                                        )#textbox.wtcp-social-suggestions-textbox
-                                                                            |#{file.filename}
-                                                                    div.container-bottom.wtcp-social-suggestions-textbox
-                                                                        div.char-counter.wtcp-social-suggestions-textbox
-                                        div#description-container.input-container.description.wtcp-video-metadata-editor-basics
-                                            div#description-wrapper.wtcp-video-description-html-tag.description.wtcp-video-metadata-editor-basics
-                                                div#description-container.input-container.description.wtcp-video-description
-                                                    div(
-                                                        label="설명"
-                                                    )#description-textarea.wtcp-social-suggestions-textbox-html-tag.wtcp-video-description
+                                                        label="제목"
+                                                    )#title-textarea.wtcp-social-suggestions-textbox-html-tag.wtcp-video-title
                                                         div(
                                                             tabindex="-1"
                                                         )#container.wtcp-form-input-container-html-tag.fill-height.wtcp-social-suggestions-textbox
                                                             div#outer.wtcp-form-input-container
                                                                 div#label.wtcp-form-input-container
                                                                     span#label-text.wtcp-form-input-container
-                                                                        |설명                                                                
+                                                                        |제목(필수 항목)
                                                                     div#label-help-tooltip.wtcp-form-input-container
                                                                         div(
                                                                             tabindex="0" role="tooltip" mini
@@ -271,70 +231,112 @@ div(dark dark-theme create-video-background)#create-video-page-background
                                                                             div(
                                                                                 contenteditable="true"
                                                                                 aria-required="true"
-                                                                                aria-label="시청자에게 동영상에 대해 설명해 주세요(채널을 멘션하려면 @ 입력)"
+                                                                                aria-label="동영상을 설명하는 제목 추가(채널을 멘션하려면 @ 입력)"
                                                                                 aria-invalid="false"
                                                                                 spellcheck="false"
                                                                                 style="display: inline-block;"
                                                                             )#textbox.wtcp-social-suggestions-textbox
+                                                                                |#{file.filename}
                                                                         div.container-bottom.wtcp-social-suggestions-textbox
-                                                                            div.char-counter.wtcp-social-suggestions-textbox                        
-                                        div.input-container.wtcp-video-metadata-editor-basics
-                                        div.input-container.wtcp-video-metadata-editor-basics
-                                        div#audience.input-container.wtcp-video-metadata-editor-basics
-                                    div.toggle-section.wtcp-video-metadata-editor
-                                div.wtcp-video-metadata-editor-sidepanel-html-tag.wtcp-video-metadata-editor
-                    if error
-                        div.wtcp-error-section-html-tag.wtcp-uploads-dialog
-                    div.wtcp-animatable-html-tag.button-area.metadata-fade-in-section.wtcp-uploads-dialog
-                        div.inner-button-area.wtcp-uploads-dialog
-                            div.left-button-area.wtcp-uploads-dialog
-                                div(modern).wtcp-video-uploads-progress-html-tag.wtcp-uploads-dialog
+                                                                            div.char-counter.wtcp-social-suggestions-textbox
+                                            div#description-container.input-container.description.wtcp-video-metadata-editor-basics
+                                                div#description-wrapper.wtcp-video-description-html-tag.description.wtcp-video-metadata-editor-basics
+                                                    div#description-container.input-container.description.wtcp-video-description
+                                                        div(
+                                                            label="설명"
+                                                        )#description-textarea.wtcp-social-suggestions-textbox-html-tag.wtcp-video-description
+                                                            div(
+                                                                tabindex="-1"
+                                                            )#container.wtcp-form-input-container-html-tag.fill-height.wtcp-social-suggestions-textbox
+                                                                div#outer.wtcp-form-input-container
+                                                                    div#label.wtcp-form-input-container
+                                                                        span#label-text.wtcp-form-input-container
+                                                                            |설명                                                                
+                                                                        div#label-help-tooltip.wtcp-form-input-container
+                                                                            div(
+                                                                                tabindex="0" role="tooltip" mini
+                                                                            )#help-icon.tp-wt-iron-icon-html-tag.help-outline-icon.wtcp-form-input-container
+                                                                                svg(
+                                                                                    viewBox="0 0 16 16"
+                                                                                    focusable="false"
+                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                ).tp-wt-iron-icon
+                                                                                    g.tp-wt-iron-icon
+                                                                                        path(
+                                                                                            d="M8,2c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6S4.69,2,8,2 M8,1C4.14,1,1,4.14,1,8s3.14,7,7,7s7-3.14,7-7S11.86,1,8,1L8,1z M8,12.3c0.44,0,0.8-0.36,0.8-0.8S8.44,10.7,8,10.7s-0.8,0.36-0.8,0.8S7.56,12.3,8,12.3z M8,3.55c-1.45,0-2.62,1.18-2.62,2.62h1.31 c0-0.72,0.59-1.31,1.31-1.31s1.31,0.59,1.31,1.31c0,1.32-1.97,1.15-1.97,3.28h1.31c0-1.48,1.97-1.64,1.97-3.28 C10.62,4.72,9.45,3.55,8,3.55z"
+                                                                                        ).tp-wt-iron-icon
+                                                                    div#child-input.wtcp-form-input-container
+                                                                        div#container-content.wtcp-social-suggestions-textbox
+                                                                            div(
+                                                                                dir="auto"
+                                                                            )#input.wtcp-social-suggestions-input-html-tag.fill-height.wtcp-social-suggestions-textbox
+                                                                                div(
+                                                                                    contenteditable="true"
+                                                                                    aria-required="true"
+                                                                                    aria-label="시청자에게 동영상에 대해 설명해 주세요(채널을 멘션하려면 @ 입력)"
+                                                                                    aria-invalid="false"
+                                                                                    spellcheck="false"
+                                                                                    style="display: inline-block;"
+                                                                                )#textbox.wtcp-social-suggestions-textbox
+                                                                            div.container-bottom.wtcp-social-suggestions-textbox
+                                                                                div.char-counter.wtcp-social-suggestions-textbox                        
+                                            div.input-container.wtcp-video-metadata-editor-basics
+                                            div.input-container.wtcp-video-metadata-editor-basics
+                                            div#audience.input-container.wtcp-video-metadata-editor-basics
+                                        div.toggle-section.wtcp-video-metadata-editor
+                                    div.wtcp-video-metadata-editor-sidepanel-html-tag.wtcp-video-metadata-editor
+                        if error
+                            div.wtcp-error-section-html-tag.wtcp-uploads-dialog
+                        div.wtcp-animatable-html-tag.button-area.metadata-fade-in-section.wtcp-uploads-dialog
+                            div.inner-button-area.wtcp-uploads-dialog
+                                div.left-button-area.wtcp-uploads-dialog
+                                    div(modern).wtcp-video-uploads-progress-html-tag.wtcp-uploads-dialog
+                                        div(
+                                            role="tooltip"
+                                        )#uploading-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
+                                            svg(
+                                                viewBox="0 0 24 24"
+                                                focusable="false"
+                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                            ).tp-wt-iron-icon
+                                                g.tp-wt-iron-icon
+                                                    path(
+                                                        d="M17,18v1H6V18ZM6.49,9l.71.71L11,5.91V16h1V5.91l3.8,3.81L16.51,9l-5-5Z"
+                                                    ).tp-wt-iron-icon
+                                        div(
+                                            role="tooltip"
+                                        )#processing-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
+                                            svg(
+                                                viewBox="0 0 24 24"
+                                                focusable="false"
+                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                            ).tp-wt-iron-icon
+                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                    path(
+                                                        d="M5 17V15H9V13H7C5.89 13 5 12.11 5 11V9C5 7.89 5.89 7 7 7H11V9H7V11H9C10.11 11 11 11.89 11 13V15C11 16.11 10.11 17 9 17H5ZM19 10V14C19 15.66 17.66 17 16 17H13V7H16C17.66 7 19 8.34 19 10ZM17 10C17 9.45 16.55 9 16 9H15V15H16C16.55 15 17 14.55 17 14V10ZM21 3V21H3V3H21ZM20 4H4V20H20V4Z"
+                                                    ).tp-wt-iron-icon
+                                        div(
+                                            role="tooltip"
+                                        )#checks-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
+                                            svg(
+                                                viewBox="0 0 24 24"
+                                                focusable="false"
+                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                            ).tp-wt-iron-icon
+                                                g.tp-wt-iron-icon
+                                                    path(
+                                                        d="M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3 M12,2 c5.5,0,10,4.5,10,10s-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2L12,2z"
+                                                    ).tp-wt-iron-icon
+                                        span.progress-label.wtcp-video-upload-progress
+                                            |검사가 완료되었습니다. 발견된 문제가 없습니다.
+                                div.right-button-area.wtcp-uploads-dialog
                                     div(
-                                        role="tooltip"
-                                    )#uploading-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
-                                        svg(
-                                            viewBox="0 0 24 24"
-                                            focusable="false"
-                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                        ).tp-wt-iron-icon
-                                            g.tp-wt-iron-icon
-                                                path(
-                                                    d="M17,18v1H6V18ZM6.49,9l.71.71L11,5.91V16h1V5.91l3.8,3.81L16.51,9l-5-5Z"
-                                                ).tp-wt-iron-icon
-                                    div(
-                                        role="tooltip"
-                                    )#processing-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
-                                        svg(
-                                            viewBox="0 0 24 24"
-                                            focusable="false"
-                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                        ).tp-wt-iron-icon
-                                            g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
-                                                path(
-                                                    d="M5 17V15H9V13H7C5.89 13 5 12.11 5 11V9C5 7.89 5.89 7 7 7H11V9H7V11H9C10.11 11 11 11.89 11 13V15C11 16.11 10.11 17 9 17H5ZM19 10V14C19 15.66 17.66 17 16 17H13V7H16C17.66 7 19 8.34 19 10ZM17 10C17 9.45 16.55 9 16 9H15V15H16C16.55 15 17 14.55 17 14V10ZM21 3V21H3V3H21ZM20 4H4V20H20V4Z"
-                                                ).tp-wt-iron-icon
-                                    div(
-                                        role="tooltip"
-                                    )#checks-badge.tp-wt-iron-icon-html-tag.wtcp-video-upload-progress
-                                        svg(
-                                            viewBox="0 0 24 24"
-                                            focusable="false"
-                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                        ).tp-wt-iron-icon
-                                            g.tp-wt-iron-icon
-                                                path(
-                                                    d="M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z M12,3c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S17,3,12,3 M12,2 c5.5,0,10,4.5,10,10s-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2L12,2z"
-                                                ).tp-wt-iron-icon
-                                    span.progress-label.wtcp-video-upload-progress
-                                        |검사가 완료되었습니다. 발견된 문제가 없습니다.
-                            div.right-button-area.wtcp-uploads-dialog
-                                div(
-                                    tabindex="-1"
-                                    aria-disabled="false"
-                                    role="button"
-                                ).wtcp-button-html-tag.wtcp-uploads-dialog
-                                    div.wtcp-button-shape-html-tag.wtcp-button
-                                        button(
-                                            aria-label="저장"
-                                        ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
-                                            div.wtcp-button-shape-impl__button-text-content 저장
+                                        tabindex="-1"
+                                        aria-disabled="false"
+                                        role="button"
+                                    ).wtcp-button-html-tag.wtcp-uploads-dialog
+                                        div.wtcp-button-shape-html-tag.wtcp-button
+                                            button(
+                                                aria-label="저장"
+                                            ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m.wtcp-button-shape-impl--enable-backdrop-filter-experiment
+                                                div.wtcp-button-shape-impl__button-text-content 저장
