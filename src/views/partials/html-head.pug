@@ -1,6 +1,5 @@
 doctype html
--'use strict'
--const styles=isThisPageJoinOrLogin?"":"font-size: 10px; font-family: Roboto, Arial, sans-serif;"; 
+-const styles=isThisPageJoinOrLogin?"":"font-size: 10px; font-family: Roboto, Arial, sans-serif;";
 html(
     style=styles lang="ko-KR"
     darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing
@@ -11,27 +10,9 @@ html(
         meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1")
         meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
         meta(http-equiv="X-UA-Compatible" content="ie=edge,chrome=1")
+        script.
+            window.wt=window.wt||{};wt.config_=wt.config_||{};var wtcfg={d:function(){return window.wt&&wt.config_||wtcfg.data_||(wtcfg.data_={})},get:function(k,o){return k in wtcfg.d()?wtcfg.d()[k]:o},set:function(){var a=arguments;if(a.length>1)wtcfg.d()[a[0]]=a[1];else{var k;for(k in a[0])wtcfg.d()[k]=a[0][k]}}};
         //-
-            script.
-                window.wt = window.wt || {};
-                var wtcfg = {
-                    d: function() {
-                        return window.wt && wt.config_ || wtcfg.data_ || (wtcfg.data_ = {})
-                    },
-                    get: function(k, o) {
-                        return k in wtcfg.d() ? wtcfg.d()[k] : o
-                    },
-                    set: function() {
-                        var a = arguments;
-                        if (a.length > 1)
-                            wtcfg.d()[a[0]] = a[1];
-                        else {
-                            var k;
-                            for (k in a[0])
-                                wtcfg.d()[k] = a[0][k]
-                        }
-                    }
-                };
             script.
                 (function() {
                     window.yterr = window.yterr || true;
@@ -158,116 +139,23 @@ html(
                     )();
             }
             ).call(this);
-        link(rel="shortcut icon" href="public/logos/wetube_favicon.ico" type="image/x-icon")
-        link(rel="icon" href="public/logos/wetube_favicon_32x32.png" sizes="32x32")
-        link(rel="icon" href="public/logos/wetube_favicon_48x48.png" sizes="48x48")
-        link(rel="icon" href="public/logos/wetube_favicon_96x96.png" sizes="96x96")
-        link(rel="icon" href="public/logos/wetube_favicon_144x144.png" sizes="144x144")
+        link(rel="shortcut icon" href="#" type="image/x-icon")
+        //-
+            link(rel="icon" href="public/logos/wetube_favicon_32x32.png" sizes="32x32")
+            link(rel="icon" href="public/logos/wetube_favicon_48x48.png" sizes="48x48")
+            link(rel="icon" href="public/logos/wetube_favicon_96x96.png" sizes="96x96")
+            link(rel="icon" href="public/logos/wetube_favicon_144x144.png" sizes="144x144")
         title=tabTitle
-        link(rel="canonical" href="/")
+        //-
+            link(rel="canonical" href="/")
         meta(property="og:image" content="")
         meta(name="description" content="WeTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여, 친구 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.")
         meta(name="keywords" content="동영상, 무료, 공유, 첫사이트, 어려움")
-        //-
-            script.
-                var ytcsi = {
-                    gt: function(n) {
-                        n = (n || "") + "data_";
-                        return ytcsi[n] || (ytcsi[n] = {
-                            tick: {},
-                            info: {},
-                            gel: {
-                                preLoggedGelInfos: []
-                            }
-                        })
-                    },
-                    now: window.performance && window.performance.timing && window.performance.now && window.performance.timing.navigationStart ? function() {
-                        return window.performance.timing.navigationStart + window.performance.now()
-                    }
-                    : function() {
-                        return (new Date).getTime()
-                    }
-                    ,
-                    tick: function(l, t, n) {
-                        var ticks = ytcsi.gt(n).tick;
-                        var v = t || ytcsi.now();
-                        if (ticks[l]) {
-                            ticks["_" + l] = ticks["_" + l] || [ticks[l]];
-                            ticks["_" + l].push(v)
-                        }
-                        ticks[l] = v
-                    },
-                    info: function(k, v, n) {
-                        ytcsi.gt(n).info[k] = v
-                    },
-                    infoGel: function(p, n) {
-                        ytcsi.gt(n).gel.preLoggedGelInfos.push(p)
-                    },
-                    setStart: function(t, n) {
-                        ytcsi.tick("_start", t, n)
-                    }
-                };
-                (function(w, d) {
-                    function isGecko() {
-                        if (!w.navigator)
-                            return false;
-                        try {
-                            if (w.navigator.userAgentData && w.navigator.userAgentData.brands && w.navigator.userAgentData.brands.length) {
-                                var brands = w.navigator.userAgentData.brands;
-                                var i = 0;
-                                for (; i < brands.length; i++)
-                                    if (brands[i] && brands[i].brand === "Firefox")
-                                        return true;
-                                return false
-                            }
-                        } catch (e) {
-                            setTimeout(function() {
-                                throw e;
-                            })
-                        }
-                        if (!w.navigator.userAgent)
-                            return false;
-                        var ua = w.navigator.userAgent;
-                        return ua.indexOf("Gecko") > 0 && ua.toLowerCase().indexOf("webkit") < 0 && ua.indexOf("Edge") < 0 && ua.indexOf("Trident") < 0 && ua.indexOf("MSIE") < 0
-                    }
-                    ytcsi.setStart(w.performance ? w.performance.timing.responseStart : null);
-                    var isPrerender = (d.visibilityState || d.webkitVisibilityState) == "prerender";
-                    var vName = !d.visibilityState && d.webkitVisibilityState ? "webkitvisibilitychange" : "visibilitychange";
-                    if (isPrerender) {
-                        var startTick = function() {
-                            ytcsi.setStart();
-                            d.removeEventListener(vName, startTick)
-                        };
-                        d.addEventListener(vName, startTick, false)
-                    }
-                    if (d.addEventListener)
-                        d.addEventListener(vName, function() {
-                            ytcsi.tick("vc")
-                        }, false);
-                    if (isGecko()) {
-                        var isHidden = (d.visibilityState || d.webkitVisibilityState) == "hidden";
-                        if (isHidden)
-                            ytcsi.tick("vc")
-                    }
-                    var slt = function(el, t) {
-                        setTimeout(function() {
-                            var n = ytcsi.now();
-                            el.loadTime = n;
-                            if (el.slt)
-                                el.slt()
-                        }, t)
-                    };
-                    w.__ytRIL = function(el) {
-                        if (!el.getAttribute("data-thumb"))
-                            if (w.requestAnimationFrame)
-                                w.requestAnimationFrame(function() {
-                                    slt(el, 0)
-                                });
-                            else
-                                slt(el, 16)
-                    }
-                }
-                )(window, document);
+        script.
+            if ('undefined' == typeof Symbol || 'undefined' == typeof Symbol.iterator) {delete Array.prototype.entries;}
+        script.
+            wtcfg.set('initialInnerWidth', window.innerWidth);
+            wtcfg.set('initialInnerHeight', window.innerHeight);
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap")
         link(rel="stylesheet" href="//fonts.googleapis.com/css2?family=Roboto_old:wght@300;400;500;700&family=YouTube+Sans:wght@300..900&display=swap").css-httpsfontsgoogleapiscomcss2familyRoboto_oldwght300400500700familyYouTubeSanswght300900displayswap
         script(name="www-roboto").
@@ -283,16 +171,18 @@ html(
             style.kevlar_global_style.
                 html{background-color:#fff!important;-webkit-text-size-adjust:none;}html[dark]{background-color:#0f0f0f!important;}#logo-red-icon-container.wtd-topbar-logo-renderer{width:86px;}
         meta(name="theme-color" content="rgba(33, 33, 33, 0.98)")
-        //-
-            script.
-                if (window.wtcsi) {window.wtcsi.tick('pdc', null, '');}
-            script.
-                var wtInitialData {}
-            script.
-                if (window.wtcsi) {window.wtcsi.tick('pdr', null, '');}
+        script.
+            var wtInitialData={};
         style dom-bind,dom-if,dom-repeat{display:none;}
         link(href="https://fonts.googleapis.com/css?family=Roboto_old:300italic,400italic,500italic,700italic" rel="stylesheet")
         link(href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet")
     body(dir="ltr" rounded-container cz-shortcut-listen="true")
+        script.
+            wtcfg.set('initialBodyClientWidth', document.body.clientWidth);
         block wtd-app
         block page-js
+        //-
+            script.
+                fetch('/servercontact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wtcfg.d())}).catch(e=>console.error('SERVER_CONTACT_ERROR',e))
+        script.
+            wtInitialData=wtcfg.d()

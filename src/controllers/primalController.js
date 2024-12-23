@@ -5,9 +5,7 @@ import bcrypt from "bcrypt";
 
 export const home = async (req, res) => {
     const {
-        session: {
-            user
-        },
+        session: { user },
     } = req;
     try {
         const DBVIDEO = await VIDEO.find({})
@@ -192,9 +190,7 @@ export const postUserLogin = async (req, res) => {
 export const userLogout = (req, res) => {
     if (req.session) {
         req.session.destroy((error) => {
-            if (error) {
-                return res.status(500).redirect("/");
-            };
+            if (error) return res.status(500).redirect("/");
             res.clearCookie("connect.sid");
             return res.redirect("/");
         });
@@ -288,13 +284,20 @@ export const watchLater = (req, res) => {};
 export const likeVideo = (req, res) => {};
 
 export const watchVideo = async (req, res) => {
-    const { v: videoId, t: videoTime } = req.query;
+    const {
+        query: {
+            v: videoId, t: videoTime
+        },
+        session: { user }
+    } = req;
     if (!videoId) return res.redirect("/");
     const foundVideoFromDB = await VIDEO.findById(videoId).populate("video_owner");
     /*if (foundVideoFromDB === null)*/
     return res.render("watch-video.pug", {
         tabTitle: foundVideoFromDB.title,
         foundVideoFromDB,
+        user,
+        isThisPageWatchVideo: true,
     });
 }
 export const watchShorts = (req, res) => {}
@@ -311,11 +314,6 @@ export const accountSharing = (req, res) => {}
 export const accountBilling = (req, res) => {}
 export const accountAdvanced = (req, res) => {}
 
-export const wtConfigReceiver = (req, res) => {
-    const receivedData = req.body;
-    console.log("receivedData", receivedData);
-    res.json({
-        msg: "succssful!",
-        receivedData
-    });
+export const catchServerContact = (req, res) => {
+    const catchedData = req.body;
 };

@@ -21,7 +21,7 @@ app.set("views", process.cwd() + "/src/views");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.json());
 
 app.use(
     session({

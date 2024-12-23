@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
+        watchVideo: "./src/client/js/watch-video.js",
         createVideo: "./src/client/js/create-video.js",
         index: "./src/client/js/index.js",
         masthead: "./src/client/js/masthead.js",
@@ -12,7 +13,7 @@ module.exports = {
         home: "./src/client/js/home.js"
     },
     mode: "development",
-    target: "node",
+    target: "web",
     watch: true,
     plugins: [new MiniCssExtractPlugin({
         filename: "css/[name].bundle.css",

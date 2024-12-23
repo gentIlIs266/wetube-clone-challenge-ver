@@ -84,20 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const sidebarMenuButton = document.querySelector("#guide-button")
     const sidebarMenuInteraction = document.querySelector("#guide-button #interaction.wt-interaction-html-tag");
-    sidebarMenuButton.addEventListener("mousedown", () => {
-        sidebarMenuInteraction.classList.add("down");
-    });
-    sidebarMenuButton.addEventListener("mouseup", () => {
-        sidebarMenuInteraction.classList.remove("down");
-    });
+    sidebarMenuButton.addEventListener("mousedown", () => sidebarMenuInteraction.classList.add("down"));
+    sidebarMenuButton.addEventListener("mouseup", () => sidebarMenuInteraction.classList.remove("down"));
     sidebarMenuButton.addEventListener("mouseup", (event) => {
         if (!sidebarMenuButton.contains(event.target)) {
             sidebarMenuInteraction.classList.remove("down");
         };
     });
-    sidebarMenuButton.addEventListener("mouseleave", () => {
-        sidebarMenuInteraction.classList.remove("down");
-    });
+    sidebarMenuButton.addEventListener("mouseleave", () => sidebarMenuInteraction.classList.remove("down"));
     document.addEventListener("keydown", (event) => {
         if (event.key === "Tab") {
             sidebarMenuButton.addEventListener("focus", () => {

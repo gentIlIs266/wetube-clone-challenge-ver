@@ -7,7 +7,7 @@ import {
     watchLater, likeVideo, watchVideo, watchShorts,
     account, accountNotification, accountPlayback,
     accountPrivacy, accountSharing, accountBilling,
-    accountAdvanced, wtConfigReceiver
+    accountAdvanced, catchServerContact
 } from "../controllers/primalController";
 import { shouldNotLogInForThisUrl } from "../middleware";
 
@@ -50,6 +50,6 @@ primalRouter.get("/account_sharing", accountSharing);
 primalRouter.get("/account_billing", accountBilling);
 primalRouter.get("/account_advanced", accountAdvanced);
 
-primalRouter.post("/wtconfig", wtConfigReceiver);
+primalRouter.post("/servercontact", catchServerContact);
 
 export default primalRouter;
