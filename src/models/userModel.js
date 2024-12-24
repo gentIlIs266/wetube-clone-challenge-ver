@@ -1,25 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const generateRandomString = (length, forId, forHandle) => {
-    const forIdCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    const forHandlecharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-    let characters = "";
-    if (forId) {
-        characters = forIdCharacters;
-    };
-    if (forHandle) {
-        characters = forHandlecharacters;
-    };
-    let result = "";
-    const charactersLength = characters.length;
-    for (let i =0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charactersLength);
-        result += characters[randomIndex];
-    };
-    return result;
-};
-
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     username: { type: String, required: true, unique: true },
@@ -32,18 +13,16 @@ const userSchema = new mongoose.Schema({
     user_channel: {
         channel_name: { type: String },
         channel_handle: { type: String },
-        channel_id: { type: String, default: `${generateRandomString(25, true, false)}` }
+        channel_id: { type: String },
+        channel_subscriber: { type: Number, default: 0 }
     },
-    user_video: [{ type: mongoose.Schema.Types.ObjectId, ref: "VIDEO" }]
+    user_video: [{ type: mongoose.Schema.Types.ObjectId, ref: "VIDEO" }],
+    user_subscribing_channel: [{ type: String }]
 });
 
 userSchema.pre("save", async function () {
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 5);
-    };
-    if (this.isNew) {
-        this.user_channel.channel_name = this.username
-        this.user_channel.channel_handle = `@${this.username}-${generateRandomString(5, false, true)}`
     };
 });
 

@@ -1103,4 +1103,9 @@ i.icon.icon_help.help-anchor.bd-info {
     padding-right: 10px;
     display: inline-block;
     white-space: nowrap;
+    &:last-child {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
 }

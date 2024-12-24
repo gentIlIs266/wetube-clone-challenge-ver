@@ -25,76 +25,81 @@ export const getUserJoin = (req, res) => {
         tabTitle: "WeTube 계정 생성",
         isThisPageJoinOrLogin: true,
         error: {
-            nameError: false,
-            usernameError: false,
-            birthDateError: false,
-            emailError: false,
-            passwordError: false,
-            passwordConfirmError: false,
-            adiToAspPolicyError: false,
-            passwordConfirmNotSameError: false,
-            alreadyUsingThisUsernameError: false,
-            alreadyUsingThisEmailError: false,
+            ERROR_NO_NAME: false,
+            ERROR_NO_USERNAME: false,
+            ERROR_NO_BIRTHDATE: false,
+            ERROR_NO_EMAIL: false,
+            ERROR_NO_PASSWORD: false,
+            ERROR_NO_PASSWORD_CONFIRM: false,
+            ERROR_NO_ADI_TO_ASP_POLICY: false,
+            ERROR_PASSWORD_CONFIRM_DOESNT_MATCH: false,
+            ERROR_USER_IS_ALREADY_USING_THIS_USERNAME: false,
+            ERROR_THERE_IS_USER_USING_THIS_EMAIL: false,
         },
     });
 };
 export const postUserJoin = async (req, res) => {
-    const logInProcess = (userObj) => {
-        req.session.loggedIn = true;
-        req.session.user = userObj;
-    };
     const {
-        body: {
-            name, username, location, birthDate,
-            email, password, passwordConfirm, adiToAspPolicy
-        }
+        body: { name, username, location, birthDate, email, password, passwordConfirm, adiToAspPolicy }
     } = req;
-    try {
-        let joinRenderParamObj = {
-            tabTitle: "WeTube 계정 생성",
-            isThisPageJoinOrLogin: true,
-            error: {
-                nameError: false,
-                usernameError: false,
-                birthDateError: false,
-                emailError: false,
-                passwordError: false,
-                passwordConfirmError: false,
-                adiToAspPolicyError: false,
-                passwordConfirmNotSameError: false,
-                alreadyUsingThisUsernameError: false,
-                alreadyUsingThisEmailError: false,
-            },
+    function charGenerator(min, max) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const charLength = (Math.floor(Math.random() * (max - min + 1)) + min);
+        let output = "";
+        for (let i = 0; i < charLength; i++) {
+            output += chars.charAt(Math.floor(Math.random() * chars.length));
         };
-        const userWithSameUsername = await USER.exists({ username });
-        const userWithSameEmail = await USER.exists({ email });
-        const birthDateStringTypeCheck = (dateString) => {
-            const dateRegExp = /^\d{4}년 d{2}월 d{2}일$/;
-            return dateRegExp.test(dateString) ? false : true;
+        return output;
+    };
+    async function uniqueValueGenerator(paramUsername) {
+        let channelId, channelHandle;
+        while (true) {
+            channelId = charGenerator(19, 25);
+            channelHandle = `@${paramUsername}-${charGenerator(5, 7)}`;
+            const isUserHadAlreadySameValue = await USER.exists({
+                $or: [
+                    { "user_channel.channel_id": channelId },
+                    { "user_channel.channel_handle": channelHandle }
+                ]
+            });
+            if (!isUserHadAlreadySameValue) break;
         };
-        if (
-            (!name || !username || !birthDate || !email || !password || !passwordConfirm || !adiToAspPolicy) ||
-            (password !== passwordConfirm) ||
-            (userWithSameUsername || userWithSameEmail)
-        ) {
-            if (!name) joinRenderParamObj.error.nameError = true;
-            if (!username) joinRenderParamObj.error.usernameError = true;
-            if (!birthDate) joinRenderParamObj.error.birthDateError = true;
-            if (birthDateStringTypeCheck(birthDate)) joinRenderParamObj.error.birthDateError = true;
-            if (!email) joinRenderParamObj.error.emailError = true;
-            if (!password) joinRenderParamObj.error.passwordError = true;
-            if (!passwordConfirm) joinRenderParamObj.error.passwordConfirmError = true;
-            if (!adiToAspPolicy) joinRenderParamObj.error.adiToAspPolicyError = true;
-            if (password && passwordConfirm && (password !== passwordConfirm)) joinRenderParamObj.error.passwordConfirmNotSameError = true;
-            if (userWithSameUsername) joinRenderParamObj.error.alreadyUsingThisUsernameError = true;
-            if (userWithSameEmail) joinRenderParamObj.error.alreadyUsingThisEmailError = true;
-    
-            return res.status(400).render("user-template/user-join", joinRenderParamObj);
-        };  
-    } catch (error) {
-        return res.render("error", { error });
+        return { channelId, channelHandle };
+    };
+    let joinRenderParamObj = {
+        tabTitle: "WeTube 계정 생성",
+        isThisPageJoinOrLogin: true,
+        error: {
+            ERROR_NO_NAME: !name,
+            ERROR_NO_USERNAME: !username,
+            ERROR_NO_BIRTHDATE: !birthDate,
+            ERROR_NO_EMAIL: !email,
+            ERROR_NO_PASSWORD: !password,
+            ERROR_NO_PASSWORD_CONFIRM: !passwordConfirm,
+            ERROR_NO_ADI_TO_ASP_POLICY: !adiToAspPolicy,
+            ERROR_PASSWORD_CONFIRM_DOESNT_MATCH: (password !== passwordConfirm),
+            ERROR_USER_IS_ALREADY_USING_THIS_USERNAME: false,
+            ERROR_THERE_IS_USER_USING_THIS_EMAIL: false,
+        },
+        input_refresh_value: {
+            REFRESH_NAME: name ? name : null,
+            REFRESH_USERNAME: username ? username : null,
+            REFRESH_BIRTHDATE: birthDate ? birthDate : null,
+            REFRESH_EMAIL: email ? email : null,
+            REFRESH_PASSWORD: password ? password : null,
+            REFRESH_PASSWORD_CONFIRM: passwordConfirm ? passwordConfirm : null,
+        }
     };
     try {
+        const [ userWithSameUsername, userWithSameEmail ] = await Promise.all(
+            [ USER.exists({ username }), USER.exists({ email }) ]
+        );
+        if (userWithSameUsername) joinRenderParamObj.error.ERROR_USER_IS_ALREADY_USING_THIS_USERNAME = true;
+        if (userWithSameEmail) joinRenderParamObj.error.ERROR_THERE_IS_USER_USING_THIS_EMAIL = true;
+        if (Object.values(joinRenderParamObj.error).some((error) => error)) {
+            return res.status(400).render("user-template/user-join", joinRenderParamObj);
+        }
+        const { channelId, channelHandle } = await uniqueValueGenerator(username);
         const justCreatedUser = await USER.create({
             name,
             username,
@@ -102,8 +107,14 @@ export const postUserJoin = async (req, res) => {
             birthDate,
             email,
             password,
+            user_channel: {
+                channel_name: username,
+                channel_id: channelId,
+                channel_handle: channelHandle,
+            },
         });
-        logInProcess(justCreatedUser);
+        req.session.loggedIn = true;
+        req.session.user = justCreatedUser;
         return res.redirect("/");
     } catch (error) {
         return res.render("error", { error });

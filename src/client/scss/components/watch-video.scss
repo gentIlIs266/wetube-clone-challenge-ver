@@ -875,3 +875,90 @@
     bottom: 0;
     left: 100%;
 }
+.wtd-watch-flexy-html-tag[cinematics-enabled] {
+    #below.wtd-watch-flexy {
+        position: relative;
+    }
+}
+.wtd-watch-flexy-html-tag[rounded-info-panel] {
+    #clarify-box.wtd-watch-flexy {
+        margin-top: $--wtd-margin-3x;
+    }
+}
+.wtd-watch-metadata-html-tag {
+    display: block;
+    color: $--wt-spec-text-primary;
+}
+.wtd-watch-metadata-html-tag.wtd-watch-flexy {
+    margin-top: $--wtd-margin-3x;
+    margin-bottom: $--wtd-margin-6x;
+}
+.wtd-watch-metadata-html-tag[title-headline-xs] {
+    h1.wtd-watch-metadata {
+        font-family: "Roboto", "Ariel", sans-serif;
+        font-size: 2rem;
+        line-height: 2.8rem;
+        font-weight: 700;
+        overflow: hidden;
+        display: block;
+        max-height: 5.6rem;
+        -webkit-line-clamp: 2;
+        display: box;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+}
+#top-row.wtd-watch-metadata {
+    margin-top: -4px;
+    display: flexbox;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.item.wtd-watch-metadata {
+    box-sizing: border-box;
+    min-width: 350px;
+    margin-right: 12px;
+    margin-top: 12px;
+}
+#owner.wtd-watch-metadata,
+#comment-teaser.wtd-watch-metadata,
+#teaser-carousel.wtd-watch-metadata {
+    flex: 1;
+    flex-basis: 0.000000001px;
+}
+#owner.wtd-watch-metadata {
+    min-width: calc(50% - 6px);
+    flex: 1;
+    flex-basis: 0.000000001px;
+    display: flexbox;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.wtd-video-owner-renderer-html-tag {
+    min-width: 0;
+    display: flexbox;
+    display: flex;
+    flex-direction: row;
+}
+#avatar.wtd-video-owner-renderer {
+    margin-right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    overflow: hidden;
+}
+#upload-info.wtd-video-owner-renderer {
+    margin-right: 24px;
+    overflow: hidden;
+    flex: 1;
+    flex-basis: 0.000000001px;
+    display: flexbox;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

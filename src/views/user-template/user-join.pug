@@ -4,6 +4,7 @@ block page-css
 block page-js
     script(src="/assets/js/userJoin.bundle.js" type="text/javascript" defer)
 block wtd-app
+    -const v = joinRenderParamObj.input_refresh_value;
     div#pagecontent.ltr
         div#content
             div.main-header.create-header
@@ -89,7 +90,7 @@ block wtd-app
                                                                                                                     div.name-input
                                                                                                                         div.idms-textbox
                                                                                                                             div.idms-error-wrapper
-                                                                                                                                if error.nameError
+                                                                                                                                if error.ERROR_NO_NAME
                                                                                                                                     div#idms-error-wrapper-1726210118058-0.is-error
                                                                                                                                         div.form-element
                                                                                                                                             input(
@@ -136,7 +137,7 @@ block wtd-app
                                                                                                                     div.username-input
                                                                                                                         div.idms-textbox
                                                                                                                             div.idms-error-wrapper
-                                                                                                                                if error.usernameError
+                                                                                                                                if error.ERROR_NO_USERNAME
                                                                                                                                     div#idms-error-wrapper-1726214949968-0.is-error
                                                                                                                                         div.form-element
                                                                                                                                             input(
@@ -158,7 +159,7 @@ block wtd-app
                                                                                                                                                     i.form-message-icon
                                                                                                                                                     span(dir="auto").form-message
                                                                                                                                                         |유저네임을 입력하십시오.
-                                                                                                                                else if error.alreadyUsingThisUsernameError
+                                                                                                                                else if error.ERROR_USER_IS_ALREADY_USING_THIS_USERNAME
                                                                                                                                     div#idms-error-wrapper-1726214949968-0.is-error
                                                                                                                                         div.form-element
                                                                                                                                             input(
@@ -237,7 +238,7 @@ block wtd-app
                                                                                                                 ).masked-date-html-tag
                                                                                                                     div.masked-date
                                                                                                                         div.idms-error-wrapper-html-tag
-                                                                                                                            if error.birthDateError
+                                                                                                                            if error.ERROR_NO_BIRTHDATE
                                                                                                                                 div#idms-error-wrapper-1726389991588-0.is-error
                                                                                                                                     div.form-element
                                                                                                                                         input(
@@ -294,7 +295,7 @@ block wtd-app
                                                                                                         ).email-input-html-tag
                                                                                                             div.idms-textbox-html-tag
                                                                                                                 div.idms-error-wrapper
-                                                                                                                    if error.emailError
+                                                                                                                    if error.ERROR_NO_EMAIL
                                                                                                                         div#idms-error-wrapper-1726457196740-0.is-error
                                                                                                                             div.form-element
                                                                                                                                 input(
@@ -319,7 +320,7 @@ block wtd-app
                                                                                                                                         i.form-message-icon
                                                                                                                                         span(dir="auto").form-message
                                                                                                                                             |기본 이메일 주소로 사용할 유효한 이메일 주소를 입력하십시오.
-                                                                                                                    else if error.alreadyUsingThisEmailError
+                                                                                                                    else if error.ERROR_THERE_IS_USER_USING_THIS_EMAIL
                                                                                                                         div#idms-error-wrapper-1726457196740-0.is-error
                                                                                                                             div.form-element
                                                                                                                                 input(
@@ -371,7 +372,7 @@ block wtd-app
                                                                                                 div.pop-wrapper.field-pop-wrapper
                                                                                                     div.field-wrapper
                                                                                                         div.password-input-html-tag
-                                                                                                            if error.passwordError
+                                                                                                            if error.ERROR_NO_PASSWORD
                                                                                                                 div.form-element.is-error.no-error-msg
                                                                                                                     input(
                                                                                                                         name="password"
@@ -404,7 +405,7 @@ block wtd-app
                                                                                                             div.password-input
                                                                                                                 div.idms-textbox-html-tag
                                                                                                                     div.idms-error-wrapper-html-tag
-                                                                                                                        if error.passwordConfirmError || error.passwordConfirmNotSameError
+                                                                                                                        if error.ERROR_NO_PASSWORD_CONFIRM || error.ERROR_PASSWORD_CONFIRM_DOESNT_MATCH
                                                                                                                             div#idms-error-wrapper-1726456244687-0.is-error
                                                                                                                                 div.form-element
                                                                                                                                     input(
@@ -461,7 +462,7 @@ block wtd-app
                                                                                                     |WeTube은 어디에서 데이터가 처리되는지에 관계없이 WeTube의 개인정보 처리방침에 따라 데이터 보호에 대한 높은 기준을 동일하게 유지합니다. 
                                                                                                     a(href="/support" target="_blank") 
                                                                                                         |더 알아보기... 
-                                                                                            if error.adiToAspPolicyError
+                                                                                            if error.ERROR_NO_ADI_TO_ASP_POLICY
                                                                                                 div(style="padding: 10px 0 0 26px;").details.destructive
                                                                                                     |거주하는 국가의 개인정보 보호법을 준수하기 위해 이 동의가 필요합니다.
                                                                             div.flow-section
@@ -532,11 +533,4 @@ block wtd-app
                                         a(href="#").ac-gf-footer-legal-link
                                             |법적 고지 
                                         a(href="#").ac-gf-footer-legal-link
-                                            |사이트 맵 
-    //-
-        if alreadyExistError
-            div.form-message-wrapper
-                span(dir="auto").form-message 이미 그 유저네임/이메일 을 쓰는 유저가 존재합니다.
-        if alreadyExistError
-            div.form-message-wrapper
-                span(dir="auto").form-message 이미 그 유저네임/이메일을 쓰는 유저가 존재합니다.                       
+                                            |사이트 맵               

@@ -306,6 +306,46 @@ block wtd-app
                                                                                     path(d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z")#wtp-id-10.wtp-svg-fill
                                     div.wt-playability-error-supported-renderers-html-tag
                                 div#below.wtd-watch-flexy
+                                    div#alerts.wtd-watch-flexy
+                                    div#messages.wtd-watch-flexy
+                                    div#clarify-box.attached-message.wtd-watch-flexy
+                                    div#limited-state.attached-message.wtd-watch-flexy
+                                    div(
+                                        is-watch-flexy video-id=foundVideoFromDB._id
+                                        description-collapsed title-headline-xs flex-menu-enabled
+                                    ).wtd-watch-metadata-html-tag.watch-active-metadata.wtd-watch-flexy
+                                        div#above-the-fold.wtd-watch-flexy
+                                            div#title.wtd-watch-metadata
+                                                h1.wtd-watch-metadata
+                                                    div(force-default-style).wt-formatted-string-html-tag.wtd-watch-metadata
+                                                        |#{foundVideoFromDB.title}
+                                            div#top-row.wtd-watch-metadata
+                                                div#owner.item.wtd-watch-metadata
+                                                    div(watch-metadata-refresh).wtd-video-owner-renderer-html-tag.wtd-watch-metadata
+                                                        -const l=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`;
+                                                        a(href=l).wt-simple-endpoint.wtd-video-owner-renderer
+                                                            div(
+                                                                width="40" style="background-color: transparent;" loaded
+                                                            )#avatar.wt-img-shadow-html-tag.wtd-video-owner-renderer.no-transition
+                                                                img(draggable="false" alt width="40" src=foundVideoFromDB.video_owner.avatar)#img.wt-img-shadow
+                                                        div#upload-info.wtd-video-owner-renderer
+                                                            div#channel-name.wtd-channel-name-html-tag.wtd-video-owner-renderer
+                                                            -const formatNumberWithUnit=n=>n<1000?n.toString():((u,s,i,q,r)=>r===0?`${q}${s[i]}`:`${q}.${r.toString().padStart(2,'0')}${s[i]}`)([1e8,1e4,1e3],["억","만","천"],(i=[1e8,1e4,1e3].findIndex(v=>n>=v)),Math.floor(n/[1e8,1e4,1e3][i]),Math.floor((n%[1e8,1e4,1e3][i])/([1e8,1e4,1e3][i]/100))), sub=formatNumberWithUnit(foundVideoFromDB.video_owner.channel_subscriber);
+                                                            div(aria-label)#owner-sub-count.wt-formatted-string-html-tag.wtd-video-owner-renderer
+                                                                |#{}
+                                                        div#purchase-buton.wtd-video-owner-renderer
+                                                        div#sponsor-button.wtd-video-owner-renderer
+                                                        div#analytics-button.wtd-video-owner-renderer
+                                                    div#subscribe-button.wtd-watch-metadata
+                                                div#actions.item.wtd-watch-metadata
+                                            div#middle-row.wtd-watch-metadata
+                                            div#bottom-row.wtd-watch-metadata
+                                        div.wtd-metadata-row-container-renderer-html-tag
+                                    div.wtd-watch-flexy
+                                    div#expanded-metadata.wtd-watch-flexy
+                                    div#ticket-shelf.wtd-watch-flexy
+                                    dom-if(restamp)#merch-shelf.wtd-watch-flexy
+                                    div#comments.wtd-comments-html-tag.wtd-watch-flexy
                         div#secondary.wtd-watch-flexy
                     div#survey.wtd-watch-flexy
                     div(hidden)#engagement-panel-scrim.wtd-watch-flexy
