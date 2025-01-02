@@ -176,6 +176,9 @@ html(
         style dom-bind,dom-if,dom-repeat{display:none;}
         link(href="https://fonts.googleapis.com/css?family=Roboto_old:300italic,400italic,500italic,700italic" rel="stylesheet")
         link(href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet")
+        style ps-dom-if,ps-dom-repeat{display:none;}
+        style#__web-inspector-hide-shortcut-style__.
+            .__web-inspector-hide-shortcut__,.__web-inspector-hide-shortcut__ *,.__web-inspector-hidebefore-shortcut__::before,.__web-inspector-hideafter-shortcut__::after{visibility: hidden !important;}
     body(dir="ltr" rounded-container cz-shortcut-listen="true")
         script.
             wtcfg.set('initialBodyClientWidth', document.body.clientWidth);

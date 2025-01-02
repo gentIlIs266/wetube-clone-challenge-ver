@@ -81,14 +81,15 @@ export const postUserJoin = async (req, res) => {
             ERROR_USER_IS_ALREADY_USING_THIS_USERNAME: false,
             ERROR_THERE_IS_USER_USING_THIS_EMAIL: false,
         },
-        input_refresh_value: {
-            REFRESH_NAME: name ? name : null,
-            REFRESH_USERNAME: username ? username : null,
-            REFRESH_BIRTHDATE: birthDate ? birthDate : null,
-            REFRESH_EMAIL: email ? email : null,
-            REFRESH_PASSWORD: password ? password : null,
-            REFRESH_PASSWORD_CONFIRM: passwordConfirm ? passwordConfirm : null,
-        }
+        inputRefreshValue: {
+            REFRESH_NAME: name || "",
+            REFRESH_USERNAME: username || "",
+            REFRESH_BIRTHDATE: birthDate || "",
+            REFRESH_EMAIL: email || "",
+            REFRESH_PASSWORD: password || "",
+            REFRESH_PASSWORD_CONFIRM: passwordConfirm || "",
+            REFRESH_ADI_TO_ASP_POLICY: adiToAspPolicy || "",
+        },
     };
     try {
         const [ userWithSameUsername, userWithSameEmail ] = await Promise.all(
@@ -98,7 +99,7 @@ export const postUserJoin = async (req, res) => {
         if (userWithSameEmail) joinRenderParamObj.error.ERROR_THERE_IS_USER_USING_THIS_EMAIL = true;
         if (Object.values(joinRenderParamObj.error).some((error) => error)) {
             return res.status(400).render("user-template/user-join", joinRenderParamObj);
-        }
+        };
         const { channelId, channelHandle } = await uniqueValueGenerator(username);
         const justCreatedUser = await USER.create({
             name,
@@ -306,8 +307,9 @@ export const watchVideo = async (req, res) => {
     /*if (foundVideoFromDB === null)*/
     return res.render("watch-video.pug", {
         tabTitle: foundVideoFromDB.title,
-        foundVideoFromDB,
         user,
+        foundVideoFromDB,
+        ownerOfTheVideoIsWatching: (user._id == foundVideoFromDB.video_owner._id),
         isThisPageWatchVideo: true,
     });
 }

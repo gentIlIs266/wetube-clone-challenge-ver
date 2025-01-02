@@ -51,5 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isThisPageWatchVideo) {
         drawerControlButton.addEventListener("click", onAppDrawerControlClickAtWatchVideo);
         drawerControlButtonInDrawer.addEventListener("click", onAppDrawerControlClickAtHome_disappear);
-    } else drawerControlButton.addEventListener("click", onAppDrawerControlClickAtHome_appear);
+    } else {
+        drawerControlButton.addEventListener("click", onAppDrawerControlClickAtHome_appear);
+    };
 });

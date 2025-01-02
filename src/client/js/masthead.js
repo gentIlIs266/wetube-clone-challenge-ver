@@ -230,59 +230,65 @@ document.addEventListener("DOMContentLoaded", () => {
     const notificationDropdown = document.querySelector(".wtd-popup-container-html-tag #notification-dropdown");
     const notificationIconSvgPath = document.querySelector(".wtd-notification-topbar-button-renderer-html-tag.wtd-masthead .wt-icon-shape.wt-spec-icon-shape svg path");
     let isDropdownVisible = false;
-    notificationButton.addEventListener("click", () => {
-        if (!isDropdownVisible) {
-            notificationDropdown.style.zIndex = "2202";
-            notificationDropdown.removeAttribute("aria-hidden");
-            notificationDropdown.setAttribute("focused", "");
-            notificationIconSvgPath.setAttribute("d", "M18.001 10a6.003 6.003 0 00-4.025-5.667 2 2 0 10-3.945-.002A6.003 6.003 0 006.001 10v3.988a.044.044 0 01-.006.022L3.91 17.485A1 1 0 004.767 19h14.468a1 1 0 00.857-1.515l-2.085-3.475a.044.044 0 01-.006-.022V10Zm-6 12a3.001 3.001 0 002.83-2H9.17A3.001 3.001 0 0012 22Z");
-            notificationDropdown.style.display = null;
-            isDropdownVisible = true;
-        } else {
-            notificationDropdown.style.zIndex = null;
-            notificationDropdown.setAttribute("aria-hidden", "true");
-            notificationDropdown.removeAttribute("focused");
-            notificationIconSvgPath.setAttribute("d", "m13.497 4.898.053.8.694.4C15.596 6.878 16.5 8.334 16.5 10v2.892c0 .997.27 1.975.784 2.83L18.35 17.5H5.649l1.067-1.778c.513-.855.784-1.833.784-2.83V10c0-1.666.904-3.122 2.256-3.902l.694-.4.053-.8c.052-.78.703-1.398 1.497-1.398.794 0 1.445.618 1.497 1.398ZM6 10c0-2.224 1.21-4.165 3.007-5.201C9.11 3.236 10.41 2 12 2c1.59 0 2.89 1.236 2.993 2.799C16.79 5.835 18 7.776 18 10v2.892c0 .725.197 1.436.57 2.058l1.521 2.535c.4.667-.08 1.515-.857 1.515H15c0 .796-.316 1.559-.879 2.121-.562.563-1.325.879-2.121.879s-1.559-.316-2.121-.879C9.316 20.56 9 19.796 9 19H4.766c-.777 0-1.257-.848-.857-1.515L5.43 14.95c.373-.622.57-1.333.57-2.058V10Zm4.5 9c0 .398.158.78.44 1.06.28.282.662.44 1.06.44s.78-.158 1.06-.44c.282-.28.44-.662.44-1.06h-3Z");
-            notificationDropdown.style.display = "none";
-            isDropdownVisible = false;
-        };
-    });
+    if (notificationButton) {
+        notificationButton.addEventListener("click", () => {
+            if (!isDropdownVisible) {
+                notificationDropdown.style.zIndex = "2202";
+                notificationDropdown.removeAttribute("aria-hidden");
+                notificationDropdown.setAttribute("focused", "");
+                notificationIconSvgPath.setAttribute("d", "M18.001 10a6.003 6.003 0 00-4.025-5.667 2 2 0 10-3.945-.002A6.003 6.003 0 006.001 10v3.988a.044.044 0 01-.006.022L3.91 17.485A1 1 0 004.767 19h14.468a1 1 0 00.857-1.515l-2.085-3.475a.044.044 0 01-.006-.022V10Zm-6 12a3.001 3.001 0 002.83-2H9.17A3.001 3.001 0 0012 22Z");
+                notificationDropdown.style.display = null;
+                isDropdownVisible = true;
+            } else {
+                notificationDropdown.style.zIndex = null;
+                notificationDropdown.setAttribute("aria-hidden", "true");
+                notificationDropdown.removeAttribute("focused");
+                notificationIconSvgPath.setAttribute("d", "m13.497 4.898.053.8.694.4C15.596 6.878 16.5 8.334 16.5 10v2.892c0 .997.27 1.975.784 2.83L18.35 17.5H5.649l1.067-1.778c.513-.855.784-1.833.784-2.83V10c0-1.666.904-3.122 2.256-3.902l.694-.4.053-.8c.052-.78.703-1.398 1.497-1.398.794 0 1.445.618 1.497 1.398ZM6 10c0-2.224 1.21-4.165 3.007-5.201C9.11 3.236 10.41 2 12 2c1.59 0 2.89 1.236 2.993 2.799C16.79 5.835 18 7.776 18 10v2.892c0 .725.197 1.436.57 2.058l1.521 2.535c.4.667-.08 1.515-.857 1.515H15c0 .796-.316 1.559-.879 2.121-.562.563-1.325.879-2.121.879s-1.559-.316-2.121-.879C9.316 20.56 9 19.796 9 19H4.766c-.777 0-1.257-.848-.857-1.515L5.43 14.95c.373-.622.57-1.333.57-2.058V10Zm4.5 9c0 .398.158.78.44 1.06.28.282.662.44 1.06.44s.78-.158 1.06-.44c.282-.28.44-.662.44-1.06h-3Z");
+                notificationDropdown.style.display = "none";
+                isDropdownVisible = false;
+            };
+        });
+    };
 });
 /*user system dropdown active*/
 document.addEventListener("DOMContentLoaded", () => {
     const systemButton = document.querySelector("#buttons.wtd-masthead .wtd-topbar-menu-button-renderer-html-tag:last-of-type");
     const systemDropdown = document.querySelector(".wtd-popup-container-html-tag #system-dropdown");
     let isDropdownVisible = false;
-    systemButton.addEventListener("click", () => {
-        if (!isDropdownVisible) {
-            systemDropdown.style.zIndex = "2202";
-            systemDropdown.removeAttribute("aria-hidden");
-            systemDropdown.setAttribute("focused", "");
-            systemDropdown.style.display = null;
-            isDropdownVisible = true;
-        } else {
-            systemDropdown.style.zIndex = null;
-            systemDropdown.setAttribute("aria-hidden", "true");
-            systemDropdown.removeAttribute("focused");
-            systemDropdown.style.display = "none";
-            isDropdownVisible = false;
-        };
-    });
+    if (systemButton) {
+        systemButton.addEventListener("click", () => {
+            if (!isDropdownVisible) {
+                systemDropdown.style.zIndex = "2202";
+                systemDropdown.removeAttribute("aria-hidden");
+                systemDropdown.setAttribute("focused", "");
+                systemDropdown.style.display = null;
+                isDropdownVisible = true;
+            } else {
+                systemDropdown.style.zIndex = null;
+                systemDropdown.setAttribute("aria-hidden", "true");
+                systemDropdown.removeAttribute("focused");
+                systemDropdown.style.display = "none";
+                isDropdownVisible = false;
+            };
+        });
+    };
 });
 /*notification dropdown setting icon tooltip*/
 document.addEventListener("DOMContentLoaded", () => {
     const notificationSettingButton = document.querySelector("#notification-dropdown #buttons");
-    const notificationSettingTooltip = notificationSettingButton.querySelector("#tooltip");
-    notificationSettingButton.addEventListener("mouseenter", () => {
-        if (notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.remove("hidden");
-        if (!notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.add("fade-in-animation");
-    });
-    notificationSettingButton.addEventListener("mouseleave", () => {
-        if (notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.remove("fade-in-animation");
-        if (!notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.add("fade-out-animation");
-        setTimeout(() => {
-            if (notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.remove("fade-out-animation");
-            if (!notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.add("hidden");
-        }, 100);
-    });
+    if (notificationSettingButton) {
+        const notificationSettingTooltip = notificationSettingButton.querySelector("#tooltip");
+        notificationSettingButton.addEventListener("mouseenter", () => {
+            if (notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.remove("hidden");
+            if (!notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.add("fade-in-animation");
+        });
+        notificationSettingButton.addEventListener("mouseleave", () => {
+            if (notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.remove("fade-in-animation");
+            if (!notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.add("fade-out-animation");
+            setTimeout(() => {
+                if (notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.remove("fade-out-animation");
+                if (!notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.add("hidden");
+            }, 100);
+        });
+    };
 });

@@ -135,8 +135,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     if (descriptionTextbox) {
+        let userPressedEnterKey = false;
+        descriptionTextbox.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                userPressedEnterKey = true;
+            };
+        });
         descriptionTextbox.addEventListener("input", () => {
-            formDescriptionData.value = descriptionTextbox.textContent;
+            if (userPressedEnterKey) {
+                formDescriptionData.value += "\n";
+                userPressedEnterKey = false;
+            } else {
+                formDescriptionData.value = descriptionTextbox.textContent;
+            };
         });
     };
 });

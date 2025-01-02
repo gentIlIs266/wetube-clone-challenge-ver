@@ -1,3 +1,4 @@
+import { sharing } from "webpack";
 import "../scss/components/watch-video.scss";
 document.addEventListener("DOMContentLoaded", () => {
     const wtdWatchFlexy = document.querySelector(".wtd-watch-flexy-html-tag.wtd-page-manager");
@@ -118,6 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const controls = document.querySelector("#wtd-player #container .wtp-chrome-bottom .wtp-chrome-controls");
     const muteButton = controls.querySelector(".wtp-mute-button.wtp-button");
     const volumePanel = controls.querySelector(".wtp-volume-panel");
+    const volumeSlider = volumePanel.querySelector(".wtp-volume-slider");
+    const volumeSliderHandle = volumePanel.querySelector(".wtp-volume-slider-handle");
+    /*video duration display*/
     (function() {
         videoItSelf.addEventListener("loadedmetadata", () => {
             const timeCurrent = controls.querySelector(".wtp-time-current");
@@ -137,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     })();
+    /*autonav toggle*/
     (function() {
         const autonavButton = controls.querySelector(".wtp-autonav-toggle-button");
         let autonavActive = true;
@@ -150,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
     })();
+    /*subtitle button*/
     (function() {
         const subtitleButton = controls.querySelector(".wtp-subtitle-button");
         let subtitleActive = false;
@@ -163,7 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
     })();
+    /*volume*/
     (function() {
+        /*
         const leftControl = controls.querySelector(".wtp-left-controls");
         [muteButton, volumePanel].forEach((element) => {
             element.addEventListener("mouseenter", () => {
@@ -175,8 +183,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 volumePanel.classList.remove("wtp-volume-control-hover");
             });
         });
-
+        */
+        let isDragging = false;
+        const videoMaxVolume = 100;
+        const videoVolumeUpdate = (mouseEvent) => {
+            const { width: sliderWidth, left: sliderLeft } = volumeSlider.getBoundingClientRect();
+            let offsetX;
+            offsetX = Math.max(0, Math.min(mouseEvent.clientX - sliderLeft, sliderWidth))
+            const videoVolume = Math.round((offsetX / sliderWidth) * videoMaxVolume);
+            const videoVolumePercentage = videoVolume / videoMaxVolume;
+            volumeSliderHandle.style.left = `${offsetX}px`;
+            volumePanel.setAttribute("aria-valuenow", String(videoVolume));
+            volumePanel.setAttribute("aria-valuetext", `${videoVolumePercentage}% 볼륨`);
+        };
+        volumeSlider.addEventListener("click", (event) => videoVolumeUpdate(event));
+        volumeSliderHandle.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            event.preventDefault();
+        });
+        document.addEventListener("mousemove", (event) => {
+            if (isDragging) videoVolumeUpdate(event);
+        });
+        document.addEventListener("mouseup", () => {
+            if (isDragging) isDragging = false;
+        });
     })();
+    /*play/pause button*/
     (function() {
         function pauseToPlay_SVG() {
             [
@@ -239,6 +271,54 @@ document.addEventListener("DOMContentLoaded", () => {
         videoItSelf.addEventListener("play", () => {
         });
         videoItSelf.addEventListener("pause", () => {
+        });
+    })();
+});
+document.addEventListener("DOMContentLoaded", () => {
+    (function() {
+        const expandSizer = document.querySelector("#expand-sizer.tp-wt-paper-button-html-tag");
+        const expand = document.querySelector("#expand.tp-wt-paper-button-html-tag");
+        expand.style.left = `${expandSizer.offsetLeft}px`;
+    })();
+    (function() {
+        const wtdTextInlineExpander = document.querySelector("#description-inline-expander.wtd-text-inline-expander-html-tag");
+        const expandedDescriptionUserInput = wtdTextInlineExpander.querySelector("wt-attributed-string");
+        const expand = document.querySelector("#expand.tp-wt-paper-button-html-tag");
+        const snippet = document.querySelector("#snippet.wtd-text-inline-expander");
+        const snippetText = document.querySelector("#snippet-text.wtd-text-inline-expander")
+        const nbsp = snippet.querySelector(".wtd-text-inline-expander:nth-child(2):not([user-input])");
+        const expandSizer = snippet.querySelector("#expand-sizer");
+        const collapse = document.querySelector("#collapse.wtd-text-inline-expander");
+        const structuredDescription = document.querySelector(".wtd-watch-metadata[slot=extra-content] #structured-description");
+        let isExpanded = false;
+        expand.addEventListener("click", () => {
+            if (!isExpanded) {
+                wtdTextInlineExpander.setAttribute("is-expanded", "");
+                expandedDescriptionUserInput.removeAttribute("hidden");
+                snippetText.setAttribute("hidden", "");
+                snippet.style = "";
+                nbsp.setAttribute("hidden", "");
+                expandSizer.setAttribute("hidden", "");
+                expand.setAttribute("hidden", "");
+                collapse.removeAttribute("hidden");
+                structuredDescription.removeAttribute("hidden");
+                isExpanded = true;
+            };
+        });
+        collapse.addEventListener("click", () => {
+            if (isExpanded) {
+                wtdTextInlineExpander.removeAttribute("is-expanded");
+                expandedDescriptionUserInput.setAttribute("hidden", "");
+                snippetText.removeAttribute("hidden");
+                snippet.style.overflow = "hidden";
+                snippet.style.maxHeight = "6rem";
+                nbsp.removeAttribute("hidden");
+                expandSizer.removeAttribute("hidden");
+                expand.removeAttribute("hidden");
+                collapse.setAttribute("hidden", "");
+                structuredDescription.setAttribute("hidden", "");
+                isExpanded = false;
+            };
         });
     })();
 });

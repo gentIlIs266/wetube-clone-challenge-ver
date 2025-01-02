@@ -86,7 +86,11 @@ block wtd-app
                                                             div(
                                                                 data-layer="9" style="height: 146px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAACSCAYAAACE56BkAAAAAXNSR0IArs4c6QAAAPVJREFUKFNlyOlHGAAcxvHuY93H1n1fW1v3fbej+zAmI5PIRGYiM5JEkkgiiSSRJPoj83nze9Pz4uPrSUh4tURPEpKDFJWKtCBdZSAzeKOykB3kqFzkBfmqAIVBkSrGW7wLSlQpyoJyVYHKoEpVoyaoVXWoDxpUI5qCZtWC98EH1YqPwSfVhvagQ3WiK+hWPegN+lQ/BoJBNYThYESNYgzjwYSaDD6rL/iKb8GUmsZMMKvmMB8sqEUsYRnf8QMr+IlV/MIa1rGB39jEFv7gL7axg3/4j13sYR8HOMQRjnGCU5zhHBe4xBWucYNb3OEeD3jEE55fAOT7I9a9dVH7AAAAAElFTkSuQmCC');"
                                                             ).wtp-gradient-bottom
-                                                            div(data-layer="9" style="width: 616px; left: 12px;").wtp-chrome-bottom
+                                                            //-
+                                                                should be removed .wtp-volume-slider-active
+                                                            div(
+                                                                data-layer="9" style="width: 616px; left: 12px;"
+                                                            ).wtp-chrome-bottom.wtp-volume-slider-active
                                                                 div.wtp-progress-bar-container
                                                                     div(style="height: 40px;").wtp-heat-map-container
                                                                         div.wtp-heat-map-edu
@@ -321,25 +325,537 @@ block wtd-app
                                                         |#{foundVideoFromDB.title}
                                             div#top-row.wtd-watch-metadata
                                                 div#owner.item.wtd-watch-metadata
-                                                    div(watch-metadata-refresh).wtd-video-owner-renderer-html-tag.wtd-watch-metadata
-                                                        -const l=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`;
-                                                        a(href=l).wt-simple-endpoint.wtd-video-owner-renderer
+                                                    if locals.ownerOfTheVideoIsWatching
+                                                        div(watch-metadata-refresh).wtd-video-owner-renderer-html-tag.wtd-watch-metadata
+                                                            a(href=l).wt-simple-endpoint.wtd-video-owner-renderer
+                                                                div(
+                                                                    width="40" style="background-color: transparent;" loaded
+                                                                )#avatar.wt-img-shadow-html-tag.wtd-video-owner-renderer.no-transition
+                                                                    img(draggable="false" alt width="40" src=foundVideoFromDB.video_owner.avatar)#img.wt-img-shadow
+                                                            div#upload-info.wtd-video-owner-renderer
+                                                                div#channel-name.wtd-channel-name-html-tag.wtd-video-owner-renderer
+                                                                    div#container.wtd-channel-name
+                                                                        div#text-container.wtd-channel-name
+                                                                            div(
+                                                                                link-inherit-color respect-land-dir ellipsis-truncate-styling
+                                                                                title=foundVideoFromDB.video_owner.user_channel.channel_name
+                                                                                dir="auto" has-link-only_ style="text-align: left;" ellipsis-truncate
+                                                                            )#text.wt-formatted-string-html-tag.wtd-channel-name.complex-string
+                                                                                a(
+                                                                                    spellcheck="false"
+                                                                                    href=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`
+                                                                                ).wt-simple-endpoint.wt-formatted-string
+                                                                                    |#{foundVideoFromDB.video_owner.user_channel.channel_name}
+                                                                        div(
+                                                                            fit-to-visible-bounds role="tooltip" tabindex="-1" aria-label="tooltip"
+                                                                            style="inset: 0.325005px auto auto 44.2375px;"
+                                                                        ).tp-wt-paper-tooltip-html-tag.wtd-channel-name
+                                                                            div(style-target="tooltip" hidden)#tooltip.tp-wt-paper-tooltip
+                                                                                |#{foundVideoFromDB.video_owner.user_channel.channel_name}
+                                                            div#analytics-button.wtd-video-owner-renderer
+                                                                div(button-renderer button-next).wtd-button-renderer-html-tag.wtd-video-owner-renderer
+                                                                    div.wt-button-shape-html-tag
+                                                                        a(
+                                                                            aria-disabled="false" aria-label="분석" href=`/analytics#;fi=${foundVideoFromDB._id}`
+                                                                            target force-new-state="true"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                span.wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                    |분석
+                                                                            div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response-inverse
+                                                                                    div.wt-spec-touch-feedback-shape__stroke
+                                                                                    div.wt-spec-touch-feedback-shape__fill
+                                                        div#subscribe-button.wtd-watch-metadata
+                                                            div(button-renderer button-next).wtd-button-renderer-html-tag.wtd-watch-metadata
+                                                                div.wt-button-shape-html-tag
+                                                                    a(
+                                                                        aria-disabled="false" aria-label="동영상 수정"
+                                                                        href=`/studio/${foundVideoFromDB._id}/edit`
+                                                                        rel="nofollow" force-new-state="true"
+                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m
+                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                            span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                |동영상 수정
+                                                                        div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                            div.wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response-inverse
+                                                                                div.wt-spec-touch-feedback-shape__stroke
+                                                                                div.wt-spec-touch-feedback-shape__fill
+                                                    else    
+                                                        div(watch-metadata-refresh).wtd-video-owner-renderer-html-tag.wtd-watch-metadata
+                                                            -const l=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`;
+                                                            a(href=l).wt-simple-endpoint.wtd-video-owner-renderer
+                                                                div(
+                                                                    width="40" style="background-color: transparent;" loaded
+                                                                )#avatar.wt-img-shadow-html-tag.wtd-video-owner-renderer.no-transition
+                                                                    img(draggable="false" alt width="40" src=foundVideoFromDB.video_owner.avatar)#img.wt-img-shadow
+                                                            div#upload-info.wtd-video-owner-renderer
+                                                                div#channel-name.wtd-channel-name-html-tag.wtd-video-owner-renderer
+                                                                    div#container.wtd-channel-name
+                                                                        div#text-container.wtd-channel-name
+                                                                            div(
+                                                                                link-inherit-color respect-land-dir title=foundVideoFromDB.video_owner.user_channel.channel_name
+                                                                                ellipsis-truncate-styling dir="auto" has-link-only_ style="text-align: left;"
+                                                                            )#text.wt-formatted-string-html-tag.wtd-channel-name.complex-string
+                                                                                a(
+                                                                                    spellcheck="false"
+                                                                                    href=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`
+                                                                                ).wt-simple-endpoint.wt-formatted-string
+                                                                                    |#{foundVideoFromDB.video_owner.user_channel.channel_name}
+                                                                        div(
+                                                                            fit-to-visible-bounds role="tooltip" tabindex="-1" aria-label="tooltip"
+                                                                            style="inset: -26.8px auto auto 47.7375px;"
+                                                                        )#tooltip.tp-wt-paper-tooltip.wtd-channel-name
+                                                                -function fmtNum(n){if(n<1e3)return n+"";for(let{v,u} of [{v:1e8,u:"억"},{v:1e4,u:"만"},{v:1e3,u:"천"}])if(n>=v){let q=Math.floor(n/v),r=Math.floor((n%v)/(v/100));return r===0?`${q}${u}`:`${q}.${r.toString().padStart(2,"0")}${u}`}};const sub=`${fmtNum(foundVideoFromDB.video_owner.user_channel.channel_subscriber)}명`;
+                                                                div(aria-label=sub)#owner-sub-count.wt-formatted-string-html-tag.wtd-video-owner-renderer
+                                                                    |#{`구독자 ${sub}`}
+                                                            div(hidden)#purchase-buton.wtd-video-owner-renderer
+                                                            div#sponsor-button.wtd-video-owner-renderer
+                                                            div#analytics-button.wtd-video-owner-renderer
+                                                        div#subscribe-button.wtd-watch-metadata
                                                             div(
-                                                                width="40" style="background-color: transparent;" loaded
-                                                            )#avatar.wt-img-shadow-html-tag.wtd-video-owner-renderer.no-transition
-                                                                img(draggable="false" alt width="40" src=foundVideoFromDB.video_owner.avatar)#img.wt-img-shadow
-                                                        div#upload-info.wtd-video-owner-renderer
-                                                            div#channel-name.wtd-channel-name-html-tag.wtd-video-owner-renderer
-                                                            -const formatNumberWithUnit=n=>n<1000?n.toString():((u,s,i,q,r)=>r===0?`${q}${s[i]}`:`${q}.${r.toString().padStart(2,'0')}${s[i]}`)([1e8,1e4,1e3],["억","만","천"],(i=[1e8,1e4,1e3].findIndex(v=>n>=v)),Math.floor(n/[1e8,1e4,1e3][i]),Math.floor((n%[1e8,1e4,1e3][i])/([1e8,1e4,1e3][i]/100))), sub=formatNumberWithUnit(foundVideoFromDB.video_owner.channel_subscriber);
-                                                            div(aria-label)#owner-sub-count.wt-formatted-string-html-tag.wtd-video-owner-renderer
-                                                                |#{}
-                                                        div#purchase-buton.wtd-video-owner-renderer
-                                                        div#sponsor-button.wtd-video-owner-renderer
-                                                        div#analytics-button.wtd-video-owner-renderer
-                                                    div#subscribe-button.wtd-watch-metadata
+                                                                animated-action-enabled enable-refresh-web foreground-lottie-ref="{}"
+                                                                background-lottie-ref="{}" use-keyboard-focused
+                                                            ).wtd-subscribe-button-renderer-html-tag.wtd-watch-metadata
+                                                                div.wt-smartimation-html-tag.smartimation.smartimation--enable-masking.wtd-subscribe-button-renderer
+                                                                    div.smartimation__content
+                                                                        div.__slot-el-html-tag
+                                                                            div#subscribe-button-shape.wt-button-shape-html-tag.wtd-subscribe-button-renderer
+                                                                                button(
+                                                                                    aria-label=`${foundVideoFromDB.video_owner.user_channel.channel_name}을(를) 구독합니다` title style
+                                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m
+                                                                                    div.wt-spec-button-shape-next__button-text-content
+                                                                                        span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                            |구독
+                                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                        div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response-inverse
+                                                                                            div.wt-spec-touch-feedback-shape__stroke
+                                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                            div(key="children_2" hidden)#notification-preference-toggle-button.wtd-subscribe-button-renderer
+                                                                            div.wt-animated-action-html-tag.animated-action__container.undefined.wtd-subscribe-button-renderer
+                                                                                div.animated-action__content-with-background
+                                                                                    div(aria-hidden="true").animated-action__lottie.animated-action__background-container.__web-inspector-hide-shortcut__
+                                                                                        div.lottie-component-html-tag.animated-action__background.wtLottieComponentHost
+                                                                                            svg(
+                                                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 96"
+                                                                                                width="180" height="96" preserveAspectRatio="xMidYMid meet" 
+                                                                                                style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"
+                                                                                            )
+                                                                                                defs
+                                                                                                    clipPath#__lottie_element_124
+                                                                                                        rect(width="180" height="96" x="0" y="0")
+                                                                                                    mask(mask-type="alpha")#__lottie_element_125
+                                                                                                        g(style="display: none;")
+                                                                                                            path(fill="url(#__lottie_element_127)")
+                                                                                                    linearGradient(spreadMethod="pad" gradientUnits="userSpaceOnUse")#__lottie_element_127
+                                                                                                        stop
+                                                                                                        stop
+                                                                                                    mask(mask-type="alpha")#__lottie_element_130
+                                                                                                        g(style="display: none;")
+                                                                                                            path(fill="url(#__lottie_element_132)")
+                                                                                                    linearGradient(spreadMethod="pad" gradientUnits="userSpaceOnUse")#__lottie_element_132
+                                                                                                        stop
+                                                                                                        stop
+                                                                                                g(clip-path="url(#__lottie_element_124)")
+                                                                                                    g(mask="url(#__lottie_element_130)" style="display: block;")
+                                                                                                        g(
+                                                                                                            transform="matrix(6.199999809265137,0,0,1.2000000476837158,90,48)"
+                                                                                                            opacity="1"
+                                                                                                        )
+                                                                                                            path(
+                                                                                                                fill="rgb(255,39,145)" fill-opacity="1"
+                                                                                                                d=" M50,-75 C50,-75 50,75 50,75 C50,75 -50,75 -50,75 C-50,75 -50,-75 -50,-75 C-50,-75 50,-75 50,-75z"
+                                                                                                            )
+                                                                                                    g(mask="url(#__lottie_element_125)" style="display: block;")
+                                                                                                        g(
+                                                                                                            transform="matrix(6.199999809265137,0,0,1.2000000476837158,90,48)"
+                                                                                                            opacity="1"
+                                                                                                        )
+                                                                                                            path(
+                                                                                                                fill="rgb(255,39,145)" fill-opacity="1"
+                                                                                                                d=" M50,-75 C50,-75 50,75 50,75 C50,75 -50,75 -50,75 C-50,75 -50,-75 -50,-75 C-50,-75 50,-75 50,-75z"
+                                                                                                            )
+                                                                                    div.__slot-el-html-tag
+                                                                                        div(key="children_0" invisible)#notification-preference-button.wtd-subscribe-button-renderer
+                                                                                            div(
+                                                                                                button-renderer="true"
+                                                                                            ).wtd-subscription-notification-toggle-button-renderer-next-html-tag.wtd-subscribe-button-renderer
+                                                                                                div.wt-button-shape-html-tag
+                                                                                                    button(
+                                                                                                        aria-label=`현재 설정은 맞춤설정 알림 수신입니다. ${foundVideoFromDB.video_owner.user_channel.channel_name} 채널의 알림 설정을 변경하려면 탭하세요.`
+                                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading-trailing
+                                                                                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                                                            div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                                                div(animated-icon-type="NOTIFICATION_BELL").wt-animated-icon-html-tag
+                                                                                                                    div(style="display: block;").wtd-lootie-player-html-tag.wt-animated-icon.lottie-player
+                                                                                                                        div.lottie-component-html-tag.wtLottieComponentHost
+                                                                                                                            svg(
+                                                                                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"
+                                                                                                                                width="96" height="96" preserveAspectRatio="xMidYMid meet"
+                                                                                                                                style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"
+                                                                                                                            )
+                                                                                                                                defs
+                                                                                                                                    clipPath#__lottie_element_160
+                                                                                                                                        rect(width="96" height="96" x="0" y="0")
+                                                                                                                                g(clip-path="url(#__lottie_element_160)")
+                                                                                                                                    g(
+                                                                                                                                        transform="transform=matrix(1,0,0,1,47.99999237060547,48)"
+                                                                                                                                        opacity="1" style="display: block;"
+                                                                                                                                    )
+                                                                                                                                        g(opacity="1" transform="matrix(1,0,0,1,0,0)")
+                                                                                                                                        g(opacity="1" transform="matrix(1,0,0,1,0,0)")
+                                                                                                                                            path(
+                                                                                                                                                fill="rgb(3,3,3)" fill-opacity="1"
+                                                                                                                                                d=" M-6.5,26.410999298095703 C-6.5,26.410999298095703 6.5,26.410999298095703 6.5,26.410999298095703 C6.5,29.923999786376953 3.575000047683716,32.79899978637695 0,32.79899978637695 C-3.575000047683716,32.79899978637695 -6.5,29.923999786376953 -6.5,26.410999298095703z M22.75,19.290000915527344 C22.75,19.290000915527344 16.25,13.28600025177002 16.25,13.28600025177002 C16.25,13.28600025177002 16.25,-4.184000015258789 16.25,-4.184000015258789 C16.25,-12.071999549865723 12.381999969482422,-18.107999801635742 6.077000141143799,-20.47100067138672 C1.9819999933242798,-22.163999557495117 -2.502000093460083,-22.06800079345703 -6.4019999504089355,-20.375 C-12.51200008392334,-17.947999954223633 -16.25,-11.944000244140625 -16.25,-4.184000015258789 C-16.25,-4.184000015258789 -16.25,13.28600025177002 -16.25,13.28600025177002 C-16.25,13.28600025177002 -22.75,19.290000915527344 -22.75,19.290000915527344 C-22.75,19.290000915527344 -22.75,20.02400016784668 -22.75,20.02400016784668 C-22.75,20.02400016784668 22.75,20.02400016784668 22.75,20.02400016784668 C22.75,20.02400016784668 22.75,19.290000915527344 22.75,19.290000915527344z M26,17.947999954223633 C26,17.947999954223633 26,23.218000411987305 26,23.218000411987305 C26,23.218000411987305 -26,23.218000411987305 -26,23.218000411987305 C-26,23.218000411987305 -26,17.947999954223633 -26,17.947999954223633 C-26,17.947999954223633 -19.5,11.944000244140625 -19.5,11.944000244140625 C-19.5,11.944000244140625 -19.5,-4.502999782562256 -19.5,-4.502999782562256 C-19.5,-13.829000473022461 -14.430000305175781,-21.173999786376953 -6.5,-23.60099983215332 C-6.5,-23.60099983215332 -6.5,-24.81399917602539 -6.5,-24.81399917602539 C-6.5,-29.349000930786133 -1.6579999923706055,-32.79800033569336 3.2170000076293945,-30.434999465942383 C5.329999923706055,-29.413000106811523 6.5,-27.145000457763672 6.5,-24.81399917602539 C6.5,-24.81399917602539 6.5,-23.569000244140625 6.5,-23.569000244140625 C14.430000305175781,-21.173999786376953 19.5,-13.795999526977539 19.5,-4.4710001945495605 C19.5,-4.4710001945495605 19.5,11.97599983215332 19.5,11.97599983215332 C19.5,11.97599983215332 26,17.947999954223633 26,17.947999954223633z"
+                                                                                                                                            )
+                                                                                                                                            path(
+                                                                                                                                                fill="rgb(255,255,255)" fill-opacity="1"
+                                                                                                                                                d=" M-6.5,26.410999298095703 C-6.5,26.410999298095703 6.5,26.410999298095703 6.5,26.410999298095703 C6.5,29.923999786376953 3.575000047683716,32.79899978637695 0,32.79899978637695 C-3.575000047683716,32.79899978637695 -6.5,29.923999786376953 -6.5,26.410999298095703z M22.75,19.290000915527344 C22.75,19.290000915527344 16.25,13.28600025177002 16.25,13.28600025177002 C16.25,13.28600025177002 16.25,-4.184000015258789 16.25,-4.184000015258789 C16.25,-12.071999549865723 12.381999969482422,-18.107999801635742 6.077000141143799,-20.47100067138672 C1.9819999933242798,-22.163999557495117 -2.502000093460083,-22.06800079345703 -6.4019999504089355,-20.375 C-12.51200008392334,-17.947999954223633 -16.25,-11.944000244140625 -16.25,-4.184000015258789 C-16.25,-4.184000015258789 -16.25,13.28600025177002 -16.25,13.28600025177002 C-16.25,13.28600025177002 -22.75,19.290000915527344 -22.75,19.290000915527344 C-22.75,19.290000915527344 -22.75,20.02400016784668 -22.75,20.02400016784668 C-22.75,20.02400016784668 22.75,20.02400016784668 22.75,20.02400016784668 C22.75,20.02400016784668 22.75,19.290000915527344 22.75,19.290000915527344z M26,17.947999954223633 C26,17.947999954223633 26,23.218000411987305 26,23.218000411987305 C26,23.218000411987305 -26,23.218000411987305 -26,23.218000411987305 C-26,23.218000411987305 -26,17.947999954223633 -26,17.947999954223633 C-26,17.947999954223633 -19.5,11.944000244140625 -19.5,11.944000244140625 C-19.5,11.944000244140625 -19.5,-4.502999782562256 -19.5,-4.502999782562256 C-19.5,-13.829000473022461 -14.430000305175781,-21.173999786376953 -6.5,-23.60099983215332 C-6.5,-23.60099983215332 -6.5,-24.81399917602539 -6.5,-24.81399917602539 C-6.5,-29.349000930786133 -1.6579999923706055,-32.79800033569336 3.2170000076293945,-30.434999465942383 C5.329999923706055,-29.413000106811523 6.5,-27.145000457763672 6.5,-24.81399917602539 C6.5,-24.81399917602539 6.5,-23.569000244140625 6.5,-23.569000244140625 C14.430000305175781,-21.173999786376953 19.5,-13.795999526977539 19.5,-4.4710001945495605 C19.5,-4.4710001945495605 19.5,11.97599983215332 19.5,11.97599983215332 C19.5,11.97599983215332 26,17.947999954223633 26,17.947999954223633z"
+                                                                                                                                            )
+                                                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                                                            span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                                                |구독중
+                                                                                                        div.wt-spec-button-shape-next__secondary-icon
+                                                                                                            div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                                        svg(
+                                                                                                                            xmlns="http://www.w3.org/2000/svg" height="24"
+                                                                                                                            viewBox="0 0 24 24" width="24" focusable="false"
+                                                                                                                            aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                                        )
+                                                                                                                            path(d="m18 9.28-6.35 6.35-6.37-6.35.72-.71 5.64 5.65 5.65-5.65z")
+                                                                                                        div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                            div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape__touch-response
+                                                                                                                div.wt-spec-touch-feedback-shape__stroke
+                                                                                                                div.wt-spec-touch-feedback-shape__fill
+                                                                                div(aria-hidden="true").animated-action__lottie
                                                 div#actions.item.wtd-watch-metadata
+                                                    div#actions-inner.wtd-watch-metadata
+                                                        div#menu.wtd-watch-metadata
+                                                            div(
+                                                                safe-area menu-active tonal-override has-items="2"
+                                                            ).wtd-menu-renderer-html-tag.wtd-watch-metadata
+                                                                div#top-level-buttons-computed.top-level-buttons.wtd-menu-renderer
+                                                                    div(button-renderer="true").segmented-like-dislike-button-view-model-html-tag.wtSegmentedLikeDislikeButtonViewModelHost.wtd-menu-renderer
+                                                                        div.wt-smartimation-html-tag.smartimation.smartimation--enable-masking
+                                                                            div.smartimation__content
+                                                                                div.wtSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper
+                                                                                    div.like-button-view-model.wtLikeButtonViewModelHost
+                                                                                        div.toggle-button-model-view
+                                                                                            div.button-view-model-html-tag.wt-spec-button-view-model
+                                                                                                button(
+                                                                                                    aria-disabled="false" aria-pressed="false"
+                                                                                                    aria-label=(foundVideoFromDB.likes === 0) ? "아무도 이 동영상을 좋아하지 않습니다." : `나 외에 ${(foundVideoFromDB.likes-1).toLocaleString("en-US")}명이 이 동영상을 좋아함`
+                                                                                                    title="이 동영상이 마음에 듭니다."
+                                                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading.wt-spec-button-shape-next--segmented-start
+                                                                                                    div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                                            div(animated-icon-type="LIKE").wt-animated-icon-html-tag
+                                                                                                                div(style="display: block;").wt-lottie-player-html-tag.wt-animated-icon.lottie-player
+                                                                                                                    div.lottie-component-html-tag.wtLottieComponentHost
+                                                                                                                        svg(
+                                                                                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270"
+                                                                                                                            width="270" height="270" preserveAspectRatio="xMidYMid meet"
+                                                                                                                            style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"
+                                                                                                                        )
+                                                                                                                            defs
+                                                                                                                                clipPath#__lottie_element_165
+                                                                                                                                    rect(width="270" height="270" x="0" y="0")
+                                                                                                                                clipPath#__lottie_element_167
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_170
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_180
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_189
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_198
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_207
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                                clipPath#__lottie_element_216
+                                                                                                                                    path(d="M0,0 L480,0 L480,480 L0,480z")
+                                                                                                                            g(clip-path="url(#__lottie_element_165)")
+                                                                                                                                g(clip-path="url(#__lottie_element_167)" transform="matrix(0.4350000023841858,0,0,0.4350000023841858,28.474998474121094,26.724998474121094)")
+                                                                                                                                    g(clip-path="url(#__lottie_element_216)" style="display: none;")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                    g(clip-path="url(#__lottie_element_207)" style="display: none;")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                    g(clip-path="url(#__lottie_element_198)" style="display: none;")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                    g(clip-path="url(#__lottie_element_189)" style="display: none;")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                    g(clip-path="url(#__lottie_element_180)" style="display: none;")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path(stroke-linecap="round" stroke-linejoin="round" fill-opacity="0")
+                                                                                                                                    g(
+                                                                                                                                        clip-path="url(#__lottie_element_170)" transform="matrix(1,0,0,1,0,0)"
+                                                                                                                                        opacity="1" style="display: block;"
+                                                                                                                                    )
+                                                                                                                                        g(style="display: none;")
+                                                                                                                                            path
+                                                                                                                                            g
+                                                                                                                                                g
+                                                                                                                                        g(transform="matrix(10,0,0,10,120,120)" opacity="1" style="display: block;")
+                                                                                                                                            path(
+                                                                                                                                                fill="rgb(255,255,255)" fill-opacity="1"
+                                                                                                                                                d=" M8,11 C8,11 3,11 3,11 C3,11 3,21 3,21 C3,21 8,21 8,21 C8,21 8,11 8,11z M18.770000457763672,11 C18.770000457763672,11 14.539999961853027,11 14.539999961853027,11 C14.539999961853027,11 16.059999465942383,6.059999942779541 16.059999465942383,6.059999942779541 C16.3799991607666,5.03000020980835 15.539999961853027,4 14.380000114440918,4 C13.800000190734863,4 13.239999771118164,4.239999771118164 12.859999656677246,4.650000095367432 C12.859999656677246,4.650000095367432 7,11 7,11 C7,11 7,21 7,21 C7,21 17.43000030517578,21 17.43000030517578,21 C18.489999771118164,21 19.40999984741211,20.329999923706055 19.6200008392334,19.389999389648438 C19.6200008392334,19.389999389648438 20.959999084472656,13.390000343322754 20.959999084472656,13.390000343322754 C21.229999542236328,12.149999618530273 20.18000030517578,11 18.770000457763672,11z M7,20 C7,20 4,20 4,20 C4,20 4,12 4,12 C4,12 7,12 7,12 C7,12 7,20 7,20z M19.979999542236328,13.170000076293945 C19.979999542236328,13.170000076293945 18.639999389648438,19.170000076293945 18.639999389648438,19.170000076293945 C18.540000915527344,19.649999618530273 18.030000686645508,20 17.43000030517578,20 C17.43000030517578,20 8,20 8,20 C8,20 8,11.390000343322754 8,11.390000343322754 C8,11.390000343322754 13.600000381469727,5.329999923706055 13.600000381469727,5.329999923706055 C13.789999961853027,5.119999885559082 14.079999923706055,5 14.380000114440918,5 C14.640000343322754,5 14.880000114440918,5.110000133514404 15.010000228881836,5.300000190734863 C15.079999923706055,5.400000095367432 15.15999984741211,5.559999942779541 15.100000381469727,5.769999980926514 C15.100000381469727,5.769999980926514 13.579999923706055,10.710000038146973 13.579999923706055,10.710000038146973 C13.579999923706055,10.710000038146973 13.180000305175781,12 13.180000305175781,12 C13.180000305175781,12 14.529999732971191,12 14.529999732971191,12 C14.529999732971191,12 18.760000228881836,12 18.760000228881836,12 C19.170000076293945,12 19.559999465942383,12.170000076293945 19.790000915527344,12.460000038146973 C19.920000076293945,12.609999656677246 20.049999237060547,12.859999656677246 19.979999542236328,13.170000076293945z"
+                                                                                                                                            )
+                                                                                                    div.wt-spec-button-shape-next__button-text-content
+                                                                                                        -function fmtNum(n){if(n<1e3)return n+"";for(let{v,u} of [{v:1e8,u:"억"},{v:1e4,u:"만"},{v:1e3,u:"천"}])if(n>=v){let q=Math.floor(n/v),r=Math.floor((n%v)/(v/100));return r===0?`${q}${u}`:`${q}.${r.toString().padStart(2,"0")}${u}`}};const like=`${fmtNum(foundVideoFromDB.likes)}`;
+                                                                                                        |#{(foundVideoFromDB.likes === 0) ? 0 : like}
+                                                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                        div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                                            div.wt-spec-touch-feedback-shape__stroke
+                                                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                                    div.dislike-button-view-model.wtDisLikeButtonViewModelHost
+                                                                                        div.toggle-button-view-medel-html-tag
+                                                                                            div.button-view-model-html-tag.wt-spec-button-view-model
+                                                                                                button(
+                                                                                                    aria-disabled="false" aria-pressed="false" aria-label="동영상 싫어요 표시"
+                                                                                                    title="이 동영상이 마음에 들지 않습니다."
+                                                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-button.wt-spec-button-shape-next--segmented-end
+                                                                                                    div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                                                        div(style="width: 24px; height: 24px").wt-icon-html-tag
+                                                                                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                                    svg(
+                                                                                                                        xmlns="http://www.w3.org/2000/svg" height="24"
+                                                                                                                        viewBox="0 0 24 24" width="24" 
+                                                                                                                        style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                                    )
+                                                                                                                        path(d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21 c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z M10.4,19.67C10.21,19.88,9.92,20,9.62,20c-0.26,0-0.5-0.11-0.63-0.3 c-0.07-0.1-0.15-0.26-0.09-0.47l1.52-4.94l0.4-1.29H9.46H5.23c-0.41,0-0.8-0.17-1.03-0.46c-0.12-0.15-0.25-0.4-0.18-0.72l1.34-6 C5.46,5.35,5.97,5,6.57,5H16v8.61L10.4,19.67z M20,13h-3V5h3V13z")
+                                                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                        div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                                            div.wt-spec-touch-feedback-shape__stroke
+                                                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                    div.wt-button-view-model-html-tag.wtd-menu-renderer
+                                                                        div.button-view-model-html-tag.wt-spec-button-view-model.wtd-menu-renderer
+                                                                            button(
+                                                                                aria-disabled="false" aria-label="공유" title="공유"
+                                                                            ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading
+                                                                                div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                                    div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                        span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                svg(
+                                                                                                    xmlns="http://www.w3.org/2000/svg" height="24"
+                                                                                                    viewBox="0 0 24 24" width="24" focusable="false"
+                                                                                                    aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                )
+                                                                                                    path(d="M15 5.63 20.66 12 15 18.37V14h-1c-3.96 0-7.14 1-9.75 3.09 1.84-4.07 5.11-6.4 9.89-7.1l.86-.13V5.63M14 3v6C6.22 10.13 3.11 15.33 2 21c2.78-3.97 6.44-6 12-6v6l8-9-8-9z")
+                                                                                div.wt-spec-button-shape-next__button-text-content
+                                                                                    |공유
+                                                                                div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                    div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                        div.wt-spec-touch-feedback-shape__stroke
+                                                                                        div.wt-spec-touch-feedback-shape__fill
+                                                                div(
+                                                                    style-target="button" role="button" aria-label="wt-icon-button" hidden
+                                                                )#button.wt-icon-button-html-tag.dropdown-trigger.wtd-menu-renderer
+                                                                div#button-shape.wt-button-shape-html-tag.wtd-menu-renderer
+                                                                    button(
+                                                                        aria-label="추가 작업"
+                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-button
+                                                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                            div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                        svg(
+                                                                                            xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                                                                                            width="24" focusable="false" aria-hidden="true"
+                                                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                        )
+                                                                                            path(d="M7.5 12c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm4.5-1.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm6 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z")
+                                                                        div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                            div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                div.wt-spec-touch-feedback-shape__stroke
+                                                                                div.wt-spec-touch-feedback-shape__fill
                                             div#middle-row.wtd-watch-metadata
                                             div#bottom-row.wtd-watch-metadata
+                                                div#description.item.wtd-watch-metadata
+                                                    div#description-inner.wtd-watch-metadata
+                                                        div#wtd-watch-info-text.wtd-watch-info-text-html-tag.wtd-watch-metadata
+                                                            div#info-container.wtd-watch-info-text
+                                                                div#view-count.wtd-watch-info-text
+                                                                div#date-text.wtd-watch-info-text
+                                                                div#info.wt-formatted-string.wtd-watch-info-text
+                                                                    -function fmtNum(n){if(n<1e3)return n+"";for(let{v,u} of [{v:1e8,u:"억"},{v:1e4,u:"만"},{v:1e3,u:"천"}])if(n>=v){let q=Math.floor(n/v),r=Math.floor((n%v)/(v/100));return r===0?`${q}${u}`:`${q}.${r.toString().padStart(2,"0")}${u}`}};const views=fmtNum(foundVideoFromDB.views);
+                                                                    -const n=new Date(),ud=foundVideoFromDB.meta.createdAt.split("_")[0],ut=foundVideoFromDB.meta.createdAt.split("_")[1],cm=n.getTime(),um=new Date(`${ud}T${ut}`).getTime(),ct=()=>{const dis=Math.floor((cm-um)/1e3);if(dis<0)return "FUTURE_VIDEO_ERROR";const yd=Math.floor(dis/31536000),mod=Math.floor(dis/2629800),wd=Math.floor(dis/604800),dd=Math.floor(dis/86400),hd=Math.floor(dis/3600),md=Math.floor(dis/60);return yd>0?`${yd}년 전`:mod>0?`${mod}달 전`:wd>0?`${wd}주 전`:dd>0?`${dd}일 전`:hd>0?`${hd}시간 전`:md>0?`${md}분 전`:`${dis}초 전`;},ago=ct();
+                                                                    span(dir="auto" style-target="bold").bold.wt-formatted-string
+                                                                        |#{`조회수 ${views}회`}
+                                                                    span(dir="auto" style-target="bold").bold.wt-formatted-string
+                                                                        |   
+                                                                    span(dir="auto" style-target="bold").bold.wt-formatted-string
+                                                                        |#{ago}
+                                                                dom-if.wtd-watch-info-text
+                                                            div(
+                                                                role="tooltip" tabindex="-1" aria-label="tooltip"
+                                                                style="left: 220.838px; top: 46px;"
+                                                            ).tp-wt-paper-tooltip-html-tag.wtd-watch-info-text
+                                                                div(style-target="tooltip")#tooltip.tp-wt-paper-tooltip.hidden
+                                                                    |#{`조회수 ${foundVideoFromDB.views.toLocaleString("en-US")}회 • ${(foundVideoFromDB.meta.createdAt).split("_")[0].replaceAll("-", ". ")}`}
+                                                        div(
+                                                            always-show-expand-button show-expand-button
+                                                        )#description-inline-expander.wtd-text-inline-expander-html-tag.wtd-watch-metadata
+                                                            wt-attributed-string(user-input hidden).wtd-text-inline-expander
+                                                                |#{foundVideoFromDB.description}
+                                                            div(
+                                                                disable-attributed-string hidden disable-upgrade
+                                                            ).wt-formatted-string-html-tag.wtd-text-inline-expander
+                                                            div(style="overflow: hidden; max-height: 6rem;")#snippet.wtd-text-inline-expander
+                                                                span#snippet-text.wtd-text-inline-expander
+                                                                    span(hidden)#plain-snippet-text.wtd-text-inline-expander
+                                                                    wt-attributed-string(user-input)#attributed-snippet-text.wtd-text-inline-expander
+                                                                        span(
+                                                                            dir="auto" role="text"
+                                                                        ).wt-core-attributed-string.wt-core-attributed-string--white-space-pre-wrap
+                                                                            span(
+                                                                                dir="auto" style="color: rgb(255, 255, 255);"
+                                                                            ).wt-core-attributed-string--link-inherit-color
+                                                                                |#{foundVideoFromDB.description}
+                                                                    div(
+                                                                        disable-attributed-string disable-upgrade hidden
+                                                                    )#formatted-snippet-string.wt-formatted-string-html-tag.wtd-text-inline-expander
+                                                                span.wtd-text-inline-expander
+                                                                    |&nbsp;
+                                                                span(hidden)#ellipsis.wtd-text-inline-expander
+                                                                    |…
+                                                                div(
+                                                                    style-target="host" role="button" tabindex="0" animated elevation="0"
+                                                                    aria-disabled="false"
+                                                                )#expand-sizer.tp-wt-paper-button-html-tag.button.wtd-text-inline-expander
+                                                                    |...더보기
+                                                            div(
+                                                                style-target="host" role="button" tabindex="0" animated elevation="0"
+                                                                aria-disabled="false" style
+                                                            )#expand.tp-wt-paper-button-html-tag.button.wtd-text-inline-expander
+                                                                    |...더보기
+                                                            div(slot="extra-content").wtd-watch-metadata
+                                                                div(
+                                                                    inline-structured-description modern hidden
+                                                                )#structured-description.wtd-structured-description-content-renderer-html-tag.wtd-watch-metadata
+                                                                    div#items.wtd-structured-description-content-renderer
+                                                                        div(
+                                                                            modern modern-typography
+                                                                        ).wtd-video-description-transcript-section-renderer-html-tag.wtd-structured-description-content-renderer
+                                                                            div#header.wtd-video-description-transcript-section-renderer
+                                                                                div#title.wtd-video-description-transcript-section-renderer
+                                                                                    |스크립트
+                                                                            div#sub-header.wtd-video-description-transcript-section-renderer
+                                                                                p#sub-header-text.wtd-video-description-transcript-section-renderer
+                                                                                    |스크립트를 보면서 시청하세요.
+                                                                            div#button-container.wtd-video-description-transcript-section-renderer
+                                                                                div#primary-button.wtd-video-description-transcript-section-renderer
+                                                                                    div(button-renderer button-next).wtd-button-renderer-html-tag.wtd-video-description-transcript-section-renderer
+                                                                                        div.wt-button-shape-html-tag
+                                                                                            button(
+                                                                                                aria-disabled="false" aria-label="스크립트 표시"
+                                                                                            ).wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m
+                                                                                                div.wt-spec-button-shape-next__button-text-content
+                                                                                                    span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                                        |스크립트 표시
+                                                                                                div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                    div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                                        div.wt-spec-touch-feedback-shape__stroke
+                                                                                                        div.wt-spec-touch-feedback-shape__fill
+                                                                        div(
+                                                                            at-start at-end show-creator-custom-url-buttons
+                                                                        ).wtd-video-description-infocards-section-renderer-html-tag.wtd-structured-description-content-renderer
+                                                                            a(
+                                                                                href=`/${foundVideoFromDB.video_owner.user_channel.channel_handle}`
+                                                                            )#header.wt-simple-endpoint.wtd-video-description-infocards-section-renderer
+                                                                                div(
+                                                                                    loaded style="background-color: transparent;"
+                                                                                )#thumbnail.wt-img-shadow-html-tag.wtd-video-description-infocards-section-renderer.no-transition
+                                                                                    img(
+                                                                                        draggable="false" alt width="36"
+                                                                                        src=foundVideoFromDB.video_owner.avatar
+                                                                                    )#img.wt-img-shadow
+                                                                                div#header-text.wtd-video-description-infocards-section-renderer
+                                                                                    -function fmtNum(n){if(n<1e3)return n+"";for(let{v,u} of [{v:1e8,u:"억"},{v:1e4,u:"만"},{v:1e3,u:"천"}])if(n>=v){let q=Math.floor(n/v),r=Math.floor((n%v)/(v/100));return r===0?`${q}${u}`:`${q}.${r.toString().padStart(2,"0")}${u}`}};const sub=`${fmtNum(foundVideoFromDB.video_owner.user_channel.channel_subscriber)}명`;
+                                                                                    h3#title.wtd-video-description-infocards-section-renderer
+                                                                                        |#{foundVideoFromDB.video_owner.user_channel.channel_name}
+                                                                                    div#subtitle.wtd-video-description-infocards-section-renderer
+                                                                                        |#{`구독자 ${sub}`}
+                                                                            div(hidden)#action-buttons.wtd-video-description-infocards-section-renderer
+                                                                            div#social-links.wtd-video-description-infocards-section-renderer
+                                                                                div#left-arrow-container.arrow-container.wtd-video-description-infocards-section-renderer
+                                                                                div(style="touch-action: pan-y;")#scroll-container.arrow-container.wtd-video-description-infocards-section-renderer
+                                                                                    div(style="transform: translateX(0px);")#items.wtd-video-description-infocards-section-renderer
+                                                                                        div(button-renderer button-next).wtd-button-renderer-html-tag.wtd-video-description-infocards-section-renderer
+                                                                                            div.wt-button-shape-html-tag
+                                                                                                a(
+                                                                                                    aria-disabled="false" aria-label="동영상"
+                                                                                                    href=`/channel/${foundVideoFromDB.video_owner.user_channel.channel_id}/videos`
+                                                                                                    force-new-state="true"
+                                                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading
+                                                                                                    div.wt-spec-button-shape-next__icon
+                                                                                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                                    svg(
+                                                                                                                        xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                                                                                        height="24" viewBox="0 0 24 24" width="24" focusable="false"
+                                                                                                                        aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                                    )
+                                                                                                                        path(d="m10 8 6 4-6 4V8zm11-5v18H3V3h18zm-1 1H4v16h16V4z")
+                                                                                                    div.wt-spec-button-shape-next__button-text-content
+                                                                                                        span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-spce-no-wrap
+                                                                                                            |동영상
+                                                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                        div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                                            div.wt-spec-touch-feedback-shape__stroke
+                                                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                                        div(button-renderer button-next).wtd-button-renderer-html-tag.wtd-video-description-infocards-section-renderer
+                                                                                            div.wt-button-shape-html-tag
+                                                                                                a(
+                                                                                                    aria-disabled="false" aria-label="정보"
+                                                                                                    href=`/channel/${foundVideoFromDB.video_owner.user_channel.channel_id}/about`
+                                                                                                    force-new-state="true"
+                                                                                                ).wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading
+                                                                                                    div.wt-spec-button-shape-next__icon
+                                                                                                        div(style="width: 24px; height: 24px;").wt-icon-html-tag
+                                                                                                            span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                                                div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                                    svg(
+                                                                                                                        xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false"
+                                                                                                                        aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                                    )
+                                                                                                                        path(d="M4 20h14v1H3V6h1v14zM6 3v15h15V3H6zm2.02 14c.36-2.13 1.93-4.1 5.48-4.1s5.12 1.97 5.48 4.1H8.02zM11 8.5a2.5 2.5 0 015 0 2.5 2.5 0 01-5 0zm3.21 3.43A3.507 3.507 0 0017 8.5C17 6.57 15.43 5 13.5 5S10 6.57 10 8.5c0 1.69 1.2 3.1 2.79 3.43-3.48.26-5.4 2.42-5.78 5.07H7V4h13v13h-.01c-.38-2.65-2.31-4.81-5.78-5.07z")
+                                                                                                    div.wt-spec-button-shape-next__button-text-content
+                                                                                                        span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-spce-no-wrap
+                                                                                                            |정보
+                                                                                                    div(style="border-radius: inherit;").wt-touch-feedback-shape-html-tag
+                                                                                                        div(aria-hidden="true").wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response
+                                                                                                            div.wt-spec-touch-feedback-shape__stroke
+                                                                                                            div.wt-spec-touch-feedback-shape__fill
+                                                                                div#right-arrow-container.arrow-container.wtd-video-description-infocards-section-renderer
+                                                                            div#infocards-section.wtd-video-description-infocards-section-renderer
+                                                            div(
+                                                                style-target="host" role="button" tabindex="0" animated elevation="0"
+                                                                aria-disabled="false" hidden
+                                                            )#collapse.tp-wt-paper-button-html-tag.button.wtd-text-inline-expander
+                                                                |간략히
+                                                    div#description-interaction.wt-interaction-html-tag.rounded-large.wtd-watch-metadata
+                                                div#bottom-actions.wtd-watch-metadata
+                                                div(hidden)#comment-teaser.item.wtd-watch-metadata
+                                                div(hidden)#teaser-carousel.item.wtd-watch-metadata
                                         div.wtd-metadata-row-container-renderer-html-tag
                                     div.wtd-watch-flexy
                                     div#expanded-metadata.wtd-watch-flexy

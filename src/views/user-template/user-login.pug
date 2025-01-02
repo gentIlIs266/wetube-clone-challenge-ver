@@ -147,13 +147,13 @@ block wtd-app
                                                             div.error.pop-bottom.tk-subbody-headline
                                                                 p#errMsg.fat
                                                                     if error.noUserExistError
-                                                                        |입력하신 유저네임 혹은 이메일을 쓰는 유저가
+                                                                        |입력하신 이메일 혹은 유저네임을 쓰는 유저가
                                                                         br
                                                                         |존재하지 않습니다.
                                                                     if error.wrongPasswordError
                                                                         |암호가 올바르지 않습니다.
                                                                 if error.noUserExistError
-                                                                    a(href="#").si-link.ax-outline.thin.tk-subbody 
+                                                                    a(href="/join").si-link.ax-outline.thin.tk-subbody 
                                                                         |WeTube&nbsp;ID가 
                                                                         span.no-wrap.sk-icon.sk-icon-after.sk-icon-external
                                                                             |없으십니까?

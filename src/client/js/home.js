@@ -59,8 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
     wtdAppAttributeObserver.observe(wtdAppDiv, { attributes: true });
-    wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-width", `${clientWidth - 240}px`);
-    wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-top", `56px`);
+    if (wtdFeedFilterChipBarRenderer) {
+        wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-width", `${clientWidth - 240}px`);
+        wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-top", `56px`);
+    };
 });
 /*home filter bar cloud chip select response*/
 document.addEventListener("DOMContentLoaded", () => {

@@ -438,6 +438,9 @@ button.wt-icon-button {
     position: absolute;
     outline: none;
     z-index: 1002;
+    -mox-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
     cursor: default;
 }
@@ -680,16 +683,6 @@ button.wtd-topbar-menu-button-renderer,
 }
 .wt-img-shadow-html-tag.no-transition {
     opacity: 1;
-}
-.wt-spec-touch-feedback-shape__stroke {
-    will-change: opacity;
-    opacity: 0;
-    border-radius: inherit;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 }
 img.wt-img-shadow {
     display: block;
