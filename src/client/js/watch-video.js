@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 100);
     });
 });
+/*progress bar*/
 document.addEventListener("DOMContentLoaded", () => {
     const moviePlayer = document.querySelector("#movie_player.html5-video-player");
     const videoItSelf = document.querySelector("#wtd-player .html5-video-container video");
@@ -68,35 +69,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const playProgress = chromeBottom.querySelector(".wtp-play-progress");
     const loadProgress = progressBar.querySelector(".wtp-load-progress");
     const scrubberContainer = progressBar.querySelector(".wtp-scrubber-container");
+    let progressBarWidth = 0;
+    let wholeVideoLength = 0;
     function getTimeStr(d) {
         const h = Math.floor(d / 3600);
         const m = Math.floor((d % 3600) / 60);
         const s = Math.floor(d % 60);
-        return h > 0
-        ? `${h} 시 ${m} 분 ${s}초`
-        : `${m} 분 ${s}초`
+        return h > 0 ? `${h} 시 ${m} 분 ${s}초` : `${m} 분 ${s}초`;
     };
     function getDefaultTimeStr(d) {
         const h = Math.floor(d / 3600);
-        return h > 0
-        ? `0 시 0 분 0초`
-        : `0 분 0초`
+        return h > 0 ? `0 시 0 분 0초` : `0 분 0초`;
     };
-    const { width: progressBarWidth } = progressBar.getBoundingClientRect();
-    let wholeVideoLength = null;
+    function updateProgressBarWidth() {
+        progressBarWidth = progressBar.getBoundingClientRect().width;
+    }; updateProgressBarWidth();
+
+    window.addEventListener("resize", updateProgressBarWidth);
     videoItSelf.addEventListener("loadedmetadata", () => {
         wholeVideoLength = Math.floor(videoItSelf.duration);
-        progressBar.setAttribute("aria-valuemax", String(wholeVideoLength));
+        progressBar.setAttribute("aria-valuemax", `${wholeVideoLength}`);
         progressBar.setAttribute("aria-valuetext", `${getDefaultTimeStr(wholeVideoLength)}/${getTimeStr(wholeVideoLength)}`);
     });
     videoItSelf.addEventListener("timeupdate", () => {
         const progress = (videoItSelf.currentTime / videoItSelf.duration);
         const now = Math.floor(videoItSelf.currentTime);
-        const scrubberPosition = (progress * progressBarWidth);
-        scrubberContainer.style.transform = `translateX(${scrubberPosition}px)`;
-        progressBar.setAttribute("aria-valuenow", String(now));
+
+        updateProgressBarWidth();
+        const playProgressWidth = progress * progressBarWidth;
+        const scrubberCenter = playProgressWidth - scrubberContainer.offsetWidth / 2;
+        
+        progressBar.setAttribute("aria-valuenow", `${now}`);
         progressBar.setAttribute("aria-valuetext", `${getTimeStr(now)}/${getTimeStr(wholeVideoLength)}`);
+
         playProgress.style.transform = `scaleX(${progress})`;
+        scrubberContainer.style.transform = `translateX(${scrubberCenter}px)`;
     });
     videoItSelf.addEventListener("progress", () => {
         if (videoItSelf.buffered.length > 0) {
@@ -171,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
     /*volume*/
     (function() {
-        /*
         const leftControl = controls.querySelector(".wtp-left-controls");
         [muteButton, volumePanel].forEach((element) => {
             element.addEventListener("mouseenter", () => {
@@ -183,35 +189,160 @@ document.addEventListener("DOMContentLoaded", () => {
                 volumePanel.classList.remove("wtp-volume-control-hover");
             });
         });
-        */
         let isDragging = false;
         const videoMaxVolume = 100;
-        const videoVolumeUpdate = (mouseEvent) => {
+        function videoVolumeUpdate(mouseEvent) {
             const { width: sliderWidth, left: sliderLeft } = volumeSlider.getBoundingClientRect();
-            let offsetX;
-            offsetX = Math.max(0, Math.min(mouseEvent.clientX - sliderLeft, sliderWidth))
-            const videoVolume = Math.round((offsetX / sliderWidth) * videoMaxVolume);
-            const videoVolumePercentage = videoVolume / videoMaxVolume;
-            volumeSliderHandle.style.left = `${offsetX}px`;
-            volumePanel.setAttribute("aria-valuenow", String(videoVolume));
+            const offsetX = Math.max(0, Math.min(mouseEvent.clientX - sliderLeft, sliderWidth));
+            const videoVolumeToIndicate = Math.round((offsetX / sliderWidth) * videoMaxVolume);
+            const videoVolumePercentage = (videoVolumeToIndicate / videoMaxVolume);
+            const actualVideoVolume = (offsetX / sliderWidth);
+            const handleWidth = volumeSliderHandle.offsetWidth;
+
+            const handleLeft = offsetX - handleWidth / 2;
+            volumeSliderHandle.style.left = `${Math.max(0, Math.min(handleLeft, sliderWidth - handleWidth))}px`;
+
+            videoItSelf.volume = actualVideoVolume;
+            volumePanel.setAttribute("aria-valuenow", `${videoVolumeToIndicate}`);
             volumePanel.setAttribute("aria-valuetext", `${videoVolumePercentage}% 볼륨`);
         };
+        function setInitialVideoVolume() {
+            const sliderWidth = volumeSlider.getBoundingClientRect().width;
+            const handleWidth = volumeSliderHandle.offsetWidth;
+            
+            const initialVideoVolume = videoItSelf.volume;
+            const offsetX = (initialVideoVolume * sliderWidth);
+            const handleLeft = offsetX - handleWidth / 2;
+            volumeSliderHandle.style.left = `${(Math.max(0, Math.min(handleLeft, sliderWidth - handleWidth)))}px`;
+            
+            volumePanel.setAttribute("aria-valuenow", String(Math.round(initialVideoVolume * videoMaxVolume)));
+            volumePanel.setAttribute("aria-valuetext", `${initialVideoVolume * videoMaxVolume}% 볼륨`);
+        };
+        videoItSelf.addEventListener("loadedmetadata", () => {
+            setTimeout(setInitialVideoVolume, 1);
+        });
+        [volumeSlider, volumeSliderHandle].forEach((element) => {
+            element.addEventListener("mousedown", (event) => {
+                isDragging = true;
+                event.preventDefault();
+            });
+        });
+        document.addEventListener("mousemove", (event) => { if (isDragging) videoVolumeUpdate(event) });
+        document.addEventListener("mouseup", () => { if (isDragging) isDragging = false });
         volumeSlider.addEventListener("click", (event) => videoVolumeUpdate(event));
-        volumeSliderHandle.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            event.preventDefault();
-        });
-        document.addEventListener("mousemove", (event) => {
-            if (isDragging) videoVolumeUpdate(event);
-        });
-        document.addEventListener("mouseup", () => {
-            if (isDragging) isDragging = false;
+    })();
+    /*mute button active*/
+    (function() {
+        const allocate = {
+            attribute: function() {
+                const a = arguments;
+                if (a.length > 2)
+                    a[0].setAttribute(`${a[1]}`, `${a[2]}`);
+                else {
+                    let k;
+                    for (k in a[1])
+                        a[0].setAttribute(k, a[1][k]);
+                };
+            }
+        };
+        const resetSvg = () => muteButton.querySelector("svg").remove();
+        const create = (elementInText) => document.createElementNS("http://www.w3.org/2000/svg", `${elementInText}`);
+        function muteToUnmuteAction() {
+            function setSvg() {
+                const newSvg = create("svg");
+                const firstUse = create("use");
+                const secondUse = create("use");
+                const defs = create("defs");
+                const firstClipPath = create("clipPath");
+                const firstPathInsideFirstClipPath = create("path");
+                const secondPathInsideFirstClipPath = create("path");
+                const thirdPathInsideFirstClipPath = create("path");
+                const secondClipPath = create("clipPath");
+                const pathInsideSecondClipPath = create("clipPath");
+                const firstPath = create("path");
+                const secondPath = create("path");
+                allocate.attribute(newSvg, { "height": "100%", "version": "1.1", "viewBox": "0 0 36 36", "width": "100%" });
+                allocate.attribute(firstUse, { "class": "wtp-svg-shadow", "href": "#wtp-id-15" });
+                allocate.attribute(secondUse, { "class": "wtp-svg-shadow", "href": "#wtp-id-16" });
+                allocate.attribute(firstClipPath, "id", "wtp-svg-volume-animation-mask");
+                allocate.attribute(firstPathInsideFirstClipPath, "d", "m 14.35,-0.14 -5.86,5.86 20.73,20.78 5.86,-5.91 z");
+                allocate.attribute(secondPathInsideFirstClipPath, "d", "M 7.07,6.87 -1.11,15.33 19.61,36.11 27.80,27.60 z");
+                allocate.attribute(thirdPathInsideFirstClipPath, {
+                    "class": "wtp-svg-volume-animation-mover",
+                    "d": "M 9.09,5.20 6.47,7.88 26.82,28.77 29.66,25.99 z",
+                    "transform": "translate(0, 0)"
+                });
+                firstClipPath.append(firstPathInsideFirstClipPath, secondPathInsideFirstClipPath, thirdPathInsideFirstClipPath);
+                allocate.attribute(secondClipPath, "id", "wtp-svg-volume-animation-slash-mask");
+                allocate.attribute(pathInsideSecondClipPath, {
+                    "class": "wtp-svg-volume-animation-mover",
+                    "d": "m -11.45,-15.55 -4.44,4.51 20.45,20.94 4.55,-4.66 z",
+                    "transform": "translate(0, 0)"
+                });
+                secondClipPath.append(pathInsideSecondClipPath);
+                defs.append(firstClipPath, secondClipPath);
+                allocate.attribute(firstPath, {
+                    "class": "wtp-svg-fill wtp-svg-volume-animation-speaker",
+                    "clip-path": "url(#wtp-svg-volume-animation-mask)",
+                    "d": "M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z",
+                    "fill": "#fff",
+                    "id": "wtp-id-15"
+                });
+                allocate.attribute(secondPath, {
+                    "class": "wtp-svg-fill wtp-svg-volume-animation-hider",
+                    "clip-path": "url(#wtp-svg-volume-animation-slash-mask)",
+                    "d": "M 9.25,9 7.98,10.27 24.71,27 l 1.27,-1.27 Z",
+                    "fill": "#fff",
+                    "id": "wtp-id-16"
+                });
+                newSvg.append(firstUse, secondUse, defs, firstPath, secondPath);
+                muteButton.appendChild(newSvg);
+            };
+            resetSvg();
+            setSvg();
+            allocate.attribute(muteButton, "data-title-no-tooltip", "음소거");
+            allocate.attribute(muteButton, "title", "음소거");
+            allocate.attribute(muteButton, "aria-label", "음소거 단축키 m");
+            allocate.attribute(volumePanel, "aria-valuetext", `${volumePanel.getAttribute("aria-valuetext").replace(" 음소거됨", "")}`);
+        };
+        function unmuteToMuteAction() {
+            function setSvg() {
+                const newSvg = create("svg");
+                const use = create("use");
+                const path = create("path");
+                allocate.attribute(newSvg, { "height": "100%", "version": "1.1", "viewBox": "0 0 36 36", "width": "100%" });
+                allocate.attribute(use, { "class": "wtp-svg-shadow", "href": "#wtp-id-253" });
+                allocate.attribute(path, {
+                    "class": "wtp-svg-fill",
+                    "d": "m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z",
+                    "id": "wtp-id-253"
+                });
+                newSvg.append(use, path);
+                muteButton.appendChild(newSvg);
+            };
+            resetSvg();
+            setSvg();
+            allocate.attribute(muteButton, "data-title-no-tooltip", "음소거 해제");
+            allocate.attribute(muteButton, "title", "음소거 해제");
+            allocate.attribute(muteButton, "aria-label", "음소거 해제 단축키 m");
+            allocate.attribute(volumePanel, "aria-valuetext", `${volumePanel.getAttribute("aria-valuetext")} 음소거됨`);
+        };
+        muteButton.addEventListener("click", () => {
+            if (videoItSelf.muted) {
+                muteToUnmuteAction();
+                localStorage.setItem("IS_VIDEO_MUTED", "false");
+                videoItSelf.muted = false;
+            } else {
+                unmuteToMuteAction();
+                localStorage.setItem("IS_VIDEO_MUTED", "true");
+                videoItSelf.muted = true;
+            };
         });
     })();
     /*play/pause button*/
     (function() {
         function pauseToPlay_SVG() {
-            [
+            const paths = [
                 "M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z",
                 "M 12,26 18.418059839786192,22.13110425634209 18.418059839786192,13.868895743657907 12,10 z M 18.581940160213808,22.13110425634209 25,18.262208512684186 25,17.737791487315814 18.581940160213808,13.868895743657907 z",
                 "M 12,26 18.1732066477125,22.522869363659996 18.1732066477125,13.477130636340004 12,10 z M 18.8267933522875,22.522869363659996 25,19.045738727319993 25,16.954261272680007 18.8267933522875,13.477130636340004 z",
@@ -226,12 +357,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 "M 12,26 16.71222114420174,24.86044616927721 16.71222114420174,11.13955383072279 12,10 z M 20.28777885579826,24.86044616927721 25,23.72089233855442 25,12.279107661445579 20.28777885579826,11.13955383072279 z",
                 "M 12,26 16.3209635625,25.4864583 16.3209635625,10.513541700000001 12,10 z M 20.6790364375,25.4864583 25,24.972916599999998 25,11.0270834 20.6790364375,10.513541700000001 z",
                 "M 12,26 16,26 16,10 12,10 z M 21,26 25,26 25,10 21,10 z"
-            ].forEach((element, index) => {
-                setTimeout(() => playSvgPath.setAttribute("d", element), (12 * index));
-            });
+            ];
+            let index = 0;
+            function animate() {
+                if (index < paths.length) {
+                    playSvgPath.setAttribute("d", paths[index]);
+                    index++;
+                    requestAnimationFrame(animate);
+                };
+            };
+            requestAnimationFrame(animate);
         };
         function playToPause_SVG() {
-            [
+            const paths = [
                 "M 12,26 16,26 16,10 12,10 z M 21,26 25,26 25,10 21,10 z",
                 "M 12,26 16.083310371335884,25.866703405862584 16.083310371335884,10.133296594137414 12,10 z M 20.916689628664116,25.866703405862584 25,25.73340681172517 25,10.266593188274829 20.916689628664116,10.133296594137414 z",
                 "M 12,26 16.395957190092417,25.366468495852132 16.395957190092417,10.633531504147868 12,10 z M 20.604042809907583,25.366468495852132 25,24.732936991704264 25,11.267063008295736 20.604042809907583,10.633531504147868 z",
@@ -246,9 +384,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 "M 12,26 17.863692448211296,23.018092082861926 17.863692448211296,12.981907917138074 12,10 z M 19.136307551788704,23.018092082861926 25,20.036184165723853 25,15.963815834276147 19.136307551788704,12.981907917138074 z",
                 "M 12,26 18.26903351183419,22.36954638106529 18.26903351183419,13.630453618934707 12,10 z M 18.73096648816581,22.36954638106529 25,18.739092762130586 25,17.260907237869414 18.73096648816581,13.630453618934707 z",
                 "M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"
-            ].forEach((element, index) => {
-                setTimeout(() => playSvgPath.setAttribute("d", element), (12 * index));
-            });
+            ];
+            let index = 0;
+            function animate() {
+                if (index < paths.length) {
+                    playSvgPath.setAttribute("d", paths[index]);
+                    index++;
+                    requestAnimationFrame(animate);
+                };
+            };
+            requestAnimationFrame(animate);
         };
         const playButton = controls.querySelector(".wtp-play-button.wtp-button");
         const playSvgPath = playButton.querySelector("svg path");
@@ -263,7 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 playButton.setAttribute("data-title-no-tooltip", "재생");
                 playButton.setAttribute("title", "재생(k)");
-                playToPause_SVG()
+                playToPause_SVG();
                 videoPlayer.classList.replace("playing-mode", "paused-mode");
                 videoItSelf.pause();
             };
