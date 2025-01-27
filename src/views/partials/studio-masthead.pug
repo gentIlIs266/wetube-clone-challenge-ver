@@ -1,86 +1,86 @@
-include ../partials/html-head.pug
-link(rel="stylesheet" href="/assets/css/masthead.bundle.css" type="text/css")
-div#studio-header
-    header
-        button(
-            icon="menu"
-            tabindex="0"
-            aria-disabled="false"
-            aria-label="메뉴 접기"
-            role="button"
-        )#collapse-expand-icon
-            div.wt-iron-icon
-                svg(
-                    viewBox="0 0 24 24"
-                    focusable="false"
-                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                ).topbar-wt-iron-icon
-                    g.topbar-wt-iron-icon
-                        path(d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z").topbar-wt-iron-icon
-        button#studio-home
-            a(target="_self" href=`/studio/channel/${user.user_channel.channel_id}`)#home-button
-                img(height="24" src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_white.svg").home-button
-        div#omnisearch.wtcp-header
-            div(tabindex="-1")#search-layer.omnisearch
-                div#topbar-wt-iron-icon.search-icon
-                    svg(viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;")
-                        g.topbar-wt-iron-icon
-                            path(
-                                d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"
-                                fill="#fff"
-                            ).topbar-wt-iron-icon
-            div(role="none")#search-form-container
-                form(name="searchForm").omnisearch
-                    input(
-                        autocomplete="off"
-                        aria-controls="results"
-                        type="text"
-                        placeholder="채널에서 검색하기"
-                        aria-expanded="false"
-                    )#query-input.omnisearch
-            div(tabindex="0" aria-disabled="false" aria-label="지우기" role="button")#clear-icon.omnisearch
-                div.remove-defaults
-                    svg(viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;")
-                        g.topbar-wt-iron-icon
-                            path(
-                                d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
-                                fill="#fff"
-                            ).topbar-wt-iron-icon
-        div.right-section.wtcp-header
-            div.icons-section
-                div#help-widget
-                    div(icon="help-outline" tabindex="0" aria-disabled="false" aria-label="도움말" role="button")#help-icon
-                        div.remove-defaults
-                            svg(
-                                viewBox="0 0 24 24"
-                                focusable="false"
-                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                            )
-                                g.topbar-wt-iron-icon
-                                    path(
-                                        d="M15.36,9.96c0,1.09-0.67,1.67-1.31,2.24c-0.53,0.47-1.03,0.9-1.16,1.6L12.85,14h-1.75l0.03-0.28 c0.14-1.17,0.8-1.76,1.47-2.27c0.52-0.4,1.01-0.77,1.01-1.49c0-0.51-0.23-0.97-0.63-1.29c-0.4-0.31-0.92-0.42-1.42-0.29 c-0.59,0.15-1.05,0.67-1.19,1.34L10.32,10H8.57l0.06-0.42c0.2-1.4,1.15-2.53,2.42-2.87c1.05-0.29,2.14-0.08,2.98,0.57 C14.88,7.92,15.36,8.9,15.36,9.96z M12,18c0.55,0,1-0.45,1-1s-0.45-1-1-1s-1,0.45-1,1S11.45,18,12,18z M12,3c-4.96,0-9,4.04-9,9 s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12S6.48,2,12,2L12,2z"
-                                        fill="#fff"
-                                    ).topbar-wt-iron-icon
-            div(
-                label="만들기"
+extends ../partials/html-head.pug
+block wtd-app
+    div#studio-header
+        header
+            button(
+                icon="menu"
+                tabindex="0"
                 aria-disabled="false"
-                tabindex="-1"
+                aria-label="메뉴 접기"
                 role="button"
-                onclick=`location.href="/studio/${user.user_channel.channel_id}/videos/upload"`
-            )#create-icon.wtcp-header
-                div#wtcp-button-shape.wtcp-button
-                    button(aria-label="만들기").ytcp-button-shape-impl
-                        div(aria-hidden="true").wtcp-button-shape-impl__icon
-                            div(style="width: 24px; height: 24px;") 
+            )#collapse-expand-icon
+                div.wt-iron-icon
+                    svg(
+                        viewBox="0 0 24 24"
+                        focusable="false"
+                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                    ).topbar-wt-iron-icon
+                        g.topbar-wt-iron-icon
+                            path(d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z").topbar-wt-iron-icon
+            button#studio-home
+                a(target="_self" href=`/studio/channel/${user.user_channel.channel_id}`)#home-button
+                    img(height="24" src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_white.svg").home-button
+            div#omnisearch.wtcp-header
+                div(tabindex="-1")#search-layer.omnisearch
+                    div#topbar-wt-iron-icon.search-icon
+                        svg(viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;")
+                            g.topbar-wt-iron-icon
+                                path(
+                                    d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"
+                                    fill="#fff"
+                                ).topbar-wt-iron-icon
+                div(role="none")#search-form-container
+                    form(name="searchForm").omnisearch
+                        input(
+                            autocomplete="off"
+                            aria-controls="results"
+                            type="text"
+                            placeholder="채널에서 검색하기"
+                            aria-expanded="false"
+                        )#query-input.omnisearch
+                div(tabindex="0" aria-disabled="false" aria-label="지우기" role="button")#clear-icon.omnisearch
+                    div.remove-defaults
+                        svg(viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;")
+                            g.topbar-wt-iron-icon
+                                path(
+                                    d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
+                                    fill="#fff"
+                                ).topbar-wt-iron-icon
+            div.right-section.wtcp-header
+                div.icons-section
+                    div#help-widget
+                        div(icon="help-outline" tabindex="0" aria-disabled="false" aria-label="도움말" role="button")#help-icon
+                            div.remove-defaults
                                 svg(
                                     viewBox="0 0 24 24"
                                     focusable="false"
                                     style="pointer-events: none; display: block; width: 100%; height: 100%;"
-                                ).wt-icon
-                                    g.wt-icon
+                                )
+                                    g.topbar-wt-iron-icon
                                         path(
-                                            d="M14,13h-3v3H9v-3H6v-2h3V8h2v3h3V13z M17,6H3v12h14v-6.39l4,1.83V8.56l-4,1.83V6 M18,5v3.83L22,7v8l-4-1.83V19H2V5H18L18,5 z"
+                                            d="M15.36,9.96c0,1.09-0.67,1.67-1.31,2.24c-0.53,0.47-1.03,0.9-1.16,1.6L12.85,14h-1.75l0.03-0.28 c0.14-1.17,0.8-1.76,1.47-2.27c0.52-0.4,1.01-0.77,1.01-1.49c0-0.51-0.23-0.97-0.63-1.29c-0.4-0.31-0.92-0.42-1.42-0.29 c-0.59,0.15-1.05,0.67-1.19,1.34L10.32,10H8.57l0.06-0.42c0.2-1.4,1.15-2.53,2.42-2.87c1.05-0.29,2.14-0.08,2.98,0.57 C14.88,7.92,15.36,8.9,15.36,9.96z M12,18c0.55,0,1-0.45,1-1s-0.45-1-1-1s-1,0.45-1,1S11.45,18,12,18z M12,3c-4.96,0-9,4.04-9,9 s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12S6.48,2,12,2L12,2z"
                                             fill="#fff"
-                                        ).wt-icon
-                        div.wtcp-button-shape-impl__button-text-content
-                            |만들기
+                                        ).topbar-wt-iron-icon
+                div(
+                    label="만들기"
+                    aria-disabled="false"
+                    tabindex="-1"
+                    role="button"
+                    onclick=`location.href="/studio/${user.user_channel.channel_id}/videos/upload"`
+                )#create-icon.wtcp-header
+                    div#wtcp-button-shape.wtcp-button
+                        button(aria-label="만들기").ytcp-button-shape-impl
+                            div(aria-hidden="true").wtcp-button-shape-impl__icon
+                                div(style="width: 24px; height: 24px;") 
+                                    svg(
+                                        viewBox="0 0 24 24"
+                                        focusable="false"
+                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                    ).wt-icon
+                                        g.wt-icon
+                                            path(
+                                                d="M14,13h-3v3H9v-3H6v-2h3V8h2v3h3V13z M17,6H3v12h14v-6.39l4,1.83V8.56l-4,1.83V6 M18,5v3.83L22,7v8l-4-1.83V19H2V5H18L18,5 z"
+                                                fill="#fff"
+                                            ).wt-icon
+                            div.wtcp-button-shape-impl__button-text-content
+                                |만들기

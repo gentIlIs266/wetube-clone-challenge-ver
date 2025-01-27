@@ -14,7 +14,6 @@ module.exports = {
     mode: "development",
     target: "web",
     watch: true,
-    cache: false,
     plugins: [
         new MiniCssExtractPlugin({
             filename: "css/bundled.[name].css",

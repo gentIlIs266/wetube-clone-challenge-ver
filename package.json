@@ -8,11 +8,14 @@
   },
   "keywords": [
     "NodeJS",
-    "MongoDB",
-    "Pug",
     "Express",
+    "Pug",
+    "MongoDB",
     "mongoose",
-    "webpack"
+    "webpack",
+    "sass",
+    "CRUD",
+    "web"
   ],
   "repository": {
     "type": "git",

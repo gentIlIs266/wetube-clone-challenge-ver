@@ -100,10 +100,34 @@
 .wtd-watch-flexy-html-tag[flexy][flexy-enable-small-window-sizing][flexy-small-window_][should-stamp-chat][is-two-columns_]:not([is-extra-wide-video_]) {
     --wtd-watch-flexy-min-player-height: 360px;
 }
+.wtd-watch-flexy-html-tag[full-bleed-player] #full-bleed-container.wtd-watch-flexy {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    height: 56.25vh;
+    max-height: calc(100vh - 160px);
+    min-height: 480px;
+    overflow-x: clip;
+    background: #000;
+}
+.wtd-watch-flexy-html-tag[fullscreen] #full-bleed-container.wtd-watch-flexy {
+    height: 100vh;
+    max-height: none;
+}
+#player-full-bleed-container.wtd-watch-flexy {
+    position: relative;
+    flex: 1;
+}
 #columns.wtd-watch-flexy {
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+}
+.wtd-watch-flexy-html-tag:not([panels-beside-player]):not([fixed-panels]) {
+    #panels-full-bleed-container.wtd-watch-flexy {
+        display: none;
+    }
 }
 .wtd-watch-flexy-html-tag[flexy]:not([full-bleed-player][full-bleed-no-max-width-columns]) {
     #columns.wtd-watch-flexy {
@@ -191,6 +215,12 @@
         border-radius: 12px;
     }
 }
+#wtd-player, #container.wtd-player {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-user-select: none;
+}
 .html5-video-player {
     position: relative;
     width: 100%;
@@ -207,6 +237,36 @@
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     touch-action: manipulation;
+    a {
+        color: inherit;
+        text-decoration: none;
+        -webkit-transition: color .1s cubic-bezier(0,0,.2,1);
+        transition: color .1s cubic-bezier(0,0,.2,1);
+        outline: 0;
+        &:hover {
+            color: #fff;
+            -webkit-transition: color .1s cubic-bezier(.4,0,1,1);
+            transition: color .1s cubic-bezier(.4,0,1,1);
+        }
+    }
+    h1, h2 {
+        margin: 0;
+    }
+    svg {
+        pointer-events: none;
+    }
+    &:not(.wtp-touch-mode) ::-webkit-scrollbar {
+        width: 10px;
+        background-color: #424242;
+    }
+    &:not(.wtp-touch-mode) ::-webkit-scrollbar-track {
+        background-color: #424242;
+    }
+    &:not(.wtp-touch-mode) ::-webkit-scrollbar-thumb {
+        background-color: #8e8e8e;
+        border: 1px solid #424242;
+        border-radius: 5px;
+    }
 }
 .html5-video-player, .wtp-contextmenu {
     forced-color-adjust: none;
@@ -222,6 +282,13 @@
     width: 100%;
     height: 100%;
     outline: 0;
+}
+.wtp-big-mode {
+    font-size: 17px;
+    .wtp-gradient-top {
+        height: 69px;
+        padding-bottom: 77px;
+    }
 }
 .wtp-fit-cover-video .html5-main-video {
     -o-object-fit: cover;
@@ -874,6 +941,30 @@
     top: 5px;
     bottom: 0;
     left: 100%;
+}
+.wtp-fullscreen-button-corner-0, .wtp-fullscreen-button-corner-1,
+.wtp-fullscreen-button-corner-2, .wtp-fullscreen-button-corner-3 {
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+}
+.wtp-fullscreen-button:not([aria-disabled=true]):hover {
+    .wtp-fullscreen-button-corner-0 {
+        -webkit-animation: wtp-fullscreen-button-corner-0-animation .4s cubic-bezier(.4,0,.2,1);
+        animation: wtp-fullscreen-button-corner-0-animation .4s cubic-bezier(.4,0,.2,1);
+    }
+    .wtp-fullscreen-button-corner-1 {
+        -webkit-animation: wtp-fullscreen-button-corner-1-animation .4s cubic-bezier(.4,0,.2,1);
+        animation: wtp-fullscreen-button-corner-1-animation .4s cubic-bezier(.4,0,.2,1);
+    }
+    .wtp-fullscreen-button-corner-2 {
+        -webkit-animation: wtp-fullscreen-button-corner-2-animation .4s cubic-bezier(.4,0,.2,1);
+        animation: wtp-fullscreen-button-corner-2-animation .4s cubic-bezier(.4,0,.2,1);
+    }
+    .wtp-fullscreen-button-corner-3 {
+        -webkit-animation: wtp-fullscreen-button-corner-3-animation .4s cubic-bezier(.4,0,.2,1);
+        animation: wtp-fullscreen-button-corner-3-animation .4s cubic-bezier(.4,0,.2,1);
+    }
 }
 .wtd-watch-flexy-html-tag[cinematics-enabled] {
     #below.wtd-watch-flexy {
