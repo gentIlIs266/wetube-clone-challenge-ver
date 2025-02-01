@@ -61,6 +61,32 @@ block wtd-app
                                                                 ).video-stream.html5-main-video
                                                             div(data-layer="1").wtp-gradient-top
                                                             div(data-layer="1").wtp-chrome-top
+                                                                div.wtp-title-channel
+                                                                div.wtp-title
+                                                                    div.wtp-title-text
+                                                                        a(
+                                                                            target="_blank" data-sessionlink="featrue=player-title" tabindex="-1"
+                                                                        ).wtp-title-link.wt-uix-sessionlink.wtp-title-fullscreen-link 
+                                                                            |#{foundVideoFromDB.title}
+                                                                div.wtp-chrome-top-buttons
+                                                                    button(title="나중에 시청하기" data-tooltip-opaque="false" aria-label="나중에 시청하기").wtp-button.wtp-watch-later-button
+                                                                        div.wtp-watch-later-icon
+                                                                            svg(height="100%" version="1.1" viewBox="0 0 36 36" width="100%")
+                                                                                use(href="#wtp-id-26").wtp-svg-shadow
+                                                                                path(
+                                                                                    d="M18,8 C12.47,8 8,12.47 8,18 C8,23.52 12.47,28 18,28 C23.52,28 28,23.52 28,18 C28,12.47 23.52,8 18,8 L18,8 Z M16,19.02 L16,12.00 L18,12.00 L18,17.86 L23.10,20.81 L22.10,22.54 L16,19.02 Z"
+                                                                                )#wtp-id-26.wtp-svg-fill
+                                                                        div.wtp-watch-later-title
+                                                                            |나중에 시청하기
+                                                                    button(title="공유" aria-haspopup="true" aria-owns="wtd-id-25" aria-label="공유").wtp-button.wtp-share-button.wtp-share-button-visible
+                                                                        div.wtp-watch-later-icon
+                                                                            svg(height="100%" version="1.1" viewBox="0 0 36 36" width="100%")
+                                                                                use(href="#wtp-id-402").wtp-svg-shadow
+                                                                                path(
+                                                                                    d="m 20.20,14.19 0,-4.45 7.79,7.79 -7.79,7.79 0,-4.56 C 16.27,20.69 12.10,21.81 9.34,24.76 8.80,25.13 7.60,27.29 8.12,25.65 9.08,21.32 11.80,17.18 15.98,15.38 c 1.33,-0.60 2.76,-0.98 4.21,-1.19 z"
+                                                                                )#wtp-id-402.wtp-svg-fill
+                                                                        div.wtp-watch-later-title
+                                                                            |공유
                                                             button(data-layer="2" style="display: none;").wtp-unmute.wtp-popup.wtp-button.wtp-unmute-animated.wtp-unmute-shrink
                                                             div(data-layer="4" style="display: none;").wtp-gated-actions-overlay
                                                             div(data-layer="4" style="display: none;").wtp-overlay.wtp-speedmaster-overlay
@@ -89,8 +115,6 @@ block wtd-app
                                                             div(
                                                                 data-layer="9" style="height: 146px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAACSCAYAAACE56BkAAAAAXNSR0IArs4c6QAAAPVJREFUKFNlyOlHGAAcxvHuY93H1n1fW1v3fbej+zAmI5PIRGYiM5JEkkgiiSSRJPoj83nze9Pz4uPrSUh4tURPEpKDFJWKtCBdZSAzeKOykB3kqFzkBfmqAIVBkSrGW7wLSlQpyoJyVYHKoEpVoyaoVXWoDxpUI5qCZtWC98EH1YqPwSfVhvagQ3WiK+hWPegN+lQ/BoJBNYThYESNYgzjwYSaDD6rL/iKb8GUmsZMMKvmMB8sqEUsYRnf8QMr+IlV/MIa1rGB39jEFv7gL7axg3/4j13sYR8HOMQRjnGCU5zhHBe4xBWucYNb3OEeD3jEE55fAOT7I9a9dVH7AAAAAElFTkSuQmCC');"
                                                             ).wtp-gradient-bottom
-                                                            //-
-                                                                should be removed .wtp-volume-slider-active
                                                             div(
                                                                 data-layer="9" style="width: 616px; left: 12px;"
                                                             ).wtp-chrome-bottom

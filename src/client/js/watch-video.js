@@ -1,4 +1,5 @@
 import "../scss/components/watch-video.scss";
+
 document.addEventListener("DOMContentLoaded", () => {
     const wtdWatchFlexy = document.querySelector(".wtd-watch-flexy-html-tag.wtd-page-manager");
     const initialWidth = wtInitialData.initialBodyClientWidth;
@@ -27,36 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const sizingWidth = document.body.clientWidth;
         if (sizingWidth < twoColumnPoint) oneColumn();
         else twoColumn();
-    });
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const videoItSelf = document.querySelector("#wtd-player .html5-video-container video");
-    const playerContainerOuter = document.querySelector(".wtd-watch-flexy-html-tag #columns #player-container-outer");
-    const chromeBottom = document.querySelector("#movie_player .wtp-chrome-bottom");
-    const chapterHover = chromeBottom.querySelector(".wtp-chapter-hover-container");
-    const playProgress = chapterHover.querySelector(".wtp-play-progress.wtp-swatch-background-color");
-    if (!videoItSelf.getAttribute("src")) location.reload();
-    if (!videoItSelf || !playerContainerOuter) location.reload();
-    function videoSizeAdjust() {
-        const { width: w, height: h } = playerContainerOuter.getBoundingClientRect();
-        videoItSelf.style.width = `${w}px`;
-        videoItSelf.style.height = `${h}px`;
-    };
-    function controllerSizeAdjust() {
-        const { width: controllerWidth } = playerContainerOuter.getBoundingClientRect();
-        chromeBottom.style.width = `${controllerWidth - 24}px`;
-        chapterHover.style.width = `${controllerWidth - 24}px`;
-        playProgress.style.backgroundSize = `${controllerWidth - 24}px`;
-    };
-    controllerSizeAdjust();
-    videoItSelf.addEventListener("loadeddata", videoSizeAdjust);
-    let resizeTimeout = null;
-    window.addEventListener("resize", () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            videoSizeAdjust();
-            controllerSizeAdjust();
-        }, 100);
     });
 });
 /*progress bar*/
@@ -570,20 +541,68 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
         videoItSelf.addEventListener("play", () => {
+            playButton.setAttribute("data-title-no-tooltip", "일시중지");
+            playButton.setAttribute("title", "일시중지(k)");
+            pauseToPlay_SVG();
+            videoPlayer.classList.replace("paused-mode", "playing-mode");
+            videoItSelf.play();
         });
         videoItSelf.addEventListener("pause", () => {
+            playButton.setAttribute("data-title-no-tooltip", "재생");
+            playButton.setAttribute("title", "재생(k)");
+            playToPause_SVG();
+            videoPlayer.classList.replace("playing-mode", "paused-mode");
+            videoItSelf.pause();
         });
     })();
-    /*fullscreen button*/
+    /*fullscreen button, video size adjust*/
     (function() {
         const watchFlexy = document.querySelector(".wtd-watch-flexy-html-tag");
         const playerFullBleedContainer = document.querySelector("#player-full-bleed-container.wtd-watch-flexy");
         const playerContainerInner = document.querySelector("#player-container-inner.wtd-watch-flexy");
         const playerContainer = document.querySelector("#player-container.wtd-watch-flexy");
+        const moviePlayer = document.querySelector("#movie_player");
+        const rightControls = document.querySelector(".wtp-chrome-bottom .wtp-right-controls");
+        const settingsButton = rightControls.querySelector(".wtp-settings-button.wtp-button");
+        const miniplayerButton = rightControls.querySelector(".wtp-miniplayer-button.wtp-button");
+        const sizeButton = rightControls.querySelector(".wtp-size-button.wtp-button");
         const fullscreenButton = controls.querySelector(".wtp-fullscreen-button.wtp-button");
         const buttonSvg = fullscreenButton.querySelector("svg");
         const corners = buttonSvg.querySelectorAll("g");
-        let IS_FULL_SCREEN = false;
+        const videoItSelf = document.querySelector("#wtd-player .html5-video-container video");
+        const playerContainerOuter = document.querySelector(".wtd-watch-flexy-html-tag #columns #player-container-outer");
+        const chromeBottom = document.querySelector("#movie_player .wtp-chrome-bottom");
+        const chapterHover = chromeBottom.querySelector(".wtp-chapter-hover-container");
+        const playProgress = chapterHover.querySelector(".wtp-play-progress.wtp-swatch-background-color");
+        let resizeTimeout = null, IS_FULL_SCREEN = false;
+        let aspectRatio, videoWidth;
+
+        function fullscreenResize() {
+            aspectRatio = (videoItSelf.videoWidth / videoItSelf.videoHeight);
+
+            if (window.innerHeight * aspectRatio <= window.innerWidth)
+                videoWidth = window.innerHeight * aspectRatio;
+            else
+                videoWidth = window.innerWidth;
+
+            videoItSelf.style.width = `${videoWidth}px`;
+            videoItSelf.style.height = `${window.innerHeight}px`;
+            videoItSelf.style.left = `${(window.innerWidth - videoWidth) / 2}px`;
+        };
+        function defaultPlayerAdjust() {
+            const { width: w, height: h } = playerContainerOuter.getBoundingClientRect();
+            const controllerWidth = playerContainerOuter.getBoundingClientRect().width;
+
+            videoItSelf.style.width = `${w}px`;
+            videoItSelf.style.height = `${h}px`;
+            chromeBottom.style.width = `${controllerWidth - 24}px`;
+            chapterHover.style.width = `${controllerWidth - 24}px`;
+            playProgress.style.backgroundSize = `${controllerWidth - 24}px`;
+        };
+        function onVideoResize() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(defaultPlayerAdjust, 100);
+        };
         function EXIT_FULLSCREEN_ACTION() {
             document.exitFullscreen();
     
@@ -594,15 +613,27 @@ document.addEventListener("DOMContentLoaded", () => {
             corners[2].style.transform = "translate(0, 0)";
             corners[3].style.transform = "translate(0, 0)";
     
+            settingsButton.insertAdjacentElement("afterend", miniplayerButton);
+            miniplayerButton.insertAdjacentElement("afterend", sizeButton);
+
             watchFlexy.removeAttribute("fullscreen");
             watchFlexy.removeAttribute("full-bleed-player");
+            moviePlayer.setAttribute("aria-label", "WeTube 동영상 플레이어");
             videoPlayer.classList.remove("wtp-fullscreen");
             videoPlayer.classList.remove("wtp-big-mode");
             videoPlayer.classList.remove("wtp-large-width-mode");
+            videoPlayer.classList.add("wtp-hide-info-bar");
+
     
-    
+            document.body.classList.remove("no-scroll");
+
             playerContainerInner.appendChild(playerContainer);
-            
+
+            window.removeEventListener("resize", fullscreenResize);
+            window.addEventListener("resize", onVideoResize);
+
+            localStorage.setItem("IS_FULL_SCREENING", "false");
+
             IS_FULL_SCREEN = false;
         };
         function ENTER_FULLSCREEN_ACTION() {
@@ -614,13 +645,24 @@ document.addEventListener("DOMContentLoaded", () => {
             corners[1].style.transform = "translate(-10px, 10px)";
             corners[2].style.transform = "translate(-10px, -10px)";
             corners[3].style.transform = "translate(10px, -10px)";
+
+            [miniplayerButton, sizeButton].forEach((element) => element.remove());
     
             watchFlexy.setAttribute("fullscreen", "");
             watchFlexy.setAttribute("full-bleed-player", "");
+            moviePlayer.setAttribute("aria-label", "WeTube 동영상 플레이어 전체화면 모드");
             videoPlayer.classList.add("wtp-fullscreen");
             videoPlayer.classList.add("wtp-big-mode");
             videoPlayer.classList.add("wtp-large-width-mode");
+            videoPlayer.classList.remove("wtp-hide-info-bar");
+
+            document.body.classList.add("no-scroll");
     
+            localStorage.setItem("IS_FULL_SCREENING", "true");
+
+            window.removeEventListener("resize", onVideoResize);
+            window.addEventListener("resize", fullscreenResize);
+
             playerContainer.requestFullscreen();
             IS_FULL_SCREEN = true;
         };
@@ -630,12 +672,17 @@ document.addEventListener("DOMContentLoaded", () => {
             else
                 ENTER_FULLSCREEN_ACTION();
         };
-        document.addEventListener("keydown", (event) => {
+        function onKeydown(event) {
             if (event.key === "f") {
+                event.preventDefault();
                 if (IS_FULL_SCREEN) 
                     EXIT_FULLSCREEN_ACTION();
                 else
                     ENTER_FULLSCREEN_ACTION();                
+            };
+            if (event.key === " ") {
+
+                event.preventDefault();
             };
             /*
             if (event.key === "m")
@@ -645,8 +692,42 @@ document.addEventListener("DOMContentLoaded", () => {
             if (event.key === "ArrowUp")
             if (event.key === "ArrowDown")
             */
-        });
+        };
+        function onFullscreenChange() {
+            if (document.fullscreenElement) {
+                videoItSelf.style.height = `${window.innerHeight}px`;
+                videoItSelf.style.width = `${window.innerWidth}px`;
+                chromeBottom.style.width = `${window.innerWidth - 48}px`;
+                chromeBottom.style.left = "24px";
+            } else {
+                videoItSelf.style.left = "0px";
+                chromeBottom.style.left = "12px";
+            };
+        };
+        document.addEventListener("keydown", onKeydown);
+        document.addEventListener("fullscreenchange", onFullscreenChange);
         fullscreenButton.addEventListener("click", fullscreenToggle);
+        videoItSelf.addEventListener("loadeddata", defaultPlayerAdjust);
+        window.addEventListener("resize", onVideoResize);
+    })();
+    /*chrome bottom, top vanish*/
+    (function() {
+        const playerContainer = document.querySelector("#player-container.wtd-watch-flexy");
+        const moviePlayer = document.querySelector("#movie_player");
+        let cursorStopTimePassed;
+        function showChromeBottom() {
+            moviePlayer.classList.remove("wtp-autohide");
+            clearTimeout(cursorStopTimePassed);
+            cursorStopTimePassed = setTimeout(hideChromeBottom, 3000);
+        };
+        function hideChromeBottom() {
+            if (videoItSelf.paused)
+                moviePlayer.classList.remove("wtp-autohide");    
+            else
+                moviePlayer.classList.add("wtp-autohide");
+        };
+        playerContainer.addEventListener("mousemove", showChromeBottom);
+        playerContainer.addEventListener("mouseleave", hideChromeBottom);
     })();
 });
 /*video description*/
@@ -673,11 +754,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 expandedDescriptionUserInput.removeAttribute("hidden");
                 snippetText.setAttribute("hidden", "");
                 snippet.style = "";
-                nbsp.setAttribute("hidden", "");
-                expandSizer.setAttribute("hidden", "");
-                expand.setAttribute("hidden", "");
-                collapse.removeAttribute("hidden");
-                structuredDescription.removeAttribute("hidden");
+                [nbsp, expandSizer, expand].forEach((element) => element.setAttribute("hidden", ""));
+                [collapse, structuredDescription].forEach((element) => element.removeAttribute("hidden"));
                 isExpanded = true;
             };
         });
@@ -688,11 +766,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 snippetText.removeAttribute("hidden");
                 snippet.style.overflow = "hidden";
                 snippet.style.maxHeight = "6rem";
-                nbsp.removeAttribute("hidden");
-                expandSizer.removeAttribute("hidden");
-                expand.removeAttribute("hidden");
-                collapse.setAttribute("hidden", "");
-                structuredDescription.setAttribute("hidden", "");
+                [nbsp, expandSizer, expand].forEach((element) => element.removeAttribute("hidden"));
+                [collapse, structuredDescription].forEach((element) => element.setAttribute("hidden", ""));
                 isExpanded = false;
             };
         });
