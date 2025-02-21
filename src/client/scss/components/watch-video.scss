@@ -648,6 +648,9 @@
 .wtp-hover-progress-light {
     background: rgba(255,255,255,.5);
 }
+.wtp-progress-bar-hover .wtp-hover-progress {
+    opacity: 1;
+}
 .wtp-timed-markers-container {
     -webkit-transform: scaleY(.6);
     -ms-transform: scaleY(.6);

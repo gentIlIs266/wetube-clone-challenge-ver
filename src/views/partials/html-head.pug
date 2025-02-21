@@ -188,5 +188,3 @@ html(
         //-
             script.
                 fetch('/servercontact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wtcfg.d())}).catch(e=>console.error('SERVER_CONTACT_ERROR',e))
-        script.
-            wtInitialData=wtcfg.d()
