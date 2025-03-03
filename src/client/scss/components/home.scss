@@ -13,6 +13,9 @@
 [hidden] {
     display: none !important;
 }
+html[dark] {
+    scrollbar-color: hsl(0, 0%, 67%) transparent;
+}
 .wtd-app-html-tag {
     --app-drawer-width: 240px;
     --wtd-persistent-guide-width: 240px;

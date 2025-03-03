@@ -1,26 +1,35 @@
 import "../scss/components/app-drawer.scss";
-/*app drawer control to button*/
+/*app drawer control through button*/
 document.addEventListener("DOMContentLoaded", () => {
+    const drawerControlButton = document.querySelector("#start.wtd-masthead #guide-button");
+    const appDrawer = document.querySelector("#guide.tp-wt-app-drawer-html-tag.wtd-app");
+    const miniGuide = document.querySelector(".wtd-mini-guide-renderer-html-tag.wtd-app");
+    const wtdAppDiv = document.querySelector(".wtd-app-html-tag");
+    const appDrawerScrim = appDrawer.querySelector("#scrim");
+    const appDrawerContentContainer = appDrawer.querySelector("#contentContainer");
+    const drawerControlButtonInDrawer = appDrawerContentContainer.querySelector("#header .wt-icon-button-html-tag.wtd-app");
+    const appDrawerTopBarLogoRenderer = appDrawerContentContainer.querySelector("#header .wtd-topbar-logo-renderer-html-tag");
+    const isThisPageWatchVideo = (appDrawer.dataset.page === "watch-video");
+    let isDrawerOpened = isThisPageWatchVideo ? false : true;
     function onAppDrawerControlClickAtHome_appear() {
         if (isDrawerOpened) {
-            appDrawer.removeAttribute("opened");
-            appDrawerContentContainer.removeAttribute("opened");
-            miniGuide.removeAttribute("guide-persistent-and-visible");
-            miniGuide.removeAttribute("hidden");
-            miniGuide.removeAttribute("disable-upgrade");
-            miniGuide.setAttribute("mini-guide-visible", "");
-            wtdAppDiv.removeAttribute("guide-persistent-and-visible");
-            wtdAppDiv.setAttribute("mini-guide-visible", "");
-            isDrawerOpened = false;
+            ["guide-persistent-and-visible", "hidden", "disable-upgrade"]
+                .forEach((attr) => miniGuide.removeAttribute(attr));
+            [wtdAppDiv, miniGuide]
+                .forEach((element) => element.setAttribute("mini-guide-visible", ""));
+                appDrawer.removeAttribute("opened");
+                appDrawerContentContainer.removeAttribute("opened");
+                wtdAppDiv.removeAttribute("guide-persistent-and-visible");
+                isDrawerOpened = false;
         } else {
+            ["guide-persistent-and-visible", "hidden", "disable-upgrade"]
+                .forEach((attr) => miniGuide.setAttribute(attr, ""));
+            [wtdAppDiv, miniGuide]
+                .forEach((element) => element.removeAttribute("mini-guide-visible"));
+
             appDrawer.setAttribute("opened", "");
             appDrawerContentContainer.setAttribute("opened", "")
-            miniGuide.setAttribute("guide-persistent-and-visible", "");
-            miniGuide.setAttribute("hidden", "");
-            miniGuide.setAttribute("disable-upgrade", "");
-            miniGuide.removeAttribute("mini-guide-visible");
             wtdAppDiv.setAttribute("guide-persistent-and-visible", "");
-            wtdAppDiv.removeAttribute("mini-guide-visible");
             isDrawerOpened = true;
         };
     };
@@ -38,16 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         appDrawerTopBarLogoRenderer.setAttribute("disable-upgrade", "");
         isDrawerOpened = true;
     };
-    const drawerControlButton = document.querySelector("#start.wtd-masthead #guide-button");
-    const appDrawer = document.querySelector("#guide.tp-wt-app-drawer-html-tag.wtd-app");
-    const miniGuide = document.querySelector(".wtd-mini-guide-renderer-html-tag.wtd-app");
-    const wtdAppDiv = document.querySelector(".wtd-app-html-tag");
-    const appDrawerScrim = appDrawer.querySelector("#scrim");
-    const appDrawerContentContainer = appDrawer.querySelector("#contentContainer");
-    const drawerControlButtonInDrawer = appDrawerContentContainer.querySelector("#header .wt-icon-button-html-tag.wtd-app");
-    const appDrawerTopBarLogoRenderer = appDrawerContentContainer.querySelector("#header .wtd-topbar-logo-renderer-html-tag");
-    const isThisPageWatchVideo = (appDrawer.dataset.page === "watch-video");
-    let isDrawerOpened = isThisPageWatchVideo ? false : true;
     if (isThisPageWatchVideo) {
         drawerControlButton.addEventListener("click", onAppDrawerControlClickAtWatchVideo);
         drawerControlButtonInDrawer.addEventListener("click", onAppDrawerControlClickAtHome_disappear);

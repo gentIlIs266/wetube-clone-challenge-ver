@@ -1,6 +1,6 @@
 import "../scss/components/user-login.scss";
-/*user loain account input focus resposne*/
 document.addEventListener("DOMContentLoaded", () => {
+    /*user loain account input focus resposne*/
     const formUserDiv = document.querySelector("[dir=ltr].form-mouseuser");
     const swpEnableDiv = document.querySelector(".swp-enable.container.si-field-container.password-second-step");
     const signInForm = document.querySelector("#sign_in_form.signin-form");
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const secondStepAccountNameDiv = signInForm.querySelector(".account-name.show-password");
     const showPasswordPlaceholderDiv = document.querySelector(".password.show-password.show-placeholder");
     let dataFocusMethod = "";
+
     accountNameInput.addEventListener("mousedown", () => {
         dataFocusMethod = "mouse";
         if (formUserDiv.classList.contains("form-keyboarduser")) {
@@ -43,10 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
         firstStepAccountNameDiv.classList.remove("wetube-id-focus");
         if (accountNameInput.hasAttribute("data-focus-method")) accountNameInput.removeAttribute("data-focus-method")
         if (passwordInput) {
-            if (accountNameInput.style.position === "relative") accountNameInput.style.position = "";
-            accountNameInput.zIndex = undefined;
-            if (accountNameInput.style.position === "relative") accountNameInput.style.position = "";
-            passwordInput.zIndex = undefined;
+            if (accountNameInput.style.position === "relative")
+                accountNameInput.style.position = "";
+
+            accountNameInput.zIndex = "";
+            if (accountNameInput.style.position === "relative")
+                accountNameInput.style.position = "";
+
+            passwordInput.zIndex = "";
         };
     });
     accountNameInput.addEventListener("input", (event) => {
@@ -59,9 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     if (passwordInput) {
         const passwordInputAutoFocused = document.activeElement;
+
         swpEnableDiv.classList.add("password-on");
         signInForm.classList.add("account-name-entered");
         signInForm.classList.add("show-password");
+
         passwordInput.addEventListener("mousedown", () => {
             dataFocusMethod = "mouse";
             if (formUserDiv.classList.contains("form-keyboarduser")) {
@@ -102,9 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
             showPasswordPlaceholderDiv.classList.remove("password-focus");
             if (passwordInput) {
                 if (accountNameInput.style.position === "relative") accountNameInput.style.position = "";
-                accountNameInput.zIndex = undefined;
+                accountNameInput.zIndex = "";
                 if (passwordInput.style.position === "relative") passwordInput.style.position = "";
-                passwordInput.zIndex = undefined;
+                passwordInput.zIndex = "";
             };
         });
         passwordInput.addEventListener("input", (event) => {
@@ -113,19 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (event.target.value === "") {
                 signInForm.classList.remove("password-entered")
                 passwordInput.classList.remove("form-textbox-entered");
-            }
+            };
         });
     };
-});
-/*user login account input submit button*/
-document.addEventListener("DOMContentLoaded", () => {
-    const accountNameInput = document.querySelector("[dir=ltr] #account_name_text_field.form-textbox-input");
-    const passwordInput = document.querySelector("[dir=ltr] #password_text_field.form-textbox-input");
-    const signInForm = document.querySelector("#sign_in_form.signin-form.hide-password");
+
     const disableButton = document.querySelector("#sign-in.si-button.disable");
-    disableButton.addEventListener("click", () => {
-        signInForm.submit();
-    });
+    /*user login account input submit button*/
+    disableButton.addEventListener("click", () => signInForm.submit());
     accountNameInput.addEventListener("input", (event) => {
         disableButton.classList.remove("disable");
         disableButton.setAttribute("aria-disabled", "false");
@@ -156,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (firstStepAccountNameDiv.classList.contains("is-error")) {
         swpEnableDiv.classList.add("has-error")
     } else {
-        if (swpEnableDiv.classList.contains("has-error")) swpEnableDiv.classList.remove("has-error");
+        if (swpEnableDiv.classList.contains("has-error"))
+            swpEnableDiv.classList.remove("has-error");
     };
 });

@@ -1,34 +1,25 @@
 import "../scss/components/user-join.scss";
-/*join submit button action*/
-document.addEventListener("DOMContentLoaded", () => {
-    const joinForm = document.querySelector("[method=POST].create-form");
-    const joinSubmitButton = document.querySelector(".primary-button-group .button.button-primary");
-    joinSubmitButton.addEventListener("click", () => {
-        joinForm.submit();
-    });
-});
-/*birthday input help icon hover popover*/
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {    
+    /*birthday input help icon hover popover*/
     const birthdayInfoButton = document.querySelector("button[aria-describedby=birthdayInfoMsg]");
     const birthdayInfoMsg = document.querySelector("#birthdayInfoMsg");
-    birthdayInfoButton.addEventListener("click", (event) => {
-        event.preventDefault();
-    });
-    const generateBirthdayPopover = () => {
+    function generateBirthdayPopover() {
         const idmsPopoverContainerDiv = document.createElement("div");
-        idmsPopoverContainerDiv.classList.add("idms-popover-container");
-    
         const idmsPopoverWrapperDiv = document.createElement("div");
+        const idmsPopoverDiv = document.createElement("div");
+        const msgDiv = document.createElement("div");
+
+        idmsPopoverContainerDiv.classList.add("idms-popover-container");
         idmsPopoverWrapperDiv.classList.add(
             "idms-popover-wrapper",
             "idms-popover-wrapper-direction-top",
             "idms-popover-wrapper-align-center"
         );
+
         idmsPopoverWrapperDiv.style.top = "-33.2125px";
         idmsPopoverWrapperDiv.style.left = "16.5px";
         idmsPopoverWrapperDiv.style.width = "300px";
-    
-        const idmsPopoverDiv = document.createElement("div");
+        
         idmsPopoverDiv.setAttribute("id", "idms-popover-1727074279636-0");
         idmsPopoverDiv.setAttribute("role", "dialog");
         idmsPopoverDiv.classList.add(
@@ -39,33 +30,46 @@ document.addEventListener("DOMContentLoaded", () => {
             "security-code-small-box",
         );
     
-        const msgDiv = document.createElement("div");
         msgDiv.setAttribute("role", "tooltip");
         msgDiv.classList.add("message");
         msgDiv.textContent = "이 정보는 계정에서 사용할 수 있는 서비스를 정하는 데 사용됩니다."
-    
+        
         idmsPopoverDiv.appendChild(msgDiv);
         idmsPopoverWrapperDiv.appendChild(idmsPopoverDiv);
         idmsPopoverContainerDiv.appendChild(idmsPopoverWrapperDiv);
+
         return idmsPopoverContainerDiv;
     };
-    birthdayInfoButton.addEventListener("mouseover", () => {
-        const isPopoverAlreadyExist = document.querySelector(".idms-popover-container");
-        if (!isPopoverAlreadyExist) {
+
+
+    /*join submit button action*/
+    document.querySelector(".primary-button-group .button.button-primary").addEventListener("click", () => {
+        document.querySelector("[method=POST].create-form").submit();
+    });
+
+    birthdayInfoButton.addEventListener("mousemove", () => {
+        if (!document.querySelector(".idms-popover-container")) {
             const generatedPopover = generateBirthdayPopover();
             birthdayInfoMsg.appendChild(generatedPopover);
         };
     });
-    birthdayInfoButton.addEventListener("mouseout", () => {
+    birthdayInfoButton.addEventListener("mouseleave", () => {
         const existingBirthdayPopover = document.querySelector(".idms-popover-container");
         if (existingBirthdayPopover) {
             birthdayInfoMsg.removeChild(existingBirthdayPopover);
         };
     });
-});
-/*birthday input formatting*/
-document.addEventListener("DOMContentLoaded", () => {
-    function handleNumberInput (enteredKey) {
+    birthdayInfoButton.addEventListener("click", (event) => event.preventDefault());
+
+    /*birthday input formatting*/
+    const birthdayInput = document.querySelector("#input-1727167270343-1");
+    const defaultDateFormat = "yyyy년 mm월 dd일";
+    let currentInput = defaultDateFormat;
+    let caretIndex = 0;
+    function updateCaretPosition() {
+        birthdayInput.setSelectionRange(caretIndex, caretIndex);
+    };
+    function handleNumberKey (enteredKey) {
         while (
             caretIndex < defaultDateFormat.length &&
             defaultDateFormat[caretIndex] !== "y" &&
@@ -75,11 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             caretIndex++;
         };
         
-        if (
-            caretIndex < defaultDateFormat.length
-            &&
-            defaultDateFormat[caretIndex] === " "
-        ) {
+        if (caretIndex < defaultDateFormat.length && defaultDateFormat[caretIndex] === " ") {
             caretIndex++;
         };
         
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
             };
         };
-
+        
         currentInput = currentInput.substring(0, caretIndex) + enteredKey + currentInput.substring(caretIndex + 1);
         birthdayInput.value = currentInput;
         caretIndex++;
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
             caretIndex++;
         };
-
+        
         if (caretIndex >= defaultDateFormat.length) {
             if (caretIndex >= currentInput.length) caretIndex = currentInput.length;
             birthdayInput.setSelectionRange(currentInput.length, currentInput.length);
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateCaretPosition();
         };
     };
-    function handleBackspaceInput () {
+    function handleBackspaceKey () {
         if (caretIndex <= 0) return;
         if (defaultDateFormat[caretIndex - 1] === " ") caretIndex--;
         while (
@@ -145,11 +145,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
             caretIndex--;
         };
-
+        
         caretIndex--;
         currentInput = currentInput.substring(0, caretIndex) + defaultDateFormat[caretIndex] + currentInput.substring(caretIndex + 1);
         birthdayInput.value = currentInput;
-
+        
         updateCaretPosition();
     };
     function handleArrowKeys (enteredKey) {
@@ -179,24 +179,18 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         updateCaretPosition();
     };
-    const birthdayInput = document.querySelector("#input-1727167270343-1");
-    const defaultDateFormat = "yyyy년 mm월 dd일";
-    let currentInput = defaultDateFormat;
-    let caretIndex = 0;
-    birthdayInput.addEventListener("focus", () => {
+    function onBirthdayInputFocus() {
         if (birthdayInput.value === "") {
             birthdayInput.value = defaultDateFormat;
         };
-        setTimeout(() => {
-            updateCaretPosition();
-        }, 5)
-    });
-    birthdayInput.addEventListener("blur", () => {
+        setTimeout(updateCaretPosition, 5);
+    };
+    function onBirthdayInputBlur() {
         if (birthdayInput.value === defaultDateFormat) {
             birthdayInput.value = "";
         };
-    });
-    birthdayInput.addEventListener("keydown", (event) => {
+    };
+    function onBirthdayInputKeydown(event) {
         const enteredKey = event.key;
         const areAllNumbersEntered = currentInput.includes("y") || currentInput.includes("m") || currentInput.includes("d");
         if (
@@ -207,27 +201,30 @@ document.addEventListener("DOMContentLoaded", () => {
             enteredKey === "ArrowRight"
         ) {
             event.preventDefault();
+            if (currentInput.replace(/[^0-9]/g, "").length === 8) event.preventDefault();
+            
             if (enteredKey >= "0" && enteredKey <= "9") {
-                areAllNumbersEntered ? handleNumberInput(enteredKey) : event.preventDefault();
+                areAllNumbersEntered ? handleNumberKey(enteredKey) : event.preventDefault();
             } else if (enteredKey === "Backspace") {
-                handleBackspaceInput();
+                handleBackspaceKey();
             } else if (enteredKey === "ArrowLeft" || enteredKey === "ArrowRight") {
                 handleArrowKeys(enteredKey);
             } else if (enteredKey === "Tab") {
-                /*There is no code here*/
+                //nothing
             } else {
                 event.preventDefault();
             };
-            if (currentInput.replace(/[^0-9]/g, "").length === 8) event.preventDefault();
         };
-    });
-    birthdayInput.addEventListener("input", (event) => {
+    };
+    function onBirthdayInputValueItSlef(event) {
         const hangulLetter = event.target;
         const removeKorRegExp = /(?!년|월|일)[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
         hangulLetter.value = hangulLetter.value.replace(removeKorRegExp, "");
-        setTimeout(() => {
-            updateCaretPosition();
-        }, 5);
-    });
-    const updateCaretPosition = () => birthdayInput.setSelectionRange(caretIndex, caretIndex);
+        setTimeout(() => updateCaretPosition, 5);
+    };
+    
+    birthdayInput.addEventListener("focus", onBirthdayInputFocus);
+    birthdayInput.addEventListener("blur", onBirthdayInputBlur);
+    birthdayInput.addEventListener("keydown", onBirthdayInputKeydown);
+    birthdayInput.addEventListener("input", onBirthdayInputValueItSlef);
 });

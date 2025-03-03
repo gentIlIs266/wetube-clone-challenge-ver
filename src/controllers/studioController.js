@@ -172,10 +172,26 @@ export const postCreateVideo = async (req, res) => {
         };
     };
 };
-export const videoEdit = (req, res) => {}
-export const outline = (req, res) => {}
-export const reach = (req, res) => {}
-export const participation = (req, res) => {}
-export const audience = (req, res) => {}
-export const videoEditor = (req, res) => {}
 
+export const getVideoEdit = async (req, res) => {
+    const videoIdToEdit = req.params.videoId;
+    const sessionUser = req.session.user;
+    const foundVideoToEdit = await VIDEO.findById(videoIdToEdit);
+
+    if (!foundVideoToEdit) {
+        return res.status(404).render("error.pug", { errorMessage: "NO_VIDEO_ERROR" });
+    };
+    if (String(foundVideoToEdit.video_owner) !== String(sessionUser._id)) {
+        return res.status(403).render("error.pug", { errorMessage: "NOT_AUTHORIZED" });
+    };
+
+    return res.render("studio-template/video-edit.pug", {
+        tabTitle: "동영상 세부정보 - WeTube Studio",
+        STUDIO_PARTIALS: true,
+        foundVideoToEdit,
+        sessionUser
+    });
+};
+export const postVideoEdit = (req, res) => {
+
+};

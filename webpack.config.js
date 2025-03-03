@@ -3,6 +3,7 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var root = path.resolve(__dirname, "src", "client", "js") + "/";
 module.exports = {
     entry: {
+        videoEdit: root + "video-edit.js",
         watchVideo: root + "watch-video.js",
         createVideo: root + "create-video.js",
         masthead: root + "masthead.js",
@@ -50,12 +51,13 @@ module.exports = {
             },
         ],
     },
+    /*
     resolve: {
         fallback: {
             "fs": false,
             "path": false,
-            "zlib": false,
             "stream": false,
+            "zlib": false,
             "crypto": false,
             "util": false,
             "buffer": false,
@@ -76,4 +78,5 @@ module.exports = {
             "inspector": false,
         },
     },
+    */
 }

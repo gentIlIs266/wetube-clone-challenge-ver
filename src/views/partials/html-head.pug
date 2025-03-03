@@ -1,12 +1,14 @@
 doctype html
--const styles=isThisPageJoinOrLogin?"":"font-size: 10px; font-family: Roboto, Arial, sans-serif;";
+-const styles = isThisPageJoinOrLogin ? "" : "font-size: 10px;font-family: Roboto, Arial, sans-serif;";
 html(
     style=styles lang="ko-KR"
     darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing
 )
     head
-        script(src="assets/js/bundled.appDrawer.js" defer) 
-        script(src="assets/js/bundled.masthead.js" defer) 
+        if STUDIO_PARTIALS
+        else
+            script(src="assets/js/bundled.appDrawer.js" defer)
+            script(src="assets/js/bundled.masthead.js" defer)
         meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1")
         meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
         meta(http-equiv="X-UA-Compatible" content="ie=edge,chrome=1")
@@ -160,31 +162,55 @@ html(
         link(rel="stylesheet" href="//fonts.googleapis.com/css2?family=Roboto_old:wght@300;400;500;700&family=YouTube+Sans:wght@300..900&display=swap").css-httpsfontsgoogleapiscomcss2familyRoboto_oldwght300400500700familyYouTubeSanswght300900displayswap
         script(name="www-roboto").
             if(document.fonts&&document.fonts.load){document.fonts.load("400 10pt Roboto","");document.fonts.load("500 10pt Roboto","");}
-        link(rel="stylesheet" href="assets/css/bundled.appDrawer.css")
-        link(rel="stylesheet" href="assets/css/bundled.masthead.css")
+        if STUDIO_PARTIALS
+        else
+            link(rel="stylesheet" href="assets/css/bundled.appDrawer.css")
+            link(rel="stylesheet" href="assets/css/bundled.masthead.css")
         block page-css
-        style.global_styles.
-            body{padding:0;margin:0;overflow-y:scroll}body.autoscroll{overflow-y:auto}body.no-scroll{overflow:hidden}body.no-y-scroll{overflow-y:hidden}.hidden{display:none}textarea{--paper-input-container-input_-_white-space:pre-wrap}.grecaptcha-badge{visibility:hidden}
+        if STUDIO_PARTIALS
+        else
+            style.global_styles.
+                body{padding:0;margin:0;overflow-y:scroll}body.autoscroll{overflow-y:auto}body.no-scroll{overflow:hidden}body.no-y-scroll{overflow-y:hidden}.hidden{display:none}textarea{--paper-input-container-input_-_white-space:pre-wrap}.grecaptcha-badge{visibility:hidden}
         style.masthead_shell
         style.searchbox.
             #search-input.wtd-searchbox-spt input{-webkit-appearance:none;-webkit-font-smoothing:antialiased;background-color:transparent;border:none;box-shadow:none;color:inherit;font-family:Roboto,Noto,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin-left:4px;max-width:100%;outline:none;text-align:inherit;width:100%;-ms-flex:1 1 0.000000001px;-webkit-flex:1;-webkit-box-flex:1;-moz-box-flex:1;flex:1;-webkit-flex-basis:0.000000001px;-ms-flex-perferred-size:0.000000001px;flex-basis:0.000000001px}#search-container.wtd-searchbox-spt{pointer-events:none;position:absolute;top:0;right:0;bottom:0;left:0}#search-input.wtd-searchbox-spt #search::-webkit-input-placeholder{color:#888}#search-input.wtd-searchbox-spt #search::-moz-input-placeholder{color:#888}#search-input.wtd-searchbox-spt #search:-ms-input-placeholder{color:#888}
         if !isThisPageJoinOrLogin
-            style.kevlar_global_style.
-                html{background-color:#fff!important;-webkit-text-size-adjust:none;}html[dark]{background-color:#0f0f0f!important;}#logo-red-icon-container.wtd-topbar-logo-renderer{width:86px;}
+            if !STUDIO_PARTIALS
+                style.kevlar_global_style.
+                    html{background-color:#fff!important;-webkit-text-size-adjust:none;}html[dark]{background-color:#0f0f0f!important;}#logo-red-icon-container.wtd-topbar-logo-renderer{width:86px;}
         meta(name="theme-color" content="rgba(33, 33, 33, 0.98)")
         script.
             var wtInitialData={};
         style dom-bind,dom-if,dom-repeat{display:none;}
+        style ps-dom-if,ps-dom-repeat{display:none;}
         link(href="https://fonts.googleapis.com/css?family=Roboto_old:300italic,400italic,500italic,700italic" rel="stylesheet")
         link(href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet")
-        style ps-dom-if,ps-dom-repeat{display:none;}
         style#__web-inspector-hide-shortcut-style__.
             .__web-inspector-hide-shortcut__,.__web-inspector-hide-shortcut__ *,.__web-inspector-hidebefore-shortcut__::before,.__web-inspector-hideafter-shortcut__::after{visibility: hidden !important;}
     body(dir="ltr" rounded-container cz-shortcut-listen="true")
-        script.
-            wtcfg.set('initialBodyClientWidth', document.body.clientWidth);
-        block wtd-app
-        block page-js
-        //-
+        if STUDIO_PARTIALS
+            //-
+                script.
+                    if (window.wtcsi) {window.wtcsi.tick('ai', null, '');}
+            block wtcp-app
+            //-
+                script.
+                    if (window.wtcsi) {window.wtcsi.tick('ac', null, '');}
+                script.
+                    if (window.wtcsi) {window.wtcsi.tick('hr', null, '');}
+                script.
+                    if (window.wtcsi) {window.wtcsi.infoGel({serverTimeMs: 65.0});}
             script.
-                fetch('/servercontact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wtcfg.d())}).catch(e=>console.error('SERVER_CONTACT_ERROR',e))
+                wtcfg.set({"CSI_SERVICE_NAME": 'wetube_creator_studio', "TIMING_INFO": {}})
+            block page-js
+        else
+            //-
+                script.
+                    if (window.wtcsi)
+            script.
+                wtcfg.set('initialBodyClientWidth', document.body.clientWidth);
+            block wtd-app
+            block page-js
+            //-
+                script.
+                    fetch('/servercontact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wtcfg.d())}).catch(e=>console.error('SERVER_CONTACT_ERROR',e))

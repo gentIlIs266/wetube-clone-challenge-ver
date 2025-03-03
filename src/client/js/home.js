@@ -1,6 +1,6 @@
 import "../scss/components/home.scss";
-/*features related with items per row*/
 document.addEventListener("DOMContentLoaded", () => {
+    /*features related with items per row*/
     const wtdAppDiv = document.querySelector(".wtd-app-html-tag");
     const wtdRichGridRenderer = document.querySelector(".wtd-rich-grid-renderer-html-tag");
     const wtdFeedFilterChipBarRenderer = document.querySelector(".wtd-feed-filter-chip-bar-renderer-html-tag.wtd-rich-grid-renderer");
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeContentItems = document.querySelectorAll("#contents.wtd-rich-grid-renderer .wtd-rich-item-renderer-html-tag.wtd-rich-grid-renderer");
     const clientWidth = document.body.clientWidth;
     let appDrawerWidth = 240;
+
     if (elementsPerRowIs === "3") {
         homeContentItems.forEach(
             (item, index) => {
@@ -39,7 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     wtdRichGridRenderer.setAttribute("elements-per-row", "3");
                     homeContentItems.forEach((item, index) => {
                             item.removeAttribute("is-in-first-column")
-                            if ((index - 1) % 3 === 0) item.setAttribute("is-in-first-column", "");
+                            if ((index - 1) % 3 === 0)
+                                item.setAttribute("is-in-first-column", "");
                         });
                 } else {
                     appDrawerWidth = 72;
@@ -51,7 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     wtdRichGridRenderer.setAttribute("elements-per-row", "4");
                     homeContentItems.forEach((item, index) => {
                             item.removeAttribute("is-in-first-column")
-                            if ((index - 1) % 4 === 0) item.setAttribute("is-in-first-column", "");
+                            if ((index - 1) % 4 === 0)
+                                item.setAttribute("is-in-first-column", "");
                         });
                 };
                 wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-width", `${clientWidth - appDrawerWidth}px`);
@@ -59,13 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
     wtdAppAttributeObserver.observe(wtdAppDiv, { attributes: true });
+    
     if (wtdFeedFilterChipBarRenderer) {
         wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-width", `${clientWidth - 240}px`);
         wtdFeedFilterChipBarRenderer.style.setProperty("--wtd-rich-grid-chips-bar-top", `56px`);
     };
-});
-/*home filter bar cloud chip select response*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*home filter bar cloud chip select response*/
     const chipCloudChips = document.querySelectorAll(".iron-selector-html-tag.wtd-feed-filter-chip-bar-renderer .wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer");
     const selectedCloudQueryString = ".iron-selector-html-tag.wtd-feed-filter-chip-bar-renderer .wt-chip-cloud-chip-renderer-html-tag.wtd-feed-filter-chip-bar-renderer[selected]";
     chipCloudChips.forEach((cloudChip) => {
@@ -79,7 +82,4 @@ document.addEventListener("DOMContentLoaded", () => {
             cloudChip.setAttribute("aria-selected", "true");
         });
     });
-});
-document.addEventListener("DOMContentLoaded", () => {
-    
 });

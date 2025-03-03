@@ -1,6 +1,6 @@
 import "../scss/components/masthead.scss";
-/*masthead searchbox focused, has text styling*/
 document.addEventListener("DOMContentLoaded", () => {
+    /*masthead searchbox focused, has text styling*/
     const mastheadSearchbox = document.querySelector("#search.wtd-searchbox-html-tag[role=search]");
     const mastheadSearchInput = document.querySelector("#search-input.wtd-searchbox-spt input#search");
     mastheadSearchInput.addEventListener("focus", () => {
@@ -16,9 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
             mastheadSearchbox.classList.add("has-input");
         };
     });
-});
-/*login button touch response*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*login button touch response*/
     const touchFeedbackShape = document.querySelector(".wt-spec-touch-feedback-shape.wt-spec-touch-feedback-shape--touch-response");
     const classInsert_1 = (type) => {
         if (type === "add") {
@@ -37,9 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         touchFeedbackShape.addEventListener("mouseleave", () => classInsert_1("remove"));
     };
-});
-/*login button key focus response*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*login button key focus response*/
     const loginAncher = document.querySelector("a[aria-label=로그인]");
     document.addEventListener("keydown", (event) => {
         if (event.key === "Tab") {
@@ -51,9 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
     });
-});
-/*not logged in menu button touch response*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*not logged in menu button touch response*/
     const menuButton = document.querySelector(".wtd-topbar-menu-button-renderer-html-tag.wtd-masthead[has-no-text] #button.wtd-topbar-menu-button-renderer");
     const menuInteraction = menuButton.querySelector("#interaction.wt-interaction-html-tag.circular.wt-icon-button");
     const classInsert_2 = (type) => {
@@ -79,9 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
             classInsert_2("remove");
         });
     };
-});
-/*topbar left menu button touch response*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*topbar left menu button touch response*/
     const sidebarMenuButton = document.querySelector("#guide-button")
     const sidebarMenuInteraction = document.querySelector("#guide-button #interaction.wt-interaction-html-tag");
     sidebarMenuButton.addEventListener("mousedown", () => sidebarMenuInteraction.classList.add("down"));
@@ -99,9 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });            
         };
     });
-});
-/*search clear button active*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*search clear button active*/
     const searchClearButton = document.querySelector("#search-clear-button .wt-spec-button-shape-next");
     const searchInput = document.querySelector("#search.wtd-searchbox");
     const wtdSearchBox = document.querySelector("#search.wtd-searchbox-html-tag[role=search]");
@@ -111,9 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
         searchInput.focus();
         if (wtdSearchBox.classList.contains("has-input")) wtdSearchBox.classList.remove("has-input");
     });
-});
-/*search button tooltip active*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*search button tooltip active*/
     const searchButton = document.querySelector("#search-icon-legacy");
     const searchButtonTooltip = searchButton.querySelector("#tooltip");
     searchButton.addEventListener("mouseenter", () => {
@@ -128,9 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!searchButtonTooltip.classList.contains("hidden")) searchButtonTooltip.classList.add("hidden");
         }, 100);
     });
-});
-/*voice search button tooltip active*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*voice search button tooltip active*/
     const voiceSearchButton = document.querySelector("#voice-search-button button");
     const voiceSearchButtonTooltip = document.querySelector("#voice-search-button .tp-wt-paper-tooltip-html-tag #tooltip");
     voiceSearchButton.addEventListener("mouseenter", () => {
@@ -145,9 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!voiceSearchButtonTooltip.classList.contains("hidden")) voiceSearchButtonTooltip.classList.add("hidden");
         }, 100);    
     });
-});
-/*create button tooltip active*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*create button tooltip active*/
     const createButton = document.querySelector(".wtd-topbar-menu-button-renderer-html-tag.wtd-masthead #button.wtd-topbar-menu-button-renderer");
     const createButtonTooltip = createButton.querySelector("#tooltip");
     if (createButton) {
@@ -164,9 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 100);
         });
     };
-});
-/*notification tooltip active*/
-document.addEventListener("DOMContentLoaded", () => {
+
+    /*notification tooltip active*/
     const notificationButton = document.querySelector(".wt-icon-button-html-tag.wtd-notification-topbar-button-renderer #button");
     const notificationButtonTooltip = document.querySelector(".tp-wt-paper-tooltip-html-tag.wtd-notification-topbar-button-renderer #tooltip");
     if (notificationButton) {
@@ -182,11 +173,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!notificationButtonTooltip.classList.contains("hidden")) notificationButtonTooltip.classList.add("hidden");
             }, 100);
         });
+
+        /*notification dropdown setting icon tooltip*/
+        const notificationSettingButton = document.querySelector("#notification-dropdown #buttons");
+        if (notificationSettingButton) {
+            const notificationSettingTooltip = notificationSettingButton.querySelector("#tooltip");
+            notificationSettingButton.addEventListener("mouseenter", () => {
+                if (notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.remove("hidden");
+                if (!notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.add("fade-in-animation");
+            });
+            notificationSettingButton.addEventListener("mouseleave", () => {
+                if (notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.remove("fade-in-animation");
+                if (!notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.add("fade-out-animation");
+                setTimeout(() => {
+                    if (notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.remove("fade-out-animation");
+                    if (!notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.add("hidden");
+                }, 100);
+            });
+        };
     };
-});
-/*voice search button touch response*/
-document.addEventListener("DOMContentLoaded", () => {
-    const voiceSearchButton = document.querySelector("#voice-search-button button");
+
+    /*voice search button touch response*/
     const voiceSearchFeedback = document.querySelector("#voice-search-button .wt-touch-feedback-shape-html-tag .wt-spec-touch-feedback-shape");
     voiceSearchButton.addEventListener("mousedown", () => {
         voiceSearchFeedback.classList.add("wt-spec-touch-feedback-shape--down");
@@ -202,10 +209,8 @@ document.addEventListener("DOMContentLoaded", () => {
     voiceSearchButton.addEventListener("mouseleave", () => {
         voiceSearchFeedback.classList.remove("wt-spec-touch-feedback-shape--down");
     });
-});
-/*create dropdown control*/
-document.addEventListener("DOMContentLoaded", () => {
-    const createButton = document.querySelector("#buttons.wtd-masthead .wtd-topbar-menu-button-renderer-html-tag:first-of-type");
+
+    /*create dropdown control*/
     const createDropdown = document.querySelector(".wtd-popup-container-html-tag #create-dropdown");
     let isDropdownVisible = false;
     createButton.addEventListener("click", () => {
@@ -223,9 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
             isDropdownVisible = false;
         };
     });
+
 });
-/*notification dropdown control*/
 document.addEventListener("DOMContentLoaded", () => {
+    /*notification dropdown control*/
     const notificationButton = document.querySelector("#buttons.wtd-masthead .wtd-notification-topbar-button-renderer-html-tag");
     const notificationDropdown = document.querySelector(".wtd-popup-container-html-tag #notification-dropdown");
     const notificationIconSvgPath = document.querySelector(".wtd-notification-topbar-button-renderer-html-tag.wtd-masthead .wt-icon-shape.wt-spec-icon-shape svg path");
@@ -270,25 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 systemDropdown.style.display = "none";
                 isDropdownVisible = false;
             };
-        });
-    };
-});
-/*notification dropdown setting icon tooltip*/
-document.addEventListener("DOMContentLoaded", () => {
-    const notificationSettingButton = document.querySelector("#notification-dropdown #buttons");
-    if (notificationSettingButton) {
-        const notificationSettingTooltip = notificationSettingButton.querySelector("#tooltip");
-        notificationSettingButton.addEventListener("mouseenter", () => {
-            if (notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.remove("hidden");
-            if (!notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.add("fade-in-animation");
-        });
-        notificationSettingButton.addEventListener("mouseleave", () => {
-            if (notificationSettingTooltip.classList.contains("fade-in-animation")) notificationSettingTooltip.classList.remove("fade-in-animation");
-            if (!notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.add("fade-out-animation");
-            setTimeout(() => {
-                if (notificationSettingTooltip.classList.contains("fade-out-animation")) notificationSettingTooltip.classList.remove("fade-out-animation");
-                if (!notificationSettingTooltip.classList.contains("hidden")) notificationSettingTooltip.classList.add("hidden");
-            }, 100);
         });
     };
 });
