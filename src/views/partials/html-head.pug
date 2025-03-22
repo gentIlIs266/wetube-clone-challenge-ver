@@ -2,7 +2,7 @@ doctype html
 -const styles = isThisPageJoinOrLogin ? "" : "font-size: 10px;font-family: Roboto, Arial, sans-serif;";
 html(
     style=styles lang="ko-KR"
-    darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing
+    darker-dark-theme darker-dark-theme-deprecate dark typography typography-spacing modern
 )
     head
         if STUDIO_PARTIALS
@@ -187,6 +187,7 @@ html(
         link(href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet")
         style#__web-inspector-hide-shortcut-style__.
             .__web-inspector-hide-shortcut__,.__web-inspector-hide-shortcut__ *,.__web-inspector-hidebefore-shortcut__::before,.__web-inspector-hideafter-shortcut__::after{visibility: hidden !important;}
+        style [hidden] { display: none !important; }
     body(dir="ltr" rounded-container cz-shortcut-listen="true")
         if STUDIO_PARTIALS
             //-

@@ -79,3 +79,19 @@
         transform: translate(-1px, 1px);
     }
 }
+@keyframes shinkGap {
+    0% {
+        margin-top: var(--thumbnail-top-section-gap);
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+@keyframes checkmark-expand {
+    0% {
+        transform: scale(0, 0) rotate(45deg);
+    }
+    100% {
+        transform: scale(1, 1) rotate(45deg);
+    }
+}

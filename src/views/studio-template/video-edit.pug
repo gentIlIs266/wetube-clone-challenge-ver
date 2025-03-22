@@ -120,3 +120,1347 @@ block wtcp-app
                                                 src=sessionUser.avatar
                                             )#img.wt-img-shadow
                 wtcp-banner.entity-banner.wtcp-entity-page.closing
+                div.nav-and-main-content.wtcp-entity-page
+                    wtcp-navigation-drawer(
+                        modern layout="video" back-button
+                    ).wtcp-entity-page
+                        nav(
+                            tabindex="-1" aria-expanded="true"
+                        )#left-nav.wtcp-navigation-drawer
+                            wtcp-animatable.sync-on-transition.wtcp-navigation-drawer
+                                wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                    a(
+                                        href=`/channel/${sessionUser.user_channel.channel_id}/videos/upload`
+                                    )#back-button.menu-item-link.wtcp-navigation-drawer
+                                        tp-wt-paper-icon-item(
+                                            role="button" tabindex="-1"
+                                            style-target="host" aria-disabled="false"
+                                        ).wtcp-navigation-drawer
+                                            div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                    svg(
+                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                        focusable="false" aria-hidden="true"
+                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                    ).tp-wt-iron-icon
+                                                        g(mirror-in-rtl).tp-wt-iron-icon
+                                                            path(
+                                                                d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"
+                                                            ).tp-wt-iron-icon
+                                            div.nav-item-text.back-button-text.wtcp-navigation-drawer
+                                                |채널 콘텐츠
+                            div.thumbnail-wrapper.thumbnail-wrapper-video.wtcp-navigation-drawer
+                                wtcp-animatable.sync-on-transition.wtcp-navigation-drawer
+                                    wtcp-overlay-with-link(
+                                        rounded-corners track-click
+                                    ).video-overlay.wtcp-navigation-drawer
+                                        div(tabindex="0").overlay-container.wtcp-overlay-with-link
+                                            div(rounded-corners hidden).grey-overlay.wtcp-overlay-with-link
+                                            div(hidden).overlay-with-link.wtcp-overlay-with-link
+                                                a(
+                                                    target="_blank" tabindex="-1" role="tooltip"
+                                                    src=`/watch?v=${foundVideoToEdit._id}`
+                                                )#overlay-link-to-wetube.overlay-link.wtcp-overlay-with-link
+                                                    wtcp-icon-button(
+                                                        no-tooltip overlay tabindex="0" modern
+                                                        aria-disabled="false" role="button"
+                                                    )#overlay-icon.wtcp-overlay-with-link
+                                                        tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g.tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M10,9.35,15,12l-5,2.65ZM12,6a54.36,54.36,0,0,0-7.56.38A1.53,1.53,0,0,0,3.38,7.44,24.63,24.63,0,0,0,3,12a24.63,24.63,0,0,0,.38,4.56,1.53,1.53,0,0,0,1.06,1.06A54.36,54.36,0,0,0,12,18a54.36,54.36,0,0,0,7.56-.38,1.53,1.53,0,0,0,1.06-1.06A24.63,24.63,0,0,0,21,12a24.63,24.63,0,0,0-.38-4.56,1.53,1.53,0,0,0-1.06-1.06A54.36,54.36,0,0,0,12,6h0m0-1s6.25,0,7.81.42a2.51,2.51,0,0,1,1.77,1.77A25.87,25.87,0,0,1,22,12a25.87,25.87,0,0,1-.42,4.81,2.51,2.51,0,0,1-1.77,1.77C18.25,19,12,19,12,19s-6.25,0-7.81-.42a2.51,2.51,0,0,1-1.77-1.77A25.87,25.87,0,0,1,2,12a25.87,25.87,0,0,1,.42-4.81A2.51,2.51,0,0,1,4.19,5.42C5.75,5,12,5,12,5Z"
+                                                                    ).tp-wt-iron-icon
+                                    wtcp-thumbnail(modern).thumbnail.video-thumbnail.wtcp-navigation-drawer
+                                        div.container.wtcp-thumbnail
+                                            wtcp-img-with-fallback(
+                                                retry rounded modern size="medium"
+                                                image-ready image-display-type="default"
+                                            ).wtcp-thumbnail
+                                                div.container.wtcp-img-with-fallback
+                                                    img(
+                                                        alt=`동영상 미리보기 이미지: ${foundVideoToEdit.title}`
+                                                        src=`/${foundVideoToEdit.thumbnailUrl[0]}`
+                                                    )#img-with-fallback.wtcp-img-with-fallback
+                                            div.timestamp.wtcp-thumbnail
+                                                div.label.wtcp-thumbnail
+                                                    |#{foundVideoToEdit.meta.videoLength}
+                                    div#entity-label-container.wtcp-navigation-drawer
+                                        div#entity-type.entity-type.wtcp-navigation-drawer
+                                            |  내 동영상 
+                                        div#entity-name.entity-name.wtcp-navigation-drawer
+                                            |  #{foundVideoToEdit.title} 
+                            wtcp-animatable.top-section.sync-on-transition.wtcp-navigation-drawer
+                                ul#main-menu.wtcp-navigation-drawer
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-0.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-0.iron-selected.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19ZM17.61 2.63L15.06 5.18L18.85 8.97001L21.4 6.42L17.61 2.63Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |세부정보
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-1.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-1.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M9 17H7V10H9V17ZM13 7H11V17H13V7ZM17 14H15V17H17V14ZM20 4H4V20H20V4ZM21 3V21H3V3H21Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |분석
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-2.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-2.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M2 4.99982V18.9998H22V4.99982H2ZM21 5.99982V17.9998H3V5.99982H5L6.5 8.99982H9.5L8 5.99982H10L11.5 8.99982H14.5L13 5.99982H15L16.5 8.99982H19.5L18 5.99982H21Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |편집기
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-3.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-3.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M8 7H16V9H8V7ZM8 13H13V11H8V13ZM5 3V16H15H15.41L15.7 16.29L19 19.59V3H5ZM4 2H20V22L15 17H4V2Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |댓글
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-4.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-4.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M8 7H16V9H8V7ZM8 13H13V11H8V13ZM5 3V16H15H15.41L15.7 16.29L19 19.59V3H5ZM4 2H20V22L15 17H4V2Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |자막
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-5.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-5.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M10.57 10.96C10.62 10.66 10.72 10.4 10.84 10.17C10.96 9.94 11.15 9.75 11.38 9.61C11.6 9.47 11.87 9.41 12.21 9.4C12.42 9.41 12.61 9.45 12.78 9.52C12.96 9.6 13.13 9.71 13.25 9.85C13.38 9.99 13.48 10.15 13.56 10.33C13.64 10.51 13.68 10.71 13.69 10.91L15.32 10.91C15.3 10.48 15.22 10.09 15.06 9.73C14.91 9.37 14.7 9.06 14.42 8.81C14.14 8.56 13.82 8.35 13.44 8.21C13.07 8.06 12.65 8 12.18 8C11.59 8 11.07 8.1 10.63 8.31C10.19 8.52 9.83 8.79 9.54 9.15C9.25 9.5 9.03 9.91 8.89 10.39C8.75 10.87 8.67 11.36 8.67 11.88L8.67 12.13C8.67 12.66 8.74 13.15 8.88 13.62C9.02 14.09 9.24 14.5 9.53 14.85C9.82 15.2 10.19 15.48 10.62 15.68C11.06 15.88 11.58 15.99 12.17 15.99C12.6 15.99 13 15.92 13.37 15.78C13.74 15.64 14.07 15.45 14.35 15.21C14.63 14.96 14.86 14.68 15.02 14.35C15.18 14.02 15.28 13.68 15.29 13.3L13.66 13.3C13.65 13.49 13.61 13.66 13.52 13.83C13.43 14 13.33 14.13 13.19 14.25C13.05 14.37 12.9 14.46 12.72 14.52C12.55 14.58 12.36 14.6 12.17 14.61C11.84 14.6 11.57 14.54 11.36 14.4C11.13 14.25 10.95 14.06 10.82 13.84C10.69 13.61 10.59 13.34 10.55 13.04C10.51 12.74 10.48 12.43 10.48 12.13L10.48 11.88C10.5 11.56 10.52 11.26 10.57 10.96ZM12 3C16.96 3 21 7.04 21 12C21 16.96 16.96 21 12 21C7.04 21 3 16.96 3 12C3 7.04 7.04 3 12 3ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |저작권
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve(track-click role="none").wtcp-navigation-drawer
+                                            a(
+                                                href=`/studio/${foundVideoToEdit._id}/edit`
+                                            )#menu-item-6.menu-item-link.wtcp-navigation-drawer
+                                                tp-wt-paper-icon-item(
+                                                    role="button" tabindex="-1" style-target="host" aria-disabled="false"
+                                                )#menu-paper-icon-item-6.wtcp-navigation-drawer
+                                                    div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                        tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M8 7C8 7.55 7.55 8 7 8C6.45 8 6 7.55 6 7C6 6.45 6.45 6 7 6C7.55 6 8 6.45 8 7ZM7 16C6.45 16 6 16.45 6 17C6 17.55 6.45 18 7 18C7.55 18 8 17.55 8 17C8 16.45 7.55 16 7 16ZM10.79 8.23L21 18.44V20H17.73L11.97 14.24L10.7 15.51C10.89 15.97 11 16.47 11 17C11 19.21 9.21 21 7 21C4.79 21 3 19.21 3 17C3 14.79 4.79 13 7 13C7.42 13 7.81 13.08 8.19 13.2L9.56 11.83L8.45 10.72C8 10.89 7.51 11 7 11C4.79 11 3 9.21 3 7C3 4.79 4.79 3 7 3C9.21 3 11 4.79 11 7C11 7.43 10.91 7.84 10.79 8.23ZM10.08 8.94L9.65 8.5L9.84 7.92C9.95 7.58 10 7.28 10 7C10 5.35 8.65 4 7 4C5.35 4 4 5.35 4 7C4 8.65 5.35 10 7 10C7.36 10 7.73 9.93 8.09 9.79L8.7 9.55L9.16 10.01L10.27 11.12L10.98 11.83L10.27 12.54L8.9 13.91L8.47 14.34L7.89 14.16C7.55 14.05 7.27 14 7 14C5.35 14 4 15.35 4 17C4 18.65 5.35 20 7 20C8.65 20 10 18.65 10 17C10 16.62 9.93 16.25 9.78 15.88L9.53 15.27L10 14.8L11.27 13.53L11.98 12.82L12.69 13.53L18.15 19H20V18.85L10.08 8.94ZM17.73 4H21V5.56L15.48 11.08L13.07 8.67L17.73 4ZM18.15 5L14.48 8.67L15.48 9.67L20 5.15V5H18.15Z"
+                                                                    ).tp-wt-iron-icon
+                                                    div.nav-item-text.wtcp-navigation-drawer
+                                                        |클립
+                            div#bottom-section.wtcp-navigation-drawer
+                                hr.divider.wtcp-navigation-drawer
+                                ul.remove-default-style.wtcp-navigation-drawer
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve.wtcp-navigation-drawer
+                                            tp-wt-paper-icon-item(
+                                                role="button" style-target="host" tabindex="0" aria-disabled="false"
+                                            )#settings-item.wtcp-navigation-drawer
+                                                div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                    tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                        svg(
+                                                            viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                            focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                        ).tp-wt-iron-icon
+                                                            g.tp-wt-iron-icon
+                                                                path(
+                                                                    d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,8c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4 S14.21,8,12,8L12,8z M13.22,3l0.55,2.2l0.13,0.51l0.5,0.18c0.61,0.23,1.19,0.56,1.72,0.98l0.4,0.32l0.5-0.14l2.17-0.62l1.22,2.11 l-1.63,1.59l-0.37,0.36l0.08,0.51c0.05,0.32,0.08,0.64,0.08,0.98s-0.03,0.66-0.08,0.98l-0.08,0.51l0.37,0.36l1.63,1.59l-1.22,2.11 l-2.17-0.62l-0.5-0.14l-0.4,0.32c-0.53,0.43-1.11,0.76-1.72,0.98l-0.5,0.18l-0.13,0.51L13.22,21h-2.44l-0.55-2.2l-0.13-0.51 l-0.5-0.18C9,17.88,8.42,17.55,7.88,17.12l-0.4-0.32l-0.5,0.14l-2.17,0.62L3.6,15.44l1.63-1.59l0.37-0.36l-0.08-0.51 C5.47,12.66,5.44,12.33,5.44,12s0.03-0.66,0.08-0.98l0.08-0.51l-0.37-0.36L3.6,8.56l1.22-2.11l2.17,0.62l0.5,0.14l0.4-0.32 C8.42,6.45,9,6.12,9.61,5.9l0.5-0.18l0.13-0.51L10.78,3H13.22 M14,2h-4L9.26,4.96c-0.73,0.27-1.4,0.66-2,1.14L4.34,5.27l-2,3.46 l2.19,2.13C4.47,11.23,4.44,11.61,4.44,12s0.03,0.77,0.09,1.14l-2.19,2.13l2,3.46l2.92-0.83c0.6,0.48,1.27,0.87,2,1.14L10,22h4 l0.74-2.96c0.73-0.27,1.4-0.66,2-1.14l2.92,0.83l2-3.46l-2.19-2.13c0.06-0.37,0.09-0.75,0.09-1.14s-0.03-0.77-0.09-1.14l2.19-2.13 l-2-3.46L16.74,6.1c-0.6-0.48-1.27-0.87-2-1.14L14,2L14,2z"
+                                                                ).tp-wt-iron-icon
+                                                div.nav-item-text.wtcp-navigation-drawer
+                                                    |설정
+                                    li.wtcp-navigation-drawer
+                                        wtcp-ve.wtcp-navigation-drawer
+                                            tp-wt-paper-icon-item(
+                                                role="button" style-target="host" tabindex="0" aria-disabled="false"
+                                            )#settings-item.wtcp-navigation-drawer
+                                                div#contentIcon.content-icon.tp-wt-paper-icon-item
+                                                    tp-wt-iron-icon(slot="item-icon" item-icon).wtcp-navigation-drawer
+                                                        svg(
+                                                            viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                            focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                        ).tp-wt-iron-icon
+                                                            g.tp-wt-iron-icon
+                                                                path(
+                                                                    d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                                                ).tp-wt-iron-icon
+                                                div.nav-item-text.wtcp-navigation-drawer
+                                                    |의견 보내기
+                    main(studio-theme="DEFAULT")#main.wtcp-entity-page
+                        div(aria-live="polite").all-pages.wtcp-app
+                            wtcp-animatable(name="video.edit").page-selected.wtcp-app
+                                wtcp-video-details-section(modern)#edit.wtcp-app
+                                    wtcp-sticky-header(optional).wtcp-video-details-section
+                                        wtcp-entity-page-header.wtcp-video-details-section
+                                            div.wrapper.wtcp-entity-page-header
+                                                div.primary.wtcp-entity-page-header
+                                                    h1.page-title.wtcp-entity-page-header
+                                                        |동영상 세부정보
+                                                div(slot="secondary").buttons.wtcp-video-details-section
+                                                    wtcp-button(
+                                                        tabindex="-1" type="tonal" button-style="default"
+                                                        icon-alignment="start" modern aria-disabled="true"
+                                                        role="button" disabled
+                                                    )#discard.wtcp-video-details-section
+                                                        wtcp-button-shape.wtcp-button
+                                                            button(
+                                                                aria-label="변경사항 실행취소" disabled
+                                                            ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--disabled.wtcp-button-shape-impl--size-m
+                                                                div.wtcp-button-shape-impl__button-text-content
+                                                                    |변경사항 실행취소
+                                                    wtcp-button(
+                                                        track-click type="filled" tabindex="-1"
+                                                        button-style="default" icon-alignment="start" modern
+                                                        aria-disabled="true" role="button" disabled
+                                                    )#save.wtcp-video-details-section
+                                                        wtcp-button-shape.wtcp-button
+                                                            button(
+                                                                aria-label="저장" disabled
+                                                            ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--disabled.wtcp-button-shape-impl--size-m
+                                                                div.wtcp-button-shape-impl__button-text-content
+                                                                    |저장
+                                                    wtcp-video-overflow-menu#video-overflow-menu.wtcp-video-details-section
+                                                        wtcp-icon-button(
+                                                            icon="more-vert" track-click tabindex="0" role="button"
+                                                            modern aria-disabled="false" aria-label="옵션"
+                                                        )#overflow-menu-button.wtcp-video-overflow-menu
+                                                            tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                svg(
+                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                    focusable="false" aria-hidden="true"
+                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                ).tp-wt-iron-icon
+                                                                    g.tp-wt-iron-icon
+                                                                        path(
+                                                                            d="M12,16.5c0.83,0,1.5,0.67,1.5,1.5s-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5S11.17,16.5,12,16.5z M10.5,12 c0,0.83,0.67,1.5,1.5,1.5s1.5-0.67,1.5-1.5s-0.67-1.5-1.5-1.5S10.5,11.17,10.5,12z M10.5,6c0,0.83,0.67,1.5,1.5,1.5 s1.5-0.67,1.5-1.5S12.83,4.5,12,4.5S10.5,5.17,10.5,6z"
+                                                                        ).tp-wt-iron-icon
+                                                        wtcp-text-menu(modern)#overflow-menu.wtcp-video-overflow-menu
+                                                            tp-wt-paper-dialog(
+                                                                style-target="dialog" role="dialog" tabindex="-1"
+                                                                style="outline: none; display: none;"
+                                                                aria-hidden="true"
+                                                            )#dialog.wtcp-text-menu
+                                                                tp-wt-paper-listbox(
+                                                                    selectable=".selectable-item" role="menu" tabindex="0"
+                                                                )#paper-list.wtcp-text-menu
+                                                                    tp-wt-paper-item(
+                                                                        test-id="VIDEO_DOWNLOAD" role="mneuitem" has-anchor
+                                                                        style-target="host" tabindex="-1" aria-disabled="false" aria-selected="false"
+                                                                    )#text-item-0.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                                                                        wtcp-ve(role="none").wtcp-text-menu
+                                                                            a(
+                                                                                tabindex="-1" href=`/download_my_video?v=${foundVideoToEdit._id}`
+                                                                            ).remove-default-style.wtcp-text-menu
+                                                                                tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                                                                                    svg(
+                                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                        focusable="false" aria-hidden="true"
+                                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                    ).tp-wt-iron-icon
+                                                                                        g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                                            path(
+                                                                                                d="M17 18V19H6V18H17ZM16.5 11.4L15.8 10.7L12 14.4V4H11V14.4L7.2 10.6L6.5 11.3L11.5 16.3L16.5 11.4Z"
+                                                                                            ).tp-wt-iron-icon
+                                                                                tp-wt-paper-item-body.wtcp-text-menu
+                                                                                    div.wtcp-text-menu
+                                                                                        div.right-container.wtcp-text-menu
+                                                                                            div.text-content.wtcp-text-menu
+                                                                                                wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                                                                                    |오프라인 저장
+                                                                    tp-wt-paper-item(
+                                                                        test-id="VIDEO_DELETE" role="mneuitem"
+                                                                        style-target="host" tabindex="-1" aria-disabled="false" aria-selected="false"
+                                                                    )#text-item-1.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                                                                        wtcp-ve(role="none").wtcp-text-menu
+                                                                            tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                                                                                svg(
+                                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                    focusable="false" aria-hidden="true"
+                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                ).tp-wt-iron-icon
+                                                                                    g.tp-wt-iron-icon
+                                                                                        path(
+                                                                                            d="M11,17H9V8h2V17z M15,8h-2v9h2V8z M19,4v1h-1v16H6V5H5V4h4V3h6v1H19z M17,5H7v15h10V5z"
+                                                                                        ).tp-wt-iron-icon
+                                                                            tp-wt-paper-item-body.wtcp-text-menu
+                                                                                div.wtcp-text-menu
+                                                                                    div.right-container.wtcp-text-menu
+                                                                                        div.text-content.wtcp-text-menu
+                                                                                            wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                                                                                |삭제
+
+                                                                    tp-wt-paper-item(
+                                                                        test-id="VIDEO_PROMOTE" role="mneuitem" disabled
+                                                                        style-target="host" tabindex="-1" aria-disabled="true"
+                                                                        style="pointer-events: none;" aria-selected="false"
+                                                                    )#text-item-2.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                                                                        wtcp-ve(role="none").wtcp-text-menu
+                                                                            tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                                                                                svg(
+                                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                    focusable="false" aria-hidden="true"
+                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                ).tp-wt-iron-icon
+                                                                                    g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                                        path(d="M19.1945 4L16 6.40726L17.2036 8.00453L20.3982 5.59727L19.1945 4Z").tp-wt-iron-icon
+                                                                                        path(fill-rule="evenodd" clip-rule="evenodd" d="M8 9.00003L14 5.00003V8.53519C15.1956 9.22681 16 10.5195 16 12.0001C16 13.4806 15.1956 14.7733 14 15.4649V19L8 15H7V19H5V15H2V9.00003H8ZM8.30278 10L13 6.86855V17.1315L8.30278 14H3V10H8.30278Z").tp-wt-iron-icon
+                                                                                        path(d="M18 11H22V13H18V11Z").tp-wt-iron-icon
+                                                                                        path(d="M17.2041 16L20.3986 18.4073L19.195 20.0046L16.0005 17.5973L17.2041 16Z").tp-wt-iron-icon
+                                                                            tp-wt-paper-item-body.wtcp-text-menu
+                                                                                div.wtcp-text-menu
+                                                                                    div.right-container.wtcp-text-menu
+                                                                                        div.text-content.wtcp-text-menu
+                                                                                            wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                                                                                |광고
+                                                                    dom-repeat(as="item").wtcp-text-menu
+                                    wtcp-video-metadata-editor(modern)#video-metadata-editor.wtcp-video-details-section
+                                        form(
+                                            method="POST"
+                                            style="position: absolute; overflow: hidden; height: 0px; width: 0px; opacity: 0; left: 0px; top: 0px; display: none;"
+                                        )#video-metadata-edit-form
+                                            input(
+                                                name="editedTitle"
+                                                type="text"
+                                                aria-hidden="true"
+                                            )#edited-title-input
+                                            input(
+                                                name="editedDescription"
+                                                type="text"
+                                                aria-hidden="true"
+                                            )#edited-description-input
+                                        div.left-col.wtcp-video-metadata-editor
+                                            wtcp-video-metadata-editor-basics#basics.wtcp-video-metadata-editor
+                                                div.input-container.title.wtcp-video-metadata-editor-basics
+                                                    wtcp-video-title#title-wrapper.wtcp-video-metadata-editor-basics
+                                                        wtcp-social-suggestions-textbox(
+                                                            error-tip-position="bottom" in-video-editor is-new-line-forbidden
+                                                            required label="제목" modern
+                                                        )#title-textarea.wtcp-video-title
+                                                            wtcp-form-input-container(
+                                                                counter tabindex="-1" lable-icon-style="default" modern
+                                                            )#container.fill-height.wtcp-social-suggestions-textbox
+                                                                div#outer.wtcp-form-input-container
+                                                                    div#label.wtcp-form-input-container
+                                                                        span#label-text.wtcp-form-input-container
+                                                                            |제목(필수 항목)
+                                                                        div#label-help-tooltip.wtcp-form-input-container
+                                                                            tp-wt-iron-icon(
+                                                                                mini tabindex="0" role="tooltip"
+                                                                            )#help-icon.help-outline-icon.wtcp-form-input-container
+                                                                                svg(
+                                                                                    viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet"
+                                                                                    focusable="false" aria-hidden="true"
+                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                ).tp-wt-iron-icon
+                                                                                    g.wt-icon
+                                                                                        path(
+                                                                                            d="M8,2c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6S4.69,2,8,2 M8,1C4.14,1,1,4.14,1,8s3.14,7,7,7s7-3.14,7-7S11.86,1,8,1L8,1z M8,12.3c0.44,0,0.8-0.36,0.8-0.8S8.44,10.7,8,10.7s-0.8,0.36-0.8,0.8S7.56,12.3,8,12.3z M8,3.55c-1.45,0-2.62,1.18-2.62,2.62h1.31 c0-0.72,0.59-1.31,1.31-1.31s1.31,0.59,1.31,1.31c0,1.32-1.97,1.15-1.97,3.28h1.31c0-1.48,1.97-1.64,1.97-3.28 C10.62,4.72,9.45,3.55,8,3.55z"
+                                                                                        ).wt-icon
+                                                                    div#child-input.wtcp-form-input-container
+                                                                        div(slot="body")#container-content.wtcp-social-suggestions-textbox
+                                                                            wtcp-social-suggestion-input(dir="auto")#input.fill-height.wtcp-social-suggestions-textbox
+                                                                                div(
+                                                                                    slot="input" contenteditable="true" aria-required="true"
+                                                                                    aria-label="동영상을 설명하는 제목 추가(채널을 멘션하려면 @ 입력)"
+                                                                                    aria-invalid="false" style="display: inline-block;"
+                                                                                )#textbox.wtcp-social-suggestions-textbox
+                                                                                    |#{foundVideoToEdit.title}
+                                                                                div.container-bottom.wtcp-social-suggestions-textbox
+                                                                                    div.char-counter.wtcp-social-suggestions-textbox
+                                                                                        |#{foundVideoToEdit.title.length}/100
+                                                                div#description.wtcp-form-input-container
+                                                            wtcp-form-error-tip(
+                                                                anchor-selector="#container" position="bottom" hidden
+                                                            )#suggestion-form-error-tip.wtcp-social-suggestions-textbox
+                                                div#description-container.input-container.description.wtcp-video-metadata-editor-basics
+                                                    wtcp-video-description#description-wrapper.wtcp-video-metadata-editor-basics
+                                                        div#description-container.input-container.description.wtcp-video-description
+                                                            wtcp-social-suggestions-textbox(
+                                                                in-video-editor label="설명" modern
+                                                            )#description-textarea.wtcp-video-description
+                                                                wtcp-form-input-container(
+                                                                    counter tabindex="-1" label-icon-style="default" modern
+                                                                )#container.fill-height.wtcp-social-suggestions-textbox
+                                                                    div#outer.wtcp-form-input-container
+                                                                        div#label.wtcp-form-input-container
+                                                                            span#label-text.wtcp-form-input-container
+                                                                                |설명
+                                                                            div#label-help-tooltip.wtcp-form-input-container
+                                                                                tp-wt-iron-icon(mini tabindex="0" role="tooltip")#help-icon.help-outline-icon.wtcp-form-input-container
+                                                                                    svg(
+                                                                                        viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet"
+                                                                                        focusable="false" aria-hidden="true"
+                                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                    ).tp-wt-iron-icon
+                                                                                        g.tp-wt-iron-icon
+                                                                                            path(
+                                                                                                d="M8,2c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6S4.69,2,8,2 M8,1C4.14,1,1,4.14,1,8s3.14,7,7,7s7-3.14,7-7S11.86,1,8,1L8,1z M8,12.3c0.44,0,0.8-0.36,0.8-0.8S8.44,10.7,8,10.7s-0.8,0.36-0.8,0.8S7.56,12.3,8,12.3z M8,3.55c-1.45,0-2.62,1.18-2.62,2.62h1.31 c0-0.72,0.59-1.31,1.31-1.31s1.31,0.59,1.31,1.31c0,1.32-1.97,1.15-1.97,3.28h1.31c0-1.48,1.97-1.64,1.97-3.28 C10.62,4.72,9.45,3.55,8,3.55z"
+                                                                                            ).tp-wt-iron-icon
+                                                                        div#child-input.wtcp-form-input-container
+                                                                            div(slot="body")#container-content.wtcp-social-suggestions-textbox
+                                                                                wtcp-social-suggestions-textbox(dir="auto")#input.fill-height.wtcp-social-suggestions-textbox
+                                                                                    div(
+                                                                                        slot="input" contenteditable="true" aria-required="false"
+                                                                                        aria-label="시청자에게 동영상에 대해 설명해 주세요(채널을 멘션하려면 @ 입력)"
+                                                                                        aria-invalid="false" style="display: inline-block;"
+                                                                                    )#textbox.wtcp-social-suggestions-textbox
+                                                                                        |#{foundVideoToEdit.description}
+                                                                                div.container-bottom.wtcp-social-suggestions-textbox
+                                                                                    div.char-counter.wtcp-social-suggestions-textbox
+                                                                                        |#{foundVideoToEdit.description.length}/5000
+                                                                    div#description.wtcp-form-input-container
+                                                div.input-container.wtcp-video-metadata-editor-basics
+                                                    wtcp-video-thumbnail-editor.wtcp-video-metadata-editor-basics
+                                                        div#autogen-thumb-label.label.wtcp-video-thumbnail-editor
+                                                            |썸네일
+                                                        div.sublabel.wtcp-video-thumbnail-editor
+                                                            |  눈에 띄고 시청자의 관심을 끄는 썸네일을 설정하세요. 
+                                                            a(
+                                                                href="https://support.google.com/youtube/answer/72431?hl=ko" target="_blank"
+                                                            ).wtcp-video-thumbnail-editor
+                                                                |자세히 알아보기
+                                                        div.editors.wtcp-video-thumbnail-editor
+                                                            wtcp-video-custom-still-editor.wtcp-video-thumbnail-editor
+                                                                div#custom-still-editor-wrapper.wtcp-video-custom-still-editor
+                                                                    wtcp-thumbnail-uploader(image-size="IMAGE_2MB").wtcp-video-custom-still-editor
+                                                                        wtcp-thumbnail-editor.wtcp-thumbnail-uploader
+                                                                            div.select.wtcp-thumbnail-editor
+                                                                                wtcp-ve(role="none").wtcp-thumbnail-editor
+                                                                                    button(aria-label="파일 업로드")#select-button.remove-default-style.wtcp-thumbnail-editor
+                                                                                        tp-wt-iron-icon(
+                                                                                            compact tabindex="0" role="tooltip"
+                                                                                        )#select-tooltip-icon.help-tooltip.wtcp-thumbnail-editor
+                                                                                            svg(
+                                                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                focusable="false" aria-hidden="true"
+                                                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                            ).tp-wt-iron-icon
+                                                                                                g.tp-wt-iron-icon
+                                                                                                    path(
+                                                                                                        d="M15.36,9.96c0,1.09-0.67,1.67-1.31,2.24c-0.53,0.47-1.03,0.9-1.16,1.6L12.85,14h-1.75l0.03-0.28 c0.14-1.17,0.8-1.76,1.47-2.27c0.52-0.4,1.01-0.77,1.01-1.49c0-0.51-0.23-0.97-0.63-1.29c-0.4-0.31-0.92-0.42-1.42-0.29 c-0.59,0.15-1.05,0.67-1.19,1.34L10.32,10H8.57l0.06-0.42c0.2-1.4,1.15-2.53,2.42-2.87c1.05-0.29,2.14-0.08,2.98,0.57 C14.88,7.92,15.36,8.9,15.36,9.96z M12,18c0.55,0,1-0.45,1-1s-0.45-1-1-1s-1,0.45-1,1S11.45,18,12,18z M12,3c-4.96,0-9,4.04-9,9 s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12S6.48,2,12,2L12,2z"
+                                                                                                    ).tp-wt-iron-icon
+                                                                                        tp-wt-iron-icon#add-photo-icon.remove-defaults.help-tooltip.wtcp-thumbnail-editor
+                                                                                            svg(
+                                                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                focusable="false" aria-hidden="true"
+                                                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                            ).tp-wt-iron-icon
+                                                                                                g(
+                                                                                                    version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                                    x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24"
+                                                                                                    enable-background="new 0 0 24 24" xml:space="preserve"
+                                                                                                ).tp-wt-iron-icon
+                                                                                                    path(
+                                                                                                        d="M14,13.6l2.8,3.4h-5.4l0.3-0.4L14,13.6 M8.9,14.7l1.2,1.9l0.3,0.4H7.1L8.9,14.7 M14,12l-3,4l-2-3l-4,5h14L14,12L14,12z M21,7h-2v2h-2V7h-2V5h2V3h2v2h2V7z M13,4v6v1h1h6v9H4V4H13 M14,3H3v18h18V10h-7V3L14,3z"
+                                                                                                    ).tp-wt-iron-icon
+                                                                                        span.wtcp-thumbnail-editor
+                                                                                            |파일 업로드
+                                                                            div(hidden).preview.wtcp-thumbnail-editor
+                                                                        input(
+                                                                            hidden="true" type="file" accept="image/jpg,image/png"
+                                                                        )#file-loader.wtcp-thumbnail-uploader
+                                                                    wtcp-form-error-tip(always-visible position="top" hidden).wtcp-video-custom-still-editor
+                                                            wtcp-video-autogenerated-thumbnails-editor.wtcp-video-thumbnail-editor
+                                                                wtcp-thumbnail-editor(
+                                                                    select-icon="wt-icons:auto-awesome"
+                                                                ).wtcp-video-thumbnails-editor
+                                                                    div.select.wtcp-thumbnail-editor
+                                                                        wtcp-ve(role="none").wtcp-thumbnail-editor
+                                                                            button#select-button.remove-default-style.wtcp-thumbnail-editor
+                                                                                div(slot="select").default-still.wtcp-video-autogenerated-thumbnails-editor
+                                                                                    wtcp-img-with-fallback(
+                                                                                        retry modern size="medium" image-ready image-display-type="default"
+                                                                                    ).wtcp-video-autogenerated-thumbnails-container
+                                                                                        div.container.wtcp-img-with-fallback
+                                                                                            img(
+                                                                                                src=`/${foundVideoToEdit.thumbnailUrl[0]}`
+                                                                                            )#img-with-fallback.wtcp-img-with-fallback
+                                                                                tp-wt-iron-icon#add-photo-icon.remove-defaults.wtcp-thumbnail-editor
+                                                                                    svg(
+                                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                        focusable="false" aria-hidden="true"
+                                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                    ).tp-wt-iron-icon
+                                                                                        g.tp-wt-iron-icon
+                                                                                            path(
+                                                                                                d="M9.91,8.7l0.6,2.12l0.15,0.54l0.54,0.15l2.12,0.6l-2.12,0.6l-0.54,0.15l-0.15,0.54l-0.6,2.12l-0.6-2.12l-0.15-0.54 L8.62,12.7l-2.12-0.6l2.12-0.6l0.54-0.15l0.15-0.54L9.91,8.7 M9.91,5.01l-1.56,5.53L2.83,12.1l5.53,1.56l1.56,5.53l1.56-5.53 L17,12.1l-5.53-1.56L9.91,5.01L9.91,5.01z M16.72,16.81l-2.76,0.78l2.76,0.78l0.78,2.76l0.78-2.76l2.76-0.78l-2.76-0.78l-0.78-2.76 L16.72,16.81z M17.5,2.96l-0.78,2.76L13.96,6.5l2.76,0.78l0.78,2.76l0.78-2.76l2.76-0.78l-2.76-0.78L17.5,2.96z"
+                                                                                            ).tp-wt-iron-icon
+                                                                                span.wtcp-thumbnail-editor
+                                                                                    |자동 생성됨
+                                                                    div(hidden).preview.wtcp-thumbnail-editor
+                                                            wtcp-thumbnails-experiment-editor#thumbnail-experiment-editor.wtcp-video-thumbnail-editor
+                                                                wtcp-thumbnail-editor(select-icon="wt-sys-icons:poll")#thumbnail-editor.wtcp-thumbnails-experiment-editor
+                                                                    div.select.wtcp-thumbnail-editor
+                                                                        wtcp-ve(role="none").wtcp-thumbnail-editor
+                                                                            button#select-button.remove-default-style.wtcp-thumbnail-editor
+                                                                                tp-wt-iron-icon#add-photo-icon.remove-defaults.wtcp-thumbnail-editor
+                                                                                    svg(
+                                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                        focusable="false" aria-hidden="true"
+                                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                    ).tp-wt-iron-icon
+                                                                                        g.tp-wt-iron-icon
+                                                                                            path(
+                                                                                                d="M9,17H7v-7h2V17z M13,7h-2v10h2V7z M17,14h-2v3h2V14z M20,4H4v16h16V4 M21,3v18H3V3H21L21,3z"
+                                                                                            ).tp-wt-iron-icon
+                                                                                span.wtcp-thumbnail-editor
+                                                                                    |테스트 및 비교
+                                                                    div(hidden).preview.wtcp-thumbnail-editor
+                                                div.input-container.wtcp-video-metadata-editor-basics
+                                                    div.section-label-with-description.wtcp-video-metadata-editor-basics
+                                                        |재생목록
+                                                    div.section-description.wtcp-video-metadata-editor-basics
+                                                        |동영상을 하나 이상의 재생목록에 추가하여 시청자를 위한 콘텐츠를 정리하세요.
+                                                        a(
+                                                            href="https://support.google.com/youtube/answer/57792" target="_blank"
+                                                        ).wtcp-video-metadata-editor-basics
+                                                            |  자세히 알아보기
+                                                    div.compact-row.wtcp-video-metadata-editor-basics
+                                                        div.col.wtcp-video-metadata-editor-basics
+                                                            wtcp-video-metadata-playlists(aria-label="재생목록에 추가").wtcp-video-metadata-editor-basics
+                                                                wtcp-text-dropdown-trigger(
+                                                                    icon="icons:arrow-drop-down" placeholder="선택" track-click="true" modern
+                                                                ).dropdown.wtcp-video-metadata-playlists
+                                                                    wtcp-dropdown-trigger(aria-label="재생목록 선택" modern tabindex="0").use-placeholder.wtcp-text-dropdown-trigger
+                                                                        div(role="button").container.wtcp-dropdown-trigger
+                                                                            div.color-marker.wtcp-dropdown-trigger
+                                                                                div.color-marker-inner.wtcp-dropdown-trigger
+                                                                            div.left-container.wtcp-dropdown-trigger
+                                                                                span.dropdown-trigger-text.wtcp-text-dropdown-trigger
+                                                                                    |선택
+                                                                            div.right-container.wtcp-dropdown-trigger
+                                                                                tp-wt-iron-icon#right-icon.right-icon.wtcp-dropdown-trigger
+                                                                                    svg(
+                                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                        focusable="false" aria-hidden="true"
+                                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                    ).tp-wt-iron-icon
+                                                                                        g.tp-wt-iron-icon
+                                                                                            path(
+                                                                                                d="M12,15.7L5.6,9.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,15.7z"
+                                                                                            ).tp-wt-iron-icon
+                                                        div.col.wtcp-video-metadata-editor-basics
+                                                div#audience.input-container.wtcp-video-metadata-editor-basics
+                                                    div.section-label.wtcp-video-metadata-editor-basics
+                                                        |시청자층
+                                                    wtkc-made-for-kids-select.wtcp-video-metadata-editor-basics
+                                                        div.radio-button-title.wtkc-made-for-kids-select
+                                                            |이 동영상이 아동용이 아니라고 설정됨
+                                                            wtcp-badge(state="default").mfk-rating-badge.wtkc-made-for-kids-select
+                                                                div.container.wtcp-badge
+                                                                    div.label.wtcp-badge
+                                                                        |크리에이터가 설정함
+                                                        div.description.wtkc-made-for-kids-select
+                                                            |모든 크리에이터는 위치에 상관없이 아동 온라인 개인정보 보호법(COPPA) 및 기타 법률을 준수해야 할 법적인 의무가 있습니다. 아동용 동영상인지 여부는 크리에이터가 지정해야 합니다.
+                                                            a(
+                                                                target="_blank" href="https://support.google.com/youtube/answer/9528076?hl=ko"
+                                                            ).wtkc-made-for-kids-select
+                                                                |아동용 컨텐츠란 무엇인가요?
+                                                        div.mfk-infobox-container.wtkc-made-for-kids-select
+                                                            div.infobox.wtkc-made-for-kids-select
+                                                                tp-wt-iron-icon(compact).wtkc-made-for-kids-select
+                                                                    svg(
+                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                        focusable="false" aria-hidden="true"
+                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                    ).tp-wt-iron-icon
+                                                                        g.tp-wt-iron-icon
+                                                                            path(
+                                                                                d="M13,17h-2v-6h2V17z M13,7h-2v2h2V7z M12,3c-4.96,0-9,4.04-9,9s4.04,9,9,9c4.96,0,9-4.04,9-9S16.96,3,12,3 M12,2 c5.52,0,10,4.48,10,10s-4.48,10-10,10C6.48,22,2,17.52,2,12S6.48,2,12,2L12,2z"
+                                                                            ).tp-wt-iron-icon
+                                                                div.wtkc-made-for-kids-select
+                                                                    span(aria-hidden="true").wtkc-made-for-kids-select
+                                                                        |아동용 동영상에서는 개인 맞춤 광고 및 알림 등의 기능을 사용할 수 없습니다. 크리에이터가 아동용으로 설정한 동영상은 다른 아동용 동영상과 함께 추천될 가능성이 높습니다. 
+                                                                    a(
+                                                                        target="_blank" aria-label="동영상의 시청자층 설정 자세히 알아보기"
+                                                                        href="https://support.google.com/youtube/answer/9527654?hl=ko"
+                                                                    ).wtkc-made-for-kids-select
+                                                                        |  자세히 알아보기
+                                                        div.made-for-kids-rating-container.wtkc-made-for-kids-select
+                                                            tp-wt-paper-radio-group(role="radiogroup" tabindex="0").made-for-kids-group.wtkc-made-for-kids-select
+                                                                tp-wt-paper-radio-button(name="VIDEO_MADE_FOR_KIDS_MFK").wtkc-made-for-kids-select
+                                                                    div#radioContainer(style-target="container").tp-wt-paper-radio-button
+                                                                        div#offRadio.tp-wt-paper-radio-button
+                                                                        div#onRadio.tp-wt-paper-radio-button
+                                                                    div#radioLabel(style-target="label").tp-wt-paper-radio-button
+                                                                        wtcp-ve(track-click role="none").wtkc-made-for-kids-select
+                                                                            |예, 아동용입니다
+                                                                tp-wt-paper-radio-button(name="VIDEO_MADE_FOR_KIDS_NOT_MFK" aria-selected="true" checked active).wtkc-made-for-kids-select
+                                                                    div#radioContainer(style-target="container").tp-wt-paper-radio-button
+                                                                        div#offRadio.tp-wt-paper-radio-button
+                                                                        div#onRadio.tp-wt-paper-radio-button
+                                                                    div#radioLabel(style-target="label").tp-wt-paper-radio-button
+                                                                        wtcp-ve(track-click role="none").wtkc-made-for-kids-select
+                                                                            |아니요, 아동용이 아닙니다
+                                                    button(aria-controls="age-restriction").expand-button.remove-default-style.wtcp-video-metadata-editor-basics
+                                                        tp-wt-iron-icon.remove-defaults.wtcp-video-metadata-editor-basics
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g.tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M12,15.7L5.6,9.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,15.7z"
+                                                                    ).tp-wt-iron-icon
+                                                        h3.section-label.wtcp-video-metadata-editor-basics
+                                                            |연령 제한(고급)
+                                            div.toggle-section.wtcp-video-metadata-editor
+                                                wtcp-button(
+                                                    track-click tabindex="-1" type="tonal" button-style="default"
+                                                    icon-alignment="start" modern aria-disabled="false" role="button"
+                                                )#toggle-button.wtcp-video-metadata-editor
+                                                    wtcp-button-shape.wtcp-button
+                                                        button(
+                                                            aria-label="고급 설정 표시"
+                                                        ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m
+                                                            div.wtcp-button-shape-impl__button-text-content
+                                                                |자세히 보기
+                                                div.more-options-description.wtcp-video-metadata-editor
+                                                    |유료 프로모션, 태그, 자막 등
+                                        wtcp-video-metadata-editor-sidepanel.wtcp-video-metadata-editor
+                                            wtcp-video-info(
+                                                show-video-url is-hd-processed show-hd-badge is-sd-processed show-video-player
+                                            ).input-container.wtcp-video-metadata-editor-sidepanel
+                                                div.container.wtcp-video-info
+                                                    wtcp-html5-video-player.wtcp-video-info
+                                                        wtcp-video-player#video-player.wtcp-html5-video-player
+                                                            div.player-wrapper.wtcp-video-player
+                                                                div.loading-screen.wtcp-video-player
+                                                                wtcp-video-player-controls(show-fullscreen show-timeline modern)#video-player.video-player.wtcp-video-player.locked
+                                                                    div(
+                                                                        aria-label="동영상 플레이어" tabindex="-1"
+                                                                    )#video-container.wtcp-video-player-controls
+                                                                        div#video-source-slot.wtcp-video-player-controls
+                                                                            div(slot="video-source")#video-source-container.wtcp-video-player
+                                                                                div(slot="video-source")#video-source-container.wtcp-html5-video-player
+                                                                                    wtcp-html5-video-source#video-source.wtcp-html5-video-player
+                                                                                        video(
+                                                                                            src=`/${foundVideoToEdit.fileUrl}`
+                                                                                        )#video.wtcp-html5-video-source
+                                                                        div#overlay-container.wtcp-video-player-controls
+                                                                        div(dir="ltr")#toolbar-container.wtcp-video-player-controls
+                                                                            div#toolbar.wtcp-video-player-controls
+                                                                                div#pushdown.wtcp-video-player-controls
+                                                                                wtcp-video-player-timeline#timeline.wtcp-video-player-controls
+                                                                                    div#timeline-container.wtcp-video-player-timeline
+                                                                                        div#timeline-slices-container.wtcp-video-player-timeline
+                                                                                            div(style="left: 0px; width: 100%;").wtcp-video-player-timeline.slice.timeline-slice
+                                                                                        div#buffer-progress-container.wtcp-video-player-timeline
+                                                                                            div.wtcp-video-player-timeline.slice.buffer-progress-slice
+                                                                                        div#hover-progress-slices-container.wtcp-video-player-timeline
+                                                                                            div.wtcp-video-player-timeline.slice.hover-progress-slice
+                                                                                        div#playhead.wtcp-video-player-timeline
+                                                                                        div#highlight-container.wtcp-video-player-timeline
+                                                                                div#button-bar.wtcp-video-player-controls
+                                                                                    wtcp-icon-button(
+                                                                                        icon="av:play-arrow" tooltip-label="재생" tabindex="0" overlay
+                                                                                        modern aria-disabled="false" aria-label="재생" role="button"
+                                                                                    )#play-button.left-button.wtcp-video-player-controls
+                                                                                        tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                                            svg(
+                                                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                focusable="false" aria-hidden="true"
+                                                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                            ).tp-wt-iron-icon
+                                                                                                g.tp-wt-iron-icon
+                                                                                                    path(
+                                                                                                        d="M6,4l12,8L6,20V4z"
+                                                                                                    ).tp-wt-iron-icon
+                                                                                    div.volume-control.wtcp-video-player-controls
+                                                                                        wtcp-icon-button(
+                                                                                            tooltip-label="음소거" tabindex="0" overlay modern aria-disabled="false"
+                                                                                            aria-label="음소거" role="button"
+                                                                                        )#volume-icon-button.volume-button.high.wtcp-video-player-controls
+                                                                                            tp-wt-iron-icon(offset="6").remove-defaults.wtcp-icon-button
+                                                                                                svg(
+                                                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                    focusable="false" aria-hidden="true"
+                                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                                ).tp-wt-iron-icon
+                                                                                                    g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                                                        path(
+                                                                                                            d="M17.5 11.93C17.5 14.07 16 15.85 14 16.31V15.27C15.44 14.84 16.5 13.51 16.5 11.93C16.5 10.35 15.44 9.03 14 8.59V7.55C16 8.01 17.5 9.79 17.5 11.93ZM12 4V19.86L6.16 14.93H3V8.93H6.16L12 4ZM11 6.15L6.52 9.93H4V13.93H6.52L11 17.71V6.15ZM21 11.93C21 16.01 17.95 19.37 14 19.86V18.85C17.39 18.36 20 15.45 20 11.93C20 8.41 17.39 5.5 14 5.01V4C17.95 4.49 21 7.85 21 11.93Z"
+                                                                                                        ).tp-wt-iron-icon
+                                                                                        tp-wt-paper-slider(
+                                                                                            aria-label="volume" dir="ltr" max="100" min="0" role="slider"
+                                                                                            tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-disabled="false"
+                                                                                        )#volume-slider.wtcp-video-player-controls
+                                                                                            div#sliderContainer.tp-wt-paper-slider
+                                                                                                div.bar-container.tp-wt-paper-slider
+                                                                                                    tp-wt-paper-progress(
+                                                                                                        aria-hidden="true" aria-disabled="false" style="touch-action: none;"
+                                                                                                    )#sliderBar.tp-wt-paper-slider
+                                                                                                        div#progressContainer.tp-wt-paper-progress
+                                                                                                            div(hidden)#secondaryProgress.tp-wt-paper-progress
+                                                                                                            div#primaryProgress.tp-wt-paper-progress
+                                                                                                div#sliderKnobContainer.slider-knob-container.tp-wt-paper-slider
+                                                                                    wtcp-video-player-timestamp.wtcp-video-player-controls
+                                                                                        |0:00 / #{foundVideoToEdit.meta.videoLength}
+                                                                                    div.split.wtcp-video-player-controls
+                                                                                    wtcp-video-player-settings-menu(modern).wtcp-video-player-controls
+                                                                                        wtcp-icon-button(
+                                                                                            icon="settings" tooltip-label="설정" tabindex="0"
+                                                                                            overlay modern aria-disabled="false" aria-label="설정"
+                                                                                            role="button"
+                                                                                        )#settings-button.wtcp-video-player-settings-menu
+                                                                                            tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                                                svg(
+                                                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                    focusable="false" aria-hidden="true"
+                                                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                                ).tp-wt-iron-icon
+                                                                                                    g.tp-wt-iron-icon
+                                                                                                        path(
+                                                                                                            d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,8c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4 S14.21,8,12,8L12,8z M13.22,3l0.55,2.2l0.13,0.51l0.5,0.18c0.61,0.23,1.19,0.56,1.72,0.98l0.4,0.32l0.5-0.14l2.17-0.62l1.22,2.11 l-1.63,1.59l-0.37,0.36l0.08,0.51c0.05,0.32,0.08,0.64,0.08,0.98s-0.03,0.66-0.08,0.98l-0.08,0.51l0.37,0.36l1.63,1.59l-1.22,2.11 l-2.17-0.62l-0.5-0.14l-0.4,0.32c-0.53,0.43-1.11,0.76-1.72,0.98l-0.5,0.18l-0.13,0.51L13.22,21h-2.44l-0.55-2.2l-0.13-0.51 l-0.5-0.18C9,17.88,8.42,17.55,7.88,17.12l-0.4-0.32l-0.5,0.14l-2.17,0.62L3.6,15.44l1.63-1.59l0.37-0.36l-0.08-0.51 C5.47,12.66,5.44,12.33,5.44,12s0.03-0.66,0.08-0.98l0.08-0.51l-0.37-0.36L3.6,8.56l1.22-2.11l2.17,0.62l0.5,0.14l0.4-0.32 C8.42,6.45,9,6.12,9.61,5.9l0.5-0.18l0.13-0.51L10.78,3H13.22 M14,2h-4L9.26,4.96c-0.73,0.27-1.4,0.66-2,1.14L4.34,5.27l-2,3.46 l2.19,2.13C4.47,11.23,4.44,11.61,4.44,12s0.03,0.77,0.09,1.14l-2.19,2.13l2,3.46l2.92-0.83c0.6,0.48,1.27,0.87,2,1.14L10,22h4 l0.74-2.96c0.73-0.27,1.4-0.66,2-1.14l2.92,0.83l2-3.46l-2.19-2.13c0.06-0.37,0.09-0.75,0.09-1.14s-0.03-0.77-0.09-1.14l2.19-2.13 l-2-3.46L16.74,6.1c-0.6-0.48-1.27-0.87-2-1.14L14,2L14,2z"
+                                                                                                        ).tp-wt-iron-icon
+                                                                                    wtcp-icon-button(
+                                                                                        icon="icons:fullscreen" tooltip-label="전체 화면" tabindex="0"
+                                                                                        overlay modern aria-disabled="false" aria-label="전체 화면" role="button"
+                                                                                    )#fullscreen-icon-button.right-button.wtcp-video-player-controls
+                                                                                        tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                                            svg(
+                                                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                                                focusable="false" aria-hidden="true"
+                                                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                                            ).tp-wt-iron-icon
+                                                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                                                    path(
+                                                                                                        d="M5 9H4V4H9V5H5V9ZM20 4H15V5H19V9H20V4ZM20 15H19V19H15V20H20V15ZM9 19H5V15H4V20H9V19Z"
+                                                                                                    ).tp-wt-iron-icon
+                                                    div.row.wtcp-video-info
+                                                        div.left.wtcp-video-info
+                                                            div.label.wtcp-video-info
+                                                                |동영상 링크
+                                                            div.value.wtcp-video-info
+                                                                span.video-url-fadeable.wtcp-video-info
+                                                                    a(
+                                                                        target="_blank"
+                                                                        href=`/watch?v=${foundVideoToEdit._id}`
+                                                                    ).wtcp-video-info
+                                                                        |#{`/watch?v=${foundVideoToEdit._id}`}
+                                                        div.right.wtcp-video-info
+                                                            wtcp-icon-button(
+                                                                icon="icons:content-copy" tooltip-label="동영상 링크 복사"
+                                                                track-click tabindex="0" modern aria-disabled="false"
+                                                                aria-label="동영상 링크 복사" role="button"
+                                                            ).video-url-fadeable.wtcp-video-info
+                                                                tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                    svg(
+                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                        focusable="false" aria-hidden="true"
+                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                    ).tp-wt-iron-icon
+                                                                        g.tp-wt-iron-icon
+                                                                            path(
+                                                                                d="M19,6v15H8V6H19 M15,2H4v16h1V3h10V2L15,2z M20,5H7v17h13V5L20,5z"
+                                                                            ).tp-wt-iron-icon
+                                                    div.label.wtcp-video-info
+                                                        |파일 이름
+                                                    div#original-filename.value.wtcp-video-info
+                                                        |#{foundVideoToEdit.fileUrl.split("\\")[2]}
+                                                    div.label.wtcp-video-info
+                                                        |동영상 화질
+                                                    div(tabindex="0")#video-resolutions.value.wtcp-video-info
+                                                        tp-wt-iron-icon(role="img" aria-label="표준 화질 완료")#badge-sd.wtcp-video-info
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M5 17V15H9V13H7C5.89 13 5 12.11 5 11V9C5 7.89 5.89 7 7 7H11V9H7V11H9C10.11 11 11 11.89 11 13V15C11 16.11 10.11 17 9 17H5ZM19 10V14C19 15.66 17.66 17 16 17H13V7H16C17.66 7 19 8.34 19 10ZM17 10C17 9.45 16.55 9 16 9H15V15H16C16.55 15 17 14.55 17 14V10ZM21 3V21H3V3H21ZM20 4H4V20H20V4Z"
+                                                                    ).tp-wt-iron-icon
+                                                        tp-wt-iron-icon(role="img" aria-label="고화질 완료")#badge-hd.wtcp-video-info
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M3 3V21H21V3H3ZM20 20H4V4H20V20ZM16 7H13V17H16C17.66 17 19 15.66 19 14V10C19 8.34 17.66 7 16 7ZM15 15V9H16C16.55 9 17 9.45 17 10V14C17 14.55 16.55 15 16 15H15ZM11 7V17H9V13H7V17H5V7H7V11H9V7H11Z"
+                                                                    ).tp-wt-iron-icon
+                                            div.input-container.wtcp-video-metadata-editor-sidepanel
+                                                wtcp-video-metadata-visibility(modern).wtcp-video-metadata-editor-sidepanel
+                                                    div#container.icon-grey.lock-icon.wtcp-video-metadata-visibility
+                                                        div.left-container.wtcp-video-metadata-visibility
+                                                            div#label.wtcp-video-metadata-visibility
+                                                                |공개 상태
+                                                            div#content.wtcp-video-metadata-visibility
+                                                                div#icon-and-type.wtcp-video-metadata-visibility
+                                                                    tp-wt-iron-icon(compact)#privacy-icon.wtcp-video-metadata-visibility
+                                                                        svg(
+                                                                            viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                            focusable="false" aria-hidden="true"
+                                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                        ).tp-wt-iron-icon
+                                                                            g.tp-wt-iron-icon
+                                                                                path(
+                                                                                    d="M17,8V6.63C17,4.08,14.76,2,12,2S7,4.08,7,6.63V8H4v14h16V8H17z M8,6.63c0-2.02,1.79-3.66,4-3.66s4,1.64,4,3.66V8H8V6.63z M19,21H5V9h14V21z M12,12c-1.66,0-3,1.34-3,3s1.34,3,3,3s3-1.34,3-3S13.66,12,12,12z M12,17c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2 s2,0.9,2,2C14,16.1,13.1,17,12,17z"
+                                                                                ).tp-wt-iron-icon
+                                                                    div#visibility-text.wtcp-video-metadata-visibility
+                                                                        |비공개
+                                                        div.right-container.wtcp-video-metadata-visibility
+                                                            wtcp-icon-button(
+                                                                icon="icons:arrow-down" tooltip-label="동영상 공개 상태 수정"
+                                                                tabindex="0" modern aria-disabled="false"
+                                                                aria-label="동영상 공개 상태 수정" role="button"
+                                                            )#select-button.wtcp-video-metadata-visibility
+                                                                tp-wt-iron-icon.remove-defaults.wtcp-icon-button
+                                                                    svg(
+                                                                        viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                        focusable="false" aria-hidden="true"
+                                                                        style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                    ).tp-wt-iron-icon
+                                                                        g.tp-wt-iron-icon
+                                                                            path(
+                                                                                d="M12,15.7L5.6,9.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,15.7z"
+                                                                            ).tp-wt-iron-icon
+                                            wtcp-video-metadata-restrictions.input-container.wtcp-video-metadata-editor-sidepanel
+                                                div(tabindex="0")#restrictions.input-container.wtcp-video-metadata-restrictions
+                                                    div.label.wtcp-video-metadata-restrictions
+                                                        |제한사항
+                                                    div(as="restriction").restriction.wtcp-video-metadata-restrictions
+                                                        |저작권
+                                            wtcp-text-dropdown-trigger(
+                                                icon="icons:create" left-icon="av:subtitles" role="button"
+                                                track-click disabled modern
+                                            )#subtitles-editor-link.input-container.classic-studio-editors-links.wtcp-video-metadata-editor-sidepanel
+                                                wtcp-dropdown-trigger(modern disabled).wtcp-text-dropdown-trigger
+                                                    div(role="button").container.wtcp-dropdown-trigger
+                                                        div.color-marker.wtcp-dropdown-trigger
+                                                            div.color-marker-inner.wtcp-dropdown-trigger
+                                                        tp-wt-iron-icon.left-icon.wtcp-dropdown-trigger
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g.tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M5,11h2v2H5V11z M15,15H5v2h10V15z M19,15h-2v2h2V15z M19,11H9v2h10V11z M22,6H2v14h20V6z M3,7h18v12H3V7z"
+                                                                    ).tp-wt-iron-icon
+                                                        div.left-container.wtcp-dropdown-trigger
+                                                            span.dropdown-trigger-text.wtcp-text-dropdown-trigger
+                                                                |자막
+                                                        div.right-container.wtcp-dropdown-trigger
+                                                            tp-wt-iron-icon#right-icon.right-icon.wtcp-dropdown-trigger
+                                                                svg(
+                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                    focusable="false" aria-hidden="true"
+                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                ).tp-wt-iron-icon
+                                                                    g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                        path(
+                                                                            d="M14.06 7.6L16.4 9.94L6.34 20H4V17.66L14.06 7.6ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19ZM17.61 4.05L19.98 6.42L18.84 7.56L16.47 5.19L17.61 4.05ZM17.61 2.63L15.06 5.18L18.85 8.97001L21.4 6.42L17.61 2.63Z"
+                                                                        ).tp-wt-iron-icon
+                                            wtcp-text-dropdown-trigger(
+                                                icon="icons:create" icon-left="wt-studio-icons:picture_in_picture" role="button"
+                                                track-click modern
+                                            )#endscreen-editor-link.input-container.classic-studio-editors-links.wtcp-video-metadata-editor-sidepanel
+                                                wtcp-dropdown-trigger(modern tabindex="0").wtcp-text-dropdown-trigger
+                                                    div(role="button").container.wtcp-dropdown-trigger
+                                                        div.color-marker.wtcp-dropdown-trigger
+                                                            div.color-marker-inner.wtcp-dropdown-trigger
+                                                        tp-wt-iron-icon.left-icon.wtcp-dropdown-trigger
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(mirror-in-rtl).tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M5,8h9v5H5V8z M22,5H2v14h20V5z M3,6h18v12H3V6z"
+                                                                    ).tp-wt-iron-icon
+                                                        div.left-container.wtcp-dropdown-trigger
+                                                            span.dropdown-trigger-text.wtcp-text-dropdown-trigger
+                                                                |최종 화면
+                                                        div.right-container.wtcp-dropdown-trigger
+                                                            tp-wt-iron-icon#right-icon.right-icon.wtcp-dropdown-trigger
+                                                                svg(
+                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                    focusable="false" aria-hidden="true"
+                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                ).tp-wt-iron-icon
+                                                                    g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                        path(
+                                                                            d="M14.06 7.6L16.4 9.94L6.34 20H4V17.66L14.06 7.6ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19ZM17.61 4.05L19.98 6.42L18.84 7.56L16.47 5.19L17.61 4.05ZM17.61 2.63L15.06 5.18L18.85 8.97001L21.4 6.42L17.61 2.63Z"
+                                                                        ).tp-wt-iron-icon
+                                            wtcp-text-dropdown-trigger(
+                                                icon="icons:create" icon-left="wt-studio-icons:info-outline" role="button"
+                                                track-click modern
+                                            )#info-cards-editor-link.input-container.classic-studio-editors-links.wtcp-video-metadata-editor-sidepanel
+                                                wtcp-dropdown-trigger(modern tabindex="0").wtcp-text-dropdown-trigger
+                                                    div(role="button").container.wtcp-dropdown-trigger
+                                                        div.color-marker.wtcp-dropdown-trigger
+                                                            div.color-marker-inner.wtcp-dropdown-trigger
+                                                        tp-wt-iron-icon.left-icon.wtcp-dropdown-trigger
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).tp-wt-iron-icon
+                                                                g(mirror-in-rtl).tp-wt-iron-icon
+                                                                    path(
+                                                                        d="M13,17h-2v-6h2V17z M13,7h-2v2h2V7z M12,3c-4.96,0-9,4.04-9,9s4.04,9,9,9c4.96,0,9-4.04,9-9S16.96,3,12,3 M12,2 c5.52,0,10,4.48,10,10s-4.48,10-10,10C6.48,22,2,17.52,2,12S6.48,2,12,2L12,2z"
+                                                                    ).tp-wt-iron-icon
+                                                        div.left-container.wtcp-dropdown-trigger
+                                                            span.dropdown-trigger-text.wtcp-text-dropdown-trigger
+                                                                |카드
+                                                        div.right-container.wtcp-dropdown-trigger
+                                                            tp-wt-iron-icon#right-icon.right-icon.wtcp-dropdown-trigger
+                                                                svg(
+                                                                    viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                    focusable="false" aria-hidden="true"
+                                                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                                ).tp-wt-iron-icon
+                                                                    g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                                                        path(
+                                                                            d="M14.06 7.6L16.4 9.94L6.34 20H4V17.66L14.06 7.6ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19ZM17.61 4.05L19.98 6.42L18.84 7.56L16.47 5.19L17.61 4.05ZM17.61 2.63L15.06 5.18L18.85 8.97001L21.4 6.42L17.61 2.63Z"
+                                                                        ).tp-wt-iron-icon
+        wtcp-popup-container.wtcp-app
+            tp-wt-iron-dropdown(
+                horizontal-align="auto" vertical-align="top" aria-disabled="false"
+                prevent-autonav="true" style="outline: none; position: fixed; display: none;"
+                aria-hidden="true"
+            ).wtcp-popup-container.account-dropdown
+                div#contentWrapper.tp-wt-iron-dropdown
+                    wtd-multi-page-menu-renderer(
+                        slot="dropdown-content" menu-style="multi-page-menu-style-type-account" tabindex="-1" 
+                        style="outline: none; box-sizing: border-box; max-width: 300px; max-height: 349.6px;"
+                    ).wtcp-popup-container
+                        div#header.wtd-multi-page-menu-renderer
+                            wtd-active-account-header-renderer(enable-handles-account-menu-switcher).wtd-multi-page-menu-renderer
+                                wt-img-shadow(
+                                    height="40" width="24" style="background-color: transparent;" loaded
+                                )#avatar.wtd-active-account-header-renderer.no-transition
+                                    img(
+                                        draggable="false" height="40" width="40"
+                                        src=sessionUser.avatar
+                                    )#img.wt-img-shadow
+                                div#channel-container.wtd-active-account-header-renderer
+                                    wt-formatted-string(
+                                        ellipsis-truncate ellipsis-truncate-styling title=sessionUser.username
+                                    )#account-name.wtd-active-account-header-renderer
+                                        |#{sessionUser.username}
+                                    wt-formatted-string(
+                                        ellipsis-truncate respect-lang-dir ellipsis-truncate-styling
+                                        title=sessionUser.user_channel.channel_handle style="text-align: left;"
+                                    )#channel-handle.wtd-active-account-header-renderer
+                                        |#{sessionUser.user_channel.channel_handle}
+                        div#container.menu-container.wtd-multi-page-menu-renderer
+                            div#sections.wtd-multi-page-menu-renderer
+                                wt-multi-page-menu-section-renderer.wtd-multi-page-menu-renderer
+                                    div#items.wt-multi-page-menu-section-renderer
+                                        wtd-compact-link-renderer(hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1" href=`/${sessionUser.user_channel.channel_handle}`)#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M3,3v18h18V3H3z M4.99,20c0.39-2.62,2.38-5.1,7.01-5.1s6.62,2.48,7.01,5.1H4.99z M9,10c0-1.65,1.35-3,3-3s3,1.35,3,3 c0,1.65-1.35,3-3,3S9,11.65,9,10z M12.72,13.93C14.58,13.59,16,11.96,16,10c0-2.21-1.79-4-4-4c-2.21,0-4,1.79-4,4 c0,1.96,1.42,3.59,3.28,3.93c-4.42,0.25-6.84,2.8-7.28,6V4h16v15.93C19.56,16.73,17.14,14.18,12.72,13.93z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |내 채널
+                                        wtd-compact-link-renderer(hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1" href="/")#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M10,9.35,15,12l-5,2.65ZM12,6a54.36,54.36,0,0,0-7.56.38A1.53,1.53,0,0,0,3.38,7.44,24.63,24.63,0,0,0,3,12a24.63,24.63,0,0,0,.38,4.56,1.53,1.53,0,0,0,1.06,1.06A54.36,54.36,0,0,0,12,18a54.36,54.36,0,0,0,7.56-.38,1.53,1.53,0,0,0,1.06-1.06A24.63,24.63,0,0,0,21,12a24.63,24.63,0,0,0-.38-4.56,1.53,1.53,0,0,0-1.06-1.06A54.36,54.36,0,0,0,12,6h0m0-1s6.25,0,7.81.42a2.51,2.51,0,0,1,1.77,1.77A25.87,25.87,0,0,1,22,12a25.87,25.87,0,0,1-.42,4.81,2.51,2.51,0,0,1-1.77,1.77C18.25,19,12,19,12,19s-6.25,0-7.81-.42a2.51,2.51,0,0,1-1.77-1.77A25.87,25.87,0,0,1,2,12a25.87,25.87,0,0,1,.42-4.81A2.51,2.51,0,0,1,4.19,5.42C5.75,5,12,5,12,5Z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |WeTube
+                                        wtd-compact-link-renderer(has-secondary hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1")#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M3,3v18h18V3H3z M4.99,20c0.39-2.62,2.38-5.1,7.01-5.1s6.62,2.48,7.01,5.1H4.99z M9,10c0-1.65,1.35-3,3-3s3,1.35,3,3 c0,1.65-1.35,3-3,3S9,11.65,9,10z M12.72,13.93C14.58,13.59,16,11.96,16,10c0-2.21-1.79-4-4-4c-2.21,0-4,1.79-4,4 c0,1.96,1.42,3.59,3.28,3.93c-4.42,0.25-6.84,2.8-7.28,6V4h16v15.93C19.56,16.73,17.14,14.18,12.72,13.93z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |계정 전환
+                                                    wt-icon#right-icon.wtd-compact-link-renderer
+                                                        svg(
+                                                            viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                            focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                        ).wt-icon
+                                                            g(mirror-in-rtl).wt-icon
+                                                                path(
+                                                                    d="M9.4,18.4l-0.7-0.7l5.6-5.6L8.6,6.4l0.7-0.7l6.4,6.4L9.4,18.4z"
+                                                                ).wt-icon
+                                        wtd-compact-link-renderer(hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1" href="/logout")#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M3,3v18h18V3H3z M4.99,20c0.39-2.62,2.38-5.1,7.01-5.1s6.62,2.48,7.01,5.1H4.99z M9,10c0-1.65,1.35-3,3-3s3,1.35,3,3 c0,1.65-1.35,3-3,3S9,11.65,9,10z M12.72,13.93C14.58,13.59,16,11.96,16,10c0-2.21-1.79-4-4-4c-2.21,0-4,1.79-4,4 c0,1.96,1.42,3.59,3.28,3.93c-4.42,0.25-6.84,2.8-7.28,6V4h16v15.93C19.56,16.73,17.14,14.18,12.72,13.93z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |로그아웃
+                                wt-multi-page-menu-section-renderer.wtd-multi-page-menu-renderer
+                                    div#items.wt-multi-page-menu-section-renderer
+                                        wtd-compact-link-renderer(has-secondary hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1")#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M12 22C10.93 22 9.86998 21.83 8.83998 21.48L7.41998 21.01L8.83998 20.54C12.53 19.31 15 15.88 15 12C15 8.12 12.53 4.69 8.83998 3.47L7.41998 2.99L8.83998 2.52C9.86998 2.17 10.93 2 12 2C17.51 2 22 6.49 22 12C22 17.51 17.51 22 12 22ZM10.58 20.89C11.05 20.96 11.53 21 12 21C16.96 21 21 16.96 21 12C21 7.04 16.96 3 12 3C11.53 3 11.05 3.04 10.58 3.11C13.88 4.81 16 8.21 16 12C16 15.79 13.88 19.19 10.58 20.89Z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |디자인: 어두운 테마
+                                                    wt-icon#right-icon.wtd-compact-link-renderer
+                                                        svg(
+                                                            viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                            focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                        ).wt-icon
+                                                            g(mirror-in-rtl).wt-icon
+                                                                path(
+                                                                    d="M9.4,18.4l-0.7-0.7l5.6-5.6L8.6,6.4l0.7-0.7l6.4,6.4L9.4,18.4z"
+                                                                ).wt-icon
+                                        wtd-compact-link-renderer(hide-secondary-string compact-link-style).wt-multi-page-menu-section-renderer
+                                            a(role="link" tabindex="-1")#endpoint.wt-simple-endpoint.wtd-compact-link-renderer
+                                                tp-wt-paper-item(role="none" style-target="host" tabindex="0" aria-disabeld="false").wtd-compact-link-renderer
+                                                    div#content-icon.wtd-compact-link-renderer
+                                                        wt-icon.wtd-compact-link-renderer
+                                                            svg(
+                                                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                                                focusable="false" aria-hidden="true"
+                                                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                                            ).wt-icon
+                                                                g.wt-icon
+                                                                    path(
+                                                                        d="M13,14h-2v-2h2V14z M13,5h-2v6h2V5z M19,3H5v16.59l3.29-3.29L8.59,16H9h10V3 M20,2v15H9l-5,5V2H20L20,2z"
+                                                                    ).wt-icon
+                                                    div#primary-text-container.wtd-compact-link-renderer
+                                                        wt-formatted-string#label.wtd-compact-link-renderer
+                                                            |의견 보내기
+    wtcp-text-menu(modern)#creation-menu.wtcp-header
+        tp-wt-paper-dialog(
+            style-target="dialog" role="dialog" tabindex="-1" with-backdrop aria-hidden="true"
+            style="outline: none; position: fixed; box-sizing: border-box; max-width: initial; max-height: 184px; display: none;"
+        )#dialog.wtcp-text-menu
+            tp-wt-paper-listbox(selectable=".selectable-item" role="menu" tabindex="0")#paper-list.wtcp-text-menu
+                tp-wt-paper-item(role="menuitem" style-target="host" tabindex="-1" aria-disabled="false")#text-item-0.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                    a(href=`/studio/${sessionUser._id}/videos/upload`)
+                    wtcp-ve(role="none").wtcp-text-menu
+                        tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                            svg(
+                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                focusable="false" aria-hidden="true"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                    path(
+                                        d="M17,18v1H6V18ZM6.49,9l.71.71L11,5.91V16h1V5.91l3.8,3.81L16.51,9l-5-5Z"
+                                    ).tp-wt-iron-icon
+                        tp-wt-paper-item-body.wtcp-text-menu
+                            div.wtcp-text-menu
+                                div.right-container.wtcp-text-menu
+                                    div.text-content.wtcp-text-menu
+                                        wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                            |동영상 업로드
+                tp-wt-paper-item(role="menuitem" style-target="host" tabindex="-1" aria-disabled="false")#text-item-1.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                    wtcp-ve(role="none").wtcp-text-menu
+                        tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                            svg(
+                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                focusable="false" aria-hidden="true"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                    path(
+                                        d="M14 11.9999C14 13.0999 13.1 13.9999 12 13.9999C10.9 13.9999 10 13.0999 10 11.9999C10 10.8999 10.9 9.99992 12 9.99992C13.1 9.99992 14 10.8999 14 11.9999ZM8.48 8.44992L7.77 7.74992C6.68 8.82992 6 10.3399 6 11.9999C6 13.6599 6.68 15.1699 7.77 16.2499L8.48 15.5399C7.57 14.6399 7 13.3899 7 11.9999C7 10.6099 7.57 9.35992 8.48 8.44992ZM16.23 7.74992L15.52 8.45992C16.43 9.35992 17 10.6099 17 11.9999C17 13.3899 16.43 14.6399 15.52 15.5499L16.23 16.2599C17.32 15.1699 18 13.6599 18 11.9999C18 10.3399 17.32 8.82992 16.23 7.74992ZM5.65 5.62992L4.95 4.91992C3.13 6.72992 2 9.23992 2 11.9999C2 14.7599 3.13 17.2699 4.95 19.0799L5.66 18.3699C4.02 16.7399 3 14.4899 3 11.9999C3 9.50992 4.02 7.25992 5.65 5.62992ZM19.05 4.91992L18.34 5.62992C19.98 7.25992 21 9.50992 21 11.9999C21 14.4899 19.98 16.7399 18.35 18.3699L19.06 19.0799C20.87 17.2699 22 14.7599 22 11.9999C22 9.23992 20.87 6.72992 19.05 4.91992Z"
+                                    ).tp-wt-iron-icon
+                        tp-wt-paper-item-body.wtcp-text-menu
+                            div.wtcp-text-menu
+                                div.right-container.wtcp-text-menu
+                                    div.text-content.wtcp-text-menu
+                                        wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                            |라이브 스트리밍 시작
+                tp-wt-paper-item(role="menuitem" style-target="host" tabindex="-1" aria-disabled="false")#text-item-2.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                    wtcp-ve(role="none").wtcp-text-menu
+                        tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                            svg(
+                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                focusable="false" aria-hidden="true"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                    path(
+                                        d="M15.01 7.34L16.65 8.98L8.64 17H6.99V15.36L15.01 7.34ZM15.01 5.92L5.99 14.94V18H9.05L18.07 8.98L15.01 5.92ZM17.91 4.43L19.58 6.1L18.91 6.77L17.24 5.1L17.91 4.43ZM17.91 3.02L15.83 5.1L18.92 8.19L21 6.11L17.91 3.02ZM21 10H20V20H4V4H14V3H3V21H21V10Z"
+                                    ).tp-wt-iron-icon
+                        tp-wt-paper-item-body.wtcp-text-menu
+                            div.wtcp-text-menu
+                                div.right-container.wtcp-text-menu
+                                    div.text-content.wtcp-text-menu
+                                        wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                            |게시물 작성
+                tp-wt-paper-item(role="menuitem" style-target="host" tabindex="-1" aria-disabled="false")#text-item-3.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                    wtcp-ve(role="none").wtcp-text-menu
+                        tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                            svg(
+                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                focusable="false" aria-hidden="true"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g.tp-wt-iron-icon
+                                    path(
+                                        d="M22,13h-4v4h-2v-4h-4v-2h4V7h2v4h4V13z M14,7H2v1h12V7z M2,12h8v-1H2V12z M2,16h8v-1H2V16z"
+                                    ).tp-wt-iron-icon
+                        tp-wt-paper-item-body.wtcp-text-menu
+                            div.wtcp-text-menu
+                                div.right-container.wtcp-text-menu
+                                    div.text-content.wtcp-text-menu
+                                        wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                            |새 재생목록
+                tp-wt-paper-item(role="menuitem" style-target="host" tabindex="-1" aria-disabled="false")#text-item-4.tp-wt-paper-item.selectable-item.wtcp-text-menu
+                    wtcp-ve(role="none").wtcp-text-menu
+                        tp-wt-iron-icon.menu-icon.wtcp-text-menu
+                            svg(
+                                viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                focusable="false" aria-hidden="true"
+                                style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            ).tp-wt-iron-icon
+                                g(width="24" height="24" viewBox="0 0 24 24").tp-wt-iron-icon
+                                    path(
+                                        d="M6,12c0-3.31,2.69-6,6-6s6,2.69,6,6c0,1.66-0.67,3.16-1.77,4.25l-0.71-0.71C16.44,14.63,17,13.38,17,12c0-2.76-2.24-5-5-5 s-5,2.24-5,5c0,1.38,0.56,2.63,1.47,3.54l-0.71,0.71C6.67,15.16,6,13.66,6,12z M14,12c0-1.1-0.9-2-2-2s-2,0.9-2,2 c0,0.74,0.4,1.38,1,1.72V22h2v-8.28C13.6,13.38,14,12.74,14,12z M4.94,19.08l0.71-0.71C4.01,16.74,3,14.49,3,12c0-4.96,4.04-9,9-9 s9,4.04,9,9c0,2.49-1.01,4.74-2.65,6.37l0.71,0.71C20.88,17.27,22,14.77,22,12c0-5.52-4.48-10-10-10S2,6.48,2,12 C2,14.77,3.12,17.27,4.94,19.08z"
+                                    ).tp-wt-iron-icon
+                        tp-wt-paper-item-body.wtcp-text-menu
+                            div.wtcp-text-menu
+                                div.right-container.wtcp-text-menu
+                                    div.text-content.wtcp-text-menu
+                                        wt-formatted-string.item-text.main-text.wtcp-text-menu
+                                            |새로운 팟캐스트
+    wtcp-video-delete-dialog
+        wtcp-confirmation-dialog(modern)#delete-dialog.wtcp-video-delete-dialog
+            wtcp-dialog(aria-labelledby="dialog-title" modal modern)#dialog.wtcp-confirmation-dialog
+                tp-wt-paper-dialog(
+                    restore-focus-on-close aria-labelledby="dialog-title"
+                    style-target="host" role="dialog" tabindex="-1" with-backdrop
+                    style="outline: none; min-width: 576px; max-width: 576px; position: fixed; top: 0px; left: 480px; box-sizing: border-box; max-height: 240px; min-height: 240px; display: none;"
+                )#dialog.wtcp-dialog
+                    div#header.header.wtcp-dialog
+                        div.header-content.wtcp-dialog
+                            h1(slot="primary-header")#dialog-title.wtcp-confirmation-dialog
+                                |이 동영상을 완전히 삭제하시겠습니까?
+                    div#content.content.content.wtcp-dialog
+                        div(slot="content").wtcp-confirmation-dialog
+                            div#dialog-content-text.wtcp-confirmation-dialog
+                                div(slot="dialog-content").wtcp-video-delete-dialog
+                                    wtcp-video-thumbnail-with-info.wtcp-video-delete-dialog
+                                        div.video-thumbnail-container.wtcp-video-thumbnail-with-info
+                                            wtcp-thumbnail(hide-upload-progress theme="dark" modern).wtcp-video-thumbnail-with-info
+                                                div.container.wtcp-thumbnail
+                                                    wtcp-img-with-fallback(
+                                                        retry rounded modern size="medium" image-ready image-display-type="default"
+                                                    ).wtcp-thumbnail
+                                                        div.container.wtcp-img-with-fallback
+                                                            img(
+                                                                alt=`동영상 미리보기 이미지: ${foundVideoToEdit.title}`
+                                                                src=`/${foundVideoToEdit.thumbnailUrl[0]}`
+                                                            )#img-with-fallback.wtcp-img-with-fallback
+                                                    div.timestamp.wtcp-thumbnail
+                                                        div.label.wtcp-thumbnail
+                                                            |#{foundVideoToEdit.meta.videoLength}
+                                        div.video-thumbnail-info.wtcp-video-thumbnail-with-info
+                                            div.video-title.wtcp-video-thumbnail-with-info
+                                                |#{foundVideoToEdit.title}
+                                            div.video-info.wtcp-video-thumbnail-with-info
+                                                -const d = foundVideoToEdit.meta.createdAt.split("_")[0].split("-");
+                                                |#{`업로드 날짜: ${d[0]}. ${d[1]}. ${d[2]}.`}
+                                            div.video-info.wtcp-video-thumbnail-with-info
+                                                |#{`조회수 ${foundVideoToEdit.views}회`}
+                            div.wtcp-confirmation-dialog
+                                div.dialog-content-confirm-checkboxs.wtcp-confirmation-dialog
+                                    label.checkbox-wrapper.wtcp-confirmation-dialog.wtcp-checkbox-label
+                                        wtcp-checkbox-lit(
+                                            label-wrap aria-disabled="false" tabindex="0" aria-checked="false" role="checkbox"
+                                        )#confirm-checkbox.wtcp-confirmation-dialog
+                                            div#root-container.wtcp-checkbox-lit
+                                                div#checkbox-line-height-aligner-container.wtcp-checkbox-lit
+                                                    div#checkbox-line-height-aligner.wtcp-checkbox-lit
+                                                        div#checkbox-container.wtcp-checkbox-lit
+                                                            div#checkbox.wtcp-checkbox-lit
+                                                            paper-ripple(center="true")#ink.circle.wtcp-checkbox-lit
+                                                input(slot="hidden-input" type="checkbox").wtcp-confirmation-dialog
+                                        span(slot="label").confirm-checkox-label.wtcp-confirmation-dialog
+                                            |동영상이 영구적으로 삭제되며 모든 시청자층 및 동영상 분석에 액세스할 수 없다는 점을 이해합니다.
+                    div#footer.footer.wtcp-dialog
+                        div(slot="primary-footer").wtcp-confirmation-dialog
+                            div(slot="primary-footer").wtcp-video-delete-dialog
+                                wtcp-button(
+                                    tabindex="-1" type="tonal" button-style="default"
+                                    icon-alignment="start" modern aria-disabled="false"
+                                    role="button"
+                                )#download-button.wtcp-video-delete-dialog
+                                    wtcp-button-shape.wtcp-button
+                                        button(
+                                            aria-label="동영상 오프라인 저장"
+                                        ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m
+                                            div.wtcp-button-shape-impl__button-text-content
+                                                |동영상 오프라인 저장
+                        div(slot="secondary-footer")#dialog-buttons.wtcp-confirmation-dialog
+                            wtcp-button(
+                                track-click tabindex="-1" type="tonal" button-style="default"
+                                icon-alignment="start" modern aria-disabled="false" role="button"
+                            )#cancel-button.wtcp-confirmation-dialog
+                                wtcp-button-shape.wtcp-button
+                                    button(
+                                        aria-label="취소"
+                                    ).wtcp-button-shape-impl.wtcp-button-shape-impl--tonal.wtcp-button-shape-impl--mono.wtcp-button-shape-impl--size-m
+                                        div.wtcp-button-shape-impl__button-text-content
+                                            |취소
+                            wtcp-button(
+                                track-click disabled tabindex="-1" type="filled" button-style="default"
+                                icon-alignment="start" modern aria-disabled="true" role="button"
+                            )#confirm-button.wtcp-confirmation-dialog
+                                wtcp-button-shape.wtcp-button
+                                    button(
+                                        aria-label="취소"
+                                    ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--disabled.wtcp-button-shape-impl--size-m
+                                        div.wtcp-button-shape-impl__button-text-content
+                                            |완전삭제
+            //-
+                div(
+                    style="position: fixed; pointer-events: none; inset: 0px; background: rgb(0, 0, 0); opacity: 0.55; z-index: 2201;"
+                ).popup-host-behavior-backdrop

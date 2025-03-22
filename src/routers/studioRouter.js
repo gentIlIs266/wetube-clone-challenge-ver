@@ -5,7 +5,8 @@ import {
     postCreateVideo,
     getWetubeStudio,
     getVideoEdit,
-    postVideoEdit
+    postVideoEdit,
+    deleteVideo
 } from "../controllers/studioController";
 
 import { multerVideoErrorHandling, shouldLogInForThisUrl, videoFileUpload } from "../middleware"; 
@@ -30,5 +31,10 @@ studioRouter
     .all(shouldLogInForThisUrl)
     .get(getVideoEdit)
     .post(postVideoEdit);
+
+studioRouter
+    .route("/:videoId([0-9a-f]{24})/delete")
+    .all(shouldLogInForThisUrl)
+    .get(deleteVideo)
 
 export default studioRouter;

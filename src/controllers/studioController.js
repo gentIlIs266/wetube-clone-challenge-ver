@@ -184,7 +184,7 @@ export const getVideoEdit = async (req, res) => {
     if (String(foundVideoToEdit.video_owner) !== String(sessionUser._id)) {
         return res.status(403).render("error.pug", { errorMessage: "NOT_AUTHORIZED" });
     };
-
+    
     return res.render("studio-template/video-edit.pug", {
         tabTitle: "동영상 세부정보 - WeTube Studio",
         STUDIO_PARTIALS: true,
@@ -192,6 +192,51 @@ export const getVideoEdit = async (req, res) => {
         sessionUser
     });
 };
-export const postVideoEdit = (req, res) => {
+export const postVideoEdit = async (req, res) => {
+    const {
+        session: {
+            user: { _id: sessionUserId }
+        },
+        params: { videoId },
+        body: { editedTitle, editedDescription },
+    } = req;
+    const videoToBeEdited = await VIDEO.exists({ _id: videoId });
+    
+    if (!videoToBeEdited) {
+        return res.status(404).render("error.pug", { errorMessage: "VIDEO_NOT_FOUND" });
+    };
+    if (String(videoToBeEdited.video_owner) !== String(sessionUserId)) {
+        return res.status(403).render("error.pug", { errorMessage: "NOT_AUTHORIZED" });
+    };
 
+    await VIDEO.findByIdAndUpdate(
+        videoId,
+        {
+            title: editedTitle,
+            description: editedDescription
+        }
+    );
+    return res.redirect(`/studio/${videoId}/edit`)
+};
+
+export const deleteVideo = async (req, res) => {
+    const {
+        params: { id: videoId },
+        session: {
+            user: { _id: userId }
+        },
+    } = req;
+    const videoToBeDeleted = await VIDEO.findById(videoId);
+
+    if (!videoToBeDeleted) {
+        console.error("video not found");
+        return res.status(404).render("error", { errorMessage: "VIDEO_NOT_FOUND" });
+    };
+    if (String(videoToBeDeleted.video_owner) !== String(userId)) {
+        console.error("not authorized");
+        return res.status(404).render("error", { errorMessage: "NOT_AUTHORIZED" });
+    };
+
+    await VIDEO.findByIdAndDelete(videoId);
+    return res.redirect("/");
 };
