@@ -72,6 +72,7 @@ export const postCreateVideo = async (req, res) => {
                     ? `${hour}:${minute}:${second}`
                     : `${minute}:${second}`;
                 /*ffmpeg extract video duration end*/
+                
                 /*ffmpeg extract video thumbnail start*/
                 const thumbnailFileSavePath = `uploads/thumbnails/${file.filename}`;
                 await fs.promises.mkdir(thumbnailFileSavePath, { recursive: true });
@@ -86,7 +87,7 @@ export const postCreateVideo = async (req, res) => {
                         EXTRACT_THUMBNAIL_SIZE_ERROR: true,
                     });
                 };
-                const screenshotTimestamps = ["1%", "50%", "99%"];
+                const screenshotTimestamps = ["33%", "66%"];
                 function ffmpegScreenshotTimestampFormatting (videoDuration, percent) {
                     const timeInSeconds = (videoDuration * (parseFloat(percent) / 100)).toFixed(1);
                     return parseFloat(timeInSeconds);
@@ -194,26 +195,29 @@ export const getVideoEdit = async (req, res) => {
 };
 export const postVideoEdit = async (req, res) => {
     const {
-        session: {
-            user: { _id: sessionUserId }
-        },
         params: { videoId },
+        session: {
+            user: { _id: userId }
+        },
         body: { editedTitle, editedDescription },
     } = req;
     const videoToBeEdited = await VIDEO.exists({ _id: videoId });
     
     if (!videoToBeEdited) {
+        console.error("video not found");
         return res.status(404).render("error.pug", { errorMessage: "VIDEO_NOT_FOUND" });
     };
-    if (String(videoToBeEdited.video_owner) !== String(sessionUserId)) {
+    console.log(videoToBeEdited, userId)
+    if (String(videoToBeEdited.video_owner) !== String(userId)) {
+        console.error("not authorized");
         return res.status(403).render("error.pug", { errorMessage: "NOT_AUTHORIZED" });
     };
 
     await VIDEO.findByIdAndUpdate(
         videoId,
         {
-            title: editedTitle,
-            description: editedDescription
+            title: editedTitle ? editedTitle : videoToBeEdited.title,
+            description: editedDescription ? editedDescription : videoToBeEdited.description,
         }
     );
     return res.redirect(`/studio/${videoId}/edit`)
@@ -221,7 +225,7 @@ export const postVideoEdit = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
     const {
-        params: { id: videoId },
+        params: { videoId },
         session: {
             user: { _id: userId }
         },
