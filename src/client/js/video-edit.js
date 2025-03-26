@@ -141,17 +141,19 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             deactivateSaveButton();
         };
-
+        
         if (!titleEditInput.textContent) {
             [titleTextarea, titleContainer]
-                .forEach((element) => {
-                    element.setAttribute("invalid", "");
-                });
+            .forEach((element) => {
+                element.setAttribute("invalid", "");
+            });
+            deactivateSaveButton();
         } else {
             [titleTextarea, titleContainer]
-                .forEach((element) => {
-                    element.removeAttribute("invalid");
-                });
+            .forEach((element) => {
+                element.removeAttribute("invalid");
+            });
+            activateSaveButton();
         };
     };
 
@@ -255,6 +257,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function onDiscardButtonClick() {
         titleEditInput.textContent = initialTitleInputValue;
         descriptionEditInput.textContent = initialDescriptionInputValue;
+
+        deactivateSaveButton();
     };
     
     function onOverflowMenuDeleteButtonClick() {

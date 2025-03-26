@@ -201,14 +201,13 @@ export const postVideoEdit = async (req, res) => {
         },
         body: { editedTitle, editedDescription },
     } = req;
-    const videoToBeEdited = await VIDEO.exists({ _id: videoId });
+    const videoToBeEdited = await VIDEO.exists({ _id: videoId }).populate("video_owner");
     
     if (!videoToBeEdited) {
         console.error("video not found");
         return res.status(404).render("error.pug", { errorMessage: "VIDEO_NOT_FOUND" });
     };
-    console.log(videoToBeEdited, userId)
-    if (String(videoToBeEdited.video_owner) !== String(userId)) {
+    if (String(videoToBeEdited.video_owner._id) !== String(userId)) {
         console.error("not authorized");
         return res.status(403).render("error.pug", { errorMessage: "NOT_AUTHORIZED" });
     };
@@ -242,5 +241,11 @@ export const deleteVideo = async (req, res) => {
     };
 
     await VIDEO.findByIdAndDelete(videoId);
+    await USER.updateOne(
+        { _id: userId },
+        { $pull: { user_video: videoToBeDeleted._id } },
+    );
+    
+
     return res.redirect("/");
 };
