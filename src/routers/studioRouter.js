@@ -6,15 +6,21 @@ import {
     getWetubeStudio,
     getVideoEdit,
     postVideoEdit,
-    deleteVideo
+    deleteVideo,
 } from "../controllers/studioController";
 
-import { multerVideoErrorHandling, shouldLogInForThisUrl, videoFileUpload } from "../middleware"; 
+import {
+    multerVideoErrorHandling,
+    shouldLogInForThisUrl,
+    videoFileUpload
+} from "../middleware";
 
 const studioRouter = express.Router();
 
-
-studioRouter.get("/channel/:channelId[0-9A-Za-z]", getWetubeStudio);
+studioRouter
+    .route("/channel/:channelId[0-9A-Za-z]/videos")
+    .all(shouldLogInForThisUrl)
+    .get(getWetubeStudio);
 
 studioRouter
     .route("/:channelId[0-9A-Za-z]/videos/upload")
@@ -35,6 +41,6 @@ studioRouter
 studioRouter
     .route("/:videoId([0-9a-f]{24})/delete")
     .all(shouldLogInForThisUrl)
-    .get(deleteVideo)
+    .get(deleteVideo);
 
 export default studioRouter;

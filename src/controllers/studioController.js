@@ -6,26 +6,21 @@ import Ffmpeg from "fluent-ffmpeg";
 Ffmpeg.setFfmpegPath("C:\\Users\\10-231105\\Downloads\\ffmpeg-master-latest-win64-gpl\\ffmpeg-master-latest-win64-gpl\\bin\\ffmpeg.exe");
 Ffmpeg.setFfprobePath("C:\\Users\\10-231105\\Downloads\\ffmpeg-master-latest-win64-gpl\\ffmpeg-master-latest-win64-gpl\\bin\\ffprobe.exe");
 
-export const myVideo = (req, res) => {
-    const {
-        session: { _id },
-    } = req;
+export const getWetubeStudio = async (req, res) => {
+    const sessionUser = req.session.user;
+    const foundUser = await USER.findOne({ _id: sessionUser._id }).populate("user_video");
+
+    if (!foundUser) {
+        console.log("no user exist");
+        return res.status(404).render("error.pug", { errorMessage: "NO_USER_EXIST" });
+    };    
+
     return res.render("studio-template/my-studio.pug", {
-        _id
+        tabTitle: "채널 콘텐츠 - WeTube Studio",
+        foundUser
     });
 };
-export const getWetubeStudio = (req, res) => {
-    const {
-        session: { user }
-    } = req;
-    return res.render("studio-template/my-studio", {
-        tabTitle: "채널 대시보드 - Wetube Studio",
-        user,
-    });
-};
-export const postWetubeStudio = (req, res) => {
-    
-};
+
 export const getCreateVideo = (req, res) => {
     const {
         session: {

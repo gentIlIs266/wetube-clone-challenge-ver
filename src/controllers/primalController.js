@@ -326,7 +326,3 @@ export const accountPrivacy = (req, res) => {}
 export const accountSharing = (req, res) => {}
 export const accountBilling = (req, res) => {}
 export const accountAdvanced = (req, res) => {}
-
-export const catchServerContact = (req, res) => {
-    const catchedData = req.body;
-};

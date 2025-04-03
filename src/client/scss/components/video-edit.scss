@@ -670,12 +670,6 @@ nav.wtcp-navigation-drawer {
     border-right: 1px solid $--wtcp-line-divider;
     overflow: hidden;
 }
-/*
-wtcp-navigation-drawer[first-load] nav.wtcp-navigation-drawer {
-    opacity: 0;
-    animation: var(--loading-animation) var(--loading-duration);
-}
-*/
 .menu-item-link.wtcp-navigation-drawer {
     display: block;
     outline: none;
@@ -2393,13 +2387,6 @@ tp-wt-paper-progress {
 .indeterminate.tp-wt-paper-progress::after {
     background: var(--paper-progress-container-color, #e0e0e0);
 }
-/*
-div#progressContainer.tp-wt-paper-progress
-    div(hidden)#secondaryProgress.tp-wt-paper-progress
-    div#primaryProgress.tp-wt-paper-progress
-
-this part
-*/
 wtcp-video-player-timestamp {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,8 @@
-//-isThisPageWatchVideo: true
+//-
+    isThisPageWatchVideo: true
+
+    pug param
+    -user
 -const guideStyle=isThisPageWatchVideo?"transition-duration: 200ms; touch-action: pan-y;":"transition-duration: 0ms; touch-action: pan-y;",insideGuideStyle=isThisPageWatchVideo?"transition-duration: 200ms;":"transition-duration: 0ms;";
 div(
     align="start"
@@ -348,6 +352,51 @@ div(
                                                                             )
                                                             div.wt-formatted-string-html-tag.title.wtd-guide-entry-renderer
                                                                 |재생목록
+                                                            span.guide-entry-count.wtd-guide-entry-renderer
+                                                            div(
+                                                                size="16" disable-upgrade
+                                                            ).wt-icon-html-tag.guide-entry-badge.wtd-guide-entry-renderer
+                                                            div#newness-dot.wtd-guide-entry-renderer
+                                                    div.wt-interaction-html-tag.wtd-guide-entry-renderer
+                                                        div.stroke.wt-interaction
+                                                        div.fill.wt-interaction
+                                                div(
+                                                    line-end-style="none"
+                                                ).wtd-guide-entry-renderer-html-tag.wtd-guide-collapsible-section-entry-renderer
+                                                    a(
+                                                        tabindex="-1"
+                                                        role="link"
+                                                        title="내 동영상"
+                                                        href=`/studio/channel/${user.user_channel.channel_id}/videos`
+                                                    )#endpoint.wt-simple-endpoint.wtd-guide-entry-renderer
+                                                        div(
+                                                            role="link"
+                                                            style-target="host"
+                                                            tabindex="0"
+                                                            aria-disabled="false"
+                                                        ).tp-wt-paper-item-html-tag.wtd-guide-entry-renderer
+                                                            div.wt-icon-html-tag.guide-icon.wtd-guide-entry-renderer
+                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                    div(
+                                                                        style="width: 100%; height: 100%; display: block; fill: currentcolor;"
+                                                                    )
+                                                                        svg(
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="currentColor"
+                                                                            height="24"
+                                                                            viewBox="0 0 24 24"
+                                                                            width="24"
+                                                                            focusable="false"
+                                                                            aria-hidden="true"
+                                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                        )
+                                                                            path(
+                                                                                clip-rule="evenodd"
+                                                                                d="M3.5 5.5h17v13h-17v-13ZM2 5.5C2 4.672 2.672 4 3.5 4h17c.828 0 1.5.672 1.5 1.5v13c0 .828-.672 1.5-1.5 1.5h-17c-.828 0-1.5-.672-1.5-1.5v-13Zm7.748 2.927c-.333-.19-.748.05-.748.435v6.276c0 .384.415.625.748.434L16 12 9.748 8.427Z"
+                                                                                fill-rule="evenodd"
+                                                                            )
+                                                            div.wt-formatted-string-html-tag.title.wtd-guide-entry-renderer
+                                                                |내 동영상
                                                             span.guide-entry-count.wtd-guide-entry-renderer
                                                             div(
                                                                 size="16" disable-upgrade

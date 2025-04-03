@@ -3,6 +3,7 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var root = path.resolve(__dirname, "src", "client", "js") + "/";
 module.exports = {
     entry: {
+        myStudio: root + "my-studio.js",
         videoEdit: root + "video-edit.js",
         watchVideo: root + "watch-video.js",
         createVideo: root + "create-video.js",

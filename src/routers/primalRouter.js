@@ -50,6 +50,4 @@ primalRouter.get("/account_sharing", accountSharing);
 primalRouter.get("/account_billing", accountBilling);
 primalRouter.get("/account_advanced", accountAdvanced);
 
-primalRouter.post("/servercontact", catchServerContact);
-
 export default primalRouter;
