@@ -286,15 +286,6 @@ export const finishGhLogin = async (req, res) => {
     }
 };
 
-export const game = (req, res) => {};
-export const podcast = (req, res) => {};
-export const youtubePremium = (req, res) => {};
-export const youtubeMusic = (req, res) => {};
-export const youtubeKids = (req, res) => {};
-
-export const watchLater = (req, res) => {};
-export const likeVideo = (req, res) => {};
-
 export const watchVideo = async (req, res) => {
     const {
         query: {
@@ -313,16 +304,22 @@ export const watchVideo = async (req, res) => {
         isThisPageWatchVideo: true,
     });
 }
-export const watchShorts = (req, res) => {}
 
-export const account = (req, res) => {
-    return res.render("account-template/account.pug", {
-        tabTitle: "WeTube",
-    })
-}
-export const accountNotification = (req, res) => {}
-export const accountPlayback = (req, res) => {}
-export const accountPrivacy = (req, res) => {}
-export const accountSharing = (req, res) => {}
-export const accountBilling = (req, res) => {}
-export const accountAdvanced = (req, res) => {}
+export const watchChannel = async (req, res) => {
+    if (!new RegExp("@([가-힣a-zA-Z0-9]+)-([a-zA-Z0-9]+)").test(req.params.channelHandle)) {
+        console.error("channel dosen't exist");
+        return res.redirect("/");
+    };
+    const user = await USER.findOne({"user_channel.channel_handle": req.params.channelHandle});
+
+    if (!user) {
+        console.log("channel owner don't exist");
+        //flash message
+        return res.status(404).redirect("/");
+    };
+
+    return res.render("partials/channel.pug", {
+        tabTitle: `${user.user_channel.channel_name}`,
+        user
+    });
+};

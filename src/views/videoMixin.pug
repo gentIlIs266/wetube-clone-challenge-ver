@@ -71,7 +71,7 @@ mixin videoItSelf(videoInfo)
                             a(
                                 tabindex="-1" title=videoInfo.video_owner.username hidden
                                 href=`/${videoInfo.video_owner.user_channel.channel_handle}`
-                            )#avatar-link.wt-simple-endpoint.wtd-rich-grid-media 
+                            )#avatar-link.wt-simple-endpoint.wtd-rich-grid-media
                                 div(
                                     width="48" style="background-color: transparent;" loaded
                                 )#avatar.wt-img-shadow-html-tag.wtd-rich-grid-media.no-transition
@@ -113,7 +113,7 @@ mixin videoItSelf(videoInfo)
                                                         ellipsis-truncate ellipsis-truncate-styling dir="auto" has-link-only_
                                                         style="text-align: left;"
                                                     )#text.wt-formatted-string-html-tag.wtd-channel-name.complex-string
-                                                        a(spellcheck="false" href=`/${videoInfo.video_owner.channel_handle}`).wt-simple-endpoint.wt-formatted-string
+                                                        a(spellcheck="false" href=`/${videoInfo.video_owner.user_channel.channel_handle}`).wt-simple-endpoint.wt-formatted-string
                                                             |#{videoInfo.video_owner.username}
                                                 div(
                                                     fit-to-visible-bounds role="tooltip" tabindex="-1"
@@ -124,8 +124,6 @@ mixin videoItSelf(videoInfo)
                                             div(
                                                 system-icons enable-refresh-web enable-signature-moments-web
                                             ).wtd-badge-supported-renderer-html-tag.wtd-channel-name
-                                                //-
-                                                    if videoInfo.video_owner.user_channel.meta
                                                 div(
                                                     aria-label="인증됨" role="img"
                                                 ).badge.badge-style-type-verified.wtd-badge-supported-renderer

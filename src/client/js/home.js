@@ -82,4 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cloudChip.setAttribute("aria-selected", "true");
         });
     });
+    /*channel anchor active*/
+    const avatarAnchor = document.querySelector("#avatar-container a");
+    document.querySelector("#decorated-avatar").addEventListener("click", () => avatarAnchor.click());
 });

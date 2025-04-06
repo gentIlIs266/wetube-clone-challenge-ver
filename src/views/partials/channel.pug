@@ -1,0 +1,59 @@
+//-
+    pug render param
+    -user
+extends html-head.pug
+include ../videoMixin.pug
+block page-css
+    link(rel="stylesheet", href="assets/css/bundled.channel.css" type="text/css")
+block page-js
+    script(src="assets/js/bundled.channel.js" type="text/javascript" defer)
+block wtd-app
+    wtd-app(darker-dark-theme guide-persistent-and-visible)
+        div#guide-service.wt-guide-manager-html-tag.wtd-app
+        div.wt-mdx-manager-html-tag.wtd-app
+        div.wt-playlist-manager-html-tag.wtd-app
+        div.wt-hotkey-manager-html-tag.wtd-app
+        div#content.wtd-app
+            div#frosted-glass.wtd-app
+            include masthead.pug
+            include app-drawer.pug
+            wtd-page-manager#page-manager.wtd-app
+                wtd-browse(
+                    rounded-container darker-dark-theme page-subtype="channels"
+                    role="main" guide-persistent-and-visible
+                ).wtd-page-manager
+                    div#alert-banner.wtd-browse
+                    div#personal-greeting.wtd-browse
+                    div#masthead-ad.wtd-browse
+                    div#header.wtd-browse
+                        wtd-tabbed-page-header(
+                            rich-grid-and-mini-mode has-banner has-inset-banner
+                            guide-persistent-and-visible
+                            style="--ytd-rich-grid-max-width: 1233px; --ytd-rich-grid-slim-items-per-row: 4;"
+                        ).wtd-browse.grid.grid-5-columns
+                            tp-wt-app-header-layout.wtd-tabbed-page-header
+                                div#wrapper.tp-wt-app-header-layout
+                                    tp-wt-app-header(
+                                        slot="header" condenses fixed
+                                        style="left: 240px; right: 0.199951px; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"
+                                    )#header.wtd-tabbed-page-header
+                                        div#background.tp-wt-app-header
+                                            div(style="transform: translate3d(0px, 0px, 0px);")#backgroundRearLayer.tp-wt-app-header
+                                            div(style="transform: translate3d(0px, 0px, 0px);")#backgroundFrontLayer.tp-wt-app-header
+                                        div#contentContainer.tp-wt-app-header
+                                            div#page-header-container.wtd-tabbed-page-header
+                                                div#page-header.wtd-tabbed-page-header
+                                                    wt-page-header-renderer.page-header-renderer-wiz.wtd-tabbed-page-header
+                                                        wt-page-header-view-model.page-header-view-model-wiz.page-header-view-model-wiz--no-padding
+                                                            div.page-header-view-model-wiz__page-header-content
+                                                                div.page-header-view-model-wiz__page-header-headline
+                                                                    wt-decorated-avatar-view-model.wt-decorated-avatar-view-model-wiz.page-header-view-model-wiz__page-header-headline-image
+                                                                        wt-avatar-shape
+                                                                            div.wt-spec-avatar-shape.wt-spec-avatar-shape__button.wt-spec-avatar-shape__button--button-giant
+                                                                                div
+                                                                                    div.wt-spec-avatar-shape--avatar-size-giant
+                                                                                        img(src=user.avatar).wt-core-image.wt-spec-avatar-shape__image.wt-core-image--fill-parent-height.wt-core-image--fill-parent-width.wt-core-image--content-mode-scale-to-fill.wt-core-image--loaded
+                                                                    div.page-header-view-model-wiz__page-header-headline-info
+                                                                        
+                                            tp-wt-app-toolbar(sticky style="transform: translate3d(0px, 0px, 0px);").wtd-tabbed-page-header
+                    div#alerts.wtd-browse

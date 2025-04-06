@@ -907,6 +907,9 @@ h3.wtd-rich-grid-media {
 .wt-formatted-string-html-tag[dir=auto][ellipsis-truncate-styling].complex-string>*.wt-formatted-string:not(style) {
     display: inline;
 }
+.wt-formatted-string-html-tag[has-link-only_]:not([force-default-style]) a.wt-simple-endpoint.wt-formatted-string:hover {
+    color: var(--wt-endpoint-hover-color, $--wt-spec-text-primary);
+}
 .wt-formatted-string-html-tag[ellipsis-truncate-styling] a.wt-formatted-string:last-child,
 .wt-formatted-string-html-tag[ellipsis-truncate-styling] span.wt-formatted-string:last-child {
     overflow: hidden;

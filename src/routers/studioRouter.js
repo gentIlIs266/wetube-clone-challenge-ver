@@ -33,13 +33,13 @@ studioRouter
     );
 
 studioRouter
-    .route("/:videoId([0-9a-f]{24})/edit")
+    .route("/:videoId([0-9a-z]{24})/edit")
     .all(shouldLogInForThisUrl)
     .get(getVideoEdit)
     .post(postVideoEdit);
 
 studioRouter
-    .route("/:videoId([0-9a-f]{24})/delete")
+    .route("/:videoId([0-9a-z]{24})/delete")
     .all(shouldLogInForThisUrl)
     .get(deleteVideo);
 
