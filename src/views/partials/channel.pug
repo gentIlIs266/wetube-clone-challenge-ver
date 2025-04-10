@@ -80,12 +80,18 @@ block wtd-app
                                                                         wt-flexible-actions-view-model.page-header-view-model-wiz__page-header-flexible-actions.page-header-view-model-wiz__page-header-flexible-actions--page-header-flexible-actions-margin-top.page-header-view-model-wiz__page-header-flexible-actions--page-header-flexible-actions-margin-bottom.wt-flexible-actions-view-model-wiz.wt-flexible-actions-view-model-wiz--inline
                                                                             div.wt-flexible-actions-view-model-wiz__action
                                                                                 button-view-model.wt-spec-button-view-model
-                                                                                    a(aria-disabled="false" aria-label="채널 맞춤설정").wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                    a(
+                                                                                        aria-disabled="false" aria-label="채널 맞춤설정"
+                                                                                        a
+                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
                                                                                         div.wt-spec-button-shape-next__button-text-content
                                                                                             |채널 맞춤설정
                                                                             div.wt-flexible-actions-view-model-wiz__action
                                                                                 button-view-model.wt-spec-button-view-model
-                                                                                    a(aria-disabled="false" aria-label="동영상 관리").wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                    a(
+                                                                                        aria-disabled="false" aria-label="동영상 관리"
+                                                                                        href=`/studio/channel/${user.user_channel.channel_id}/videos`
+                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
                                                                                         div.wt-spec-button-shape-next__button-text-content
                                                                                             |동영상 관리
                                             tp-wt-app-toolbar(sticky style="transform: translate3d(0px, 0px, 0px);").wtd-tabbed-page-header

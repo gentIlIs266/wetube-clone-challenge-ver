@@ -328,3 +328,17 @@ export const watchChannel = async (req, res) => {
         user
     });
 };
+
+export const getAccountEdit = (req, res) => {
+    const {
+        user: sessionUser
+    } = req.session;
+    
+    return res.render("user-template/account-edit.pug", {
+        tabTitle: `editing ${sessionUser.username}`,
+        sessionUser
+    });
+};
+export const postAccountEdit = (req, res) => {
+
+};

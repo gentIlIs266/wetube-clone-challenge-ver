@@ -3,9 +3,11 @@ import express from "express";
 import {
     home, getUserJoin, postUserJoin, getUserLogin,
     postUserLogin, userLogout, startGhLogin, finishGhLogin, watchVideo,
-    watchChannel
+    watchChannel,
+    getAccountEdit,
+    postAccountEdit
 } from "../controllers/primalController";
-import { shouldNotLogInForThisUrl } from "../middleware";
+import { shouldLogInForThisUrl, shouldNotLogInForThisUrl } from "../middleware";
 
 const primalRouter = express.Router();
 
@@ -28,6 +30,13 @@ primalRouter.get("/gh/finish", finishGhLogin);
 
 primalRouter.get("/watch", watchVideo);
 
-primalRouter.get("/:channelHandle", watchChannel);
+primalRouter
+    .route("/account_edit")
+    .all(shouldLogInForThisUrl)
+    .get(getAccountEdit)
+    .post(postAccountEdit);
+
+primalRouter.get("/:channelHandle(@[a-zA-Z0-9\uAC00-\uD7A3]+-[a-zA-Z0-9]+)", watchChannel);
+
 
 export default primalRouter;

@@ -50,7 +50,7 @@ app.use("/", primalRouter);
 app.use("/feed", feedRouter);
 app.use("/channel", handleRouter);
 app.use("/studio", studioRouter);
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 app.use("/videos", videoRouter);
 
 

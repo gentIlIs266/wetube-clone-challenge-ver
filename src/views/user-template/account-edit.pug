@@ -1,0 +1,15 @@
+//-
+    pug param
+    -sessionUser
+extends ../partials/html-head.pug
+block page-css
+    link(rel="stylesheet" href="/assets/css/bundled.accountEdit.css" type="text/css")
+block page-js
+    script(src="/assets/js/bundled.accountEdit.js" type="text/javascript" defer)
+block wtd-app
+    wtae-app
+        form(method="POST")#edit-form
+            input(name="username")
+            input(name="avatar")
+            input(name="loaction")
+            input(name="password")
