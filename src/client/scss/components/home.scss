@@ -461,8 +461,8 @@ html[dark] {
     justify-content: center;
 }
 .wtd-rich-grid-media-html-tag {
-    --wt-button-compact-backgrond-color: $--wt-spec-10-percent-layer;
-    --wt-button-compact-text-color: $--wt-spec-text-secondary;
+    --wt-button-compact-backgrond-color: rgba(255,255,255,0.2);
+    --wt-button-compact-text-color: #aaa;
     width: 100%;
     margin: 0;
     display: block;

@@ -8,19 +8,19 @@ block page-css
 block page-js
     script(src="assets/js/bundled.channel.js" type="text/javascript" defer)
 block wtd-app
-    wtd-app(darker-dark-theme guide-persistent-and-visible)
+    div(darker-dark-theme guide-persistent-and-visible).wtd-app-html-tag
         div#guide-service.wt-guide-manager-html-tag.wtd-app
         div.wt-mdx-manager-html-tag.wtd-app
         div.wt-playlist-manager-html-tag.wtd-app
         div.wt-hotkey-manager-html-tag.wtd-app
         div#content.wtd-app
-            div#frosted-glass.wtd-app
+            div#frosted-glass.none.wtd-app
             include masthead.pug
             include app-drawer.pug
-            wtd-page-manager#page-manager.wtd-app
+            div#page-manager.wtd-page-manager-html-tag.wtd-app
                 wtd-browse(
                     rounded-container darker-dark-theme page-subtype="channels"
-                    role="main" guide-persistent-and-visible
+                    responsive-sizing="COMPACT" role="main" guide-persistent-and-visible
                 ).wtd-page-manager
                     div#alert-banner.wtd-browse
                     div#personal-greeting.wtd-browse
@@ -29,13 +29,13 @@ block wtd-app
                         wtd-tabbed-page-header(
                             rich-grid-and-mini-mode has-banner has-inset-banner
                             guide-persistent-and-visible
-                            style="--ytd-rich-grid-max-width: 1233px; --ytd-rich-grid-slim-items-per-row: 4;"
+                            style="--wtd-rich-grid-max-width: 1328px; --wtd-rich-grid-slim-items-per-row: 5;"
                         ).wtd-browse.grid.grid-5-columns
                             tp-wt-app-header-layout.wtd-tabbed-page-header
                                 div#wrapper.tp-wt-app-header-layout
                                     tp-wt-app-header(
                                         slot="header" condenses fixed
-                                        style="left: 240px; right: 0.199951px; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"
+                                        style="left: 240px; right: 0.199951px; transform: translate3d(0px, 0px, 0px);"
                                     )#header.wtd-tabbed-page-header
                                         div#background.tp-wt-app-header
                                             div(style="transform: translate3d(0px, 0px, 0px);")#backgroundRearLayer.tp-wt-app-header
@@ -54,6 +54,73 @@ block wtd-app
                                                                                     div.wt-spec-avatar-shape--avatar-size-giant
                                                                                         img(src=user.avatar).wt-core-image.wt-spec-avatar-shape__image.wt-core-image--fill-parent-height.wt-core-image--fill-parent-width.wt-core-image--content-mode-scale-to-fill.wt-core-image--loaded
                                                                     div.page-header-view-model-wiz__page-header-headline-info
-                                                                        
+                                                                        wt-dynamic-text-view-model.page-header-view-model-wiz__page-header-title.page-header-view-model-wiz__page-header-title--page-header-title-large.dynamic-text-view-model-wiz
+                                                                            h1.dynamic-text-view-model-wiz__h1
+                                                                                span(dir="auto" role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-pre-wrap
+                                                                                    |#{user.user_channel.channel_name}
+                                                                        wt-content-metadata-view-model.page-header-view-model-wiz__page-header-content-metadata.wt-content-metadata-view-model-wiz.wt-content-metadata-view-model-wiz--inline.wt-content-metadata-view-model-wiz--medium-text
+                                                                            div.wt-content-metadata-view-model-wiz__metadata-row.wt-content-metadata-view-model-wiz__metadata-row--metadata-row-inline
+                                                                                span(dir="auto" style="font-weight: 500; color: rgb(255, 255, 255);").wt-core-attributed-string.wt-content-metadata-view-model-wiz__metadata-text.wt-core-attributed-string--white-space-pre-wrap.wt-core-attributed-string--link-inherit-color
+                                                                                    |#{user.user_channel.channel_handle}
+                                                                            span(aria-hidden="true").wt-content-metadata-view-model-wiz__delimiter.wt-content-metadata-view-model-wiz__delimiter--standalone
+                                                                                |•
+                                                                            div.wt-content-metadata-view-model-wiz__metadata-row.wt-content-metadata-view-model-wiz__metadata-row--metadata-row-inline
+                                                                                span(dir="auto" role="text").wt-core-attributed-string.wt-content-metadata-view-model-wiz__metadata-text.wt-core-attributed-string--white-space-pre-wrap.wt-core-attributed-string--link-inherit-color
+                                                                                    span(dir="auto")
+                                                                                        |#{`동영상 ${user.user_video.length}개`}
+                                                                        wt-description-preview-view-model.wt-description-preview-view-model-wiz.page-header-view-model-wiz__page-header-description.wt-description-preview-view-model-wiz--clickable
+                                                                            truncated-text(style="line-height: 16px;").truncated-text-wiz.truncated-text-wiz--medium-text
+                                                                                truncated-text-content(style="max-height: 16px;").truncated-text-wiz__truncated-text-content
+                                                                                    span.wt-core-attributed-string.wt-core-attributed-string--white-space-pre-wrap
+                                                                                        span 채널 자세히 알아보기
+                                                                                button(aria-label="설명: 채널 자세히 알아보기... 탭하여 자세히 알아보세요." style="line-height: 16px; left: 136px; right: unset;").truncated-text-wiz__absolute-button
+                                                                                    span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-pre-wrap
+                                                                                        span(style="font-weight: 500;")
+                                                                                            |...더보기
+                                                                        wt-flexible-actions-view-model.page-header-view-model-wiz__page-header-flexible-actions.page-header-view-model-wiz__page-header-flexible-actions--page-header-flexible-actions-margin-top.page-header-view-model-wiz__page-header-flexible-actions--page-header-flexible-actions-margin-bottom.wt-flexible-actions-view-model-wiz.wt-flexible-actions-view-model-wiz--inline
+                                                                            div.wt-flexible-actions-view-model-wiz__action
+                                                                                button-view-model.wt-spec-button-view-model
+                                                                                    a(aria-disabled="false" aria-label="채널 맞춤설정").wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                                            |채널 맞춤설정
+                                                                            div.wt-flexible-actions-view-model-wiz__action
+                                                                                button-view-model.wt-spec-button-view-model
+                                                                                    a(aria-disabled="false" aria-label="동영상 관리").wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                                            |동영상 관리
                                             tp-wt-app-toolbar(sticky style="transform: translate3d(0px, 0px, 0px);").wtd-tabbed-page-header
+                                                div#tabs-container.wtd-tabbed-page-header
+                                                    div#tabs-inner-container.wtd-tabbed-page-header
+                                                        div#tabs-divider.wtd-tabbed-page-header
+                                                        tp-wt-paper-tabs(noink remove-idle-scroll-buttons scrollable role="tablist" tabindex="0")#tabs.wtd-tabbed-page-header
+                                                            div(style="touch-action: pan-y;")#tabsContainer.tp-wt-paper-tabs
+                                                                div(style-targer="content")#tabsContent.tabs-content.scrollable.style-scope.tp-wt-paper-tabs.style-scope.tp-wt-paper-tabs
+                                                                    tp-tab-group-shape.wt-tab-group-shape-wiz.wt-tab-group-shape-wiz--overflow-hidden
+                                                                        div(role="tablist").wt-tab-group-shape-wiz__tabs
+                                                                            wt-tab-shape(role="tab" tabindex="0" aria-checked="true" tab-title="동영상").wt-tab-shape-wiz.wt-tab-shape-wiz--host-clickable
+                                                                                div.wt-tab-shape-wiz__tab.wt-tab-shape-wiz__tab--tab-selected
+                                                                                    |동영상
+                                                                            wt-tab-shape(role="tab" tabindex="0" tab-title="재생목록").wt-tab-shape-wiz.wt-tab-shape-wiz--host-clickable
+                                                                                div.wt-tab-shape-wiz__tab.wt-tab-shape-wiz__tab--tab-selected
+                                                                                    |재생목록
+                                                                            wt-tab-shape(role="tab" tabindex="0" tab-title="게시물").wt-tab-shape-wiz.wt-tab-shape-wiz--host-clickable
+                                                                                div.wt-tab-shape-wiz__tab.wt-tab-shape-wiz__tab--tab-selected
+                                                                                    |게시물
+                                                                        div(style="width: 48px; transform: translateX(0px);").wt-tab-group-shape-wiz__slider
+                                    div#contentContainer(style="padding-top: 236px;").tp-wt-app-header-layout
                     div#alerts.wtd-browse
+                    div(page-subtype="channels" style="touch-action: pan-y;").wtd-two-column-browse-results-renderer-html-tag.wtd-browse.grid.grid-5-columns
+                        div#primary.wtd-two-column-browse-results-renderer
+                            div(
+                                elements-per-row="4" mini-mode is-slim-grid
+                                style="--wtd-rich-grid-item-max-width: 500px; --wtd-rich-grid-item-min-width: 310px; --wtd-rich-grid-row-margin: 32px; --wtd-rich-grid-items-per-row: 4; --wtd-rich-grid-posts-per-row: 3; --wtd-rich-grid-slim-items-per-row: 5; --wtd-rich-grid-game-cards-per-row: 6; --wtd-rich-grid-mini-game-cards-per-row: 6; --wtd-rich-grid-content-offset-top: 348px;"
+                            ).wtd-rich-grid-renderer-html-tag.wtd-two-column-browse-results-renderer
+                                div(hidden)#header.wtd-rich-grid-renderer
+                                div#big-yoodle.wtd-rich-grid-renderer
+                                div(style="display: none;")#masthead-ad.wtd-rich-grid-renderer
+                                div(hidden)#title-container.wtd-rich-grid-renderer
+                                div#spinner-container.wtd-rich-grid-renderer
+                                div#contents.wtd-rich-grid-renderer
+                                    each videoInfo in user.user_video
+                                        +videoItSelf(videoInfo)
+                        div#secondary.wtd-two-column-browse-results-renderer

@@ -310,7 +310,12 @@ export const watchChannel = async (req, res) => {
         console.error("channel dosen't exist");
         return res.redirect("/");
     };
-    const user = await USER.findOne({"user_channel.channel_handle": req.params.channelHandle});
+    const user = await USER
+        .findOne({"user_channel.channel_handle": req.params.channelHandle})
+        .populate({
+            path: "user_video",
+            populate: { path: "video_owner" }
+        });
 
     if (!user) {
         console.log("channel owner don't exist");
