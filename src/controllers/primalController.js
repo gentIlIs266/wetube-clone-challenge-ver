@@ -330,15 +330,131 @@ export const watchChannel = async (req, res) => {
 };
 
 export const getAccountEdit = (req, res) => {
-    const {
-        user: sessionUser
-    } = req.session;
-    
+    const { user } = req.session;
+    const locationOptions = [
+        { value: "SUN", text: "태양" },
+        { value: "MERCURY", text: "수성" },
+        { value: "VENUS", text: "금성" },
+        { value: "EARTH", text: "지구" },
+        { value: "MARS", text: "화성" },
+        { value: "JUPITER", text: "목성" },
+        { value: "SATURN", text: "토성" },
+        { value: "URANUS", text: "천왕성" },
+        { value: "NEPTUNE", text: "해왕성" },
+        { value: "PLUTO", text: "명왕성" },
+        { value: "OTHER-PLANETARY-SYSTEM", text: "그 외 행성" },
+    ];
+
     return res.render("user-template/account-edit.pug", {
-        tabTitle: `editing ${sessionUser.username}`,
-        sessionUser
+        tabTitle: `editing ${user.username}`,
+        isThisPageWatchVideo: true,
+        user,
+        locationOptions
     });
 };
-export const postAccountEdit = (req, res) => {
+export const postAccountEdit = async (req, res) => {
+    const {
+        body: {
+            editedUsername, editedLocation, editedEmail,
+            currentPassword, editedPassword, editedPasswordConfirm
+        },
+        session: {
+            user: sessionUser,
+            user: {
+                _id: sessoinUserId,
+                avatar: sessionAvatarPath
+            }
+        },
+        file: newAvatarFile,
+    } = req;
+    const userBeforeEdit = await USER.findById(sessoinUserId);
+    const USER_PW_CHANGED = Boolean(currentPassword || editedPassword || editedPasswordConfirm);
 
+    if (USER_PW_CHANGED) {
+        const pwValueMissing = !Boolean(currentPassword && editedPassword && editedPasswordConfirm);
+
+        if (pwValueMissing) {
+            return res.render("user-template/account-edit.pug", {
+                tabTitle: `editing ${sessionUser.username}`,
+                isThisPageWatchVideo: true,
+                sessionUser,
+                PASSWORD_INPUT_MISSING_ERROR: true
+            });
+        };
+        if (req.session.user.OAuth) {
+            //flash message
+            return res.redirect("/");
+        };
+        
+        const oldPwConfirm = await bcrypt.compare(currentPassword, userBeforeEdit.password);
+        
+        if (!oldPwConfirm) {
+            console.log("current password is dosen't match");
+            return res.render("user-template/account-edit.pug", {
+                tabTitle: `editing ${sessionUser.username}`,
+                isThisPageWatchVideo: true,
+                sessionUser,
+                CURRENT_PASSWORD_WRONG_ERROR: true
+            });
+        };
+        
+        console.log("new password is not confirmed");
+        if (editedPassword !== editedPasswordConfirm) {            
+            return res.render("user-template/account-edit.pug", {
+                tabTitle: `editing ${sessionUser.username}`,
+                isThisPageWatchVideo: true,
+                sessionUser,
+                NEW_PASSWORD_DONT_MATCH_ERROR: true
+            });
+        };
+
+        const editedUser = await USER.findByIdAndUpdate(
+            sessoinUserId,
+            {
+                username: editedUsername,
+                avatar: newAvatarFile ? newAvatarFile.path : sessionAvatarPath,
+                location: editedLocation,
+                email: editedEmail,
+            },
+            { new: true }
+        );
+        userBeforeEdit.password = editedPassword;
+        await userBeforeEdit.save();
+        
+        req.session.user = editedUser;
+        //flash message
+        
+        return res.redirect("/account_edit");
+    } else {
+        const editedUser = await USER.findByIdAndUpdate(
+            sessoinUserId,
+            {
+                username: editedUsername,
+                avatar: newAvatarFile ? newAvatarFile.path : sessionAvatarPath,
+                location: editedLocation,
+                email: editedEmail,
+            },
+            { new: true }
+        );
+        req.session.user = editedUser;
+
+        res.redirect("/account_edit");
+    };
+};
+
+export const deleteAccount = async (req, res) => {
+    const {
+        session: {
+            user: { _id: sessionUserId }
+        }
+    } = req;
+
+    await VIDEO.deleteMany({ video_owner: sessionUserId });
+    await USER.findByIdAndDelete({ _id: sessionUserId });
+
+    req.session.destroy((error) => {
+        if (error) return res.status(500).redirect("/");
+        res.clearCookie("connect.sid");
+        return res.redirect("/");
+    });
 };

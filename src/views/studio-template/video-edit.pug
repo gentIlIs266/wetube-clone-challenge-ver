@@ -117,7 +117,7 @@ block wtcp-app
                                         ).wtd-topbar-menu-button-renderer.no-transition
                                             img(
                                                 draggable="false" alt height="32" width="32"
-                                                src=sessionUser.avatar
+                                                src=`/${sessionUser.avatar}`
                                             )#img.wt-img-shadow
                 wtcp-banner.entity-banner.wtcp-entity-page.closing
                 div.nav-and-main-content.wtcp-entity-page
@@ -1134,7 +1134,7 @@ block wtcp-app
                                 )#avatar.wtd-active-account-header-renderer.no-transition
                                     img(
                                         draggable="false" height="40" width="40"
-                                        src=sessionUser.avatar
+                                        src=`/${sessionUser.avatar}`
                                     )#img.wt-img-shadow
                                 div#channel-container.wtd-active-account-header-renderer
                                     wt-formatted-string(
@@ -1456,7 +1456,7 @@ block wtcp-app
                             )#confirm-button.wtcp-confirmation-dialog
                                 wtcp-button-shape.wtcp-button
                                     button(
-                                        aria-label="취소"
+                                        aria-label="취소" disabled
                                     ).wtcp-button-shape-impl.wtcp-button-shape-impl--filled.wtcp-button-shape-impl--disabled.wtcp-button-shape-impl--size-m
                                         div.wtcp-button-shape-impl__button-text-content
                                             |완전삭제

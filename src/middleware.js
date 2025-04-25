@@ -4,25 +4,23 @@ import iconv from "iconv-lite";
 export const localsSetting = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn);
     res.locals.loggedInUser = req.session.user || {};
-    return next();
+    next();
 };
 
 export const shouldLogInForThisUrl = (req, res, next) => {
     if (req.session.loggedIn) {
         return next();
-    };
-    if (!req.session.loggedIn) {
+    } else {
         return res.redirect("/login");
     };
 };
 
 export const shouldNotLogInForThisUrl = (req, res, next) => {
-    if (req.session.loggedIn) {
-        return res.redirect("/");
-    };
     if (!req.session.loggedIn) {
         return next();
-    };    
+    } else {
+        return res.redirect("/");
+    };
 };
 
 export const videoFileUpload = multer({
@@ -45,7 +43,7 @@ export const videoFileUpload = multer({
             'video/x-matroska',
             'video/webm',
             'video/quicktime'
-          ];
+        ];
         if (!allowedVideoMimeTypes.includes(file.mimetype)) {
             return cb(new Error("WRONG FILE TYPE, ONLY VIDEO FILE ALLOWED"), false);
         };
@@ -53,7 +51,32 @@ export const videoFileUpload = multer({
     },
 });
 
-//export const avatarFileUpload = ;
+export const avatarFileUpload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, "uploads/avatars");
+        },
+        filename: (req, file, cb) => {
+            console.log("multer middleware file:", file);
+            cb(null, file.originalname);
+        }
+    }),
+    limits: {
+        fileSize: 3000000,
+    },
+    fileFilter: (req, file, cb) => {
+        const allowedImageMimeTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/bmp",
+        ];
+        if (!allowedImageMimeTypes.includes(file.mimetype)) {
+            return cb(new Error("WRONG FILE TYPE, ONLY IMAGE FILE ALLOWED"), false);
+        };
+        cb(null, true);
+    },
+});
 
 export const multerVideoErrorHandling = (err, rea, res, next) => {
     if (err.code === "LIMIT_FILE_SIZE") {
@@ -62,7 +85,19 @@ export const multerVideoErrorHandling = (err, rea, res, next) => {
             fileSizeOverError: true,
         });
     } else if (err) {
-        console.error(err)
+        console.error(err);
+        return res.status(400).send(err.message);
+    };
+    next();
+};
+
+export const multerAvatarErrorHandling = (err, rea, res, next) => {
+    if (err.code === "LIMIT_FILE_SIZE") {
+        return res.status(400).render("user-template/account-edit.pug", {
+            tabTitle: "Error While Editing...",
+        });
+    } else if (err) {
+        console.error(err);
         return res.status(400).send(err.message);
     };
     next();

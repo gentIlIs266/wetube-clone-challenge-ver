@@ -1,15 +1,250 @@
 //-
     pug param
-    -sessionUser
+    -user
 extends ../partials/html-head.pug
 block page-css
     link(rel="stylesheet" href="/assets/css/bundled.accountEdit.css" type="text/css")
 block page-js
     script(src="/assets/js/bundled.accountEdit.js" type="text/javascript" defer)
 block wtd-app
-    wtae-app
-        form(method="POST")#edit-form
-            input(name="username")
-            input(name="avatar")
-            input(name="loaction")
-            input(name="password")
+    wtae-app(guide-persistent-and-visible)
+        wt-guide-manager#guide-service.wtd-app
+        wt-mdx-manager.wtd-app
+        wt-playlist-manager.wtd-app
+        wt-hotkey-manager.wtd-app
+        div#content.wtd-app
+            div#frosted-glass.wtd-app
+            include ../partials/masthead.pug
+            include ../partials/app-drawer.pug
+            wtd-page-manager#page-manager.wtd-app
+                wtd-browse.wtd-page-manager
+                    wtd-two-column-browse-results-renderer.wtd-browse.grid.grid-disabled
+                        div#primary.wtd-two-column-browse-results-renderer
+                            wtd-section-list-renderer.wtd-two-column-browse-results-renderer
+                                div#contents.wtd-section-list-renderer
+                                    wtd-item-section-renderer.wtd-section-list-renderer
+                                        div#contents.wtd-item-section-renderer
+                                            wtd-page-introduction-renderer.wtd-item-section-renderer
+                                                div#primary-content.wtd-page-introduction-renderer
+                                                    div#introduction-text.wtd-page-introduction-renderer
+                                                        div#name.wtd-page-introduction-renderer
+                                                            |계정 설정
+                                                        div#title.wtd-page-introduction-renderer
+                                                            |WeTube계정을 원하는 대로 설정하기
+                                                    wt-icon.wtd-page-introduction-renderer
+                                                        span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                svg(
+                                                                    fill="none" fill-rule="evenodd" viewBox="0 0 155 155"
+                                                                    xmlns="http://www.w3.org/2000/svg" focusable="false"
+                                                                    aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                )
+                                                                    g(transform="translate(50 17.7)")
+                                                                        mask(fill="#fff")
+                                                                            path(d="M.4.3h98.7v110.4H.4z")
+                                                                        path(d="M29.8 1.3C42.9-.2 62.4.1 73.5 1.3c15.1 1.7 23 6.7 24 22 1 15.4 1.6 37.4 1.6 45.4s-3.3 14.7-11 17c-7.6 2.3-9.3 6.7-10.3 12.7-1 6-4.7 12-18.7 12.3C45.1 111 .4 103 .4 103s4.3-52.6 4.7-69.7c.3-20.9 2.7-29.5 24.7-32", fill="#EEE", mask="url(#b_yt16)")
+                                                                    g(transform="translate(6 88.7)")
+                                                                        mask(fill="#fff")
+                                                                            path(d="M.8.8h114.1V50H.8z")
+                                                                        path(d="M8.5 50c-6-.5-10.7-5.7-5.5-14.5C8 26.7 17.3 13.5 41 10.3c23.9-3.1 23.6 3.8 35.5 3.3C87.4 13 87.4 5 87.8 3.6c.5-1.6 1.6-3 4.8-2.7 3.2.4 17.2 2.3 19 3 1.7.6 3.4 1.4 3.3 5.2-.1 3.7-3.2 40.9-48 40.9H8.5z", fill="#00D4B5", mask="url(#d_yt16)")
+                                                                    path(d="M101 70.3c-1 .3-6.2 4.3-6 10.7.4 6.4 4.2 11.2 12.2 11.9 8 .7 14.4-.8 17.5-5.8 3.1-5 1.5-10.3.7-11.1-.8-1-7.8-2.2-8.8-2.2-1 .1-1.3.8-1.2 2.2 0 1.3.8 9-5.8 7.6-6.5-1.4-3.4-7.2-1.1-9.4 1.4-1.4 0-2.8-1.4-3.1-1.4-.4-4.3-1.4-6.1-.8", fill="#4620AE")
+                                                                    g(transform="translate(6 47.7)")
+                                                                        mask(fill="#fff")
+                                                                            path(d="M0 .7h69.5v52.1H0z")
+                                                                        path(d="M10.2 10.9c7.7-1.7 40.3-9 45.4-10 4.8-.8 10.4.2 11.8 5 0 0-3.4 8-3.3 8.3.7 4.5 5.3 8.2 5.3 8.2v3.4c0 5.2-2 21.1-27.5 25.8-20.8 3.8-35.7-.8-40.6-19-3.8-14 1.2-20 9-21.7", fill="#00D4B5", mask="url(#f_yt16)")
+                                                                    path(d="M33.9 54.7c0-5.8-.3-11.3 2.6-11.3 2.8 0 6.3 9.3 6.3 9.3l-9 2zM19.6 74c1 5.4 3.6 7.4 12 5.9 7-1.3 35.2-8 43.8-9.8a143.9 143.9 0 0 0-2-16.5C66.6 55.1 31.7 63 27.8 64c-7.3 1.7-9.3 4.6-8.2 10", fill="#4620AE")
+                                                                    path(d="M30.4 38.3c.5-2.6 2.8-4 5.2-3.5 2.7.5 4.2 2.7 3.7 5.2-.6 2.5-2.6 4-5.3 3.6-2.6-.4-4.1-2.6-3.6-5.3", fill="#FF76DA")
+                                                                    path(d="M47.4 84.9c.5-2.7 2.8-4 5.3-3.5 2.7.5 4.2 2.7 3.6 5.2-.5 2.4-2.5 4-5.2 3.6-2.6-.4-4.2-2.6-3.7-5.3", fill="#4620AE")
+                                                                    path(d="M119.6 50.8c3.2-3.3 7.8-2.9 10.8.1 0 0 1.2 6.2-2 9-3 3-8.9 1.8-8.9 1.8-3.2-3.1-3.2-7.7 0-11", fill="#FF76DA")
+                                                                    path(d="M119.5 61.7c3.4 3.1 7.8 3 11 0 3-2.9 3.2-7.5-.1-10.8l-10.9 10.8z", fill="#4620AE")
+                                                                    path(d="M119.4 41c-3.2-3.2-2.8-7.8.2-10.8 0 0 5-.1 8 3s2.7 7.9 2.7 7.9c-3 3.2-7.6 3.2-10.9 0", fill="red")
+                                                                    path(d="M130.3 41c3.2-3.3 3-7.6 0-10.8-2.8-3.1-7.4-3.2-10.7 0l10.7 10.9z", fill="#FF76DA")
+                                                                    path(d="M72.4 35.6c0-4.6 3.5-7.6 7.7-7.6 0 0 5 3.4 4.8 7.7-.1 4.3-4.8 7.6-4.8 7.6-4.5.1-7.7-3.1-7.7-7.7", fill="red")
+                                                                    path(d="M80 43.3a7.6 7.6 0 0 0 7.8-7.7c.1-4.2-3-7.5-7.7-7.6v15.3zM101.3 29.1L95 37.9c-1.3 1.8 0 3.3 1.7 3.3h10.5c1.7 0 2.7-1.9 1.7-3.3l-6-8.8a1 1 0 0 0-1.6 0", fill="#4620AE")
+                                                                    path(d="M106.3 62.4h-9a2.5 2.5 0 0 1-2.5-2.6V53c0-1.9 1.6-2.9 3-2.9h9c1.4 0 2.5 1.1 2.5 2.5v7.2c0 1.5-1.2 2.6-3 2.6", fill="red")
+                                                                    path(d="M120.9 97.8c.1-3.8-1.6-4.6-3.4-5.3-1.7-.6-15.7-2.5-19-3-3.1-.3-4.2 1.2-4.7 2.8-.4 1.5-.4 9.5-11.2 10-3 .1-5.1-.2-7.1-.7v37a43 43 0 0 0 45.4-40.8", fill="#00D4B5")
+                                                                    path(d="M28.8 73.7a1.5 1.5 0 0 1-.3-3l40.2-8.9c.8-.2 1.6.4 1.8 1.2.2.8-.3 1.6-1.2 1.8l-40.2 8.8h-.3", fill="#FF76DA")
+                                                                    path(d="M62.8 119.7h-25a1.3 1.3 0 0 1 0-2.5h25a1.3 1.3 0 0 1 0 2.5M58.5 113.6H42a1.3 1.3 0 0 1 0-2.5h16.4a1.3 1.3 0 0 1 0 2.5M58.5 125.8H42a1.3 1.3 0 0 1 0-2.5h16.4a1.3 1.3 0 0 1 0 2.5M75.5 135.7a.8.8 0 0 1-.8-.8v-28a.8.8 0 0 1 1.5 0v28c0 .5-.3.8-.7.8M79.4 135.7a.8.8 0 0 1-.8-.8v-28a.8.8 0 0 1 1.5 0v28c0 .5-.3.8-.7.8M25 135.7a.8.8 0 0 1-.8-.8v-22.6a.8.8 0 0 1 1.5 0V135c0 .5-.3.8-.7.8M21.2 135.7a.8.8 0 0 1-.7-.8v-19.6a.8.8 0 0 1 1.5 0v19.6c0 .5-.4.8-.8.8", fill="#4620AE")
+                                    wtd-item-section-renderer.wtd-section-list-renderer
+                                        div#contents.wtd-item-section-renderer
+                                            form(method="POST" enctype="multipart/form-data")#edit-form.wtd-item-section-renderer
+                                                wtd-user-information-column#user-avatar.wtd-item-section-renderer
+                                                    wt-avatar-shape
+                                                        div.wt-spec-avatar-shape.wt-spec-avatar-shape__button.wt-spec-avatar-shape__button--button-giant
+                                                            div
+                                                                div.wt-spec-avatar-shape--avatar-size-giant
+                                                                    img(src=user.avatar).wt-core-image.wt-spec-avatar-shape__image.wt-core-image--fill-parent-height.wt-core-image--fill-parent-width.wt-core-image--content-mode-scale-to-fill.wt-core-image--loaded
+                                                    wt-avatar-edit-button
+                                                        div#edit-button.wt-avatar-edit-button
+                                                            account-link-button-view-model(style="display: block;").wt-avatar-edit-button.wtwAccountLinkButtonViewModelHostMinWidth
+                                                                div
+                                                                    button-view-model.wt-spec-button-view-model
+                                                                        button(
+                                                                            type="button" aria-disabled="false" aria-label="아바타 이미지 변경"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div(style="padding-top: 3px;").wt-spec-button-shape-next__button-text-content
+                                                                                |아바타 변경
+                                                                            input(name="avatarFileData" type="file" accept="image/*" hidden aria-hidden="true")#avatar-input
+                                                    wt-account-delete-button
+                                                        div#account-delete-button
+                                                            account-link-button-view-model(style="display: block;").wt-avatar-edit-button.wtwAccountLinkButtonViewModelHostMinWidth
+                                                                div
+                                                                    button-view-model.wt-spec-button-view-model
+                                                                        button(
+                                                                            type="button" aria-disabled="false" aria-label="계정 삭제"
+                                                                        ).wt-spec-button-shape--warning.wt-spec-button-shape-next.wt-spec-button-shape-next--outline.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                |계정 삭제
+                                                wtd-user-information-column#user-metadata.wtd-item-section-renderer
+                                                    wtd-settings-options-renderer.wtd-user-information-column
+                                                        div#section.wtd-settings-options-renderer
+                                                            div#title.wtd-settings-options-renderer
+                                                                |유저네임
+                                                            div#content.wtd-settings-options-renderer
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wt-copy-link-renderer(modern-buttons adaptive-full-width renderer-style="copy-link-renderer-style-settings").wtd-settings-options-renderer
+                                                                        div#bar.wt-copy-link-renderer
+                                                                            input(
+                                                                                name="editedUsername" type="text" value=user.username dir="ltr" size="45"
+                                                                            )#username-input.id-share-url.wt-copy-link-renderer
+                                                    wtd-settings-options-renderer.wtd-user-information-column
+                                                        div#section.wtd-settings-options-renderer
+                                                            div#title.wtd-settings-options-renderer
+                                                                |위치
+                                                            div#content.wtd-settings-options-renderer
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wtd-dropdown-renderer(has-background no-underline).wtd-settings-options-renderer
+                                                                        tp-wt-paper-dropdown-menu-light(horizontal-align="left")#input.wtd-dropdown-renderer
+                                                                            div(
+                                                                                slot="dropdown-trigger" role="button" tabindex="0" aria-haspopup="listbox"
+                                                                            )#dropdown-trigger.dropdown-trigger.tp-wt-paper-dropdown-menu-light
+                                                                                label(style-target="label").label.label-is-floating.tp-wt-paper-dropdown-menu-light
+                                                                                    |사용자 위치
+                                                                                select(
+                                                                                    name="editedLocation"
+                                                                                    aria-required="true"
+                                                                                )#location-select.tp-wt-paper-menu-button
+                                                                                    each option in locationOptions
+                                                                                        option(
+                                                                                            dir="auto"
+                                                                                            value=option.value
+                                                                                            selected = (option.value == user.location) ? true : false
+                                                                                        )
+                                                                                            |#{option.text}
+                                                    wtd-settings-options-renderer.wtd-user-information-column
+                                                        div#section.wtd-settings-options-renderer
+                                                            div#title.wtd-settings-options-renderer
+                                                                |이메일
+                                                            div#content.wtd-settings-options-renderer
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wt-copy-link-renderer(modern-buttons adaptive-full-width renderer-style="copy-link-renderer-style-settings").wtd-settings-options-renderer
+                                                                        div#bar.wt-copy-link-renderer
+                                                                            input(
+                                                                                name="editedEmail" type="text" value=user.email dir="ltr" size="45"
+                                                                            )#email-input.id-share-url.wt-copy-link-renderer
+                                                    wtd-settings-options-renderer.wtd-user-information-column
+                                                        div#section.before-password-edit.wtd-settings-options-renderer
+                                                            div#title.wtd-settings-options-renderer
+                                                                |비밀번호
+                                                            div#content.wtd-settings-options-renderer
+                                                                div(style="flex-direction: row; align-self: flex-end;")#options.wtd-settings-options-renderer
+                                                                    wt-button-shape
+                                                                        button(
+                                                                            type="submit" aria-label="저장"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                span.wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                    |저장
+                                                                    wt-button-shape
+                                                                        button(
+                                                                            type="button" aria-label="비밀번호 변경"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--overlay.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                span.wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                    |비밀번호 변경
+                                                        div(style="display: none;")#section.after-password-edit.wtd-settings-options-renderer
+                                                            div#title.wtd-settings-options-renderer
+                                                                |비밀번호
+                                                            div#content.wtd-settings-options-renderer
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wt-button-shape
+                                                                        button(
+                                                                            type="button" aria-label="숨기기"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--tonal.wt-spec-button-shape-next--overlay.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-leading.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                span.wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                    |숨기기
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wt-copy-link-renderer(modern-buttons adaptive-full-width renderer-style="copy-link-renderer-style-settings").wtd-settings-options-renderer
+                                                                        span.password-input-label
+                                                                            |기존 비밀번호
+                                                                        div#bar.wt-copy-link-renderer
+                                                                            input(
+                                                                                name="currentPassword" type="password" autocomplete="current-password" dir="ltr" size="45"
+                                                                            )#current-pw-input.id-share-url.wt-copy-link-renderer
+                                                                    wt-copy-link-renderer(modern-buttons adaptive-full-width renderer-style="copy-link-renderer-style-settings").wtd-settings-options-renderer
+                                                                        span.password-input-label
+                                                                            |새 비밀번호
+                                                                        div#bar.wt-copy-link-renderer
+                                                                            input(
+                                                                                name="editedPassword" type="password" dir="ltr" size="45"
+                                                                            )#edited-pw-input.id-share-url.wt-copy-link-renderer
+                                                                    wt-copy-link-renderer(modern-buttons adaptive-full-width renderer-style="copy-link-renderer-style-settings").wtd-settings-options-renderer
+                                                                        span.password-input-label
+                                                                            |새 비밀번호 확인
+                                                                        div#bar.wt-copy-link-renderer
+                                                                            input(
+                                                                                name="editedPasswordConfirm" type="password" dir="ltr" size="45"
+                                                                            )#edited-pw-confirm-input.id-share-url.wt-copy-link-renderer
+                                                                div#options.wtd-settings-options-renderer
+                                                                    wt-button-shape
+                                                                        button(
+                                                                            type="submit" aria-label="저장"
+                                                                        ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--call-to-action.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                            div.wt-spec-button-shape-next__button-text-content
+                                                                                span.wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                    |저장
+    wtcp-account-delete-dialog
+        wtcp-confirmation-dialog#account-delete-dialog.wtcp-account-delete-dialog
+            wtcp-dialog(modal modern)#dialog.wtcp-confirmation-dialog
+                tp-wt-paper-dialog(
+                    restore-focus-on-close style-target="host" role="dialog" tabindex="-1" with-backdrop
+                    style="outline: none; min-width: 30vw; max-width: 30vw; position: fixed; top: calc(50% - 30vh); left: calc(50% - 15vw); box-sizing: border-box; min-height: 60vh; max-height: 60vh; display: none;"
+                )#dialog.wtcp-dialog
+                    #header.header.wtcp-dialog
+                        div.header-content.wtcp-dialog
+                            h1(slot="primary-header")#dialog-title.wtcp-confirmation-dialog
+                                |이 계정을 완전히 삭제하시겠습니까?
+                            div.header-button.wtcp-dialog
+                                svg(
+                                    viewBox="0 0 24 24" focusable="false"
+                                    style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                                )
+                                    g
+                                        path(d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z")
+                        div.header-content.warning-header.wtcp-dialog
+                            h1(slot="primary-header")#warning-title.wtcp-confirmation-dialog
+                                |This is extremely important.
+                    #content.content.wtcp-dialog
+                        div(slot="content").wtcp-confirmation-dialog
+                            div.confirm-input-container.wtcp-confirmation-dialog
+                                label(for="confirm-username").label.wtcp-confirmation-dialog
+                                    |Your username or email:
+                                input(required)#confirm-username.confirm-input
+                            div.confirm-input-container.wtcp-confirmation-dialog
+                                label(for="confirm-text").label.wtcp-confirmation-dialog
+                                    |To verify, type  
+                                    span(style="font-style: italic; font-weight: 400;")
+                                        | delete my account  
+                                    | exactly as it appears:
+                                input(required)#confirm-text.confirm-input
+                            div.confirm-input-container.wtcp-confirmation-dialog
+                                label(for="confirm-password").label.wtcp-confirmation-dialog
+                                    |Confirm your passoword:
+                                input(required)#confirm-password.confirm-input
+                    #footer.footer.wtcp-dialog
+                        div(slot="primary-footer").wtcp-confirmation-dialog
+                            button(disabled).account-delete-confirm-button.wtcp-confirmation-dialog
+                                a(style="all: unset;" href="/account/delete")
+                                    div(style="text-overflow: ellipsis; overflow: hidden;")
+                                        |Cancel plan and delete this account

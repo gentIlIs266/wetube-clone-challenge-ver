@@ -117,7 +117,7 @@ block wtd-app
                                         ).wtd-topbar-menu-button-renderer.no-transition
                                             img(
                                                 draggable="false" alt height="32" width="32"
-                                                src=foundUser.avatar
+                                                src=`/${foundUser.avatar}`
                                             )#img.wt-img-shadow
                 wtcp-banner.entity-banner.wtcp-entity-page.closing
                 div.nav-and-main-content.wtcp-entity-page
@@ -155,7 +155,7 @@ block wtd-app
                                                                     ).tp-wt-iron-icon
                                     img(
                                         alt=foundUser.user_channel.channel_name
-                                        src=foundUser.avatar
+                                        src=`/${foundUser.avatar}`
                                     ).thumbnail.image-thumbnail.wtcp-navigation-drawer
                                     div#entity-label-container.wtcp-navigation-drawer
                                         div#entity-type.entity-type.wtcp-navigation-drawer
@@ -638,7 +638,7 @@ block wtd-app
                                 )#avatar.wtd-active-account-header-renderer.no-transition
                                     img(
                                         draggable="false" height="40" width="40"
-                                        src=foundUser.avatar
+                                        src=`/${foundUser.avatar}`
                                     )#img.wt-img-shadow
                                 div#channel-container.wtd-active-account-header-renderer
                                     wt-formatted-string(

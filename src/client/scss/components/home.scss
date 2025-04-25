@@ -934,33 +934,6 @@ a.wt-formatted-string {
 .tp-wt-paper-tooltip-html-tag.wtd-channel-name {
     display: var(--wt-paper-tooltip-display);
 }
-.wtd-badge-supported-renderer-html-tag.wtd-channel-name {
-    display: var(--wtd-channel-name-badges-display, flex);
-    margin-right: var(--wtd-channel-name-badges-margin-right);
-    vertical-align: var(--wtd-channel-name-badges-vertical-align);
-}
-.badge.wtd-badge-supported-renderer {
-    border-radius: 2px;
-    display: block;
-    padding: 0 4px;
-    white-space: inherit;
-    font-family: "Roboto","Arial",sans-serif;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 500;
-}
-.badge-style-type-verified.wtd-badge-supported-renderer,
-.badge-style-type-verified-artist.wtd-badge-supported-renderer {
-    background: none;
-    margin-bottom: 1px;
-    padding: 0;
-    padding-left: 4px;
-    flex: none;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 12px;
-    letter-spacing: var(--wt-badge-letter-spacing, unset);
-}
 .wt-icon-html-tag.wtd-badge-supported-renderer {
     width: 13px;
     height: 13px;

@@ -121,29 +121,6 @@ mixin videoItSelf(videoInfo)
                                                 ).tp-wt-paper-tooltip-html-tag.wtd-channel-name
                                                     div(style-target="tooltip")#tooltip.hidden.tp-wt-paper-tooltip
                                                         |#{videoInfo.video_owner.username}
-                                            div(
-                                                system-icons enable-refresh-web enable-signature-moments-web
-                                            ).wtd-badge-supported-renderer-html-tag.wtd-channel-name
-                                                div(
-                                                    aria-label="인증됨" role="img"
-                                                ).badge.badge-style-type-verified.wtd-badge-supported-renderer
-                                                    div(size="16").wt-icon-html-tag.wtd-badge-supported-renderer
-                                                        span.wt-icon-shape.wt-icon.wt-spec-icon-shape
-                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
-                                                                svg(
-                                                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
-                                                                    width="24" focusable="false" aria-hidden="true"
-                                                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
-                                                                )
-                                                                    path(d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM9.8 17.3l-4.2-4.1L7 11.8l2.8 2.7L17 7.4l1.4 1.4-8.6 8.5z")
-                                                    p.wtd-badge-supported-renderer
-                                                    div(
-                                                        position="top" role="tooltip" tabindex="-1"
-                                                        style="left: 73.1875px; top: -23.5px;"
-                                                    ).tp-wt-paper-tooltip-html-tag.wtd-badge-supported-renderer
-                                                        div(style-target="tooltips")#tooltip.tp-wt-paper-tooltip.hidden
-                                                            |인증됨
-                                                dom-repeat(as="badge")#repeat.wtd-badge-supported-renderer
                                     div#metadata-line.wtd-video-meta-block
                                         div(
                                             hidden system-icons enable-refresh-web enable-signature-moments-web
