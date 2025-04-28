@@ -5,12 +5,9 @@ import MongoStore from "connect-mongo";
 import bodyParser from "body-parser";
 import path from "path";
 
-import feedRouter from "./routers/feedRouter";
-import handleRouter from "./routers/handleRouter";
 import primalRouter from "./routers/primalRouter";
 import studioRouter from "./routers/studioRouter";
-import userRouter from "./routers/userRouter";
-import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 
 import { localsSetting } from "./middleware";
 
@@ -47,11 +44,8 @@ app.use("/assets", express.static("assets"));
 app.use("/uploads", express.static("uploads"));
 
 app.use("/", primalRouter);
-app.use("/feed", feedRouter);
-app.use("/channel", handleRouter);
 app.use("/studio", studioRouter);
-app.use("/user", userRouter);
-app.use("/videos", videoRouter);
+app.use("/api", apiRouter);
 
 
 export default app;

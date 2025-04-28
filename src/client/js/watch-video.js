@@ -194,6 +194,15 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(WINDOW_RESIZE_TIMEOUT);
             WINDOW_RESIZE_TIMEOUT = setTimeout(videoAndControllerSizeAdjust, 100);
         };
+        function onVideoEnded() {
+            const videoId = wtdWatchFlexyHtmlTag.getAttribute("video-id");
+            fetch(
+                `/api/${videoId}/record_views`,
+                {
+                    method: "POST",
+                }
+            );
+        };
         function onFullscreenResize() {
             videoAspectRatio = videoItSelf.videoWidth / videoItSelf.videoHeight;
 
@@ -782,6 +791,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })();
         
         videoItSelf.addEventListener("loadedmetadata", videoAndControllerSizeAdjust);
+        videoItSelf.addEventListener("ended", onVideoEnded);
         window.addEventListener("resize", onNoFullscreenResize);
         
         videoItSelf.addEventListener("progress", onLoadProgress);

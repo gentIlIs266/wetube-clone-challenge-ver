@@ -156,7 +156,8 @@ export const postCreateVideo = async (req, res) => {
             const userCreatedThisVideo = await USER.findById(sessionUser._id);
             userCreatedThisVideo.user_video.push(justCreatedVideoId);
             await userCreatedThisVideo.save();
-            return res.redirect(`/studio/channel/${userCreatedThisVideo.user_channel.channel_id}`);
+
+            return res.redirect(`/studio/${justCreatedVideoId}/edit`);
         } catch (error) {
             console.error(error);
             return res.status(500).render("studio-template/create-video.pug", {
