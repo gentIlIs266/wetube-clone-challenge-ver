@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const expandButton = description.querySelector("#expand");
     const collapseButton = description.querySelector("#collapse");
     const structuredDescription = description.querySelector("#structured-description");
+    const commentSimpleboxAvatar = document.querySelector("#author-thumbnail.wtd-comment-simplebox-renderer")
+    const commentPlaceholderArea = document.querySelector("#placeholder-area.wtd-comment-simplebox-renderer");
+    const commentDialog = document.querySelector("#comment-dialog.wtd-comment-simplebox-renderer");
     let WINDOW_RESIZE_TIMEOUT;
     let CURSOR_STOP_TIMEOUT;
     let IS_CURSOR_OVER_CONTROLLER = false;
@@ -761,6 +764,66 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         };
 
+        if (commentDialog) {
+            const commentCreationbox = commentDialog.querySelector("#main #creation-box");
+            const commentLabelAndInputContainer = commentCreationbox.querySelector("#labelAndInputContainer");
+            const commentInput = commentCreationbox.querySelector("#contenteditable-root.wt-formatted-string");
+            const commentInputUnderline = commentCreationbox.querySelector(".underline");
+            const commentCancelButton = commentDialog.querySelector("#footer #cancel-button button");
+            const commentSubmitButton = commentDialog.querySelector("#footer #submit-button button");
+
+            function onCommentPlaceholderAreaClick() {
+                commentSimpleboxAvatar.setAttribute("hidden", "");
+                commentPlaceholderArea.setAttribute("hidden", "");
+                commentDialog.removeAttribute("hidden");
+    
+                commentInput.focus();
+            };
+            function onCommentInputFocus() {
+                commentCreationbox.classList.replace("not-focused", "focused");
+                commentInputUnderline.classList.add("is-highlighted");
+                commentLabelAndInputContainer.classList.add("focused");
+            };
+            function onCommentInputBlur() {
+                commentCreationbox.classList.replace("focused", "not-focused");
+                commentInputUnderline.classList.remove("is-highlighted");
+                commentLabelAndInputContainer.classList.remove("focused");
+            };
+            function onCommentInputTyping() {
+                if (commentInput.textContent.length > 0) {
+                    commentSubmitButton.classList.replace(
+                        "wt-spec-button-shape-next--disabled",
+                        "wt-spec-button-shape-next--call-to-action"
+                    );
+                    commentSubmitButton.setAttribute("aria-disabled", "false");
+                    commentSubmitButton.removeAttribute("disabled");
+                } else {
+                    commentSubmitButton.classList.replace(
+                        "wt-spec-button-shape-next--call-to-action",
+                        "wt-spec-button-shape-next--disabled"
+                    );
+                    commentSubmitButton.setAttribute("aria-disabled", "true");
+                    commentSubmitButton.setAttribute("disabled", "");
+                };
+            };
+            function onCommentCanelButtonClick() {
+                commentInput.blur();
+    
+                commentSimpleboxAvatar.removeAttribute("hidden");
+                commentPlaceholderArea.removeAttribute("hidden");
+                commentDialog.setAttribute("hidden", "");
+            };
+            
+            commentPlaceholderArea.addEventListener("click", onCommentPlaceholderAreaClick);
+    
+            commentInput.addEventListener("focus", onCommentInputFocus);
+            commentInput.addEventListener("blur", onCommentInputBlur);
+            commentInput.addEventListener("input", onCommentInputTyping);
+    
+            commentCancelButton.addEventListener("click", onCommentCanelButtonClick);
+        }
+
+        
         // WATCH VIDEO INITIAL ACTIONS //
         (function() {
             videoItSelf.addEventListener("canplay", () => {
@@ -826,5 +889,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         expandButton.addEventListener("click", onExpandButtonClick);
         collapse.addEventListener("click", onCollapseButtonClick);
+
     })();
 });

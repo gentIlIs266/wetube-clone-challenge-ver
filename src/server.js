@@ -4,6 +4,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import bodyParser from "body-parser";
 import path from "path";
+import flash from "express-flash";
 
 import primalRouter from "./routers/primalRouter";
 import studioRouter from "./routers/studioRouter";
@@ -37,6 +38,7 @@ app.use(
     })
 );
 
+app.use(flash());
 app.use(localsSetting);
 
 app.use("/avatars", express.static(path.join("public/avatars")));

@@ -289,18 +289,26 @@ export const finishGhLogin = async (req, res) => {
 export const watchVideo = async (req, res) => {
     const {
         query: {
-            v: videoId, t: videoTime
+            v: videoId
         },
         session: { user }
     } = req;
+
     if (!videoId) return res.redirect("/");
-    const foundVideoFromDB = await VIDEO.findById(videoId).populate("video_owner");
-    /*if (foundVideoFromDB === null)*/
+
+    const foundVideoFromDB = await VIDEO.findById(videoId)
+        .populate("video_owner")
+        .populate({
+            path: "comments",
+            populate: {
+                path: "comment_owner"
+            }
+        });
+
     return res.render("watch-video.pug", {
         tabTitle: foundVideoFromDB.title,
         user,
         foundVideoFromDB,
-        ownerOfTheVideoIsWatching: (user._id == foundVideoFromDB.video_owner._id),
         isThisPageWatchVideo: true,
     });
 }
@@ -408,11 +416,12 @@ export const postAccountEdit = async (req, res) => {
             });
         };
 
+        console.log(newAvatarFile)
         const editedUser = await USER.findByIdAndUpdate(
             sessoinUserId,
             {
                 username: editedUsername,
-                avatar: newAvatarFile ? newAvatarFile.path : sessionAvatarPath,
+                avatar: newAvatarFile ? newAvatarFile.location : sessionAvatarPath,
                 location: editedLocation,
                 email: editedEmail,
             },

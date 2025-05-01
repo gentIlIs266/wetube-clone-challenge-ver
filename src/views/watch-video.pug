@@ -1,8 +1,10 @@
 extends partials/html-head.pug
+include commentMixin.pug
 block page-css
     link(rel="stylesheet", href="assets/css/bundled.watchVideo.css" type="text/css")
 block page-js
     script(src="assets/js/bundled.watchVideo.js" type="text/javascript" defer)
+    script(src="assets/js/bundled.comment.js" type="text/javascript" defer)
 block wtd-app
     div(
         darker-dark-theme frosted-glass-mode="none"
@@ -352,7 +354,7 @@ block wtd-app
                                                         |#{foundVideoFromDB.title}
                                             div#top-row.wtd-watch-metadata
                                                 div#owner.item.wtd-watch-metadata
-                                                    if locals.ownerOfTheVideoIsWatching
+                                                    if String(loggedInUser._id) === String(foundVideoFromDB.video_owner._id)
                                                         div(watch-metadata-refresh).wtd-video-owner-renderer-html-tag.wtd-watch-metadata
                                                             a(href=l).wt-simple-endpoint.wtd-video-owner-renderer
                                                                 div(
@@ -888,7 +890,120 @@ block wtd-app
                                     div#expanded-metadata.wtd-watch-flexy
                                     div#ticket-shelf.wtd-watch-flexy
                                     dom-if(restamp)#merch-shelf.wtd-watch-flexy
-                                    div#comments.wtd-comments-html-tag.wtd-watch-flexy
+                                    wtd-comments#comments.wtd-watch-flexy
+                                        wtd-item-section-renderer(
+                                            initial-count="2" enable-anchored-panel section-identifier="comment-item-section" header-style
+                                        )#sections.wtd-comments
+                                            if locals.loggedIn
+                                                div#header.wtd-comments.wtd-item-section-renderer
+                                                    wtd-comments-header-renderer(modern-typography).wtd-item-section-renderer
+                                                    div#title.wtd-comments-header-renderer
+                                                        div#leading-section.wtd-comments-header-renderer
+                                                            h2#count.wtd-comments-header-renderer
+                                                                wt-formatted-string.count-text.wtd-comments-header-renderer
+                                                                    span(dir="auto").wt-formatted-string
+                                                                        |댓글  
+                                                                    span(dir="auto").wt-formatted-string
+                                                                        |#{foundVideoFromDB.comments.length}
+                                                                    span(dir="auto").wt-formatted-string
+                                                                        |개
+                                                        div#additional-section.wtd-comments-header-renderer
+                                                            span#sort-menu.wtd-comments-header-renderer
+                                                                wt-sort-filter-sub-menu-renderer.wtd-comments-header-renderer
+                                                                    wt-dropdown-menu(modern-buttons icon-label="정렬 기준").wt-sort-filter-sub-menu-renderer.has-items
+                                                                        tp-wt-paper-menu-button(
+                                                                            dynamic-align expand-sizing-target-for-scrollbars role="group" aria-haspopup="true"
+                                                                            horizontal-align="left" vertical-align="top" aria-disabled="false"
+                                                                        ).wt-dropdown-menu
+                                                                            div#trigger.tp-wt-paper-menu-button
+                                                                                tp-wt-paper-button(slot="dropdown-trigger" style-target="host" role="button" tabindex="0" animated elevation="0" aria-disabled="false" aria-label="댓글 정렬" aria-expanded="false")#label.dropdown-trigger.wt-dropdown-menu
+                                                                                    wt-icon#label-icon.wt-dropdown-menu
+                                                                                        span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                            div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                svg(
+                                                                                                    xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                                                                    height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                                                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                )
+                                                                                                    path(d="M21 6H3V5h18v1zm-6 5H3v1h12v-1zm-6 6H3v1h6v-1z")
+                                                                                    div#icon-label.wt-dropdown-menu
+                                                                                        |정렬 기준
+                                                    div#simple-box.wtd-comments-header-renderer
+                                                        wtd-comment-simplebox-renderer.wtd-comments-header-renderer
+                                                            wt-img-shadow(fit height="40" width="40" style="background-color: transparent;" loaded)#author-thumbnail.wtd-comment-simplebox-renderer.no-transition
+                                                                img(
+                                                                    draggable="false" alt=loggedInUser.user_channel.channel_name
+                                                                    src=loggedInUser.avatar
+                                                                )#img.wt-img-shadow
+                                                            div#placeholder-area.wtd-comment-simplebox-renderer
+                                                                wt-formatted-string(role="textbox" tabindex="0")#simplebox-placeholder.wtd-comment-simplebox-renderer
+                                                                    |댓글 추가...
+                                                            div(hidden)#comment-dialog.wtd-comment-simplebox-renderer
+                                                                wtd-comment-dialog-renderer.wtd-comment-simplebox-renderer
+                                                                    wtd-commentbox(added-attachment="none" prefilled-attachment_="none" modern)#commentbox.ytd-comment-dialog-renderer
+                                                                        div#thumbnail-input-row.wtd-commentbox
+                                                                            wt-img-shadow(fit height="40" width="40" style="background-color: transparent;" loaded)#author-thumbnail.wtd-commentbox.no-transition
+                                                                                img(
+                                                                                    draggable="false" alt=loggedInUser.user_channel.channel_name
+                                                                                    src=loggedInUser.avatar
+                                                                                )#img.wt-img-shadow
+                                                                            div#main.wtd-commentbox
+                                                                                form(style="all: unset;")#comment-creation-form
+                                                                                    div#creation-box.not-focused.wtd-commentbox
+                                                                                        tp-wt-paper-input-container(no-label-float use-v2-underline style-target="host")#input-container.wtd-commentbox
+                                                                                            div.input-wrapper.tp-wt-paper-input-container
+                                                                                                span.prefix.tp-wt-paper-input-container
+                                                                                                div#labelAndInputContainer.input-content.tp-wt-paper-input-container
+                                                                                                    div(slot="after-input").paper-input-input.wtd-commentbox
+                                                                                                        wtd-emoji-input#emoji.wtd-commentbox
+                                                                                                            wt-user-mention-autosuggest-input(slog="input").wtd-commentbox
+                                                                                                                wt-formatted-string(
+                                                                                                                    slot="input" enable-content-editable="true" maxlength="10000" plaintext-only="true"
+                                                                                                                    required="true" split-lines
+                                                                                                                )#contenteditable-textbox.wtd-commentbox
+                                                                                                                    div(contenteditable="true" dir="auto" aria-label="댓글 추가...")#contenteditable-root.wt-formatted-string
+                                                                                                span.suffix.tp-wt-paper-input-container
+                                                                                            div(style="height: 0;").underline.tp-wt-paper-input-container
+                                                                                                div.unfocused-line.tp-wt-paper-input-container
+                                                                                                div.focused-line.tp-wt-paper-input-container
+                                                                                    div#footer.wtd-commentbox
+                                                                                        span#emoji-button.wtd-commentbox
+                                                                                            wtd-button-renderer(button-renderer button-next).wtd-commentbox
+                                                                                                wt-button-shape
+                                                                                                    button(
+                                                                                                        type="button" aria-label="그림 이모티콘 선택도구 표시"
+                                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--icon-only-default.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                                                                                            wt-icon(style="width: 24px; height: 24px;")
+                                                                                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                                                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                                                                                        svg(
+                                                                                                                            xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                                                                                            height="24" viewBox="0 0 24 24" width="24" focusable="false"
+                                                                                                                            aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                                                                                        )
+                                                                                                                            path(d="M15.83 15c-.52 1.38-2.19 2-3.79 2-1.59 0-3.28-.62-3.85-2h7.64m.69-1H7.49c-.27 0-.49.22-.46.47C7.34 16.83 9.7 18 12.05 18c2.35 0 4.69-1.18 4.93-3.54.03-.25-.2-.46-.46-.46zM12 3c4.96 0 9 4.04 9 9s-4.04 9-9 9-9-4.04-9-9 4.04-9 9-9m0-1C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM6.94 9.73C7.19 9.25 7.72 9 8.5 9c.75 0 1.28.25 1.57.75.14.24.45.32.68.18.24-.14.32-.44.18-.68C10.6 8.68 9.91 8 8.5 8c-1.48 0-2.15.69-2.44 1.27-.13.25-.03.55.21.67.07.04.15.06.23.06.18 0 .36-.1.44-.27zm7 0c.25-.48.78-.73 1.56-.73.75 0 1.28.25 1.57.75.14.24.45.32.68.18.24-.14.32-.44.18-.68C17.6 8.68 16.91 8 15.5 8c-1.48 0-2.15.69-2.44 1.27-.13.25-.03.55.21.67.07.04.15.06.23.06.18 0 .36-.1.44-.27z")
+                                                                                        span#footer-text.wtd-commentbox
+                                                                                        span#buttons.wtd-commentbox
+                                                                                            wtd-button-renderer(button-renderer button-next)#cancel-button.wtd-commentbox
+                                                                                                wt-button-shape
+                                                                                                    button(
+                                                                                                        type="button" aria-label="취소"
+                                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                                                            span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                                                |취소
+                                                                                            wtd-button-renderer(button-renderer button-next)#submit-button.wtd-commentbox
+                                                                                                wt-button-shape
+                                                                                                    button(
+                                                                                                        type="submit" aria-disabled="true" aria-label="취소" disabled
+                                                                                                    ).wt-spec-button-shape-next.wt-spec-button-shape-next--filled.wt-spec-button-shape-next--disabled.wt-spec-button-shape-next--size-m.wt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                                                                                        div.wt-spec-button-shape-next__button-text-content
+                                                                                                            span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                                                                                |댓글
+                                            div#contents.wtd-comments.wtd-item-section-renderer
+                                                each comment in foundVideoFromDB.comments.reverse()
+                                                    +commentItSelf(comment)
                         div#secondary.wtd-watch-flexy
                     div#survey.wtd-watch-flexy
                     div(hidden)#engagement-panel-scrim.wtd-watch-flexy

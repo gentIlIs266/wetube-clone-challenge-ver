@@ -1,0 +1,80 @@
+mixin commentItSelf(commentData)
+    wtd-comment-thread-renderer.wtd-item-section-renderer
+        wtd-comment-view-model(style="--ytd-comment-paid-background-color: initial;" comment-id=commentData._id)#comment.wtd-comment-thread-renderer
+            div#paid-comment-background.wtd-comment-view-model
+            div#body.wtd-comment-view-model
+                div#author-thumbnail.wtd-comment-view-model
+                    button(aria-label=commentData.comment_owner.user_channel.channel_handle)#author-thumbnail-button.wtd-comment-view-model
+                        wt-img-shadow(
+                            fit height="40" width="40" loaded style="background-color: transparent;"
+                        ).wtd-comment-view-model.no-transition
+                            img(
+                                draggable="false" height="40" width="40"
+                                src=commentData.comment_owner.avatar
+                            )#img.wt-img-shadow
+                div#main.wtd-comment-view-model
+                    div#header.wtd-comment-view-model
+                        div#header-author.wtd-comment-view-model
+                            h3.wtd-comment-view-model
+                                a(href=`/${commentData.comment_owner.user_channel.channel_handle}`)#author-text.wt-simple-endpoint.wtd-comment-view-model
+                                    span.wtd-comment-view-model
+                                        |#{commentData.comment_owner.user_channel.channel_handle}
+                    wtd-expander(max-number-of-lines="4" collapsed should-use-number-of-lines style="--ytd-expander-max-lines: 4;")#expander.wtd-comment-view-model
+                        div#content.wtd-expander
+                            wt-attributed-string(slot="content" user-input)#content-text.wtd-comment-view-model
+                                span(dir="auto" role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-pre-wrap
+                                    |#{commentData.commentText}
+                    wtd-comment-engagement-bar#action-buttons.wtd-comment-view-model
+                        div#toolbar.wtd-comment-view-model
+                            wtd-toggle-button-renderer(button-tooltip-position="bottom" icon-size="16" button-renderer="true")#link-button.wtd-comment-engagement-bar
+                                wt-button-shape
+                                    button.wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-s.wt-spec-button-shape-next--icon-button.wt-spec-button-shape-next--override-small-size-icon.yt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                            wt-icon(style="width: 24px; height: 24px;")
+                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                            height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                        )
+                                                            path(d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z M7,20H4v-8h3V20z M19.98,13.17l-1.34,6 C18.54,19.65,18.03,20,17.43,20H8v-8.61l5.6-6.06C13.79,5.12,14.08,5,14.38,5c0.26,0,0.5,0.11,0.63,0.3 c0.07,0.1,0.15,0.26,0.09,0.47l-1.52,4.94L13.18,12h1.35h4.23c0.41,0,0.8,0.17,1.03,0.46C19.92,12.61,20.05,12.86,19.98,13.17z")
+                            wtd-toggle-button-renderer(button-tooltip-position="bottom" icon-size="16" button-renderer="true")#link-button.wtd-comment-engagement-bar
+                                wt-button-shape
+                                    button.wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-s.wt-spec-button-shape-next--icon-button.wt-spec-button-shape-next--override-small-size-icon.yt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                        div(aria-hidden="true").wt-spec-button-shape-next__icon
+                                            wt-icon(style="width: 24px; height: 24px;")
+                                                span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                                    div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                                        svg(
+                                                            xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                            height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                            style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                                        )
+                                                            path(d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21 c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z M10.4,19.67C10.21,19.88,9.92,20,9.62,20c-0.26,0-0.5-0.11-0.63-0.3 c-0.07-0.1-0.15-0.26-0.09-0.47l1.52-4.94l0.4-1.29H9.46H5.23c-0.41,0-0.8-0.17-1.03-0.46c-0.12-0.15-0.25-0.4-0.18-0.72l1.34-6 C5.46,5.35,5.97,5,6.57,5H16v8.61L10.4,19.67z M20,13h-3V5h3V13z")
+                            wtd-button-renderer(force-icon-button="true" button-renderer button-next)#reply-button-end.wtd-comment-engagement-bar
+                                wt-button-shape
+                                    button(aria-label="답글").wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-s.yt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                        div.wt-spec-button-shape-next__butotn-text-content
+                                            span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                |답글
+                            if String(loggedInUser._id) === String(commentData.comment_owner._id)
+                                wtd-button-renderer(force-icon-button="true" button-renderer button-next)#delete-button-end.wtd-comment-engagement-bar
+                                    wt-button-shape
+                                        button(aria-label="삭제").wt-spec-button-shape-next.wt-spec-button-shape-next--text.wt-spec-button-shape-next--mono.wt-spec-button-shape-next--size-s.yt-spec-button-shape-next--enable-backdrop-filter-experiment
+                                            div.wt-spec-button-shape-next__butotn-text-content
+                                                span(role="text").wt-core-attributed-string.wt-core-attributed-string--white-space-no-wrap
+                                                    |삭제
+                div#action-menu.wtd-comment-view-model
+                    wtd-menu-renderer(safe-area menu-active).wtd-comment-view-model
+                        wt-icon-button(style-target="button")#button.dropdown-trigger.wtd-menu-renderer
+                            button(aria-label="작업 메뉴")#button.wt-icon-button
+                                wt-icon.wtd-menu-renderer
+                                    span.wt-icon-shape.wt-icon.wt-spec-icon-shape
+                                        div(style="width: 100%; height: 100%; display: block; fill: currentcolor;")
+                                            svg(
+                                                xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                                height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                                style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
+                                            )
+                                                path(d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM10.5 12c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm0-6c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5z")

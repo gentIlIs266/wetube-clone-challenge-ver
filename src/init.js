@@ -5,8 +5,9 @@ import app from "./server";
 import "./db";
 import "./models/videoModel";
 import "./models/userModel";
+import "./models/commentModel";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (error) => {
     if (error) {
@@ -23,8 +24,3 @@ app.listen(PORT, (error) => {
         );
     };
 });
-/* process.on("uncaughtException", (error) => {
-    console.log("\x1b[31m%s\x1b[0m", `[X] THERE WAS A PROBLEM LISTENING TO THE PORT ${PORT}`);
-    console.log("\x1b[31m%s\x1b[0m", error);
-})
-*/

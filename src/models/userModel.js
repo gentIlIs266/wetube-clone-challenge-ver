@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
         channel_id: { type: String },
         channel_subscriber: { type: Number, default: 0 }
     },
-    user_video: [{ type: mongoose.Schema.Types.ObjectId, ref: "VIDEO" }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: "COMMENT" }],
+    user_video: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: "VIDEO" }],
     user_subscribing_channel: [{ type: String }]
 });
 

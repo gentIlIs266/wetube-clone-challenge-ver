@@ -3,6 +3,7 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var root = path.resolve(__dirname, "src", "client", "js") + "/";
 module.exports = {
     entry: {
+        comment: root + "comment.js",
         accountEdit: root + "account-edit.js",
         channel: root + "channel.js",
         myStudio: root + "my-studio.js",
@@ -15,9 +16,7 @@ module.exports = {
         appDrawer: root + "appDrawer.js",
         home: root + "home.js"
     },
-    mode: "development",
     target: "web",
-    watch: true,
     plugins: [
         new MiniCssExtractPlugin({
             filename: "css/bundled.[name].css",

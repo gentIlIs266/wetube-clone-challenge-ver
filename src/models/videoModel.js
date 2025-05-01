@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const dateTimeArr = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
@@ -18,6 +18,7 @@ const videoSchema = new mongoose.Schema({
         createdAt: { type: String, default: `${dateString}_${timeString}` },
         videoLength: { type: String, required: true },
     },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: "COMMENT" }],
     video_owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "USER" }
 })
 

@@ -1,5 +1,33 @@
 import multer from "multer";
 import iconv from "iconv-lite";
+import { S3Client } from "@aws-sdk/client-s3";
+import multerS3 from "multer-s3";
+
+const s3Client = new S3Client({
+    region: "ap-northeast-2",
+    credentials: {
+        accessKeyId: process.env.AWS_KEY,
+        secretAccessKey: process.env.AWS_SECRET,
+    },
+});
+
+const s3StorageForVideo = multerS3({
+    s3: s3Client,
+    bucket: "wetube-jhs-did-upload",
+    acl: "public-read",
+    key: function(req, file, cb) {
+        const decodedFileName = iconv.decode(Buffer.from(file.originalname, 'binary'), 'utf-8');
+        cb(null, `videos/${req.session.user._id}/${decodedFileName}`);
+    }
+});
+const s3StorageForAvatar = multerS3({
+    s3: s3Client,
+    bucket: "wetube-jhs-did-upload",
+    acl: "public-read",
+    key: function(req, file, cb) {
+        cb(null, `avatars/${req.session.user._id}/${file.originalname}`);
+    }
+});
 
 export const localsSetting = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -8,7 +36,8 @@ export const localsSetting = (req, res, next) => {
 };
 
 export const shouldLogInForThisUrl = (req, res, next) => {
-    if (req.session.loggedIn) {
+    const userIsLoggedIn = req.session.loggedIn;
+    if (userIsLoggedIn) {
         return next();
     } else {
         return res.redirect("/login");
@@ -16,7 +45,9 @@ export const shouldLogInForThisUrl = (req, res, next) => {
 };
 
 export const shouldNotLogInForThisUrl = (req, res, next) => {
-    if (!req.session.loggedIn) {
+    console.log(!req.session.loggedIn)
+    const userIsNotLoggedIn = !req.session.loggedIn;
+    if (userIsNotLoggedIn) {
         return next();
     } else {
         return res.redirect("/");
@@ -24,15 +55,7 @@ export const shouldNotLogInForThisUrl = (req, res, next) => {
 };
 
 export const videoFileUpload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, "uploads/videos");
-        },
-        filename: (req, file, cb) => {
-            const decodedFileName = iconv.decode(Buffer.from(file.originalname, "binary"), "utf-8");
-            cb(null, `${decodedFileName}`);
-        },
-    }),
+    storage: s3StorageForVideo,
     limits: {
         fileSize: 256 * 1024 * 1024,
     },
@@ -52,15 +75,7 @@ export const videoFileUpload = multer({
 });
 
 export const avatarFileUpload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, "uploads/avatars");
-        },
-        filename: (req, file, cb) => {
-            console.log("multer middleware file:", file);
-            cb(null, file.originalname);
-        }
-    }),
+    storage: s3StorageForAvatar,
     limits: {
         fileSize: 3000000,
     },
