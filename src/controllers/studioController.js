@@ -3,8 +3,8 @@ import USER from "../models/userModel";
 import path from "path";
 import fs from "fs";
 import Ffmpeg from "fluent-ffmpeg";
-Ffmpeg.setFfmpegPath("C:\\Users\\10-231105\\Downloads\\ffmpeg-master-latest-win64-gpl\\ffmpeg-master-latest-win64-gpl\\bin\\ffmpeg.exe");
-Ffmpeg.setFfprobePath("C:\\Users\\10-231105\\Downloads\\ffmpeg-master-latest-win64-gpl\\ffmpeg-master-latest-win64-gpl\\bin\\ffprobe.exe");
+Ffmpeg.setFfmpegPath("/usr/bin/ffmpeg");
+Ffmpeg.setFfprobePath("/usr/bin/ffprobe");
 
 export const getWetubeStudio = async (req, res) => {
     const sessionUser = req.session.user;
